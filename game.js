@@ -152,7 +152,7 @@ function getWscCost() {
 }
 
 function produce() {
-    player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).mul(new Decimal(0.005)));
+    player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).mul(new Decimal(0.0125)));
     for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier-1];
