@@ -1,0 +1,139 @@
+﻿.ftsz1 {
+    margin: 4px 2px;
+    font-size: 12px;
+}
+
+.ftsz2 {
+    margin: 4px 2px;
+    font-size: 16px;
+}
+
+.ftsz3 {
+    margin: 4px 2px;
+    font-size: 24px;
+}
+
+.ftsz4 {
+    margin: 4px 2px;
+    font-size: 32px;
+}
+
+.ftsz5 {
+    margin: 4px 2px;
+    font-size: 48px;
+}
+
+.ftsz6 {
+    margin: 4px 2px;
+    font-size: 64px;
+}
+
+.button {
+    background-color: #ffffff;
+    color: #000000;
+    width: 80px;
+    padding: 2px 2px;
+    margin: 4px 0px;
+    border: hidden;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.xxButton {
+    background-color: #cccccc;
+    color: #000000;
+    width: 160px;
+    height: 80px;
+    padding: 4px;
+    margin: auto;
+    border: hidden;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btnrow {
+    height: 36px;
+    width: 100%;
+    text-align: center;
+}
+
+.btnrow2 {
+    height: 100px;
+    width: 100%;
+    text-align: center;
+}
+
+.wsc {
+    border: none;
+    color: #000000;
+    height: 48px;
+    width: 1024px;
+    padding: 8px 8px;
+    margin: 0px auto;
+}
+
+.wscdat {
+    position: relative;
+    left: 0px;
+    top: 4px;
+}
+
+.wscbt1 {
+    background-color: #00000000;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    height: 48px;
+    width: 192px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt2 {
+    background-color: #00000000;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    height: 48px;
+    width: 96px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+    display: none;
+}
+
+.news { /*滚动新闻*/
+    color: #000000;
+    width: 90%;
+    left: 5%;
+    top: 4px;
+    bottom: 4px;
+    height: 20px;
+    position: relative;
+    border: 2px solid #cccccc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.newsContent {
+    height: 20px;
+    position: absolute;
+}
+
+@font-face {
+    font-family: Typewriter, monospace;
+    src: url("MonospaceTypewriter") format("truetype");
+}
