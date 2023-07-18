@@ -156,7 +156,7 @@ function produce() {
     for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier-1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(variab["wscm" + name]).mul(new Decimal(0.005)));
+        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(variab["wscm" + name]).mul(new Decimal(0.0125)));
     }
 }
 
@@ -230,7 +230,7 @@ function notation(amount) {
 
 function updateGUI() {
     document.getElementById("energy").innerHTML = notation(player.energy);
-    document.getElementById("energyPs").innerHTML = notation(player.wsca01.mul(variab.wscm01).mul(new Decimal(0.1)));
+    document.getElementById("energyPs").innerHTML = notation(player.wsca01.mul(variab.wscm01).mul(new Decimal(0.25)));
     for (let tier = 1; tier <= 8; tier++) { 
         var name = tiername[tier];
         document.getElementById("wscb" + name).innerHTML = player["wscb" + name].toFixed(0);
