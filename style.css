@@ -1,36 +1,40 @@
 ﻿.ftsz1 {
     margin: 4px 2px;
     font-size: 12px;
+    color: #ffffff;
 }
 
 .ftsz2 {
     margin: 4px 2px;
     font-size: 16px;
+    color: #ffffff;
 }
 
 .ftsz3 {
     margin: 4px 2px;
     font-size: 24px;
+    color: #ffffff;
 }
 
 .ftsz4 {
     margin: 4px 2px;
     font-size: 32px;
+    color: #ffffff;
 }
 
 .ftsz5 {
     margin: 4px 2px;
     font-size: 48px;
+    color: #ffffff;
 }
 
 .ftsz6 {
     margin: 4px 2px;
     font-size: 64px;
+    color: #ffffff;
 }
 
 .button {
-    background-color: #ffffff;
-    color: #000000;
     width: 80px;
     padding: 2px 2px;
     margin: 4px 0px;
@@ -42,17 +46,15 @@
     display: inline-block;
 }
 
-.buttonen {
-    background-color: #ffffff;
-    color: #000000;
+.slbutton {
     width: 80px;
     padding: 2px 2px;
     margin: 4px 0px;
-    border: 1px solid #00ff80;
+    border: 2px solid #00ff80;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
-    cursor: pointer;
+    cursor: default;
     display: inline-block;
 }
 

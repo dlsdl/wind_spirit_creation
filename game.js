@@ -84,6 +84,8 @@ wscm06 : new Decimal(1),
 wscm07 : new Decimal(1),
 wscm08 : new Decimal(1),
 
+wscBaseValue: new Decimal(0),
+
 }
 /*存档*/
 function save() {
@@ -149,6 +151,15 @@ function getWscCost() {
         let name = tiername[tier];
         variab["wscc" + name] = variab["wsccor" + name].mul(variab["wsccsl" + name].pow(player["wscb" + name]));
     }
+}
+
+function getWscBaseValue() {
+    var n = new Decimal(0);
+    for (let tier = 1; tier <= 8; tier++) {
+        let name = tiername[tier];
+        n = n.add(player["wscb" + name]);
+    }
+    variab.wscBaseValue = n;
 }
 
 function produce() {
@@ -237,20 +248,26 @@ function updateGUI() {
         document.getElementById("wscc" + name).innerHTML = notation(variab["wscc" + name]);
         document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(variab["wscm" + name]).padEnd(15, '_') + "^1.000__________¶1.000__________";
     }
+    document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
 }
 
 /*切换tab*/
-var tabnow = "btnrow1";
+var tabnow = "row1";
 function changeBt(name) {
     if (tabnow) document.getElementById(tabnow).style.display = 'none';
     document.getElementById(name).style.display = 'block';
+    document.getElementById("bt" + tabnow).className = "button";
+    document.getElementById("bt" + name).className = "slbutton";
+    changePg("p" + name.substr(-1) + "_1");
     tabnow = name;
 }
 var pagenow = "p1_1";
 function changePg(name) {
     if (pagenow) document.getElementById(pagenow).style.display = 'none';
     document.getElementById(name).style.display = 'block';
+    document.getElementById("bt" + pagenow).className = "button";
+    document.getElementById("bt" + name).className = "slbutton";
     pagenow = name;
 }
 
@@ -327,6 +344,7 @@ function mainLoop() {
     lastUpdate = Date.now();
     getWscMult();
     getWscCost();
+    getWscBaseValue()
     produce();
     time(diff);
     updateGUI();

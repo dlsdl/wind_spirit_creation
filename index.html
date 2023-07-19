@@ -8,68 +8,68 @@
     </head>
     <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace ">
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
-        <p align="center" class="ftsz2" style="color: #ffffff; top: 50px;">
+        <p align="center" class="ftsz2" style="top: 50px;">
             <span id="chalSt">你当前不在任何挑战中</span>
         </p>
-        <p align="center" class="ftsz3" style="color: #ffffff;">
+        <p align="center" class="ftsz3">
             <span>你有</span><span class="ftsz4" id="energy">2</span><span>能量</span>
         </p>
-        <p align="center" class="ftsz2" style="color: #ffffff;">
+        <p align="center" class="ftsz2">
             <span>你的能量每秒增加</span><span id="energyPs">0</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff0000;">
             <span>你有</span><span id="swirlPts">0</span><span>扩散点，</span><span id="swirlEng">0</span><span>扩散能量(+</span><span id="swEngPs">0</span><span>/s),</span>
             <span>它以</span><span id="swenex">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="swenmu">1</span><span>倍</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ffff00;">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ffff00; display: none">
             <span>你有</span><span id="swirl2pts">0</span><span>扪敤点</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ff00;">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ff00; display: none">
             <span>你有</span><span id="swirl3pts">0</span><span>扫敥点</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ffff;">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ffff; display: none">
             <span>你有</span><span id="swirl4pts">0</span><span>扬敦点</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #0000ff;">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #0000ff; display: none">
             <span>你有</span><span id="swirl5pts">0</span><span>扭敧点</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff00ff;">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff00ff; display: none">
             <span>你有</span><span id="swirl6pts">0</span><span>扮敨点</span>
         </p>
-        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; -webkit-text-stroke: 0.5px #808080; ">
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; -webkit-text-stroke: 0.5px #808080; display: none">
             <span>你有</span><span id="swirl7pts">0</span><span>扯敩点</span>
         </p>
         <div class="btnrow" id="btnrowm">
-            <button align="center" class="button" id="btnm_1" onclick="changeBt('btnrow1')">风灵</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff; " id="btnm_2" onclick="changeBt('btnrow2')">扩散</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000; " id="btnm_3" onclick="changeBt('btnrow3')">扪敤</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000; " id="btnm_4" onclick="changeBt('btnrow4')">扫敥</button>
-            <button align="center" class="button" style="background-color: #00ffff; color: #000000; " id="btnm_4" onclick="changeBt('btnrow5')">扬敦</button>
-            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff; " id="btnm_4" onclick="changeBt('btnrow6')">扭敧</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff; " id="btnm_4" onclick="changeBt('btnrow7')">扮敨</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff; " id="btnm_4" onclick="changeBt('btnrow8')">扯敩</button>
-            <button align="center" class="button" style="background-image: linear-gradient(to right, #ff0000, #ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); color: #000000; " id="btnm_4" onclick="changeBt('btnrow9')">扰敪</button>
-            <button align="center" class="button" style="background-image: linear-gradient(to right, #000000, #ffffff); color: #ffffff;" id="btnm_10" onclick="changeBt('btnrow10')">杂项</button>
+            <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000; " id="btrow1" onclick="changeBt('row1')">风灵</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff; " id="btrow2" onclick="changeBt('row2')">扩散</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000; display: none" id="btrow3" onclick="changeBt('row3')">扪敤</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000; display: none" id="btrow4" onclick="changeBt('row4')">扫敥</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000; display: none" id="btrow5" onclick="changeBt('row5')">扬敦</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff; display: none" id="btrow6" onclick="changeBt('row6')">扭敧</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff; display: none" id="btrow7" onclick="changeBt('row7')">扮敨</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff; display: none" id="btrow8" onclick="changeBt('row8')">扯敩</button>
+            <button align="center" class="button" style="background-image: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); display: none; color: #000000; " id="btrow9" onclick="changeBt('row9')">扰敪</button>
+            <button align="center" class="button" style="background-image: linear-gradient(to right, #000000, #ffffff); color: #ffffff;" id="btrow0" onclick="changeBt('row0')">杂项</button>
         </div>
-        <div class="btnrow" id="btnrow1">
-            <button align="center" class="button" id="btn1_1" onclick="changePg('p1_1')">风灵</button>
-            <button align="center" class="button" id="btn1_2" onclick="changePg('p1_2')">升级</button>
-            <button align="center" class="button" id="btn1_3" onclick="changePg('p1_3')">挑战</button>
+        <div class="btnrow" id="row1">
+            <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000;" id="btp1_1" onclick="changePg('p1_1')">风灵</button>
+            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_2" onclick="changePg('p1_2')">升级</button>
+            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_3" onclick="changePg('p1_3')">挑战</button>
         </div>
-        <div class="btnrow" id="btnrow2" style="display: none">
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btn2_1" onclick="changePg('p2_1')">扩散升级</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btn2_2" onclick="changePg('p2_2')">购买项</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btAstb" onclick="changePg('p2_3')">不稳态</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btAnmb" onclick="changePg('p2_4')">风之晶球</button>
+        <div class="btnrow" id="row2" style="display: none">
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_1" onclick="changePg('p2_1')">扩散升级</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_2" onclick="changePg('p2_2')">购买项</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_3" onclick="changePg('p2_3')">不稳态</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">风之晶球</button>
         </div>
-        <div class="btnrow" id="btnrow3" style="display: none">
+        <div class="btnrow" id="row3" style="display: none">
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btAbup" onclick="changePg('p3_1')">扪敤升级</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_2')">里程碑</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_3')">研究</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_4')">转化度</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_5')">元素</button>
         </div>
-        <div class="btnrow" id="btnrow4" style="display: none">
+        <div class="btnrow" id="row4" style="display: none">
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_1')">扫敥升级</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_2')">气压</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_3')">热力学</button>
@@ -77,28 +77,28 @@
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_5')">装置</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_6')">增压坍缩</button>
         </div>
-        <div class="btnrow" id="btnrow5" style="display: none">
+        <div class="btnrow" id="row5" style="display: none">
             <button align="center" class="button">placeholder</button>
         </div>
-        <div class="btnrow" id="btnrow6" style="display: none">
+        <div class="btnrow" id="row6" style="display: none">
             <button align="center" class="button">placeholder</button>
         </div>
-        <div class="btnrow" id="btnrow7" style="display: none">
+        <div class="btnrow" id="row7" style="display: none">
             <button align="center" class="button">placeholder</button>
         </div>
-        <div class="btnrow" id="btnrow8" style="display: none">
+        <div class="btnrow" id="row8" style="display: none">
             <button align="center" class="button">placeholder</button>
         </div>
-        <div class="btnrow" id="btnrow9" style="display: none">
+        <div class="btnrow" id="row9" style="display: none">
             <button align="center" class="button">placeholder</button>
         </div>
-        <div class="btnrow" id="btnrow10" style="display: none">
-            <button align="center" class="button" id="btStat" onclick="changePg('p10_1')">统计</button>
-            <button align="center" class="button" id="btAchi" onclick="changePg('p10_2')">成就</button>
-            <button align="center" class="button" id="btAchi" onclick="changePg('p10_3')">存档</button>
+        <div class="btnrow" id="row0" style="display: none">
+            <button align="center" class="button" id="btp0_1" onclick="changePg('p0_1')">存档</button>
+            <button align="center" class="button" id="btp0_2" onclick="changePg('p0_2')">统计</button>
+            <button align="center" class="button" id="btp0_3" onclick="changePg('p0_3')">成就</button>
         </div>
-        <br />
         <div id="p1_1">
+            <div align="center" class="ftsz2" id="wscinfo">基础风灵产量：0.25/s  每次作成乘数：1.6</div>
             <div class="wsc" style="background-color: #ffffff;" id="wsc_01">
                 <span>壹式风灵作成·</span><span id="wscb01"></span>
                 <button class="wscbt2" id="byat01" onclick="">自动：</button>
@@ -157,22 +157,32 @@
             </div>
         </div>
         <div id="p1_2" style="display: none">
-            
+            <div align="center" class="ftsz2" id="wscbv">风灵基础值</div>
         </div>
-        <div id="p10_1" style="display: none">
-            <span class="ftsz1" style="color: #ffffff;" id="playtime"></span>
+        <div id="p1_3" style="display: none">
+
         </div>
-        <div id="p10_2" style="display: none">
-            <span style="color: #ffffff;">placeholder</span>
+        <div id="p2_1" style="display: none">
+
         </div>
-        <div id="p10_3" style="display: none">
+        <div id="p2_2" style="display: none">
+
+        </div>
+        <div id="p2_3" style="display: none">
+
+        </div>
+        <div id="p2_4" style="display: none">
+
+        </div>
+
+        <div id="p0_1" style="display: none">
             <div class="btnrow2">
-                 <button align="center" class="xxButton" onclick="save()">保存游戏</button>
-                 <button align="center" class="xxButton" onclick="autoSave()">自动保存：<span id="autoSave">开</span></button>
-                 <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
-                 <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
-                 <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
-                 <button align="center" class="xxButton" onclick="load()">恢复存档</button>
+                <button align="center" class="xxButton" onclick="save()">保存游戏</button>
+                <button align="center" class="xxButton" onclick="autoSave()">自动保存：<span id="autoSave">开</span></button>
+                <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
+                <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
+                <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
+                <button align="center" class="xxButton" onclick="load()">恢复存档</button>
             </div>
             <form align="center">
                 <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
@@ -180,8 +190,14 @@
             <br />
             <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字。当前版本：0.0.4</div>
         </div>
+        <div id="p0_2" style="display: none">
+            <span class="ftsz1" style="color: #ffffff;" id="playtime"></span>
+        </div>
+        <div id="p0_3" style="display: none">
+            <span style="color: #ffffff;">placeholder</span>
+        </div>
 
-            <script type="text/javascript" src="break_eternity.js"></script>
-            <script type="text/javascript" src="game.js"></script>
-</body>
+        <script type="text/javascript" src="break_eternity.js"></script>
+        <script type="text/javascript" src="game.js"></script>
+    </body>
 </html>
