@@ -24,6 +24,9 @@ function hardReset() {
         wsca07: new Decimal(0),
         wsca08: new Decimal(0),
 
+        tier01: new Decimal(0),
+        tier02: new Decimal(0),
+
         upgd01: new Decimal(0),
         upgd02: new Decimal(0),
 
@@ -32,7 +35,6 @@ function hardReset() {
         minuts: new Decimal(0),
         hours: new Decimal(0),
         days: new Decimal(0),
-        years: new Decimal(0),
         totalSeconds: new Decimal(0),
     }
 }
@@ -84,7 +86,15 @@ wscm06 : new Decimal(1),
 wscm07 : new Decimal(1),
 wscm08 : new Decimal(1),
 
-wscBaseValue: new Decimal(0),
+    wscBaseValue: new Decimal(0),
+    tierc01: new Decimal(64),
+    tierc02: new Decimal(4),
+
+    upgdc01: new Decimal(1.157920892373161e77),
+    upgdc02: new Decimal(1.340780792994259e154),
+
+    upgdcsl01: new Decimal(1.340780792994259e154),
+    upgdcsl02: new Decimal(1.797693134862315e308),
 
 }
 /*存档*/
@@ -140,9 +150,12 @@ function buyWsc(tier) {
 }
 
 function getWscMult() {
+    var mult01to08 = new Decimal(1);
+    if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(16).add(1));
+    if (player.tier01.gte(3)) mult01to08 = mult01to08.mul(player.tier01.pow(2).div(4).add(1));
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        variab["wscm" + name] = new Decimal(1.6).pow(player["wscb" + name]);
+        variab["wscm" + name] = new Decimal(1.6).pow(player["wscb" + name]).mul(mult01to08);
     }
 }
 
@@ -162,6 +175,47 @@ function getWscBaseValue() {
     variab.wscBaseValue = n;
 }
 
+function getTierCost() {
+    variab.tierc01 = player.tier01.mul(64).add(64);
+    variab.tierc02 = player.tier02.mul(4).add(4);
+}
+
+function incTier1() {
+    if (variab.wscBaseValue.gte(variab.tierc01)) {
+        player.tier01 = player.tier01.add(1);
+        tier01Reset();
+        console.log('6308sfdy')
+    }
+    else return
+}
+
+function tier01Reset() {
+    player.energy = new Decimal(2);
+
+    player.wscb01 = new Decimal(0);
+    player.wscb02 = new Decimal(0);
+    player.wscb03 = new Decimal(0);
+    player.wscb04 = new Decimal(0);
+    player.wscb05 = new Decimal(0);
+    player.wscb06 = new Decimal(0);
+    player.wscb07 = new Decimal(0);
+    player.wscb08 = new Decimal(0);
+
+    player.wsca01 = new Decimal(0);
+    player.wsca02 = new Decimal(0);
+    player.wsca03 = new Decimal(0);
+    player.wsca04 = new Decimal(0);
+    player.wsca05 = new Decimal(0);
+    player.wsca06 = new Decimal(0);
+    player.wsca07 = new Decimal(0);
+    player.wsca08 = new Decimal(0);
+}
+
+function tier02Reset() {
+    tier01Reset();
+    player.tier01 = new Decimal(0);
+}
+
 function produce() {
     player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).mul(new Decimal(0.0125)));
     for (let tier = 2; tier <= 8; tier++) {
@@ -171,6 +225,7 @@ function produce() {
     }
 }
 
+/*游戏机制之外……*/
 function transformToDecimal(object) {
     for (i in object) {
         if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
@@ -197,10 +252,6 @@ function time(diff) {
     if (player.hours == 24) {
         player.hours = new Decimal(0);
         player.days = player.days.plus(1);
-    }
-    if (player.days == 365) {
-        player.days = new Decimal(0);
-        player.years = player.years.plus(1);
     }
 }
 
@@ -249,7 +300,31 @@ function updateGUI() {
         document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(variab["wscm" + name]).padEnd(15, '_') + "^1.000__________¶1.000__________";
     }
     document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
+    document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
+    document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风灵基础值提升1~8式风灵乘数。当前：×" + notation(variab.wscBaseValue.div(16).add(1));
+    document.getElementById("tier01rewa02").innerHTML = "3式风单元：基于风单元式数提升1~8式风灵乘数。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
+    
+    document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) +"风灵基础值";
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
+}
+
+function tierDisplay() {
+    var tier01requ = [null, 1, 3, 10, 25, 63, 158, 398, 1000, 2511, 6308];
+    var tier02requ = [null, 1, 2, 5, 12, 30, 75, 188, 473, 1187, 2982];
+    if (player.tier01.gte(1)) {
+        document.getElementById("tier01rewa01").style.display = 'block';
+        document.getElementById("tier01info").innerHTML = "在3式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。"
+    }
+    else document.getElementById("tier01rewa01").style.display = 'none';
+    if (player.tier01.gte(3)) {
+        document.getElementById("tier01rewa02").style.display = 'block';
+        document.getElementById("tier01info").innerHTML = "在10式风单元，将基于风模块式数提升1~8式风灵乘数(1+n³)。"
+    }
+    else document.getElementById("tier01rewa02").style.display = 'none';
+    if (player.tier01.gte(10)) document.getElementById("tier01rewa03").style.display = 'block';
+    else document.getElementById("tier01rewa03").style.display = 'none';
+    if (player.tier01.gte(25)) document.getElementById("tier01rewa04").style.display = 'block';
+    else document.getElementById("tier01rewa04").style.display = 'none';
 }
 
 /*切换tab*/
@@ -270,6 +345,27 @@ function changePg(name) {
     document.getElementById("bt" + name).className = "slbutton";
     pagenow = name;
 }
+
+/*主要循环*/
+function mainLoop() {
+    diff = (Date.now() - lastUpdate) / 1000;
+    lastUpdate = Date.now();
+    getWscMult();
+    getWscCost();
+    getWscBaseValue();
+    getTierCost();
+    tierDisplay();
+
+    produce();
+    time(diff);
+    updateGUI();
+}
+
+setInterval(mainLoop, 50);
+
+setInterval(save, 60000);
+
+updateGUI();
 
 /*滚动新闻*/
 var texts =
@@ -337,21 +433,3 @@ var newsTimer = setInterval(function () {
     }
     newsText.style.left = p.toFixed(1) + "px"
 }, 10)
-
-/*主要循环*/
-function mainLoop() {
-    diff = (Date.now() - lastUpdate) / 1000;
-    lastUpdate = Date.now();
-    getWscMult();
-    getWscCost();
-    getWscBaseValue()
-    produce();
-    time(diff);
-    updateGUI();
-}
-
-setInterval(mainLoop, 50);
-
-setInterval(save, 60000);
-
-updateGUI();

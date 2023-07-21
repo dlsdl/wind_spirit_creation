@@ -8,18 +8,19 @@
     </head>
     <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace ">
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
-        <p align="center" class="ftsz2" style="top: 50px;">
+        <br />
+        <p align="center" class="ftsz2">
             <span id="chalSt">你当前不在任何挑战中</span>
         </p>
         <p align="center" class="ftsz3">
-            <span>你有</span><span class="ftsz4" id="energy">2</span><span>能量</span>
+            <span>你有</span><span class="ftsz4" id="energy"></span><span>能量</span>
         </p>
         <p align="center" class="ftsz2">
-            <span>你的能量每秒增加</span><span id="energyPs">0</span>
+            <span>你的能量每秒增加</span><span id="energyPs"></span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff0000;">
-            <span>你有</span><span id="swirlPts">0</span><span>扩散点，</span><span id="swirlEng">0</span><span>扩散能量(+</span><span id="swEngPs">0</span><span>/s),</span>
-            <span>它以</span><span id="swenex">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="swenmu">1</span><span>倍</span>
+            <span>你有</span><span id="PL1Pts">0</span><span>扩散点，</span><span id="PL1Eng">1</span><span>扩散能量(+</span><span id="PL1EngPs">0</span><span>/s),</span>
+            <span>它以</span><span id="PL1EngEx">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL1EngMu">1</span><span>倍</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ffff00; display: none">
             <span>你有</span><span id="swirl2pts">0</span><span>扪敤点</span>
@@ -53,29 +54,29 @@
         </div>
         <div class="btnrow" id="row1">
             <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000;" id="btp1_1" onclick="changePg('p1_1')">风灵</button>
-            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_2" onclick="changePg('p1_2')">升级</button>
-            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_3" onclick="changePg('p1_3')">挑战</button>
+            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_2" onclick="changePg('p1_2')">元素生命</button>
+            <button align="center" class="button" style="background-color: #ffffff; color: #000000;" id="btp1_3" onclick="changePg('p1_3')">升级</button>
         </div>
         <div class="btnrow" id="row2" style="display: none">
             <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_1" onclick="changePg('p2_1')">扩散升级</button>
             <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_2" onclick="changePg('p2_2')">购买项</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_3" onclick="changePg('p2_3')">不稳态</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">风之晶球</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_3" onclick="changePg('p2_3')">风之晶球</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">挑战</button>
         </div>
         <div class="btnrow" id="row3" style="display: none">
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btAbup" onclick="changePg('p3_1')">扪敤升级</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_2')">里程碑</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_3')">研究</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_4')">转化度</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btMlst" onclick="changePg('p3_5')">元素</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">扪敤升级</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_2" onclick="changePg('p3_2')">里程碑</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_3" onclick="changePg('p3_3')">研究</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_4" onclick="changePg('p3_4')">元素转化</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_5" onclick="changePg('p3_5')">元素</button>
         </div>
         <div class="btnrow" id="row4" style="display: none">
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_1')">扫敥升级</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_2')">气压</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_3')">热力学</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_4')">真空域</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_5')">装置</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btMlst" onclick="changePg('p4_6')">增压坍缩</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_1" onclick="changePg('p4_1')">扫敥升级</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_2" onclick="changePg('p4_2')">气压</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_3" onclick="changePg('p4_3')">热力学</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_4" onclick="changePg('p4_4')">真空域</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">装置</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">增压坍缩</button>
         </div>
         <div class="btnrow" id="row5" style="display: none">
             <button align="center" class="button">placeholder</button>
@@ -158,12 +159,32 @@
         </div>
         <div id="p1_2" style="display: none">
             <div align="center" class="ftsz2" id="wscbv">风灵基础值</div>
+            <div class="upg" id="tier_01">
+                <span id="tier01">式风单元</span>
+                <button class="wscbt1" style="background-color: #00ff80;" id="tier01cost" onclick="incTier1()">需要：风灵基础值</button>
+                <span>重置风灵，但提升风单元。</span><span id="tier01info">在1式风单元，将基于风灵基础值提升1~8式风灵乘数(1+n/16)。</span>
+            </div>
+            <div class="upg" id="tier_02" style="display: none">
+                <span id="tier02">式风模块</span>
+                <button class="wscbt1" style="background-color: #00ff80;" id="inct02" onclick="incTier2">需要：式风单元</button>
+                <span>重置风灵和风单元，但提升风模块。</span><span id="tier02info">在1式风模块，将解锁第一个升级，并使升级1的免费等级+1。</span>
+            </div>
+            <br />
+            <div align="center" class="ftsz2" id="tier01rewa01" style="display: none">1式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa02" style="display: none">3式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa03" style="display: none">10式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">25式风单元：</div>
+            <br />
+            <div align="center" class="ftsz2" id="tier01rewa01" style="display: none">1式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa02" style="display: none">2式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa03" style="display: none">5式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">12式风单元：</div>
         </div>
         <div id="p1_3" style="display: none">
 
         </div>
         <div id="p2_1" style="display: none">
-
+            <div align="center" class="ftsz3">需要1.797e308能量</div>
         </div>
         <div id="p2_2" style="display: none">
 
@@ -188,7 +209,11 @@
                 <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
             </form>
             <br />
-            <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字。当前版本：0.0.4</div>
+            <div align="center" style="color: #ffffff; text-align: center">风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：0.1.0</div>
+            <br />
+            <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字</div>
+            <br />
+            <div align="center" style="color: #ffffff; text-align: center">支持所有序数增量吧吧友</div>
         </div>
         <div id="p0_2" style="display: none">
             <span class="ftsz1" style="color: #ffffff;" id="playtime"></span>
@@ -196,7 +221,6 @@
         <div id="p0_3" style="display: none">
             <span style="color: #ffffff;">placeholder</span>
         </div>
-
         <script type="text/javascript" src="break_eternity.js"></script>
         <script type="text/javascript" src="game.js"></script>
     </body>

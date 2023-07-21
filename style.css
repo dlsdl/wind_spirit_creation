@@ -127,6 +127,15 @@
     display: none;
 }
 
+.upg {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    height: 48px;
+    width: 1024px;
+    padding: 8px 8px;
+    margin: 0px auto;
+}
+
 .news { /*滚动新闻*/
     color: #000000;
     width: 90%;
