@@ -152,7 +152,7 @@ function buyWsc(tier) {
 function getWscMult() {
     var mult01to08 = new Decimal(1);
     if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(16).add(1));
-    if (player.tier01.gte(3)) mult01to08 = mult01to08.mul(player.tier01.pow(2).div(4).add(1));
+    if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(player.tier01.pow(2).div(4).add(1));
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
         variab["wscm" + name] = new Decimal(1.6).pow(player["wscb" + name]).mul(mult01to08);
@@ -302,9 +302,10 @@ function updateGUI() {
     document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
     document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风灵基础值提升1~8式风灵乘数。当前：×" + notation(variab.wscBaseValue.div(16).add(1));
-    document.getElementById("tier01rewa02").innerHTML = "3式风单元：基于风单元式数提升1~8式风灵乘数。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
+    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风单元式数提升1~8式风灵乘数。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
     
-    document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) +"风灵基础值";
+    document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
+
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
 }
 
@@ -314,10 +315,10 @@ function tierDisplay() {
     if (player.tier01.eq(0)) document.getElementById("tier01info").innerHTML = "在1式风单元，将基于风灵基础值提升1~8式风灵乘数(1+n/16)。";
     if (player.tier01.gte(1)) {
         document.getElementById("tier01rewa01").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在3式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。";
+        document.getElementById("tier01info").innerHTML = "在2式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。";
     }
     else document.getElementById("tier01rewa01").style.display = 'none';
-    if (player.tier01.gte(3)) {
+    if (player.tier01.gte(2)) {
         document.getElementById("tier01rewa02").style.display = 'block';
         document.getElementById("tier01info").innerHTML = "在10式风单元，将基于风模块式数提升1~8式风灵乘数(1+n³)。";
     }
