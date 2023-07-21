@@ -311,14 +311,15 @@ function updateGUI() {
 function tierDisplay() {
     var tier01requ = [null, 1, 3, 10, 25, 63, 158, 398, 1000, 2511, 6308];
     var tier02requ = [null, 1, 2, 5, 12, 30, 75, 188, 473, 1187, 2982];
+    if (player.tier01.eq(0)) document.getElementById("tier01info").innerHTML = "在1式风单元，将基于风灵基础值提升1~8式风灵乘数(1+n/16)。";
     if (player.tier01.gte(1)) {
         document.getElementById("tier01rewa01").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在3式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。"
+        document.getElementById("tier01info").innerHTML = "在3式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。";
     }
     else document.getElementById("tier01rewa01").style.display = 'none';
     if (player.tier01.gte(3)) {
         document.getElementById("tier01rewa02").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在10式风单元，将基于风模块式数提升1~8式风灵乘数(1+n³)。"
+        document.getElementById("tier01info").innerHTML = "在10式风单元，将基于风模块式数提升1~8式风灵乘数(1+n³)。";
     }
     else document.getElementById("tier01rewa02").style.display = 'none';
     if (player.tier01.gte(10)) document.getElementById("tier01rewa03").style.display = 'block';
