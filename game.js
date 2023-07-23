@@ -280,9 +280,11 @@ function produce() {
 }
 
 function fixInfinity() {
-    if (player.energy.gte(1.797693134862315e308)) player.energy = new Decimal(1.797693134862315e308);
-    document.getElementById("energy").innerHTML = "1.797e308";
-    document.getElementById("fixinf").style.display = 'block';
+    if (player.energy.gte(1.797693134862315e308)) {
+        player.energy = new Decimal(1.797693134862315e308);
+        document.getElementById("energy").innerHTML = "1.797e308";
+        document.getElementById("fixinf").style.display = 'block';
+    }
 }
 /*游戏机制之外……*/
 function transformToDecimal(object) {
