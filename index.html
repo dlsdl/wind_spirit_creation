@@ -15,6 +15,9 @@
         <p align="center" class="ftsz3">
             <span>你有</span><span class="ftsz4" id="energy"></span><span>能量</span>
         </p>
+        <p>
+            <div class="ftsz3" id="fixinf" style="display: none; text-align: center;">你需要扩散一次才能走得更远！</div>
+        </p>
         <p align="center" class="ftsz2">
             <span>你的能量每秒增加</span><span id="energyPs"></span>
         </p>
@@ -161,27 +164,39 @@
             <div align="center" class="ftsz2" id="wscbv">风灵基础值</div>
             <div class="upg" id="tier_01">
                 <span id="tier01">式风单元</span>
-                <button class="wscbt1" style="background-color: #00ff80;" id="tier01cost" onclick="incTier1()">需要：风灵基础值</button>
-                <span>重置风灵，但提升风单元。</span><span id="tier01info">在1式风单元，将基于风灵基础值提升1~8式风灵乘数(1+n/16)。</span>
+                <button class="wscbt1bl" id="tier01cost" onclick="incTier1()">需要：风灵基础值</button>
+                <span>重置风灵，但提升风单元。</span>
+                <span id="tier01info">在1式风单元，将基于风灵基础值提升1~8式风灵乘数</span>
             </div>
-            <div class="upg" id="tier_02" style="display: none">
+            <div class="upg" id="tier_02">
                 <span id="tier02">式风模块</span>
-                <button class="wscbt1" style="background-color: #00ff80;" id="inct02" onclick="incTier2">需要：式风单元</button>
-                <span>重置风灵和风单元，但提升风模块。</span><span id="tier02info">在1式风模块，将解锁第一个升级，并使升级1的免费等级+1。</span>
+                <button class="wscbt1bl" id="tier02cost" onclick="incTier2()">需要：式风单元</button>
+                <span>重置风灵和风单元，但提升风模块。</span>
+                <span id="tier02info">在1式风模块，将基于风模块式数提升风灵每次作成乘数，并解锁第一个升级</span>
             </div>
-            <br />
-            <div align="center" class="ftsz2" id="tier01rewa01" style="display: none">1式风单元：</div>
-            <div align="center" class="ftsz2" id="tier01rewa02" style="display: none">3式风单元：</div>
-            <div align="center" class="ftsz2" id="tier01rewa03" style="display: none">10式风单元：</div>
-            <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">25式风单元：</div>
             <br />
             <div align="center" class="ftsz2" id="tier01rewa01" style="display: none">1式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa02" style="display: none">2式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa03" style="display: none">5式风单元：</div>
-            <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">12式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">10式风单元：</div>
+            <br />
+            <div align="center" class="ftsz2" id="tier02rewa01" style="display: none">1式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa02" style="display: none">2式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa03" style="display: none">5式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa04" style="display: none">12式风模块：</div>
         </div>
         <div id="p1_3" style="display: none">
-
+            <br />
+            <div class="upg" id="upg_01" style="display: none">
+                <span>风灵升级一·等级<span id="upgd01"></span> 每级使风灵每次作成乘数增加0.025</span>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc01" onclick="buyUpgd01()">花费：能量</button>
+                <span id="upge01">当前：</span>
+            </div>
+            <div class="upg" id="upg_02" style="display: none ">
+                <span>风灵升级二·等级<span id="upgd02"></span> 每级使风灵每次作成乘数乘以1.031</span>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc02" onclick="buyUpgd02()">花费：能量</button>
+                <span id="upge02">当前：</span>
+            </div>
         </div>
         <div id="p2_1" style="display: none">
             <div align="center" class="ftsz3">需要1.797e308能量</div>
@@ -209,7 +224,7 @@
                 <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
             </form>
             <br />
-            <div align="center" style="color: #ffffff; text-align: center">风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：0.1.0</div>
+            <div align="center" style="color: #ffffff; text-align: center">风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：0.2.0</div>
             <br />
             <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字</div>
             <br />

@@ -113,6 +113,19 @@
     float: right;
 }
 
+.wscbt1bl {
+    background-color: #00ff80;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    height: 48px;
+    width: 192px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
 .wscbt2 {
     background-color: #00000000;
     color: #000000;
