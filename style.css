@@ -58,6 +58,21 @@
     display: inline-block;
 }
 
+.ltbutton {
+    background-color: #cccccc;
+    color: #000000;
+    width: 80px;
+    height: 20px;
+    padding: 0px;
+    margin: auto;
+    border: hidden;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
 .xxButton {
     background-color: #cccccc;
     color: #000000;
@@ -127,6 +142,19 @@
 }
 
 .wscbt2 {
+    background-color: #00000000;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    height: 48px;
+    width: 96px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt3 {
     background-color: #00000000;
     color: #000000;
     border: 2px solid #00ff80;

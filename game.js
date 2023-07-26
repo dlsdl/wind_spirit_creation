@@ -33,6 +33,10 @@ function hardReset() {
         upgd02: new Decimal(0),
 
         hasUnlockedPL1: false,
+        PL1point: new Decimal(0),
+        PL1times: new Decimal(0),
+        PL1second: new Decimal(0),
+
         milliseconds: new Decimal(0),
         seconds: new Decimal(0),
         minuts: new Decimal(0),
@@ -67,23 +71,23 @@ wscc06: new Decimal(4294967296),
 wscc07: new Decimal(1.844674407370955e19),
 wscc08: new Decimal(3.402823669209384e38),
 
-wsccor01 : new Decimal(2),
-wsccor02 : new Decimal(4),
-wsccor03 : new Decimal(16),
-wsccor04 : new Decimal(256),
-wsccor05 : new Decimal(65536),
-wsccor06 : new Decimal(4294967296),
-wsccor07 : new Decimal(1.844674407370955e19),
-wsccor08 : new Decimal(3.402823669209384e38),
+wsccor01 : new Decimal(1),
+wsccor02 : new Decimal(2),
+wsccor03 : new Decimal(4),
+wsccor04 : new Decimal(8),
+wsccor05 : new Decimal(16),
+wsccor06 : new Decimal(32),
+wsccor07 : new Decimal(64),
+wsccor08 : new Decimal(128),
 
-wsccsl01 : new Decimal(4),
-wsccsl02 : new Decimal(16),
-wsccsl03 : new Decimal(256),
-wsccsl04 : new Decimal(65536),
-wsccsl05 : new Decimal(4294967296),
-wsccsl06 : new Decimal(1.844674407370955e19),
-wsccsl07 : new Decimal(3.402823669209384e38),
-wsccsl08 : new Decimal(1.157920892373161e77),
+wsccsl01 : new Decimal(2),
+wsccsl02 : new Decimal(4),
+wsccsl03 : new Decimal(8),
+wsccsl04 : new Decimal(16),
+wsccsl05 : new Decimal(32),
+wsccsl06 : new Decimal(64),
+wsccsl07 : new Decimal(128),
+wsccsl08 : new Decimal(256),
 
 wscm01 : new Decimal(1),
 wscm02 : new Decimal(1),
@@ -151,21 +155,42 @@ function trueHardReset() {
 
 /*游戏*/
 function buyWsc(tier) {
+    getWscCost();
     var name = tiername[tier];
     if (player.energy.gte(variab["wscc" + name])) {
         player["wsca" + name] = player["wsca" + name].add(1);
         player["wscb" + name] = player["wscb" + name].add(1);
         player.energy = player.energy.sub(variab["wscc" + name]);
-        console.log('buy1')
+        console.log('buy1');
     }
     else return
+}
+
+function buyMaxWsc(tier) {
+    var name = tiername[tier];
+    var wscbmax = invscale(player.energy.log(2)).add(variab["wsccor" + name]).div(variab["wsccsl" + name]).floor();
+    if (wscbmax.gt(player["wscb" + name])) {
+        player["wsca" + name] = player["wsca" + name].add(wscbmax.sub(player["wscb" + name]));
+        player["wscb" + name] = wscbmax.sub(1);
+        getWscCost();
+        player.energy = player.energy.sub(variab["wscc" + name]);
+        player["wscb" + name] = player["wscb" + name].add(1);
+        console.log('buymax');
+    }
+    else return;
+}
+
+function maxAll() {
+    for (let i = 1; i <= 8; i++) {
+        buyMaxWsc(i);
+    }
 }
 
 function getWscMult() {
     var mult01to08 = new Decimal(1);
     if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(16).add(1));
     if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(player.tier01.pow(2).div(4).add(1));
-    if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.pow(3).add(1));
+    if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
     if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.4).add(1));
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
@@ -180,7 +205,8 @@ function getWscMultPerBuy() {
 function getWscCost() {
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        variab["wscc" + name] = variab["wsccor" + name].mul(variab["wsccsl" + name].pow(player["wscb" + name]));
+        var bcost = variab["wsccor" + name].add(variab["wsccsl" + name].mul(player["wscb" +name]));
+        variab["wscc" + name] = new Decimal(2).pow(scale(bcost));
     }
 }
 
@@ -263,11 +289,9 @@ function buyUpgd02() {
 
 function getUpgdCost() {
     var bcost1 = variab.upgcor01.add(variab.upgcsl01.mul(player.upgd01));
-    var scost1 = bcost1.max(bcost1.pow(2).div(variab.scal02)).max(bcost1.pow(4).div(variab.scal02)).max(bcost1.pow(8).div(variab.scal03)).max(bcost1.pow(16).div(variab.scal04));
-    variab.upgc01 = new Decimal(2).pow(scost1);
+    variab.upgc01 = new Decimal(2).pow(scale(bcost1));
     var bcost2 = variab.upgcor02.add(variab.upgcsl02.mul(player.upgd02));
-    var scost2 = bcost2.max(bcost2.pow(2).div(variab.scal02)).max(bcost2.pow(4).div(variab.scal02)).max(bcost2.pow(8).div(variab.scal03)).max(bcost2.pow(16).div(variab.scal04));
-    variab.upgc02 = new Decimal(2).pow(scost2);
+    variab.upgc02 = new Decimal(2).pow(scale(bcost2));
 }
 
 function produce() {
@@ -281,11 +305,20 @@ function produce() {
 
 function fixInfinity() {
     if (player.energy.gte(1.797693134862315e308)) {
-        player.energy = new Decimal(1.797693134862315e308);
-        document.getElementById("energy").innerHTML = "1.797e308";
         document.getElementById("fixinf").style.display = 'block';
     }
+    else document.getElementById("fixinf").style.display = 'none';
 }
+
+/*数值计算*/
+function scale(x) {
+    return x.max(x.pow(2).div(variab.scal01)).max(x.pow(4).div(variab.scal02)).max(x.pow(8).div(variab.scal03)).max(x.pow(16).div(variab.scal04));
+}
+
+function invscale(x) {
+    return x.min(x.mul(variab.scal01).root(2)).min(x.mul(variab.scal02).root(4)).min(x.mul(variab.scal03).root(8)).min(x.mul(variab.scal04).root(16));
+}
+
 /*游戏机制之外……*/
 function transformToDecimal(object) {
     for (i in object) {
@@ -363,10 +396,10 @@ function updateGUI() {
     }
     document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
-    document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风灵基础值提升1~8式风灵乘数。当前：×" + notation(variab.wscBaseValue.div(16).add(1));
-    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风单元式数提升1~8式风灵乘数。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
-    document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数。当前：×" + notation(player.tier02.pow(3).add(1));
-    document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数。当前：×" + notation(player.energy.add(1).log(2).pow(0.4).add(1));
+    document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风灵基础值提升1~8式风灵乘数(1+n/16)。当前：×" + notation(variab.wscBaseValue.div(16).add(1));
+    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风单元式数提升1~8式风灵乘数(1+n²/4)。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
+    document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
+    document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数log2(n+1)^0.4+1。当前：×" + notation(player.energy.add(1).log(2).pow(0.4).add(1));
     document.getElementById("tier02").innerHTML = player.tier02.toFixed(0) + "式风模块";
     document.getElementById("tier02rewa01").innerHTML = "1式风模块：基于风模块式数提升风灵每次作成乘数，并解锁第一个升级。当前：+" + notation(player.tier02.pow(0.5).mul(0.05));
     document.getElementById("tier02rewa02").innerHTML = "2式风模块：解锁第二个升级。"
@@ -381,6 +414,7 @@ function updateGUI() {
     document.getElementById("upge02").innerHTML = "当前：×" + notation(new Decimal(1.031).pow(player.upgd02));
 
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
+
 }
 
 function tierDisplay() {
@@ -390,9 +424,10 @@ function tierDisplay() {
         document.getElementById("tier01info").innerHTML = "在2式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。";
     }
     else document.getElementById("tier01rewa01").style.display = 'none';
+
     if (player.tier01.gte(2)) {
         document.getElementById("tier01rewa02").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在5式风单元，将基于风模块式数提升1~8式风灵乘数(1+n³)。";
+        document.getElementById("tier01info").innerHTML = "在5式风单元，将基于风模块式数提升1~8式风灵乘数(1+n)³。";
     }
     else document.getElementById("tier01rewa02").style.display = 'none';
     if (player.tier01.gte(5)) {
@@ -427,6 +462,16 @@ function tierDisplay() {
     }
 }
 
+document.addEventListener("keydown", hotkeys);
+function hotkeys(event) {
+    switch (event.keyCode) {
+        case 77:
+            maxAll();
+            break;
+    }
+}
+
+var wscbmax = invscale(player.energy.log(2)).add(variab.wsccor01).div(variab.wsccsl01).floor();
 /*切换tab*/
 var tabnow = "row1";
 function changeBt(name) {
