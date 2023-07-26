@@ -393,6 +393,8 @@ function updateGUI() {
         document.getElementById("wscb" + name).innerHTML = player["wscb" + name].toFixed(0);
         document.getElementById("wscc" + name).innerHTML = notation(variab["wscc" + name]);
         document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(variab["wscm" + name]).padEnd(15, '_') + "^1.000__________¶1.000__________";
+        if (player["wscb" + name].gte(new Decimal(1024).div(variab["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "一阶折算|";
+        else document.getElementById("wscs" + name).innerHTML = "";
     }
     document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
