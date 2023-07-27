@@ -8,9 +8,10 @@
     </head>
     <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace ">
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
+        <button class="PL1button" onclick="PL1reset()" id="PL1button">扩散重置：获得<span id="PL1ptspd"></span>扩散点，下一扩散点在<span id="PL1ptsnx"></span>能量</button>
         <br />
         <p align="center" class="ftsz2">
-            <span id="chalSt">你当前不在任何挑战中</span>
+            <span id="chalstat">你当前不在任何挑战中</span>
         </p>
         <p align="center" class="ftsz3">
             <span>你有</span><span class="ftsz4" id="energy"></span><span>能量</span>
@@ -23,7 +24,7 @@
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff0000;">
             <span>你有</span><span id="PL1Pts">0</span><span>扩散点，</span><span id="PL1Eng">1</span><span>扩散能量(+</span><span id="PL1EngPs">0</span><span>/s),</span>
-            <span>它以</span><span id="PL1EngEx">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL1EngMu">1</span><span>倍</span>
+            <span>它以</span><span id="PL1EngExpn">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL1EngMult">1</span><span>倍</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ffff00; display: none">
             <span>你有</span><span id="swirl2pts">0</span><span>扪敤点</span>
@@ -42,6 +43,9 @@
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; -webkit-text-stroke: 0.5px #808080; display: none">
             <span>你有</span><span id="swirl7pts">0</span><span>扯敩点</span>
+        </p>
+        <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; display: none">
+            <span>你有</span><span id="swirl8pts">0</span><span>扰敪点</span>
         </p>
         <div class="btnrow" id="btnrowm">
             <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000; " id="btrow1" onclick="changeBt('row1')">风灵</button>
@@ -162,19 +166,77 @@
                 <button class="wscbt1" id="byon08" onclick="buyWsc(8)">作成1次花费:<br><span id="wscc08"></span>能量</button><br />
                 <span class="wscdat"><span id="wscd08">0.000</span></span>
             </div>
+            <div id="wscset2" style="display: none">
+                <div class="wsc" style="background-color: #ff5555;" id="wsc_09">
+                    <span id="wscs09"></span><span>玖式风灵作成·</span><span id="wscb09">0</span>
+                    <button class="wscbt3" id="byat09" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx09" onclick="buyMaxWsc(9)">最大作成</button>
+                    <button class="wscbt1" id="byon09" onclick="buyWsc(9)">作成1次花费:<br><span id="wscc09"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd09">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #ff0000;" id="wsc_10">
+                    <span id="wscs10"></span><span>壹零式风灵作成·</span><span id="wscb10">0</span>
+                    <button class="wscbt3" id="byat10" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx10" onclick="buyMaxWsc(10)">最大作成</button>
+                    <button class="wscbt1" id="byon10" onclick="buyWsc(10)">作成1次花费:<br><span id="wscc10"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd10">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #ff5500;" id="wsc_11">
+                    <span id="wscs11"></span><span>壹壹式风灵作成·</span><span id="wscb11">0</span>
+                    <button class="wscbt3" id="byat11" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx11" onclick="buyMaxWsc(11)">最大作成</button>
+                    <button class="wscbt1" id="byon11" onclick="buyWsc(11)">作成1次花费:<br><span id="wscc11"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd11">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #aa5500;" id="wsc_12">
+                    <span id="wscs12"></span><span>壹贰式风灵作成·</span><span id="wscb12">0</span>
+                    <button class="wscbt3" id="byat12" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx12" onclick="buyMaxWsc(12)">最大作成</button>
+                    <button class="wscbt1" id="byon12" onclick="buyWsc(12)">作成1次花费:<br><span id="wscc12"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd12">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #aa5555;" id="wsc_13">
+                    <span id="wscs13"></span><span>壹叁式风灵作成·</span><span id="wscb13">0</span>
+                    <button class="wscbt3" id="byat13" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx13" onclick="buyMaxWsc(13)">最大作成</button>
+                    <button class="wscbt1" id="byon13" onclick="buyWsc(13)">作成1次花费:<br><span id="wscc13"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd13">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #aa0055;" id="wsc_14">
+                    <span id="wscs14"></span><span>壹肆式风灵作成·</span><span id="wscb14">0</span>
+                    <button class="wscbt3" id="byat14" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx14" onclick="buyMaxWsc(14)">最大作成</button>
+                    <button class="wscbt1" id="byon14" onclick="buyWsc(14)">作成1次花费:<br><span id="wscc14"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd14">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #ff0055;" id="wsc_15">
+                    <span id="wscs15"></span><span>壹伍式风灵作成·</span><span id="wscb15">0</span>
+                    <button class="wscbt3" id="byat15" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx15" onclick="buyMaxWsc(15)">最大作成</button>
+                    <button class="wscbt1" id="byon15" onclick="buyWsc(15)">作成1次花费:<br><span id="wscc15"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd15">0.000</span></span>
+                </div>
+                <div class="wsc" style="background-color: #aa0000;" id="wsc_16">
+                    <span id="wscs16"></span><span>壹陆式风灵作成·</span><span id="wscb16">0</span>
+                    <button class="wscbt3" id="byat16" onclick="">自动：</button>
+                    <button class="wscbt2" id="bymx16" onclick="buyMaxWsc(16)">最大作成</button>
+                    <button class="wscbt1" id="byon16" onclick="buyWsc(16)">作成1次花费:<br><span id="wscc16"></span>扩散点</button><br />
+                    <span class="wscdat"><span id="wscd16">0.000</span></span>
+                </div>
+            </div>
         </div>
             <div id="p1_2" style="display: none">
                 <div align="center" class="ftsz2" id="wscbv">风灵基础值</div>
                 <div class="upg" id="tier_01">
                     <span id="tier01">式风单元</span>
                     <button class="wscbt1bl" id="tier01cost" onclick="incTier1()">需要：风灵基础值</button>
-                    <span>重置风灵，但提升风单元。</span>
+                    <span>重置1~8式风灵，但提升风单元。</span>
                     <span id="tier01info">在1式风单元，将基于风灵基础值提升1~8式风灵乘数</span>
                 </div>
                 <div class="upg" id="tier_02">
                     <span id="tier02">式风模块</span>
                     <button class="wscbt1bl" id="tier02cost" onclick="incTier2()">需要：式风单元</button>
-                    <span>重置风灵和风单元，但提升风模块。</span>
+                    <span>重置1~8式风灵和风单元，但提升风模块。</span>
                     <span id="tier02info">在1式风模块，将基于风模块式数提升风灵每次作成乘数，并解锁第一个升级</span>
                 </div>
                 <br />
@@ -202,7 +264,10 @@
                 </div>
             </div>
             <div id="p2_1" style="display: none">
-                <div align="center" class="ftsz3">需要1.797e308能量</div>
+                <div class="btnrow">
+                    <br />
+                    <button align="center" class="PL1upgbutton">快来了</button>
+                </div>
             </div>
             <div id="p2_2" style="display: none">
 
@@ -215,32 +280,35 @@
             </div>
 
             <div id="p0_1" style="display: none">
-                <br />
-                <div class="btnrow2">
-                    <button align="center" class="xxButton" onclick="save()">保存游戏</button>
-                    <button align="center" class="xxButton" onclick="autoSave()">自动保存：<span id="autoSave">开</span></button>
-                    <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
-                    <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
-                    <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
-                    <button align="center" class="xxButton" onclick="load()">恢复存档</button>
+                    <br />
+                    <div class="btnrow2">
+                        <button align="center" class="xxButton" onclick="save()">保存游戏</button>
+                        <button align="center" class="xxButton" onclick="autoSave()">自动保存：<span id="autoSave">开</span></button>
+                        <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
+                        <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
+                        <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
+                        <button align="center" class="xxButton" onclick="load()">恢复存档</button>
+                    </div>
+                    <form align="center">
+                        <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
+                    </form>
+                    <br />
+                    <div align="center" style="color: #ffffff; text-align: center">风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：1.0.0</div>
+                    <br />
+                    <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字</div>
+                    <br />
+                    <div align="center" style="color: #ffffff; text-align: center">支持所有序数增量吧吧友</div>
                 </div>
-                <form align="center">
-                    <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
-                </form>
-                <br />
-                <div align="center" style="color: #ffffff; text-align: center">风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：0.3.0</div>
-                <br />
-                <div align="center" style="color: #ffffff; text-align: center">本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字</div>
-                <br />
-                <div align="center" style="color: #ffffff; text-align: center">支持所有序数增量吧吧友</div>
-            </div>
-            <div id="p0_2" style="display: none">
-                <span class="ftsz1" style="color: #ffffff;" id="playtime"></span>
-            </div>
-            <div id="p0_3" style="display: none">
-                <span style="color: #ffffff;">placeholder</span>
-            </div>
-            <script type="text/javascript" src="break_eternity.js"></script>
-            <script type="text/javascript" src="game.js"></script>
+                <div id="p0_2" style="display: none">
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
+                </div>
+                <div id="p0_3" style="display: none">
+                    <div class="ftsz4" align="center" style="color: #ffffff; text-align: center">快来了……</div>
+                </div>
+                <script type="text/javascript" src="break_eternity.js"></script>
+                <script type="text/javascript" src="game.js"></script>
 </body>
 </html>
