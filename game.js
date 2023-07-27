@@ -392,7 +392,7 @@ function getUpgdCost() {
 function PL1reset() {
     let confirmation = confirm("您确定要扩散吗？这将重置扩散之前的所有内容！");
     if (confirmation) {
-        player.PL1pts = player.energy.root(1024).floor();
+        player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor());
         player.PL1tms = player.PL1tms.add(1);
 
         player.energy = new Decimal(2);
