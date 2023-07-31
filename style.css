@@ -104,7 +104,7 @@
     border: none;
     color: #000000;
     height: 48px;
-    width: 1024px;
+    width: 1008px;
     padding: 8px 8px;
     margin: 0px auto;
 }
@@ -131,7 +131,7 @@
 .wscbt1bl {
     background-color: #00ff80;
     color: #000000;
-    border: 2px solid #00ff80;
+    border: 2px solid #000000;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
@@ -145,6 +145,19 @@
     background-color: #00000000;
     color: #000000;
     border: 2px solid #00ff80;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    height: 48px;
+    width: 96px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt2bl {
+    background-color: #00ff80;
+    color: #000000;
+    border: 2px solid #000000;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
@@ -172,8 +185,8 @@
     border: 2px solid #ffffff;
     color: #ffffff;
     height: 48px;
-    width: 1024px;
-    padding: 8px 8px;
+    width: 1008px;
+    padding: 6px 6px;
     margin: 0px auto;
 }
 
@@ -192,17 +205,84 @@
     cursor: pointer;
 }
 
-.PL1upgbutton {
-    width: 160px;
-    height: 100px;
+.PL1upgno {
+    width: 184px;
+    height: 120px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
-    border-radius: 16px;
+    border-radius: 8px;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
+}
+
+.PL1upgyes {
+    width: 184px;
+    height: 120px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ff0000;
+    border-radius: 8px;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+}
+
+.achno {
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(#ff0000,#000000);
+    color: #ffffff;
+    border: 2px solid #00ff80;
+    border-radius: 8px;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.achyes {
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(#00ff00,#000000);
+    color: #000000;
+    border: 2px solid #00ff80;
+    border-radius: 8px;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.tooltip-text {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200%;
+    padding: 4px;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: #000000;
+    border: 1px solid #00ff80;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1;
+}
+
+.achyes:hover .tooltip-text {
+    display: block;
+}
+
+.achno:hover .tooltip-text {
+    display: block;
 }
 
 .news { /*滚动新闻*/

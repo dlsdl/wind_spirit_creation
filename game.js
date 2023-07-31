@@ -53,15 +53,33 @@ function hardReset() {
 
         tier01: new Decimal(0),
         tier02: new Decimal(0),
+        tier01conf: true,
+        tier02conf: true,
+        autobuytier01: false,
+        autobuytier02: false,
 
         upgd01: new Decimal(0),
         upgd02: new Decimal(0),
+        autobuyupgd01: false,
+        autobuyupgd02: false,
 
         hasUnlockedPL1: false,
         PL1pts: new Decimal(0),
         PL1tms: new Decimal(0),
         PL1sec: new Decimal(0),
+        PL1conf: true,
 
+        PL1upg: [false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,],
+
+        autobuywsc: [null,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,],
+
+        achi: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+        ],
         milliseconds: new Decimal(0),
         seconds: new Decimal(0),
         minuts: new Decimal(0),
@@ -158,6 +176,8 @@ variab = {
     wscmpb: new Decimal(1.6),
 
     wscBaseValue: new Decimal(0),
+    wscBaseValue1: new Decimal(0),
+    wscBaseValue2: new Decimal(0),
     tierc01: new Decimal(64),
     tierc02: new Decimal(4),
 
@@ -206,8 +226,8 @@ function importSave() {
 }
 
 function trueHardReset() {
-    let promption = prompt("您确定要硬重置吗？输入yes确定");
-    if (promption == "yes") {
+    let promption = prompt("您确定要硬重置吗？输入This is the future确定");
+    if (promption == "This is the future") {
         hardReset();
     }
 }
@@ -266,6 +286,17 @@ function buyMaxWsc(tier) {
     else return
 }
 
+function autoBuyWsc() {
+    for (let i = 1; i <= 8; i++) {
+        if (player.autobuywsc[i] == true) buyMaxWsc(i);
+    }
+}
+
+function abwSwitch(tier) {
+    if (player.autobuywsc[tier] == false) player.autobuywsc[tier] = true;
+    else player.autobuywsc[tier] = false;
+}
+
 function maxAll() {
     for (let i = 1; i <= 8; i++) {
         buyMaxWsc(i);
@@ -274,10 +305,19 @@ function maxAll() {
 
 function getWscMult() {
     var mult01to08 = new Decimal(1);
-    if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(16).add(1));
-    if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(player.tier01.pow(2).div(4).add(1));
+    var mult09to16 = new Decimal(1);
+    if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(player.tier01.add(1).pow(2));
+    if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(64).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
-    if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.4).add(1));
+    if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.2).max(1));
+    if (player.tier01.gte(25)) mult09to16 = mult09to16.mul(player.tier01.add(1).pow(2));
+    if (player.tier01.gte(63)) mult09to16 = mult09to16.mul(player.tier02.add(1).pow(3));
+
+    if (player.PL1upg[4] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(2).max(1));
+    if (player.PL1upg[5] == true) mult09to16 = mult09to16.mul(player.PL1pts.pow(0.25).max(1));
+    if (player.PL1upg[6] == true) mult09to16 = mult09to16.mul(player.PL1tms.pow(4).max(1));
+    if (player.PL1upg[7] == true) mult09to16 = mult09to16.mul(player.PL1sec.max(1));
+
     variab.PL1engmult = player.PL1energy.pow(variab.PL1engexpn);
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
@@ -285,12 +325,15 @@ function getWscMult() {
     }
     for (let tier = 9; tier <= 16; tier++) {
         let name = tiername[tier];
-        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]);
+        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult09to16);
     }
 }
 
 function getWscMultPerBuy() {
-    variab.wscmpb = new Decimal(1.6).add(player.tier02.pow(0.5).mul(0.05)).add(player.upgd01.mul(0.025)).mul(new Decimal(1.031).pow(player.upgd02));
+    variab.wscmpb = new Decimal(1.6);
+    if (player.tier02.gte(1)) variab.wscmpb = variab.wscmpb.add(player.tier02.pow(0.25).mul(0.05));
+    if (player.tier02.gte(5)) variab.wscmpb = variab.wscmpb.add(player.tier01.pow(0.25).mul(0.0125));
+    variab.wscmpb = variab.wscmpb.add(player.upgd01.mul(0.025)).mul(new Decimal(1.021897148654116).pow(player.upgd02));
 }
 
 function getWscCost() {
@@ -302,16 +345,17 @@ function getWscCost() {
 }
 
 function getWscBaseValue() {
-    var n = new Decimal(0);
+    variab.wscBaseValue1 = new Decimal(0);
+    variab.wscBaseValue2 = new Decimal(0);
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        n = n.add(player["wscb" + name]);
+        variab.wscBaseValue1 = variab.wscBaseValue1.add(player["wscb" + name]);
     }
     for (let tier = 9; tier <= 16; tier++) {
         let name = tiername[tier];
-        n = n.add(player["wscb" + name].mul(4));
+        variab.wscBaseValue2 = variab.wscBaseValue2.add(player["wscb" + name]);
     }
-    variab.wscBaseValue = n;
+    variab.wscBaseValue = variab.wscBaseValue1.add(variab.wscBaseValue2.mul(4));
 }
 
 function incTier1() {
@@ -337,31 +381,72 @@ function getTierCost() {
     variab.tierc02 = player.tier02.mul(4).add(4);
 }
 
+const tier01checkbox = document.getElementById("tier01confirm");
+tier01checkbox.addEventListener("input", function () {
+    if (tier01checkbox.checked) {
+        player.tier01conf = true;
+    } else {
+        player.tier01conf = false;
+    }
+})
+
+const tier02checkbox = document.getElementById("tier02confirm");
+tier02checkbox.addEventListener("input", function () {
+    if (tier02checkbox.checked) {
+        player.tier02conf = true;
+    } else {
+        player.tier02conf = false;
+    }
+})
+
 function tier01Reset() {
-    player.energy = new Decimal(2);
+    var confirmation;
+    if (player.tier01conf == true) confirmation = confirm("您确定要获得风单元吗？这将重置能量和1~8式风灵作成");
+    if (confirmation | player.tier01conf == false) {
+        player.energy = new Decimal(2);
 
-    player.wscb01 = new Decimal(0);
-    player.wscb02 = new Decimal(0);
-    player.wscb03 = new Decimal(0);
-    player.wscb04 = new Decimal(0);
-    player.wscb05 = new Decimal(0);
-    player.wscb06 = new Decimal(0);
-    player.wscb07 = new Decimal(0);
-    player.wscb08 = new Decimal(0);
+        player.wscb01 = new Decimal(0);
+        player.wscb02 = new Decimal(0);
+        player.wscb03 = new Decimal(0);
+        player.wscb04 = new Decimal(0);
+        player.wscb05 = new Decimal(0);
+        player.wscb06 = new Decimal(0);
+        player.wscb07 = new Decimal(0);
+        player.wscb08 = new Decimal(0);
 
-    player.wsca01 = new Decimal(0);
-    player.wsca02 = new Decimal(0);
-    player.wsca03 = new Decimal(0);
-    player.wsca04 = new Decimal(0);
-    player.wsca05 = new Decimal(0);
-    player.wsca06 = new Decimal(0);
-    player.wsca07 = new Decimal(0);
-    player.wsca08 = new Decimal(0);
+        player.wsca01 = new Decimal(0);
+        player.wsca02 = new Decimal(0);
+        player.wsca03 = new Decimal(0);
+        player.wsca04 = new Decimal(0);
+        player.wsca05 = new Decimal(0);
+        player.wsca06 = new Decimal(0);
+        player.wsca07 = new Decimal(0);
+        player.wsca08 = new Decimal(0);
+    }
 }
 
 function tier02Reset() {
-    tier01Reset();
-    player.tier01 = new Decimal(0);
+    var confirmation;
+    if (player.tier02conf == true) confirmation = confirm("您确定要获得风模块吗？这将重置能量、1~8式风灵作成、风单元");
+    if (confirmation | player.tier02conf == false) {
+        tier01Reset();
+        player.tier01 = new Decimal(0);
+    }
+}
+
+function abTier01Switch() {
+    if (player.autobuytier01 == false) player.autobuytier01 = true;
+    else player.autobuytier01 = false;
+}
+
+function abTier02Switch() {
+    if (player.autobuytier02 == false) player.autobuytier02 = true;
+    else player.autobuytier02 = false;
+}
+
+function autoBuyTier() {
+    if (player.autobuytier01 == true) incTier1();
+    if (player.autobuytier02 == true) incTier2();
 }
 
 function buyUpgd01() {
@@ -382,6 +467,21 @@ function buyUpgd02() {
     else return
 }
 
+function abUpgd01Switch() {
+    if (player.autobuyupgd01 == false) player.autobuyupgd01 = true;
+    else player.autobuyupgd01 = false;
+}
+
+function abUpgd02Switch() {
+    if (player.autobuyupgd02 == false) player.autobuyupgd02 = true;
+    else player.autobuyupgd02 = false;
+}
+
+function autoBuyUpgd() {
+    if (player.autobuyupgd01 == true) buyUpgd01();
+    if (player.autobuyupgd02 == true) buyUpgd02();
+}
+
 function getUpgdCost() {
     var bcost1 = variab.upgcor01.add(variab.upgcsl01.mul(player.upgd01));
     variab.upgc01 = new Decimal(2).pow(scale(bcost1));
@@ -389,9 +489,19 @@ function getUpgdCost() {
     variab.upgc02 = new Decimal(2).pow(scale(bcost2));
 }
 
+const PL1checkbox = document.getElementById("PL1confirm");
+PL1checkbox.addEventListener("input", function () {
+    if (PL1checkbox.checked) {
+        player.PL1conf = true;
+    } else {
+        player.PL1conf = false;
+    }
+})
+
 function PL1reset() {
-    let confirmation = confirm("您确定要扩散吗？这将重置扩散之前的所有内容！");
-    if (confirmation) {
+    var confirmation;
+    if (player.PL1conf == true) confirmation = confirm("您确定要扩散吗？这将重置能量、1~8式风灵作成、风单元、风模块、风灵升级和其他的一些内容，但是可以获得扩散点！");
+    if (confirmation | player.PL1conf == false) {
         player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor());
         player.PL1tms = player.PL1tms.add(1);
 
@@ -418,6 +528,20 @@ function PL1reset() {
         player.upgd02 = new Decimal(0);
         player.PL1sec = new Decimal(0);
         player.hasUnlockedPL1 = true;
+    }
+    if (player.energy == 0 & player.PL1sec == 0) {
+        player.energy = new Decimal(2);
+    }
+}
+
+function buyPL1upg(tier) {
+    var PL1upgcost = [6, 8, 12, 16,
+        24, 32, 48, 64,
+        128, 256, 512, 1024,
+        4096, 16384, 65536, 1048576,];
+    if (player.PL1pts.gte(new Decimal(PL1upgcost[tier]))) {
+        player.PL1upg[tier] = true;
+        player.PL1pts.sub(new Decimal(PL1upgcost[tier]));
     }
 }
 
@@ -529,25 +653,39 @@ function updateGUI() {
         document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(variab["wscm" + name]).padEnd(15, '_') + "^1.000__________¶1.000__________";
         if (player["wscb" + name].gte(new Decimal(1024).div(variab["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "一阶折算|";
         else document.getElementById("wscs" + name).innerHTML = "";
+        if (player.autobuywsc[tier] == true) document.getElementById("byat" + name).innerHTML = "自动：开";
+        else document.getElementById("byat" + name).innerHTML = "自动：关";
     }
-    document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
+    document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue1) + "+" + notation(variab.wscBaseValue2) + "×4=" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
-    document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风灵基础值提升1~8式风灵乘数(1+n/16)。当前：×" + notation(variab.wscBaseValue.div(16).add(1));
-    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风单元式数提升1~8式风灵乘数(1+n²/4)。当前：×" + notation(player.tier01.pow(2).div(4).add(1));
+    document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风单元式数提升1~8式风灵乘数(1+n)²。当前：×" + notation(player.tier01.add(1).pow(2));
+    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(variab.wscBaseValue.div(64).max(1));
     document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
-    document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数log2(n+1)^0.4+1。当前：×" + notation(player.energy.add(1).log(2).pow(0.4).add(1));
+    document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数max(1,log2(n+1)^0.2)。当前：×" + notation(player.energy.add(1).log(2).pow(0.2).max(1));
+    document.getElementById("tier01rewa05").innerHTML = "25式风单元：使1式风单元奖励也对9~16式风灵生效。";
+    document.getElementById("tier01rewa06").innerHTML = "63式风单元：使5式风单元奖励也对9~16式风灵生效。";
     document.getElementById("tier02").innerHTML = player.tier02.toFixed(0) + "式风模块";
-    document.getElementById("tier02rewa01").innerHTML = "1式风模块：基于风模块式数提升风灵每次作成乘数，并解锁第一个升级。当前：+" + notation(player.tier02.pow(0.5).mul(0.05));
-    document.getElementById("tier02rewa02").innerHTML = "2式风模块：解锁第二个升级。"
+    document.getElementById("tier02rewa01").innerHTML = "1式风模块：基于风模块式数提升风灵每次作成乘数(+0.05×n^0.25)，并解锁第一个升级。当前：+" + notation(player.tier02.pow(0.25).mul(0.05));
+    document.getElementById("tier02rewa02").innerHTML = "2式风模块：解锁第二个升级。";
+    document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.0125×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.0125));
+    document.getElementById("tier02rewa04").innerHTML = "10式风模块：将1式和5式风模块的奖励中的n^0.25变为n^0.5";
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(variab.tierc02) + "式风单元";
+    if (player.autobuytier01 == true) document.getElementById("byattier01").innerHTML = "自动：开";
+    else document.getElementById("byattier01").innerHTML = "自动：关";
+    if (player.autobuytier02 == true) document.getElementById("byattier02").innerHTML = "自动：开";
+    else document.getElementById("byattier02").innerHTML = "自动：关";
 
     document.getElementById("upgd01").innerHTML = player.upgd01.toFixed(0);
     document.getElementById("upgd02").innerHTML = player.upgd02.toFixed(0);
     document.getElementById("upgc01").innerHTML = "花费：" + notation(variab.upgc01) + "能量";
     document.getElementById("upgc02").innerHTML = "花费：" + notation(variab.upgc02) + "能量";
     document.getElementById("upge01").innerHTML = "当前：+" + notation(player.upgd01.mul(0.025));
-    document.getElementById("upge02").innerHTML = "当前：×" + notation(new Decimal(1.031).pow(player.upgd02));
+    document.getElementById("upge02").innerHTML = "当前：×" + notation(new Decimal(1.022).pow(player.upgd02));
+    if (player.autobuyupgd01 == true) document.getElementById("byatupgd01").innerHTML = "自动：开";
+    else document.getElementById("byatupgd01").innerHTML = "自动：关";
+    if (player.autobuyupgd02 == true) document.getElementById("byatupgd02").innerHTML = "自动：开";
+    else document.getElementById("byatupgd02").innerHTML = "自动：关";
 
     document.getElementById("PL1ptspd").innerHTML = notation(player.energy.root(1024).floor());
     document.getElementById("PL1ptsnx").innerHTML = notation(player.energy.root(1024).floor().add(1).pow(1024));
@@ -558,6 +696,11 @@ function updateGUI() {
     document.getElementById("PL1EngMult").innerHTML = notation(variab.PL1engmult);
     document.getElementById("PL1EngPs").innerHTML = notation(player.wsca09.mul(variab.wscm09).mul(new Decimal(0.25)));
 
+    document.getElementById("PL1upge05").innerHTML = "当前：×" + notation(player.PL1energy.add(1).log(2).max(1));
+    document.getElementById("PL1upge06").innerHTML = "当前：×" + notation(player.PL1pts.pow(0.25).max(1));
+    document.getElementById("PL1upge07").innerHTML = "当前：×" + notation(player.PL1tms.pow(4).max(1));
+    document.getElementById("PL1upge08").innerHTML = "当前：×" + notation(player.PL1sec.max(1));
+
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
     document.getElementById("totalseconds").innerHTML = "游戏秒数：" + player.totalSeconds.toFixed(0);
     document.getElementById("PL1tms").innerHTML = "您扩散了" + player.PL1tms.toFixed(0) + "次";
@@ -565,10 +708,10 @@ function updateGUI() {
 }
 
 function styleDisplay() {
-    if (player.tier01.eq(0)) document.getElementById("tier01info").innerHTML = "在1式风单元，将基于风灵基础值提升1~8式风灵乘数(1+n/16)。";
+    if (player.tier01.eq(0)) document.getElementById("tier01info").innerHTML = "在1式风单元，将基于风单元式数提升1~8式风灵乘数(1+n)²。";
     if (player.tier01.gte(1)) {
         document.getElementById("tier01rewa01").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在2式风单元，将基于风单元式数提升1~8式风灵乘数(1+n²/4)。";
+        document.getElementById("tier01info").innerHTML = "在2式风单元，将基于风灵基础值提升1~8式风灵乘数max(1,n/64)。";
     }
     else document.getElementById("tier01rewa01").style.display = 'none';
 
@@ -579,19 +722,29 @@ function styleDisplay() {
     else document.getElementById("tier01rewa02").style.display = 'none';
     if (player.tier01.gte(5)) {
         document.getElementById("tier01rewa03").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "在10式风单元，将基于能量提升1~8式风灵乘数(log2(n+1)^0.4+1)。";
+        document.getElementById("tier01info").innerHTML = "在10式风单元，将基于能量提升1~8式风灵乘数max(1,log2(n+1)^0.2)。";
     }
     else document.getElementById("tier01rewa03").style.display = 'none';
     if (player.tier01.gte(10)) {
         document.getElementById("tier01rewa04").style.display = 'block';
-        document.getElementById("tier01info").innerHTML = "";
+        document.getElementById("tier01info").innerHTML = "在25式风单元，将使1式风单元奖励也对9~16式风灵生效";
     }
     else document.getElementById("tier01rewa04").style.display = 'none';
+    if (player.tier01.gte(25)) {
+        document.getElementById("tier01rewa05").style.display = 'block';
+        document.getElementById("tier01info").innerHTML = "在63式风单元，将使5式风单元奖励也对9~16式风灵生效";
+    }
+    else document.getElementById("tier01rewa05").style.display = 'none';
+    if (player.tier01.gte(63)) {
+        document.getElementById("tier01rewa06").style.display = 'block';
+        document.getElementById("tier01info").innerHTML = "";
+    }
+    else document.getElementById("tier01rewa06").style.display = 'none';
 
-    if (player.tier02.eq(0)) document.getElementById("tier02info").innerHTML = "在1式风模块，将基于风模块式数提升风灵每次作成乘数(+0.05×n^0.5)，并解锁第一个升级";
+    if (player.tier02.eq(0)) document.getElementById("tier02info").innerHTML = "在1式风模块，将基于风模块式数提升风灵每次作成乘数(+0.05×n^0.25)，并解锁第一个升级。";
     if (player.tier02.gte(1)) {
         document.getElementById("tier02rewa01").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在2式风模块，将解锁第二个升级";
+        document.getElementById("tier02info").innerHTML = "在2式风模块，将解锁第二个升级。";
         document.getElementById("upg_01").style.display = 'block';
     }
     else {
@@ -600,17 +753,62 @@ function styleDisplay() {
     }
     if (player.tier02.gte(2)) {
         document.getElementById("tier02rewa02").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "";
+        document.getElementById("tier02info").innerHTML = "在5式风模块，将基于风单元式数提升风灵每次作成乘数(+0.0125×n^0.25)。";
         document.getElementById("upg_02").style.display = 'block';
     }
     else {
         document.getElementById("tier02rewa02").style.display = 'none';
         document.getElementById("upg_02").style.display = 'none';
     }
+    if (player.tier02.gte(5)) {
+        document.getElementById("tier02rewa03").style.display = 'block';
+        document.getElementById("tier02info").innerHTML = "在10式风模块，将1式和5式风模块的奖励中的n^0.25变为n。";
+    }
+    else {
+        document.getElementById("tier02rewa03").style.display = 'none';
+    }
+    if (player.tier02.gte(10)) {
+        document.getElementById("tier02rewa04").style.display = 'block';
+        document.getElementById("tier02info").innerHTML = "";
+    }
+    else {
+        document.getElementById("tier02rewa04").style.display = 'none';
+    }
+
     if (player.energy.gte(1.797693134862315e308)) document.getElementById("PL1button").style.display = 'block';
     else document.getElementById("PL1button").style.display = 'none';
     if (player.hasUnlockedPL1 == true) {
             document.getElementById("wscset2").style.display = 'block';
+    }
+    for (let i = 0; i < 16; i++) {
+        if (player.PL1upg[i] == true) document.getElementById("PL1upg" + tiername[i + 1]).className = "PL1upgyes";
+        else document.getElementById("PL1upg" + tiername[i + 1]).className = "PL1upgno";
+    }
+    if (player.PL1upg[0] == true) {
+        for (let i = 1; i <= 8; i++) {
+            document.getElementById("byat" + tiername[i]).style.display = 'block';
+        }
+    }
+    else {
+        for (let i = 1; i <= 8; i++) {
+            document.getElementById("byat" + tiername[i]).style.display = 'none';
+        }
+    }
+    if (player.PL1upg[1] == true) {
+        document.getElementById("byattier01").style.display = 'block';
+        document.getElementById("byattier02").style.display = 'block';
+    }
+    else {
+        document.getElementById("byattier01").style.display = 'none';
+        document.getElementById("byattier02").style.display = 'none';
+    }
+    if (player.PL1upg[2] == true) {
+        document.getElementById("byatupgd01").style.display = 'block';
+        document.getElementById("byatupgd02").style.display = 'block';
+    }
+    else {
+        document.getElementById("byatupgd01").style.display = 'none';
+        document.getElementById("byatupgd02").style.display = 'none';
     }
 }
 
@@ -652,7 +850,6 @@ function mainLoop() {
     getWscBaseValue();
     getTierCost();
     getUpgdCost();
-
     
     produce();
     time(diff);
@@ -661,7 +858,15 @@ function mainLoop() {
     if (player.hasUnlockedPL1 == false) fixInfinity();
 }
 
+function autoBuyLoop() {
+    autoBuyWsc();
+    autoBuyTier();
+    autoBuyUpgd()
+}
+
 setInterval(mainLoop, 50);
+
+setInterval(autoBuyLoop, 1000);
 
 setInterval(save, 60000);
 
