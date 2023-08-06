@@ -75,7 +75,7 @@ function hardReset() {
                  false, false, false, false,
                  false, false, false, false,
                  false, false, false, false,],
-        innormcha: [false, false, false, false, false, false, false, false, false, false, false, false,],
+        innormcha: new Decimal(0),
         normchacom: [false, false, false, false, false, false, false, false, false, false, false, false,],
 
         autobuywsc: [null,
@@ -320,7 +320,7 @@ function abwSwitch(tier) {
 }
 
 function maxAll() {
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 16; i++) {
         buyMaxWsc(i);
     }
 }
@@ -590,23 +590,21 @@ function buyPL1upg(tier) {
 }
 
 function entnormcha(tier) {
-    if (player.innormcha[tier] == false) {
+    if (player.innormcha.eq(0)) {
         PL1reset();
-        player.innormcha[tier] = true;
+        player.innormcha = new Decimal(tier);
     }
 }
 
 function comNormCha() {
-    for (let i = 0; i < 12; i++) {
-        if (player.innormcha[i]==true & player.normchacom[i] == false & player.energy.gte(1.797e308)) {
-            player.normchacom[i] = true;
+    if (player.innormcha.gt(0) & player.energy.gte(1.797e308)) {
+            player.normchacom[player.innormcha.toNumber - 1] = true;
             quitcha();
-        }
     }
 }
 
 function quitcha() {
-    player.innormcha = [false, false, false, false, false, false, false, false, false, false, false, false,];
+    player.innormcha = new Decimal(0);
 }
 
 function produce() {
@@ -763,18 +761,18 @@ function updateGUI() {
     document.getElementById("PL1upge07").innerHTML = "当前：×" + notation(player.PL1tms.max(1).min(1e10));
     document.getElementById("PL1upge08").innerHTML = "当前：×" + notation(player.PL1sec.max(1).pow(4).min(1e10));
 
-    if (player.innormcha[0] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
-    else if (player.innormcha[1] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战2中";
-    else if (player.innormcha[2] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战3中";
-    else if (player.innormcha[3] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战4中";
-    else if (player.innormcha[4] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战5中";
-    else if (player.innormcha[5] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战6中";
-    else if (player.innormcha[6] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战7中";
-    else if (player.innormcha[7] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战8中";
-    else if (player.innormcha[8] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战9中";
-    else if (player.innormcha[9] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战10中";
-    else if (player.innormcha[10] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战11中";
-    else if (player.innormcha[11] == true) document.getElementById("chalstat").innerHTML = "你当前在普通挑战12中";
+    if (player.innormcha == 1) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
+    else if (player.innormcha == 2) document.getElementById("chalstat").innerHTML = "你当前在普通挑战2中";
+    else if (player.innormcha == 3) document.getElementById("chalstat").innerHTML = "你当前在普通挑战3中";
+    else if (player.innormcha == 4) document.getElementById("chalstat").innerHTML = "你当前在普通挑战4中";
+    else if (player.innormcha == 5) document.getElementById("chalstat").innerHTML = "你当前在普通挑战5中";
+    else if (player.innormcha == 6) document.getElementById("chalstat").innerHTML = "你当前在普通挑战6中";
+    else if (player.innormcha == 7) document.getElementById("chalstat").innerHTML = "你当前在普通挑战7中";
+    else if (player.innormcha == 8) document.getElementById("chalstat").innerHTML = "你当前在普通挑战8中";
+    else if (player.innormcha == 9) document.getElementById("chalstat").innerHTML = "你当前在普通挑战9中";
+    else if (player.innormcha == 10) document.getElementById("chalstat").innerHTML = "你当前在普通挑战10中";
+    else if (player.innormcha == 11) document.getElementById("chalstat").innerHTML = "你当前在普通挑战11中";
+    else if (player.innormcha == 12) document.getElementById("chalstat").innerHTML = "你当前在普通挑战12中";
     else document.getElementById("chalstat").innerHTML = "你当前不在任何挑战中";
 
     document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";

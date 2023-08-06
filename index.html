@@ -27,25 +27,25 @@
             <span>它以</span><span id="PL1EngExpn">1</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL1EngMult">1</span><span>倍</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ffff00; display: none">
-            <span>你有</span><span id="swirl2pts">0</span><span>扪敤点</span>
+            <span>你有</span><span id="PL2pts">0</span><span>扪敤点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ff00; display: none">
-            <span>你有</span><span id="swirl3pts">0</span><span>扫敥点</span>
+            <span>你有</span><span id="PL3pts">0</span><span>扫敥点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ffff; display: none">
-            <span>你有</span><span id="swirl4pts">0</span><span>扬敦点</span>
+            <span>你有</span><span id="PL4pts">0</span><span>扬敦点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #0000ff; display: none">
-            <span>你有</span><span id="swirl5pts">0</span><span>扭敧点</span>
+            <span>你有</span><span id="PL5pts">0</span><span>扭敧点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #ff00ff; display: none">
-            <span>你有</span><span id="swirl6pts">0</span><span>扮敨点</span>
+            <span>你有</span><span id="PL6pts">0</span><span>扮敨点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; -webkit-text-stroke: 0.5px #808080; display: none">
-            <span>你有</span><span id="swirl7pts">0</span><span>扯敩点</span>
+            <span>你有</span><span id="PL7pts">0</span><span>扯敩点</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; display: none">
-            <span>你有</span><span id="swirl8pts">0</span><span>扰敪点</span>
+            <span>你有</span><span id="PL8pts">0</span><span>扰敪点</span>
         </p>
         <div class="btnrow" id="btnrowm">
             <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000; " id="btrow1" onclick="changeBt('row1')">风灵</button>
@@ -323,22 +323,22 @@
             <div id="normchal" style="display: none">
                 <table align="center">
                     <tr>
-                        <td><button id="normchal01" class="normchalno" onclick="entnormcha(0)">普通挑战1<br />除了壹式风灵之外所有风灵指数强制为0，但壹式风灵指数为2<br />奖励：快速自动作成壹式风灵</button></td>
-                        <td><button id="normchal02" class="normchalno" onclick="entnormcha(1)">普通挑战2<br />1~8式风灵的指数都变为0.5<br />奖励：快速自动作成贰式风灵</button></td>
-                        <td><button id="normchal03" class="normchalno" onclick="entnormcha(2)">普通挑战3<br />有一个随时间增加0到1的乘数到1~8式风灵，作成风灵后重置<br />奖励：快速自动作成叁式风灵</button></td>
-                        <td><button id="normchal04" class="normchalno" onclick="entnormcha(3)">普通挑战4<br />你只能作成前4式风灵作成<br />奖励：快速自动作成肆式风灵</button></td>
+                        <td><button id="normchal01" class="normchalno" onclick="entnormcha(1)">普通挑战1<br />除了壹式风灵之外所有风灵指数强制为0，但壹式风灵指数为2<br />奖励：快速自动作成壹式风灵</button></td>
+                        <td><button id="normchal02" class="normchalno" onclick="entnormcha(2)">普通挑战2<br />1~8式风灵的指数都变为0.5<br />奖励：快速自动作成贰式风灵</button></td>
+                        <td><button id="normchal03" class="normchalno" onclick="entnormcha(3)">普通挑战3<br />有一个随时间增加0到1的乘数到1~8式风灵，作成风灵后重置<br />奖励：快速自动作成叁式风灵</button></td>
+                        <td><button id="normchal04" class="normchalno" onclick="entnormcha(4)">普通挑战4<br />你只能作成前4式风灵作成<br />奖励：快速自动作成肆式风灵</button></td>
                     </tr>
                     <tr>
-                        <td><button id="normchal05" class="normchalno" onclick="entnormcha(4)">普通挑战5<br />作成风灵将重置之前风灵作成<br />奖励：快速自动作成伍式风灵</button></td>
-                        <td><button id="normchal06" class="normchalno" onclick="entnormcha(5)">普通挑战6<br />你的风灵作成总数限制在300<br />奖励：快速自动作成陆式风灵</button></td>
-                        <td><button id="normchal07" class="normchalno" onclick="entnormcha(6)">普通挑战7<br />作成风灵时将重置所有风灵加数<br />奖励：快速自动作成柒式风灵</button></td>
-                        <td><button id="normchal08" class="normchalno" onclick="entnormcha(7)">普通挑战8<br />风灵乘数随时间减少，作成风灵时重置<br />奖励：快速自动作成捌式风灵</button></td>
+                        <td><button id="normchal05" class="normchalno" onclick="entnormcha(5)">普通挑战5<br />作成风灵将重置之前风灵作成<br />奖励：快速自动作成伍式风灵</button></td>
+                        <td><button id="normchal06" class="normchalno" onclick="entnormcha(6)">普通挑战6<br />你的风灵作成总数限制在300<br />奖励：快速自动作成陆式风灵</button></td>
+                        <td><button id="normchal07" class="normchalno" onclick="entnormcha(7)">普通挑战7<br />作成风灵时将重置所有风灵加数<br />奖励：快速自动作成柒式风灵</button></td>
+                        <td><button id="normchal08" class="normchalno" onclick="entnormcha(8)">普通挑战8<br />风灵乘数随时间减少，作成风灵时重置<br />奖励：快速自动作成捌式风灵</button></td>
                     </tr>
                     <tr>
-                        <td><button id="normchal09" class="normchalno" onclick="entnormcha(8)">普通挑战9<br />禁用风单元的奖励<br />奖励：快速自动获得风单元</button></td>
-                        <td><button id="normchal10" class="normchalno" onclick="entnormcha(9)">普通挑战10<br />你无法获得风模块<br />奖励：快速自动获得风模块</button></td>
-                        <td><button id="normchal11" class="normchalno" onclick="entnormcha(10)">普通挑战11<br />扩散能量指数总是为0<br />奖励：快速自动购买风灵升级1</button></td>
-                        <td><button id="normchal12" class="normchalno" onclick="entnormcha(11)">普通挑战12<br />每次作成乘数总是为1<br />奖励：快速自动购买风灵升级2</button></td>
+                        <td><button id="normchal09" class="normchalno" onclick="entnormcha(9)">普通挑战9<br />禁用风单元的奖励<br />奖励：快速自动获得风单元</button></td>
+                        <td><button id="normchal10" class="normchalno" onclick="entnormcha(10)">普通挑战10<br />你无法获得风模块<br />奖励：快速自动获得风模块</button></td>
+                        <td><button id="normchal11" class="normchalno" onclick="entnormcha(11)">普通挑战11<br />扩散能量指数总是为0<br />奖励：快速自动购买风灵升级1</button></td>
+                        <td><button id="normchal12" class="normchalno" onclick="entnormcha(12)">普通挑战12<br />每次作成乘数总是为1<br />奖励：快速自动购买风灵升级2</button></td>
                     </tr>
                 </table>
             </div>
@@ -346,9 +346,9 @@
 
         <div id="p0_1" style="display: none">
             <div class="ftsz2" align="center">
-                风单元确认：<input type="checkbox" id="tier01confirm" checked="checked"><br />
-                风模块确认：<input type="checkbox" id="tier02confirm" checked="checked"><br />
-                扩散时确认：<input type="checkbox" id="PL1confirm" checked="checked"><br />
+                风单元确认：<input type="checkbox" id="tier01confirm" ><br />
+                风模块确认：<input type="checkbox" id="tier02confirm" ><br />
+                扩散时确认：<input type="checkbox" id="PL1confirm" ><br />
             </div>
             <div class="btnrow2">
                 <button align="center" class="xxButton" onclick="save()">保存游戏</button>
@@ -365,6 +365,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v1.2.1 2023-8-6 修复了全部最大和重置确认勾选的bug<br />
                 v1.2.0 2023-8-2 添加普通挑战、完成成就、保存、导出导入存档通知，修改部分扩散升级价格和奖励<br />
                 v1.1.0 2023-7-31 添加扩散升级、普通自动化、重置确定勾选、修改并添加部分风单元和风模块奖励、添加2行成就<br />
                 v1.0.0 2023-7-27 添加9~16式风灵生产扩散能量，添加扩散重置，添加更多统计内容<br />
