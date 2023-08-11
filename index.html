@@ -259,25 +259,41 @@
             <div align="center" class="ftsz2" id="tier01rewa04" style="display: none">10式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa05" style="display: none">25式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa06" style="display: none">63式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa07" style="display: none">200式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa08" style="display: none">630式风单元：</div>
             <br />
             <div align="center" class="ftsz2" id="tier02rewa01" style="display: none">1式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa02" style="display: none">2式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa03" style="display: none">5式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa04" style="display: none">12式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa05" style="display: none">30式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa06" style="display: none">75式风模块：</div>
         </div>
         <div id="p1_3" style="display: none">
             <br />
             <div class="upg" id="upg_01" style="display: none">
-                <span>风灵升级一·等级<span id="upgd01"></span> 每级使风灵每次作成乘数增加0.025</span>
+                <span>风灵升级一·等级<span id="upgd01"></span> 每级使风灵每次作成乘数增加<span id="upgm01"></span></span>
                 <button class="wscbt2" id="byatupgd01" onclick="abUpgd01Switch()" style="color: #ffffff">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc01" onclick="buyUpgd01()">花费：能量</button>
                 <span id="upge01">当前：</span>
             </div>
-            <div class="upg" id="upg_02" style="display: none ">
-                <span>风灵升级二·等级<span id="upgd02"></span> 每级使风灵每次作成乘数乘以1.022</span>
+            <div class="upg" id="upg_02" style="display: none">
+                <span>风灵升级二·等级<span id="upgd02"></span> 每级使风灵每次作成乘数乘以<span id="upgm02"></span></span>
                 <button class="wscbt2" id="byatupgd02" onclick="abUpgd02Switch()" style="color: #ffffff">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc02" onclick="buyUpgd02()">花费：能量</button>
                 <span id="upge02">当前：</span>
+            </div>
+            <div class="upg" id="upg_03" style="display: none">
+                <span>风灵升级三·等级<span id="upgd03"></span> 每级使风灵升级1倍率增加0.25倍</span>
+                <button class="wscbt2" id="byatupgd03" onclick="abUpgd03Switch()" style="color: #ffffff; display: none">自动：</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc03" onclick="buyUpgd03()">花费：能量</button>
+                <span id="upge03">当前：</span>
+            </div>
+            <div class="upg" id="upg_04" style="display: none">
+                <span>风灵升级四·等级<span id="upgd04"></span> 每级使风灵升级2倍率增加0.25次方</span>
+                <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff; display: none">自动：</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd04()">花费：能量</button>
+                <span id="upge04">当前：</span>
             </div>
         </div>
         <div id="p2_1" style="display: none">
@@ -290,41 +306,63 @@
                     <td><button class="PL1upgno" id="PL1upg04" onclick="buyPL1upg(3)">解锁普通挑战<br />花费：16扩散点</button></td>
                 </tr>
                 <tr>
-                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log2扩散能量乘以9~16式风灵乘数<br /><span id="PL1upge05">当前：</span><br />花费：32扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg06" onclick="buyPL1upg(5)">基于扩散点^0.25乘以9~16式风灵乘数<br /><span id="PL1upge06">当前：</span><br />花费：64扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg07" onclick="buyPL1upg(6)">基于扩散次数乘以9~16式风灵乘数，上限1e10<br /><span id="PL1upge07">当前：</span><br />花费：128扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于扩散时间^4乘以9~16式风灵乘数，上限1e10<br /><span id="PL1upge08">当前：</span><br />花费：256扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log1.044扩散能量乘以9~16式风灵乘数<br /><span id="PL1upge05">当前：</span><br />花费：32扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg06" onclick="buyPL1upg(5)">基于扩散点乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge06">当前：</span><br />花费：64扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg07" onclick="buyPL1upg(6)">基于扩散次数^4乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge07">当前：</span><br />花费：128扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于log2能量乘以9~16式风灵乘数<br /><span id="PL1upge08">当前：</span><br />花费：256扩散点</button></td>
                 </tr>
-                <tr style="display:none">
-                    <td><button class="PL1upgno" id="PL1upg09" onclick="buyPL1upg(8)">1~8式风灵指数增加0.01<br /><span id="PL1upge09">当前：</span><br />花费：1024扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg10" onclick="buyPL1upg(9)">玖式风灵作成次数加成壹式风灵作成指数<br />花费：4096扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg11" onclick="buyPL1upg(10)">根据9~16式风灵作成数量提升扩散能量指数<br />花费：16384扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg12" onclick="buyPL1upg(11)">基于扩散时间乘以1~8式风灵乘数<br /><span id="PL1upge12">当前：</span><br />花费：65536扩散点</button></td>
+                <tr>
+                    <td><button class="PL1upgno" id="PL1upg09" onclick="buyPL1upg(8)">扩散能量指数增加0.5<br />花费：1024扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg10" onclick="buyPL1upg(9)">风灵升级1基础倍率增加到0.0625<br />花费：4096扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg11" onclick="buyPL1upg(10)">风灵升级2基础倍率增加到1.044<br />花费：16384扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg12" onclick="buyPL1upg(11)">解锁购买项<br />花费：65536扩散点</button></td>
                 </tr>
-                <tr style="display:none">
-                    <td><button class="PL1upgno" id="PL1upg13" onclick="buyPL1upg(12)">玖式风灵可以生产捌式风灵<br /><span id="PL1upge13">当前：</span><br />花费：1.048e6扩散点</button></td>
+                <tr>
+                    <td><button class="PL1upgno" id="PL1upg13" onclick="buyPL1upg(12)">玖式风灵可以生产捌式风灵<br />花费：1.048e6扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg14" onclick="buyPL1upg(13)">风单元不再重置任何东西<br />花费：1.677e7扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg15" onclick="buyPL1upg(14)">风模块不再重置任何东西<br />花费：2.684e8扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg16" onclick="buyPL1upg(15)">解锁购买项（还没出）<br />花费：4.294e9扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg16" onclick="buyPL1upg(15)">将每次作成乘数乘以2<br />花费：4.294e9扩散点</button></td>
                 </tr>
             </table>
         </div>
         <div id="p2_2" style="display: none">
-
+            <div id="PL1bab" style="display: none">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block;">每购买一次购买项，这一列的购买项价格都会提高，点击按钮重置购买项及其价格，但进行扩散重置</div>
+                    <button class="ltbutton" onclick="resetBab()">重置</button>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td><button class="PL1bab" id="bab01" onclick="buyPL1bab1()">使25式风单元的效果×2（<span id="PL1bab01"></span>/5）<br />花费：<span id="PL1babc1"></span>能量</button></td>
+                        <td><button class="PL1bab" id="bab02" onclick="buyPL1bab2()">使25式风单元的效果×2（<span id="PL1bab02"></span>/5）<br />花费：<span id="PL1babc2"></span>扩散能量</button></td>
+                        <td><button class="PL1bab" id="bab03" onclick="buyPL1bab3()">使25式风单元的效果×2（<span id="PL1bab03"></span>/5）<br />花费：<span id="PL1babc3"></span>扩散点</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL1bab" id="bab04" onclick="buyPL1bab4()">使12式风模块的效果+20%（<span id="PL1bab04"></span>/5）<br />花费：<span id="PL1babc4"></span>能量</button></td>
+                        <td><button class="PL1bab" id="bab05" onclick="buyPL1bab5()">使12式风模块的效果+20%（<span id="PL1bab05"></span>/5）<br />花费：<span id="PL1babc5"></span>扩散能量</button></td>
+                        <td><button class="PL1bab" id="bab06" onclick="buyPL1bab6()">使12式风模块的效果+20%（<span id="PL1bab06"></span>/5）<br />花费：<span id="PL1babc6"></span>扩散点</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL1bab" id="bab07" onclick="buyPL1bab7()">使扩散能量指数增加0.1（<span id="PL1bab07"></span>/5）<br />花费：<span id="PL1babc7"></span>能量</button></td>
+                        <td><button class="PL1bab" id="bab08" onclick="buyPL1bab8()">使扩散能量指数增加0.1（<span id="PL1bab08"></span>/5）<br />花费：<span id="PL1babc8"></span>扩散能量</button></td>
+                        <td><button class="PL1bab" id="bab09" onclick="buyPL1bab9()">使扩散能量指数增加0.1（<span id="PL1bab09"></span>/5）<br />花费：<span id="PL1babc9"></span>扩散点</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="p2_3" style="display: none">
 
         </div>
         <div id="p2_4" style="display: none">
-            <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;">点击挑战框以开始挑战，到达1.797e308能量完成普通挑战</div>
-                <button class="ltbutton" onclick="quitCha()">退出挑战</button>
-            </div>
             <div id="normchal" style="display: none">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block;">点击挑战框以开始挑战，到达1.797e308能量完成普通挑战</div>
+                    <button class="ltbutton" onclick="quitCha()">退出挑战</button>
+                </div>
                 <table align="center">
                     <tr>
                         <td><button id="normchal01" class="normchalno" onclick="entNormCha(1)">普通挑战1<br />除了壹式风灵之外所有风灵指数强制为0，但壹式风灵指数为2<br />奖励：快速自动作成壹式风灵</button></td>
-                        <td><button id="normchal02" class="normchalno" onclick="entNormCha(2)">普通挑战2<br />1~8式风灵的价格增长倍数是原来的2次方<br />奖励：快速自动作成贰式风灵</button></td>
+                        <td><button id="normchal02" class="normchalno" onclick="entNormCha(2)">普通挑战2<br />1~8式风灵的价格增长倍数是原来的2次方，且禁用全部最大<br />奖励：快速自动作成贰式风灵</button></td>
                         <td><button id="normchal03" class="normchalno" onclick="entNormCha(3)">普通挑战3<br />1~8式风灵的指数在3秒内从0增加到1，作成1~8式风灵后重置<br />奖励：快速自动作成叁式风灵</button></td>
                         <td><button id="normchal04" class="normchalno" onclick="entNormCha(4)">普通挑战4<br />你只能作成前4式风灵（无法作成5~8式风灵）<br />奖励：快速自动作成肆式风灵</button></td>
                     </tr>
@@ -366,6 +404,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v1.3.0 2023-8-11 添加购买项、新的风单元和风模块奖励、新的扩散升级、第3和第4个升级<br />
                 v1.2.1 2023-8-7 修复了全部最大、重置确认勾选、挑战的bug<br />
                 v1.2.0 2023-8-2 添加普通挑战、完成成就、保存、导出导入存档通知，修改部分扩散升级价格和奖励<br />
                 v1.1.0 2023-7-31 添加扩散升级、普通自动化、重置确定勾选、修改并添加部分风单元和风模块奖励、添加2行成就<br />
@@ -374,7 +413,7 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：1.2.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：1.3.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -450,6 +489,8 @@
             <div class="noti" id="notiach11">完成成就：100万能量很多</div>
             <div class="noti" id="notiach12">完成成就：百岁珊（？</div>
             <div class="noti" id="notiach13">完成成就：挑战完成废我一辈子</div>
+            <div class="noti" id="notiach14">完成成就：风灵找到了！</div>
+            <div class="noti" id="notiach15">完成成就：更好更需要DLC</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>

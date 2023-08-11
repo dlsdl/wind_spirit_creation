@@ -63,6 +63,8 @@ function hardReset() {
 
         upgd01: new Decimal(0),
         upgd02: new Decimal(0),
+        upgd03: new Decimal(0),
+        upgd04: new Decimal(0),
         autobuyupgd01: false,
         autobuyupgd02: false,
 
@@ -76,6 +78,15 @@ function hardReset() {
                  false, false, false, false,
                  false, false, false, false,
                  false, false, false, false,],
+        PL1bab01: new Decimal(0),
+        PL1bab02: new Decimal(0),
+        PL1bab03: new Decimal(0),
+        PL1bab04: new Decimal(0),
+        PL1bab05: new Decimal(0),
+        PL1bab06: new Decimal(0),
+        PL1bab07: new Decimal(0),
+        PL1bab08: new Decimal(0),
+        PL1bab09: new Decimal(0),
         innormcha: 0,
         normchamul: new Decimal(0),
         normchapow: new Decimal(1),
@@ -112,6 +123,11 @@ variab = {
     scal02: new Decimal(1099511627776),
     scal03: new Decimal(1.329227995784915e36),
     scal04: new Decimal(2.135987035920910e96),
+
+    scaltier01: new Decimal(100),
+    scaltier02: new Decimal(64000000),
+    scaltier03: new Decimal(2.62144e23),
+    scaltier04: new Decimal(2.62144e63),
 
     wscc01: new Decimal(2),
     wscc02: new Decimal(4),
@@ -208,15 +224,31 @@ variab = {
 
     upgc01: new Decimal(0),
     upgc02: new Decimal(0),
+    upgc03: new Decimal(0),
+    upgc04: new Decimal(0),
 
     upgcor01: new Decimal(256),
     upgcor02: new Decimal(512),
+    upgcor03: new Decimal(2048),
+    upgcor04: new Decimal(8192),
 
     upgcsl01: new Decimal(512),
     upgcsl02: new Decimal(1024),
+    upgcsl03: new Decimal(4096),
+    upgcsl04: new Decimal(16384),
+
+    upgd01mult: new Decimal(1),
+    upgd02mult: new Decimal(1),
 
     PL1engmul: new Decimal(1),
     PL1engpow: new Decimal(1),
+
+    PL1babc1: new Decimal("1e5120"),
+    PL1babc2: new Decimal(1e160),
+    PL1babc3: new Decimal(100000),
+    PL1babcsl1: new Decimal("1e1024"),
+    PL1babcsl2: new Decimal(1e32),
+    PL1babcsl3: new Decimal(10),
 }
 /*存档*/
 function save() {
@@ -269,7 +301,6 @@ function buyWsc(tier) {
             player["wsca" + name] = player["wsca" + name].add(1);
             player["wscb" + name] = player["wscb" + name].add(1);
             player.energy = player.energy.sub(variab["wscc" + name]);
-            console.log('buy1');
             if (player.innormcha == 3) player.normchapow = new Decimal(0);
             if (player.innormcha == 5) {
                 for (let i = 1; i < tier; i++) {
@@ -292,7 +323,6 @@ function buyWsc(tier) {
             player["wsca" + name] = player["wsca" + name].add(1);
             player["wscb" + name] = player["wscb" + name].add(1);
             player.PL1pts = player.PL1pts.sub(variab["wscc" + name]);
-            console.log('buy2');
         }
         else return
     }
@@ -300,7 +330,7 @@ function buyWsc(tier) {
 }
 
 function buyMaxWsc(tier) {
-    if (player.innormcha == 5) return;
+    if (player.innormcha == 2 | player.innormcha == 5) return;
     var name = tiername[tier];
     if (tier <= 8) {
         if (player.innormcha == 4 & tier >= 5) return;
@@ -311,7 +341,6 @@ function buyMaxWsc(tier) {
             getWscCost();
             player.energy = player.energy.sub(variab["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
-            console.log('buymax1');
             if (player.innormcha == 3) player.normchapow = new Decimal(0);
             if (player.innormcha == 7) {
                 for (let i = 1; i <= 8; i++) {
@@ -331,7 +360,6 @@ function buyMaxWsc(tier) {
             getWscCost();
             player.PL1pts = player.PL1pts.sub(variab["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
-            console.log('buymax2');
         }
         else return
     }
@@ -360,14 +388,13 @@ function getWscMult() {
     if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(64).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
     if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.2).max(1));
-    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).pow(player.tier01));
+    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01));
     if (player.tier01.gte(63)) mult09to16 = mult09to16.mul(player.tier01.add(1).pow(2)).mul(player.tier02.add(1).pow(3));
 
-    if (player.PL1upg[4] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(2).max(1));
-    if (player.PL1upg[5] == true) mult09to16 = mult09to16.mul(player.PL1pts.pow(0.25).max(1));
-    if (player.PL1upg[6] == true) mult09to16 = mult09to16.mul(player.PL1tms.max(1).min(1e10));
-    if (player.PL1upg[7] == true) mult09to16 = mult09to16.mul(player.PL1sec.pow(4).max(1).min(1e10));
-
+    if (player.PL1upg[4] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(1.044273782427413).max(1));
+    if (player.PL1upg[5] == true) mult09to16 = mult09to16.mul(player.PL1pts.min(player.PL1pts.add(1).log(1.189207115002721).mul(7.205759404e16)).max(1));
+    if (player.PL1upg[6] == true) mult09to16 = mult09to16.mul(player.PL1tms.pow(4).min(player.PL1tms.pow(0.25).mul(1.152921505e18)).max(1)); 
+    if (player.PL1upg[7] == true) mult09to16 = mult09to16.mul(player.energy.add(1).log(2).max(1)); 
     variab.PL1engmul = player.PL1energy.pow(variab.PL1engpow);
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
@@ -424,9 +451,10 @@ function getWscPow() {
 function getWscMultPerBuy() {
     variab.wscmpb = new Decimal(1.6);
     if (player.tier02.gte(1)) variab.wscmpb = variab.wscmpb.add(player.tier02.pow(0.25).mul(0.05));
-    if (player.tier02.gte(5)) variab.wscmpb = variab.wscmpb.add(player.tier01.pow(0.25).mul(0.01));
-    variab.wscmpb = variab.wscmpb.add(player.upgd01.mul(0.025)).mul(new Decimal(1.021897148654116).pow(player.upgd02));
-    if (player.tier02.gte(12)) variab.wscmpb = variab.wscmpb.mul(new Decimal(1.010889286051700).pow(player.tier02));
+    if (player.tier02.gte(5)) variab.wscmpb = variab.wscmpb.add(player.tier01.pow(0.25).mul(0.02));
+    variab.wscmpb = variab.wscmpb.add(player.upgd01.mul(variab.upgd01mult)).mul(new Decimal(variab.upgd02mult).pow(player.upgd02));
+    if (player.tier02.gte(12)) variab.wscmpb = variab.wscmpb.mul(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
+    if (player.PL1upg[15] == true) variab.wscmpb = variab.wscmpb.mul(2);
     if (player.innormcha == 12) variab.wscmpb = new Decimal(1);
 }
 
@@ -464,7 +492,7 @@ function incTier1() {
     if (variab.wscBaseValue.gte(variab.tierc01)) {
         if (player.innormcha == 9 | player.innormcha == 10) return
         player.tier01 = player.tier01.add(1);
-        tier01Reset();
+        if (player.PL1upg[13] == false) tier01Reset();
         console.log('6308sfdy')
     }
     else return
@@ -473,15 +501,15 @@ function incTier1() {
 function incTier2() {
     if (player.tier01.gte(variab.tierc02)) {
         player.tier02 = player.tier02.add(1);
-        tier02Reset();
+        if (player.PL1upg[14] == false) tier02Reset();
         console.log('75scjfmk')
     }
     else return
 }
 
 function getTierCost() {
-    variab.tierc01 = player.tier01.mul(64).add(64).add(player.tier01.sub(100).max(0).pow(2).mul(4));
-    variab.tierc02 = player.tier02.mul(4).add(4).add(player.tier02.sub(100).max(0).pow(2));
+    variab.tierc01 = scaleTier(player.tier01).mul(64).add(64);
+    variab.tierc02 = scaleTier(player.tier02).mul(4).add(4);
 }
 
 const tier01checkbox = document.getElementById("tier01confirm");
@@ -556,19 +584,37 @@ function autoBuyTier02() {
 }
 
 function buyUpgd01() {
+    getUpgdCost();
     if (player.energy.gte(variab.upgc01)) {
         player.upgd01 = player.upgd01.add(1);
         player.energy = player.energy.sub(variab.upgc01);
-        console.log('upgraded');
     }
     else return
 }
 
 function buyUpgd02() {
+    getUpgdCost();
     if (player.energy.gte(variab.upgc02)) {
         player.upgd02 = player.upgd02.add(1);
         player.energy = player.energy.sub(variab.upgc02);
-        console.log('upgraded');
+    }
+    else return
+}
+
+function buyUpgd03() {
+    getUpgdCost();
+    if (player.energy.gte(variab.upgc03)) {
+        player.upgd03 = player.upgd03.add(1);
+        player.energy = player.energy.sub(variab.upgc03);
+    }
+    else return
+}
+
+function buyUpgd04() {
+    getUpgdCost();
+    if (player.energy.gte(variab.upgc04)) {
+        player.upgd04 = player.upgd04.add(1);
+        player.energy = player.energy.sub(variab.upgc04);
     }
     else return
 }
@@ -591,11 +637,22 @@ function autoBuyUpgd02() {
     if (player.autobuyupgd02 == true & player.tier02.gte(2)) buyUpgd02();
 }
 
+function getUpgdMult() {
+    if (player.PL1upg[9] == true) variab.upgd01mult = new Decimal(0.0625).mul(player.upgd03.mul(0.25).add(1));
+    else variab.upgd01mult = new Decimal(0.025).mul(player.upgd03.mul(0.25).add(1));
+    if (player.PL1upg[10] == true) variab.upgd02mult = new Decimal(1.044273782427413).pow(player.upgd04.mul(0.25).add(1));
+    else variab.upgd02mult = new Decimal(1.021897148654116).pow(player.upgd04.mul(0.25).add(1));
+}
+
 function getUpgdCost() {
     var bcost1 = variab.upgcor01.add(variab.upgcsl01.mul(player.upgd01));
     variab.upgc01 = new Decimal(2).pow(scale(bcost1));
     var bcost2 = variab.upgcor02.add(variab.upgcsl02.mul(player.upgd02));
     variab.upgc02 = new Decimal(2).pow(scale(bcost2));
+    var bcost3 = variab.upgcor03.add(variab.upgcsl03.mul(player.upgd03));
+    variab.upgc03 = new Decimal(2).pow(scale(bcost3));
+    var bcost4 = variab.upgcor04.add(variab.upgcsl04.mul(player.upgd04));
+    variab.upgc04 = new Decimal(2).pow(scale(bcost4));
 }
 
 const PL1checkbox = document.getElementById("PL1confirm");
@@ -636,6 +693,7 @@ function PL1reset() {
         player.upgd01 = new Decimal(0);
         player.upgd02 = new Decimal(0);
         player.PL1sec = new Decimal(0);
+        player.PL1energy = new Decimal(1);
         player.hasUnlockedPL1 = true;
     }
     if (player.energy == 0 & player.PL1sec == 0) {
@@ -646,17 +704,105 @@ function PL1reset() {
 function getPL1engPow() {
     if (player.innormcha == 11) variab.PL1engpow = new Decimal(0.1);
     else variab.PL1engpow = new Decimal(1);
+    if (player.PL1upg[8] == true) variab.PL1engpow = variab.PL1engpow.add(0.5);
+    variab.PL1engpow = variab.PL1engpow.add(player.PL1bab07.add(player.PL1bab08).add(player.PL1bab09).mul(0.1));
 }
 
 function buyPL1upg(tier) {
     var PL1upgcost = [2, 4, 8, 16,
         32, 64, 128, 256,
         1024, 4096, 16384, 65536,
-        16777216, 4294967296, 281474976710656, 1.844674407370955e19,];
+        1048576, 16777216, 268435456, 4294967296,];
     if (player.PL1pts.gte(new Decimal(PL1upgcost[tier]))) {
         player.PL1upg[tier] = true;
         player.PL1pts = player.PL1pts.sub(new Decimal(PL1upgcost[tier]));
     }
+}
+
+function buyPL1bab1() {
+    if (player.energy.gte(variab.PL1babc1) & player.PL1bab01.lt(5)) {
+        player.PL1bab01 = player.PL1bab01.add(1);
+        player.energy = player.energy.sub(variab.PL1babc1);
+    }
+    else return
+}
+
+function buyPL1bab2() {
+    if (player.PL1energy.gte(variab.PL1babc2) & player.PL1bab02.lt(5)) {
+        player.PL1bab02 = player.PL1bab02.add(1);
+        player.PL1energy = player.PL1energy.sub(variab.PL1babc2);
+    }
+    else return
+}
+
+function buyPL1bab3() {
+    if (player.PL1pts.gte(variab.PL1babc3) & player.PL1bab03.lt(5)) {
+        player.PL1bab03 = player.PL1bab03.add(1);
+        player.PL1pts = player.PL1pts.sub(variab.PL1babc3);
+    }
+    else return
+}
+
+function buyPL1bab4() {
+    if (player.energy.gte(variab.PL1babc1) & player.PL1bab04.lt(5)) {
+        player.PL1bab04 = player.PL1bab04.add(1);
+        player.energy = player.energy.sub(variab.PL1babc1);
+    }
+    else return
+}
+
+function buyPL1bab5() {
+    if (player.PL1energy.gte(variab.PL1babc2) & player.PL1bab05.lt(5)) {
+        player.PL1bab05 = player.PL1bab05.add(1);
+        player.PL1energy = player.PL1energy.sub(variab.PL1babc2);
+    }
+    else return
+}
+
+function buyPL1bab6() {
+    if (player.PL1pts.gte(variab.PL1babc3) & player.PL1bab06.lt(5)) {
+        player.PL1bab06 = player.PL1bab06.add(1);
+        player.PL1pts = player.PL1pts.sub(variab.PL1babc3);
+    }
+    else return
+}
+
+function buyPL1bab7() {
+    if (player.energy.gte(variab.PL1babc1) & player.PL1bab07.lt(5)) {
+        player.PL1bab07 = player.PL1bab07.add(1);
+        player.energy = player.energy.sub(variab.PL1babc1);
+    }
+    else return
+}
+
+function buyPL1bab8() {
+    if (player.PL1energy.gte(variab.PL1babc2) & player.PL1bab08.lt(5)) {
+        player.PL1bab08 = player.PL1bab08.add(1);
+        player.PL1energy = player.PL1energy.sub(variab.PL1babc2);
+    }
+    else return
+}
+
+function buyPL1bab9() {
+    if (player.PL1pts.gte(variab.PL1babc3) & player.PL1bab09.lt(5)) {
+        player.PL1bab09 = player.PL1bab09.add(1);
+        player.PL1pts = player.PL1pts.sub(variab.PL1babc3);
+    }
+    else return
+}
+
+function getBabCost() {
+    variab.PL1babc1 = new Decimal("1e5120").mul(variab.PL1babcsl1.pow(player.PL1bab01.add(player.PL1bab04).add(player.PL1bab07)));
+    variab.PL1babc2 = new Decimal(1e160).mul(variab.PL1babcsl2.pow(player.PL1bab02.add(player.PL1bab05).add(player.PL1bab08)));
+    variab.PL1babc3 = new Decimal(100000).mul(variab.PL1babcsl3.pow(player.PL1bab03.add(player.PL1bab06).add(player.PL1bab09)));
+}
+
+function resetBab() {
+    for (let tier = 1; tier <= 9; tier++) {
+        let name = tiername[tier];
+        player["PL1bab" + name] = new Decimal(0);
+    }
+    PL1reset();
 }
 
 function entNormCha(tier) {
@@ -686,6 +832,7 @@ function produce() {
         player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(variab["wscm" + name]).pow(variab["wscp" + name]).mul(new Decimal(0.0125)));
     }
     player.PL1energy = player.PL1energy.add(player.wsca09.mul(variab.wscm09).pow(variab.wscp09).mul(new Decimal(0.0125)));
+    if (player.PL1upg[12] == true) player.wsca08 = player.wsca08.add(player.wsca09.mul(variab.wscm09).pow(variab.wscp09).mul(new Decimal(0.0125)));
     for (let tier = 10; tier <= 16; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier - 1];
@@ -707,6 +854,14 @@ function scale(x) {
 
 function invscale(x) {
     return x.min(x.mul(variab.scal01).root(2)).min(x.mul(variab.scal02).root(4)).min(x.mul(variab.scal03).root(8)).min(x.mul(variab.scal04).root(16));
+}
+
+function scaleTier(x) {
+    return x.max(x.pow(2).div(variab.scaltier01)).max(x.pow(4).div(variab.scaltier02)).max(x.pow(8).div(variab.scaltier03)).max(x.pow(16).div(variab.scaltier04));
+}
+
+function invscaleTier(x) {
+    return x.min(x.mul(variab.scaltier01).root(2)).min(x.mul(variab.scaltier02).root(4)).min(x.mul(variab.scaltier03).root(8)).min(x.mul(variab.scaltier04).root(16));
 }
 
 /*游戏机制之外……*/
@@ -789,20 +944,25 @@ function updateGUI() {
     document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(variab.wscBaseValue.div(64).max(1));
     document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
     document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数max(1,log2(n+1)^0.2)。当前：×" + notation(player.energy.add(1).log(2).pow(0.2).max(1));
-    document.getElementById("tier01rewa05").innerHTML = "25式风单元：每个风单元使1~8式风灵乘数×2。当前：×" + notation(new Decimal(2).pow(player.tier01));
+    document.getElementById("tier01rewa05").innerHTML = "25式风单元：每个风单元使1~8式风灵乘数×2。当前：×" + notation(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01));
     document.getElementById("tier01rewa06").innerHTML = "63式风单元：使1和5式风单元奖励也对9~16式风灵生效。";
     document.getElementById("tier02").innerHTML = player.tier02.toFixed(0) + "式风模块";
     document.getElementById("tier02rewa01").innerHTML = "1式风模块：基于风模块式数提升风灵每次作成乘数(+0.05×n^0.25)，并解锁第一个升级。当前：+" + notation(player.tier02.pow(0.25).mul(0.05));
     document.getElementById("tier02rewa02").innerHTML = "2式风模块：解锁第二个升级。";
-    document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.01×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.01));
-    document.getElementById("tier02rewa04").innerHTML = "12式风模块：每个风模块将风灵每次作成乘数×1.011。当前：×" + notation(new Decimal(1.010889286051700).pow(player.tier02));
+    document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.02×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.02));
+    document.getElementById("tier02rewa04").innerHTML = "12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×" + notation(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
+    document.getElementById("tier02rewa05").innerHTML = "30式风模块：解锁第四个升级。"
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(variab.tierc02) + "式风单元";
     if (player.tier01.gte(100)) document.getElementById("tiers01").innerHTML = "一阶折算|";
     else if (player.tier01.gte(800)) document.getElementById("tiers01").innerHTML = "二阶折算|";
+    else if (player.tier01.gte(8000)) document.getElementById("tiers01").innerHTML = "三阶折算|";
+    else if (player.tier01.gte(100000)) document.getElementById("tiers01").innerHTML = "四阶折算|";
     else document.getElementById("tiers01").innerHTML = "";
     if (player.tier02.gte(100)) document.getElementById("tiers02").innerHTML = "一阶折算|";
     else if (player.tier02.gte(800)) document.getElementById("tiers02").innerHTML = "二阶折算|";
+    else if (player.tier02.gte(8000)) document.getElementById("tiers02").innerHTML = "三阶折算|";
+    else if (player.tier02.gte(100000)) document.getElementById("tiers02").innerHTML = "四阶折算|";
     else document.getElementById("tiers02").innerHTML = "";
     if (player.autobuytier01 == true) document.getElementById("byattier01").innerHTML = "自动：开";
     else document.getElementById("byattier01").innerHTML = "自动：关";
@@ -811,10 +971,18 @@ function updateGUI() {
 
     document.getElementById("upgd01").innerHTML = player.upgd01.toFixed(0);
     document.getElementById("upgd02").innerHTML = player.upgd02.toFixed(0);
+    document.getElementById("upgd03").innerHTML = player.upgd03.toFixed(0);
+    document.getElementById("upgd04").innerHTML = player.upgd04.toFixed(0);
     document.getElementById("upgc01").innerHTML = "花费：" + notation(variab.upgc01) + "能量";
     document.getElementById("upgc02").innerHTML = "花费：" + notation(variab.upgc02) + "能量";
-    document.getElementById("upge01").innerHTML = "当前：+" + notation(player.upgd01.mul(0.025));
-    document.getElementById("upge02").innerHTML = "当前：×" + notation(new Decimal(1.022).pow(player.upgd02));
+    document.getElementById("upgc03").innerHTML = "花费：" + notation(variab.upgc03) + "能量";
+    document.getElementById("upgc04").innerHTML = "花费：" + notation(variab.upgc04) + "能量";
+    document.getElementById("upge01").innerHTML = "当前：+" + notation(player.upgd01.mul(variab.upgd01mult));
+    document.getElementById("upge02").innerHTML = "当前：×" + notation(variab.upgd02mult.pow(player.upgd02));
+    document.getElementById("upge03").innerHTML = "当前：+" + notation(player.upgd03.mul(0.25)) + "倍";
+    document.getElementById("upge04").innerHTML = "当前：×" + notation(new Decimal(1.011).pow(player.upgd04)) + "倍";
+    document.getElementById("upgm01").innerHTML = notation(variab.upgd01mult) ;
+    document.getElementById("upgm02").innerHTML = notation(variab.upgd02mult) ;
     if (player.autobuyupgd01 == true) document.getElementById("byatupgd01").innerHTML = "自动：开";
     else document.getElementById("byatupgd01").innerHTML = "自动：关";
     if (player.autobuyupgd02 == true) document.getElementById("byatupgd02").innerHTML = "自动：开";
@@ -829,10 +997,30 @@ function updateGUI() {
     document.getElementById("PL1EngMul").innerHTML = notation(variab.PL1engmul);
     document.getElementById("PL1EngPs").innerHTML = notation(player.wsca09.mul(variab.wscm09).mul(new Decimal(0.25)));
 
-    document.getElementById("PL1upge05").innerHTML = "当前：×" + notation(player.PL1energy.add(1).log(2).max(1));
-    document.getElementById("PL1upge06").innerHTML = "当前：×" + notation(player.PL1pts.pow(0.25).max(1));
-    document.getElementById("PL1upge07").innerHTML = "当前：×" + notation(player.PL1tms.max(1).min(1e10));
-    document.getElementById("PL1upge08").innerHTML = "当前：×" + notation(player.PL1sec.max(1).pow(4).min(1e10));
+    document.getElementById("PL1upge05").innerHTML = "当前：×" + notation(player.PL1energy.add(1).log(1.044273782427413).max(1));
+    document.getElementById("PL1upge06").innerHTML = "当前：×" + notation(player.PL1pts.min(player.PL1pts.add(1).log(1.189207115002721).mul(7.205759404e16)).max(1));
+    document.getElementById("PL1upge07").innerHTML = "当前：×" + notation(player.PL1tms.pow(4).min(player.PL1tms.pow(0.25).mul(1.152921505e18)).max(1));
+    document.getElementById("PL1upge08").innerHTML = "当前：×" + notation(player.energy.add(1).log(2).max(1));
+
+    document.getElementById("PL1bab01").innerHTML = player.PL1bab01.toFixed(0);
+    document.getElementById("PL1bab02").innerHTML = player.PL1bab02.toFixed(0);
+    document.getElementById("PL1bab03").innerHTML = player.PL1bab03.toFixed(0);
+    document.getElementById("PL1bab04").innerHTML = player.PL1bab04.toFixed(0);
+    document.getElementById("PL1bab05").innerHTML = player.PL1bab05.toFixed(0);
+    document.getElementById("PL1bab06").innerHTML = player.PL1bab06.toFixed(0);
+    document.getElementById("PL1bab07").innerHTML = player.PL1bab07.toFixed(0);
+    document.getElementById("PL1bab08").innerHTML = player.PL1bab08.toFixed(0);
+    document.getElementById("PL1bab09").innerHTML = player.PL1bab09.toFixed(0);
+
+    document.getElementById("PL1babc1").innerHTML = notation(variab.PL1babc1);
+    document.getElementById("PL1babc2").innerHTML = notation(variab.PL1babc2);
+    document.getElementById("PL1babc3").innerHTML = notation(variab.PL1babc3);
+    document.getElementById("PL1babc4").innerHTML = notation(variab.PL1babc1);
+    document.getElementById("PL1babc5").innerHTML = notation(variab.PL1babc2);
+    document.getElementById("PL1babc6").innerHTML = notation(variab.PL1babc3);
+    document.getElementById("PL1babc7").innerHTML = notation(variab.PL1babc1);
+    document.getElementById("PL1babc8").innerHTML = notation(variab.PL1babc2);
+    document.getElementById("PL1babc9").innerHTML = notation(variab.PL1babc3);
 
     if (player.innormcha == 1) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
     else if (player.innormcha == 2) document.getElementById("chalstat").innerHTML = "你当前在普通挑战2中";
@@ -900,7 +1088,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(2)) {
         document.getElementById("tier02rewa02").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在5式风模块，将基于风单元式数提升风灵每次作成乘数(+0.01×n^0.25)。";
+        document.getElementById("tier02info").innerHTML = "在5式风模块，将基于风单元式数提升风灵每次作成乘数(+0.02×n^0.25)。";
         document.getElementById("upg_02").style.display = 'block';
     }
     else {
@@ -909,17 +1097,28 @@ function styleDisplay() {
     }
     if (player.tier02.gte(5)) {
         document.getElementById("tier02rewa03").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在12式风模块，将使每个风模块将风灵每次作成乘数×1.011。";
+        document.getElementById("tier02info").innerHTML = "在12式风模块，将使每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。";
     }
     else {
         document.getElementById("tier02rewa03").style.display = 'none';
     }
     if (player.tier02.gte(12)) {
         document.getElementById("tier02rewa04").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "";
+        document.getElementById("tier02info").innerHTML = "在30式风模块，将解锁第四个升级";
+        document.getElementById("upg_03").style.display = 'block';
     }
     else {
         document.getElementById("tier02rewa04").style.display = 'none';
+        document.getElementById("upg_03").style.display = 'none';
+    }
+    if (player.tier02.gte(30)) {
+        document.getElementById("tier02rewa05").style.display = 'block';
+        document.getElementById("tier02info").innerHTML = "";
+        document.getElementById("upg_04").style.display = 'block';
+    }
+    else {
+        document.getElementById("tier02rewa05").style.display = 'none';
+        document.getElementById("upg_04").style.display = 'none';
     }
 
     if (player.energy.gte(1.797693134862315e308)) document.getElementById("PL1button").style.display = 'block';
@@ -963,6 +1162,8 @@ function styleDisplay() {
         if (player.normchacom[i] == true) document.getElementById("normchal" + tiername[i+1]).className = "normchalyes";
         else document.getElementById("normchal" + tiername[i + 1]).className = "normchalno";
     }
+    if (player.PL1upg[3] == true) document.getElementById("PL1bab").style.display = '';
+    else document.getElementById("PL1bab").style.display = 'none';
 
     if (player.hasUnlockedPL1 == true) document.getElementById("btrow2").style.display = '';
     else document.getElementById("btrow2").style.display = 'none';
@@ -1006,7 +1207,9 @@ function comAch() {
     if (player.PL1tms.gt(0)) getAch(16);
     if (player.PL1energy.gte(1e6)) getAch(17);
     if (player.energy.root(1024).floor().gte(100)) getAch(18);
-    if (player.normchacom === [true, true, true, true, true, true, true, true, true, true, true, true,]) getAch(19);
+    if (player.normchacom[11] == true) getAch(19);
+    if (player.PL1upg[12] == true) getAch(20);
+    if (player.PL1upg[15] == true) getAch(21);
 }
 
 function shownoti(notiname) {
@@ -1053,8 +1256,10 @@ function mainLoop() {
     getWscCost();
     getWscBaseValue();
     getTierCost();
+    getUpgdMult();
     getUpgdCost();
     getPL1engPow();
+    getBabCost();
     autoBuyFast();
     comNormCha();
     comAch();
