@@ -507,6 +507,24 @@ function incTier2() {
     else return
 }
 
+function incMaxTier1() {
+    var tierbmax = invscaleTier(variab.wscBaseValue.div(64)).floor();
+    if (tierbmax.gt(player.tier01)) {
+        player.tier01 = tierbmax;
+        if (player.PL1upg[13] == false) tier01Reset();
+    }
+    else return
+}
+
+function incMaxTier2() {
+    var tierbmax = invscaleTier(player.tier01.div(4)).floor();
+    if (tierbmax.gt(player.tier02)) {
+        player.tier02 = tierbmax;
+        if (player.PL1upg[14] == false) tier02Reset();
+    }
+    else return
+}
+
 function getTierCost() {
     variab.tierc01 = scaleTier(player.tier01).mul(64).add(64);
     variab.tierc02 = scaleTier(player.tier02).mul(4).add(4);
@@ -576,11 +594,17 @@ function abTier02Switch() {
 }
 
 function autoBuyTier01() {
-    if (player.autobuytier01 == true) incTier1();
+    if (player.autobuytier01 == true) {
+        incMaxTier1();
+        incTier1();
+    }
 }
 
 function autoBuyTier02() {
-    if (player.autobuytier02 == true) incTier2();
+    if (player.autobuytier02 == true) {
+        incMaxTier2();
+        incTier2();
+    }
 }
 
 function buyUpgd01() {
@@ -713,7 +737,7 @@ function buyPL1upg(tier) {
         32, 64, 128, 256,
         1024, 4096, 16384, 65536,
         1048576, 16777216, 268435456, 4294967296,];
-    if (player.PL1pts.gte(new Decimal(PL1upgcost[tier]))) {
+    if (player.PL1pts.gte(new Decimal(PL1upgcost[tier])) & player.PL1upg[tier] == false) {
         player.PL1upg[tier] = true;
         player.PL1pts = player.PL1pts.sub(new Decimal(PL1upgcost[tier]));
     }
@@ -1207,9 +1231,10 @@ function comAch() {
     if (player.PL1tms.gt(0)) getAch(16);
     if (player.PL1energy.gte(1e6)) getAch(17);
     if (player.energy.root(1024).floor().gte(100)) getAch(18);
-    if (player.normchacom[11] == true) getAch(19);
+    if (player.normchacom[0] & player.normchacom[1] & player.normchacom[2] & player.normchacom[3] & player.normchacom[4] &player.normchacom[5] & player.normchacom[6] & player.normchacom[7] & player.normchacom[8] & player.normchacom[9] &player.normchacom[10] & player.normchacom[11]) getAch(19);
     if (player.PL1upg[12] == true) getAch(20);
     if (player.PL1upg[15] == true) getAch(21);
+    if (player.PL1bab01.eq(5) & player.PL1bab02.eq(5) & player.PL1bab03.eq(5) & player.PL1bab04.eq(5) & player.PL1bab05.eq(5) & player.PL1bab06.eq(5) & player.PL1bab07.eq(5) & player.PL1bab08.eq(5) & player.PL1bab09.eq(5)) getAch(22);
 }
 
 function shownoti(notiname) {
