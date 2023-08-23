@@ -274,25 +274,25 @@
             <div class="upg" id="upg_01" style="display: none">
                 <span>风灵升级一·等级<span id="upgd01"></span> 每级使风灵每次作成乘数增加<span id="upgm01"></span></span>
                 <button class="wscbt2" id="byatupgd01" onclick="abUpgd01Switch()" style="color: #ffffff">自动：</button>
-                <button class="wscbt1" style="color: #ffffff;" id="upgc01" onclick="buyUpgd01()">花费：能量</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc01" onclick="buyUpgd(1)">花费：能量</button>
                 <span id="upge01">当前：</span>
             </div>
             <div class="upg" id="upg_02" style="display: none">
                 <span>风灵升级二·等级<span id="upgd02"></span> 每级使风灵每次作成乘数乘以<span id="upgm02"></span></span>
                 <button class="wscbt2" id="byatupgd02" onclick="abUpgd02Switch()" style="color: #ffffff">自动：</button>
-                <button class="wscbt1" style="color: #ffffff;" id="upgc02" onclick="buyUpgd02()">花费：能量</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc02" onclick="buyUpgd(2)">花费：能量</button>
                 <span id="upge02">当前：</span>
             </div>
             <div class="upg" id="upg_03" style="display: none; border: 2px solid #ff0000">
                 <span>风灵升级三·等级<span id="upgd03"></span> 每级使风灵升级1倍率增加0.25倍</span>
                 <button class="wscbt2" id="byatupgd03" onclick="abUpgd03Switch()" style="color: #ffffff; display: none">自动：</button>
-                <button class="wscbt1" style="color: #ffffff;" id="upgc03" onclick="buyUpgd03()">花费：能量</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc03" onclick="buyUpgd(3)">花费：能量</button>
                 <span id="upge03">当前：</span>
             </div>
             <div class="upg" id="upg_04" style="display: none; border: 2px solid #ff0000">
                 <span>风灵升级四·等级<span id="upgd04"></span> 每级使风灵升级2倍率增加0.25次方</span>
                 <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff; display: none">自动：</button>
-                <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd04()">花费：能量</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd(4)">花费：能量</button>
                 <span id="upge04">当前：</span>
             </div>
         </div>
@@ -351,7 +351,18 @@
             </div>
         </div>
         <div id="p2_3" style="display: none">
+            <div id="ulanmorb" style="display: none">
+                <div class="btnrow2">
+                    <button align="center" class="xxButton" onclick="ulAnmOrb()" style="background-color:#ff8000">解锁风之晶球<br />花费：1.158e77扩散点</button>
+                </div>
+            </div>
+            <div id="anmorb" style="display: none">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它使每次作成乘数额外乘以<span id="anmpareffe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">（捌式风灵作成次数大于等于65时将会提高风之微粒的获取，当前风之微粒软上限为80）</div><br />
 
+                </div>
+            </div>
         </div>
         <div id="p2_4" style="display: none">
             <div id="normchal" style="display: none">
@@ -379,7 +390,37 @@
                         <td><button id="normchal12" class="normchalno" onclick="entNormCha(12)">普通挑战12<br />每次作成乘数总是为1<br />奖励：快速自动购买风灵升级2</button></td>
                     </tr>
                 </table>
-                <div class="ftsz2" align="center">完成所有普通挑战后，将解锁自动扩散(还没出)</div>
+                <div class="ftsz2" align="center">完成所有普通挑战后，将解锁进阶挑战，进阶挑战的完成目标随完成次数增加</div>
+            </div>
+            <div id="chal" style="display: none">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button id="chal01" class="chalno" onclick="entCha(1)">
+                                进阶挑战1<br />扩散能量对1~8式风灵的乘数在指数之前总是1e-100<br />
+                                目标：<span id="chal01goal"></span>能量<br />完成次数：<span id="chal01comp"></span>/4<br />奖励：提升扩散能量效果指数（+<span id="chal01effe"></span>）
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal02" class="chalno" onclick="entCha(2)">
+                                进阶挑战2<br />基于能量降低所有风灵产量的指数，这个指数总是小于1<br />
+                                目标：<span id="chal02goal"></span>能量<br />完成次数：<span id="chal02comp"></span>/4<br />奖励：增加扩散升级5和8的指数(+<span id="chal02effe"></span>)
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal03" class="chalno" onclick="entCha(3)">
+                                进阶挑战3<br />风灵基础值为0，每次作成乘数为1，但风之微粒对每次作成乘数有效<br />
+                                目标：<span id="chal03goal"></span>能量<br />完成次数：<span id="chal03comp"></span>/4<br />奖励：提升1~8式风灵指数(+<span id="chal03effe"></span>)
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal04" class="chalno" onclick="entCha(4)">
+                                进阶挑战4<br />1~16式风灵的指数强制为0.25<br />
+                                目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/4<br />奖励：提高风之微粒获取数量(×<span id="chal04effe"></span>)
+                            </button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -404,6 +445,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v1.4.0 2023-8-23 添加进阶挑战，添加一部分风之晶球的内容<br />
                 v1.3.1 2023-8-16 自动提升最大风单元和风模块，修复了扩散升级重复扣扩散点，修改部分升级边框颜色<br />
                 v1.3.0 2023-8-11 添加购买项、新的风单元和风模块奖励、新的扩散升级、第3和第4个升级<br />
                 v1.2.1 2023-8-7 修复了全部最大、重置确认勾选、挑战的bug<br />
