@@ -306,13 +306,13 @@
                     <td><button class="PL1upgno" id="PL1upg04" onclick="buyPL1upg(3)">解锁普通挑战<br />花费：16扩散点</button></td>
                 </tr>
                 <tr>
-                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log1.044扩散能量乘以9~16式风灵乘数<br /><span id="PL1upge05">当前：</span><br />花费：32扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log2扩散能量^2乘以9~16式风灵乘数<br /><span id="PL1upge05">当前：</span><br />花费：32扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg06" onclick="buyPL1upg(5)">基于扩散点乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge06">当前：</span><br />花费：64扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg07" onclick="buyPL1upg(6)">基于扩散次数^4乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge07">当前：</span><br />花费：128扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于log2能量乘以9~16式风灵乘数<br /><span id="PL1upge08">当前：</span><br />花费：256扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于log2能量^2乘以9~16式风灵乘数<br /><span id="PL1upge08">当前：</span><br />花费：256扩散点</button></td>
                 </tr>
                 <tr>
-                    <td><button class="PL1upgno" id="PL1upg09" onclick="buyPL1upg(8)">扩散能量指数增加0.5<br />花费：1024扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg09" onclick="buyPL1upg(8)">扩散能量指数增加1<br />花费：1024扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg10" onclick="buyPL1upg(9)">风灵升级1基础倍率增加到0.0625<br />花费：4096扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg11" onclick="buyPL1upg(10)">风灵升级2基础倍率增加到1.044<br />花费：16384扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg12" onclick="buyPL1upg(11)">解锁购买项<br />花费：65536扩散点</button></td>
@@ -321,14 +321,14 @@
                     <td><button class="PL1upgno" id="PL1upg13" onclick="buyPL1upg(12)">玖式风灵可以生产捌式风灵<br />花费：1.048e6扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg14" onclick="buyPL1upg(13)">风单元不再重置任何东西<br />花费：1.677e7扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg15" onclick="buyPL1upg(14)">风模块不再重置任何东西<br />花费：2.684e8扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg16" onclick="buyPL1upg(15)">将每次作成乘数乘以2<br />花费：4.294e9扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg16" onclick="buyPL1upg(15)">将每次作成乘数乘以1.25<br />花费：4.294e9扩散点</button></td>
                 </tr>
             </table>
         </div>
         <div id="p2_2" style="display: none">
             <div id="PL1bab" style="display: none">
                 <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display: inline-block;">每购买一次购买项，这一列的购买项价格都会提高，点击按钮重置购买项及其价格，但进行扩散重置</div>
+                    <div align="center" class="ftsz2" style="display: inline-block;">每购买一次购买项，这一列的购买项价格都会提高，点击按钮重置前3行购买项及其价格，但进行扩散重置。第四行价格单独计算</div>
                     <button class="ltbutton" onclick="resetBab()">重置</button>
                 </div>
                 <table align="center">
@@ -347,6 +347,11 @@
                         <td><button class="PL1bab" id="bab08" onclick="buyPL1bab8()">使扩散能量指数增加0.1（<span id="PL1bab08"></span>/5）<br />花费：<span id="PL1babc8"></span>扩散能量</button></td>
                         <td><button class="PL1bab" id="bab09" onclick="buyPL1bab9()">使扩散能量指数增加0.1（<span id="PL1bab09"></span>/5）<br />花费：<span id="PL1babc9"></span>扩散点</button></td>
                     </tr>
+                    <tr>
+                        <td><button class="PL1bab" id="bab10" onclick="buyPL1bab10()">将1~8式风灵乘数乘以16（<span id="PL1bab10"></span>/60）<br />花费：<span id="PL1babc10"></span>能量</button></td>
+                        <td><button class="PL1bab" id="bab11" onclick="buyPL1bab11()">将扩散次数的获取乘以2（<span id="PL1bab11"></span>/40）<br />花费：<span id="PL1babc11"></span>扩散能量</button></td>
+                        <td><button class="PL1bab" id="bab12" onclick="buyPL1bab12()">将9~16式风灵乘数乘以2（<span id="PL1bab12"></span>/60）<br />花费：<span id="PL1babc12"></span>扩散点</button></td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -358,10 +363,30 @@
             </div>
             <div id="anmorb" style="display: none">
                 <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它使每次作成乘数额外乘以<span id="anmpareffe"></span></div><br />
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">（捌式风灵作成次数大于等于65时将会提高风之微粒的获取，当前风之微粒软上限为80）</div><br />
-
-                </div>
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以log2x^<span id="anmparexp"></span>的效果使每次作成乘数额外乘以<span id="anmpareffe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">捌式风灵作成次数大于等于65时将会提高风之微粒的获取，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button class="PL1bab" onclick="buyparupg(1)">双倍风之微粒获取<br />等级<span id="parupg01"></span><br />当前：×<span id="parupge01"></span><br />花费：<span id="parupgc01"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒乘以9~16式风灵<br />等级<span id="parupg02"></span><br />当前：×<span id="parupge02"></span><br />花费：<span id="parupgc02"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.01<br />等级<span id="parupg03"></span><br />当前：+<span id="parupge03"></span><br />花费：<span id="parupgc03"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />等级<span id="parupg04"></span><br />当前：+<span id="parupge04"></span><br />花费：<span id="parupgc04"></span>风之微粒</button></td>
+                    </tr>
+                </table>
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你拥有<span id="anmorba"></span>风之晶球（总计<span id="anmorbttl"></span>）</div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">点击回退风之晶球升级，进行扩散重置并退还风之晶球</div>
+                    <button class="ltbutton" onclick="">回退</button>
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button id="orbupg01" class="PL1upgno" onclick="">扩散能量→1~8式风灵协同增强×log2x<br />花费：2风之晶球</button></td>
+                        <td><button id="orbupg02" class="PL1upgno" onclick="">能量→1~8式风灵协同增强×log2x<br />花费：4风之晶球</button></td>
+                        <td><button id="orbupg03" class="PL1upgno" onclick="">扩散能量→9~16式风灵协同增强×log2x<br />花费：6风之晶球</button></td>
+                        <td><button id="orbupg04" class="PL1upgno" onclick="">能量→9~16式风灵协同增强×log2x<br />花费：8风之晶球</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div id="p2_4" style="display: none">
@@ -445,6 +470,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v1.5.0 2023-9-18 调整了部分升级的数值，完成了扩散层级的全部内容<br />
                 v1.4.0 2023-8-23 添加进阶挑战，添加一部分风之晶球的内容<br />
                 v1.3.1 2023-8-16 自动提升最大风单元和风模块，修复了扩散升级重复扣扩散点，修改部分升级边框颜色<br />
                 v1.3.0 2023-8-11 添加购买项、新的风单元和风模块奖励、新的扩散升级、第3和第4个升级<br />
@@ -456,7 +482,7 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：1.3.1<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：1.5.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -498,7 +524,7 @@
                     <td class="achno" id="ach15">15<br />更好更需要DLC<span class="tooltip-text">购买所有扩散升级</span></td>
                     <td class="achno" id="ach16">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的有限数量购买项</span></td>
                     <td class="achno" id="ach17">17<br />浓缩风元素能量安全吗？<span class="tooltip-text">获得1风之晶球</span></td>
-                    <td class="achno" id="ach18">18<br />无相之风拟造<span class="tooltip-text">元素爆发1次</span></td>
+                    <td class="achno" id="ach18">18<br />无相之风拟造<span class="tooltip-text">购买全部风之晶球升级</span></td>
                     <td class="achno" id="ach19">19<br />把它粉~~~~~~~~碎<span class="tooltip-text">进阶挑战完成次数达到16</span></td>
                     <td class="achno" id="ach1a">1a<br />出序输倒<span class="tooltip-text">8>7>6>5>4>3>2>1式风灵作成倍率</span></td>
                     <td class="achno" id="ach1b">1b<br />我忘啦……<span class="tooltip-text">扩散时没有任何风单元和风模块</span></td>
