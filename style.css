@@ -244,6 +244,43 @@
     cursor: pointer;
 }
 
+.PL2button {
+    width: 240px;
+    height: 80px;
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    background-color: #ffff00;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL2mlstno {
+    border: 2px solid #ffff00;
+    background-color: #000000;
+    color: #ffffff;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.PL2mlstyes {
+    border: 2px solid #ffff00;
+    background-color: #00ff80;
+    color: #000000;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
 .normchalno {
     width: 248px;
     height: 120px;
