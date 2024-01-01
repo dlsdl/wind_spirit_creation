@@ -73,11 +73,11 @@
             <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">挑战</button>
         </div>
         <div class="btnrow" id="row3" style="display: none">
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">元素</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_2" onclick="changePg('p3_2')">里程碑</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">里程碑</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_2" onclick="changePg('p3_2')">元素</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_3" onclick="changePg('p3_3')">研究</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_4" onclick="changePg('p3_4')">……</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_5" onclick="changePg('p3_5')">……</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_4" onclick="changePg('p3_4')">炼金</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_5" onclick="changePg('p3_5')">增压坍缩</button>
         </div>
         <div class="btnrow" id="row4" style="display: none">
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_1" onclick="changePg('p4_1')">扫敥升级</button>
@@ -312,6 +312,13 @@
                 <span>重置1~8式风灵和风单元，但提升风模块。</span>
                 <span id="tier02info">在1式风模块，将基于风模块式数提升风灵每次作成乘数，并解锁第一个升级</span>
             </div>
+            <div class="upg" id="tier_03">
+                <span id="tiers03"></span><span id="tier03">式风系统</span>
+                <button class="wscbt2bl" id="byattier03" onclick="abTier03Switch()" style="display: none">自动：</button>
+                <button class="wscbt1bl" id="tier03cost" onclick="incTier3()">需要：式风模块</button>
+                <span>重置1~8式风灵、风单元和风模块，但提升风系统。</span>
+                <span id="tier03info">在1式风系统，基于升级数量之和提高17~24式风灵乘数</span>
+            </div>
             <br />
             <div align="center" class="ftsz2" id="tier01rewa01" style="display: none">1式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa02" style="display: none">2式风单元：</div>
@@ -328,6 +335,13 @@
             <div align="center" class="ftsz2" id="tier02rewa04" style="display: none">12式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa05" style="display: none">30式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa06" style="display: none">75式风模块：</div>
+            <br />
+            <div align="center" class="ftsz2" id="tier03rewa01" style="display: none">1式风系统：</div>
+            <div align="center" class="ftsz2" id="tier03rewa02" style="display: none">3式风系统：</div>
+            <div align="center" class="ftsz2" id="tier03rewa03" style="display: none">9式风系统：</div>
+            <div align="center" class="ftsz2" id="tier03rewa04" style="display: none">22式风系统：</div>
+            <div align="center" class="ftsz2" id="tier03rewa05" style="display: none">55式风系统：</div>
+            <div align="center" class="ftsz2" id="tier03rewa06" style="display: none">138式风系统：</div>
         </div>
         <div id="p1_3" style="display: none">
             <br />
@@ -408,9 +422,9 @@
                         <td><button class="PL1bab" id="bab09" onclick="buyPL1bab9()">使扩散能量指数增加0.1（<span id="PL1bab09"></span>/5）<br />花费：<span id="PL1babc9"></span>扩散点</button></td>
                     </tr>
                     <tr>
-                        <td><button class="PL1bab" id="bab10" onclick="buyPL1bab10()">将1~8式风灵乘数乘以16（<span id="PL1bab10"></span>/60）<br />花费：<span id="PL1babc10"></span>能量</button></td>
+                        <td><button class="PL1bab" id="bab10" onclick="buyPL1bab10()">将1~8式风灵乘数乘以16（<span id="PL1bab10"></span>/40）<br />花费：<span id="PL1babc10"></span>能量</button></td>
                         <td><button class="PL1bab" id="bab11" onclick="buyPL1bab11()">将扩散次数的获取乘以2（<span id="PL1bab11"></span>/40）<br />花费：<span id="PL1babc11"></span>扩散能量</button></td>
-                        <td><button class="PL1bab" id="bab12" onclick="buyPL1bab12()">将9~16式风灵乘数乘以2（<span id="PL1bab12"></span>/60）<br />花费：<span id="PL1babc12"></span>扩散点</button></td>
+                        <td><button class="PL1bab" id="bab12" onclick="buyPL1bab12()">将9~16式风灵乘数乘以2（<span id="PL1bab12"></span>/40）<br />花费：<span id="PL1babc12"></span>扩散点</button></td>
                     </tr>
                 </table>
             </div>
@@ -510,31 +524,35 @@
         </div>
         <div id="p3_1" style="display: none">
             <div class="PL2mlstno" id="PL2mlst01">
-                <span>扪敤1次</span><br /><span>扪敤重置时保留第一和第二行扩散升级</span>
+                <span>扪敤1次</span><br /><span>扪敤重置时保留第一行扩散升级，在元素生命选项卡中解锁"风系统"</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst02">
-                <span>扪敤2次</span><br /><span>扪敤重置时保留全部普通挑战</span>
+                <span>扪敤2次</span><br /><span>扪敤重置时保留第二行扩散升级和全部普通挑战</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst03">
-                <span>扪敤3次</span><br /><span>扪敤重置时保留第三和第四行扩散升级</span>
+                <span>扪敤3次</span><br /><span>扪敤重置时保留第三行扩散升级和购买项</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst04">
-                <span>扪敤4次</span><br /><span>扪敤重置时保留购买项</span>
+                <span>扪敤4次</span><br /><span>扪敤重置时保留第四行扩散升级</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst04">
-                <span>扪敤6次</span><br /><span></span>
+            <div class="PL2mlstno" id="PL2mlst05">
+                <span>扪敤6次</span><br /><span>扩散不再重置风单元和风模块</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst04">
-                <span>扪敤8次</span><br /><span></span>
+            <div class="PL2mlstno" id="PL2mlst06">
+                <span>扪敤8次</span><br /><span>扪敤重置时保留风之晶球在解锁状态</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst04">
-                <span>扪敤12次</span><br /><span></span>
+            <div class="PL2mlstno" id="PL2mlst07" style="display: none">
+                <span>扪敤12次</span><br /><span>自动购买风灵升级3和升级4</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst04">
-                <span>扪敤16次</span><br /><span></span>
+            <div class="PL2mlstno" id="PL2mlst08" style="display: none">
+                <span>扪敤16次</span><br /><span>解锁扪敤次数商店</span>
             </div>
         </div>
         <div id="p3_2" style="display: none">
+            <div class="btnrow">
+                <div align="center" class="ftsz2" style="display: inline-block;">你有0风元素(下一个在2累计扪敤点)，你有0未使用的风元素</div>
+                <button class="ltbutton" onclick="">回退</button>
+            </div>
 
         </div>
         <div id="p3_3" style="display: none">
@@ -568,6 +586,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v2.0.1 2024-1-1 修改了一些扪敤里程碑效果，添加更多统计内容<br />
                 v2.0.0 2023-10-16 新增扪敤重置和里程碑，调整了部分数值<br />
                 v1.5.0 2023-9-18 调整了部分升级的数值，完成了扩散层级的全部内容<br />
                 v1.4.0 2023-8-23 添加进阶挑战，添加一部分风之晶球的内容<br />
@@ -581,7 +600,7 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.1<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -591,10 +610,13 @@
         <div id="p0_3" style="display: none">
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime"></div>
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds"></div>
+            <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy"></div>
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
+            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
             <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
+            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
         </div>
         <div id="p0_4" style="display: none">
             <table align="center">
@@ -634,6 +656,10 @@
                     <td class="achno" id="ach1e">1e<br />扩散点挑战？<span class="tooltip-text">在进阶挑战1中至少得到1e30扩散点</span></td>
                     <td class="achno" id="ach1f">1f<br />这就要用到回退按钮<span class="tooltip-text">不用风之晶球升级到达1e200000能量</span></td>
                 </tr>
+                <tr>
+                    <td class="achno" id="ach20">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
+                    <td class="achno" id="ach21">21<br />风化<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
+                </tr>
             </table>
         </div>
         <script type="text/javascript" src="break_eternity.js"></script>
@@ -669,12 +695,15 @@
             <div class="noti" id="notiach1b">完成成就：我忘啦……</div>
             <div class="noti" id="notiach1c">完成成就：只有一个……</div>
             <div class="noti" id="notiach1d">完成成就：回退按钮是做什么的</div>
-            <div class="noti" id="notiach1e">完成成就：阿莱夫贝特基未尔</div>
-            <div class="noti" id="notiach1f">完成成就：阿莱夫贝特基未尔</div>
+            <div class="noti" id="notiach1e">完成成就：扩散点挑战？</div>
+            <div class="noti" id="notiach1f">完成成就：这就要用到回退按钮</div>
+            <div class="noti" id="notiach20">完成成就：扩散的后继叫扪敤</div>
+            <div class="noti" id="notiach21">完成成就：风化</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>
             <div class="noti" id="import">已导入存档</div>
+            <div class="noti" id="hardreset">已全部重置</div>
         </div>
     </body>
 </html>
