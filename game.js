@@ -158,16 +158,6 @@ function hardReset() {
 }
 hardReset();
 
-var tempPlayer = player;
-
-load();
-
-Object.assign(tempPlayer, player);
-
-player = tempPlayer;
-
-player.ach.length = 48;
-
 /*数值*/
 variab = {
     scal01: new Decimal(1024),
@@ -368,6 +358,18 @@ variab = {
     PL2engmul2: new Decimal(1),
     PL2engpow2: new Decimal(1),
 }
+
+var tempPlayer = player;
+
+load();
+
+Object.assign(tempPlayer, player);
+
+player = tempPlayer;
+
+player.ach.length = 48;
+
+player.ach = player.ach.map(item => item === null | item === undefined ? false : item);
 
 /*存档*/
 function save() {
@@ -1170,7 +1172,8 @@ function PL2reset() {
         player.wsca15= new Decimal(0);
         player.wsca16 = new Decimal(0);
         player.tier01= new Decimal(0);
-        player.tier02= new Decimal(0);
+        player.tier02 = new Decimal(0);
+        player.tier03 = new Decimal(0);
         player.upgd01= new Decimal(0);
         player.upgd02= new Decimal(0);
         player.upgd03= new Decimal(0);
@@ -1185,7 +1188,7 @@ function PL2reset() {
         if (player.PL2tms.eq(2)) player.PL1upg = [true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false,];
         if (player.PL2tms.eq(3)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false,];
         if (player.PL2tms.gte(4)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,];
-        if (player.PL1tms.lte(3)) {
+        if (player.PL2tms.lte(2)) {
             player.PL1bab01 = new Decimal(0);
             player.PL1bab02 = new Decimal(0);
             player.PL1bab03 = new Decimal(0);
@@ -1255,7 +1258,7 @@ function produce() {
         variab.anmparps = new Decimal(0.1).mul(new Decimal(1.2).pow(player.wscb08.sub(64))).mul(new Decimal(2).pow(player.parupg01).mul(new Decimal(2).pow(player.chacom04)))
         if (player.tier01.gte(200)) variab.anmparps = variab.anmparps.mul(player.tier01.max(200));
         if (player.anmpar.gte(variab.anmparsc)) {
-            if (piayer.tierc03.gte(9)) variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc.pow(0.8)));
+            if (player.tier03.gte(9)) variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc).pow(0.8));
             else variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc));
         }
         player.anmpar = player.anmpar.add(variab.anmparps.div(20));
@@ -1332,9 +1335,9 @@ function notation(amount) {
     let mantissa3 = power2.div(Decimal.pow(10, power3));
     if (amount == 0) return "0";
     if (power < -4) return mantissa.mul(10).toFixed(3) + "e" + power;
-    if (power < -3) return amount.toFixed(6);
-    if (power < -2) return amount.toFixed(5);
-    if (power < -1) return amount.toFixed(4);
+    if (power < -3) return amount.toFixed(7);
+    if (power < -2) return amount.toFixed(6);
+    if (power < -1) return amount.toFixed(5);
     if (power < 1) return amount.toFixed(3);
     if (power < 2) return amount.toFixed(2);
     if (power < 3) return amount.toFixed(1);
@@ -1400,7 +1403,7 @@ function updateGUI() {
     document.getElementById("tier03").innerHTML = player.tier03.toFixed(0) + "式风系统";
     document.getElementById("tier03rewa01").innerHTML = "1式风系统：基于升级总和提升17~24式风灵乘数。当前：×" + notation(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04).add(1).pow(4));
     document.getElementById("tier03rewa02").innerHTML = "3式风系统：基于风系统提升1~16式风灵的指数。当前：+" + notation(player.tier03.mul(0.001));
-    document.getElementById("tier03rewa03").innerHTML = "9式风系统：使风之晶球的软上限弱化20%";
+    document.getElementById("tier03rewa03").innerHTML = "9式风系统：使风之微粒的软上限弱化20%";
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(variab.tierc02) + "式风单元";
     document.getElementById("tier03cost").innerHTML = "需要：" + notation(variab.tierc03) + "式风模块";
@@ -1656,7 +1659,7 @@ function styleDisplay() {
     else document.getElementById("tier03rewa01").style.display = 'none';
     if (player.tier03.gte(3)) {
         document.getElementById("tier03rewa02").style.display = 'block';
-        document.getElementById("tier03info").innerHTML = "在9式风系统，将使风之晶球的软上限弱化20%。";
+        document.getElementById("tier03info").innerHTML = "在9式风系统，将使风之微粒的软上限弱化20%。";
     }
     else document.getElementById("tier03rewa02").style.display = 'none';
     if (player.tier03.gte(9)) {
@@ -1750,7 +1753,7 @@ function styleDisplay() {
     if (player.PL2tms.gte(8)) document.getElementById("PL2mlst06").className = "PL2mlstyes";
     else document.getElementById("PL2mlst06").className = "PL2mlstno";
 
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 48; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
         else document.getElementById("ach" + hexdigit[i]).className = "achno";
     }

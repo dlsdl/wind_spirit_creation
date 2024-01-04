@@ -438,7 +438,7 @@
             <div id="anmorb" style="display: none">
                 <div class="btnrow">
                     <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以log2x^<span id="anmparexp"></span>的效果使每次作成乘数额外乘以<span id="anmpareffe"></span></div><br />
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">捌式风灵作成次数大于等于65时将会提高风之微粒的获取，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">每次捌式风灵作成都会将风之微粒的获取乘以1.2，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
                 </div><br />
                 <table align="center">
                     <tr>
@@ -573,7 +573,6 @@
             </div>
             <div class="btnrow2">
                 <button align="center" class="xxButton" onclick="save()">保存游戏</button>
-                <button align="center" class="xxButton" onclick="autoSave()">自动保存：<span id="autoSave">开</span></button>
                 <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
                 <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
                 <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
@@ -586,6 +585,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v2.0.2 2024-1-4 修复了一些bug<br />
                 v2.0.1 2024-1-1 修改了一些扪敤里程碑效果，添加更多统计内容<br />
                 v2.0.0 2023-10-16 新增扪敤重置和里程碑，调整了部分数值<br />
                 v1.5.0 2023-9-18 调整了部分升级的数值，完成了扩散层级的全部内容<br />
@@ -600,7 +600,7 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.1<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.2<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -659,6 +659,20 @@
                 <tr>
                     <td class="achno" id="ach20">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
                     <td class="achno" id="ach21">21<br />风化<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
+                    <td class="achno" id="ach22"></td>
+                    <td class="achno" id="ach23"></td>
+                    <td class="achno" id="ach24"></td>
+                    <td class="achno" id="ach25"></td>
+                    <td class="achno" id="ach26"></td>
+                    <td class="achno" id="ach27"></td>
+                    <td class="achno" id="ach28"></td>
+                    <td class="achno" id="ach29"></td>
+                    <td class="achno" id="ach2a"></td>
+                    <td class="achno" id="ach2b"></td>
+                    <td class="achno" id="ach2c"></td>
+                    <td class="achno" id="ach2d"></td>
+                    <td class="achno" id="ach2e"></td>
+                    <td class="achno" id="ach2f"></td>
                 </tr>
             </table>
         </div>

@@ -281,6 +281,22 @@
     text-align: center;
 }
 
+.pyro {
+    background: -webkit-linear-gradient(to bottom, #ff0000, #ff8000, #ff0000);
+}
+
+.hydro {
+    background: -webkit-linear-gradient(to bottom, #0000ff, #0080ff, #0000ff);
+}
+
+.electro {
+    background: -webkit-linear-gradient(to bottom, #ff00ff, #8000ff, #ff00ff);
+}
+
+.cryo {
+    background: -webkit-linear-gradient(to bottom, #80ffff, #ffffff, #80ffff);
+}
+
 .normchalno {
     width: 248px;
     height: 120px;
