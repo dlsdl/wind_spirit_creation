@@ -359,13 +359,13 @@
             </div>
             <div class="upg" id="upg_03" style="display: none; border: 2px solid #ff0000">
                 <span>风灵升级三·等级<span id="upgd03"></span> 每级使风灵升级1倍率增加0.25倍</span>
-                <button class="wscbt2" id="byatupgd03" onclick="abUpgd03Switch()" style="color: #ffffff; display: none">自动：</button>
+                <button class="wscbt2" id="byatupgd03" onclick="abUpgd03Switch()" style="color: #ffffff;">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc03" onclick="buyUpgd(3)">花费：能量</button>
                 <span id="upge03">当前：</span>
             </div>
             <div class="upg" id="upg_04" style="display: none; border: 2px solid #ff0000">
                 <span>风灵升级四·等级<span id="upgd04"></span> 每级使风灵升级2倍率增加0.25次方</span>
-                <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff; display: none">自动：</button>
+                <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff;">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd(4)">花费：能量</button>
                 <span id="upge04">当前：</span>
             </div>
@@ -523,6 +523,7 @@
             </div>
         </div>
         <div id="p3_1" style="display: none">
+            <div class="ftsz2" style="color: #ffffff; text-align: center" id="PL2tms"></div>
             <div class="PL2mlstno" id="PL2mlst01">
                 <span>扪敤1次</span><br /><span>扪敤重置时保留第一行扩散升级，在元素生命选项卡中解锁"风系统"</span>
             </div>
@@ -536,17 +537,25 @@
                 <span>扪敤4次</span><br /><span>扪敤重置时保留第四行扩散升级</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst05">
-                <span>扪敤6次</span><br /><span>扩散不再重置风单元和风模块</span>
+                <span>扪敤5次</span><br /><span>扩散不再重置风单元和风模块</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst06">
-                <span>扪敤8次</span><br /><span>扪敤重置时保留风之晶球在解锁状态</span>
+                <span>扪敤6次</span><br /><span>扪敤重置时保留风之晶球和风之晶球升级</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst07" style="display: none">
-                <span>扪敤12次</span><br /><span>自动购买风灵升级3和升级4</span>
+            <div class="PL2mlstno" id="PL2mlst07">
+                <span>扪敤7次</span><br /><span>你可以自动购买风灵升级3和升级4</span>
             </div>
-            <div class="PL2mlstno" id="PL2mlst08" style="display: none">
-                <span>扪敤16次</span><br /><span>解锁扪敤次数商店</span>
+            <div class="PL2mlstno" id="PL2mlst08">
+                <span>扪敤8次</span><br /><span>解锁扪敤次数商店</span>
             </div>
+            <table id="PL2tmshop" align="center">
+                <tr>
+                    <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(1)">解锁9~16风灵的自动购买(0/8)</button></td>
+                    <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(2)">双倍扪敤次数获取(0/8)</button></td>
+                    <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之晶球升级的自动购买(0/4)</button></td>
+                    <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^n乘以17~24式风灵(0/4)</button></td>
+                </tr>
+            </table>
         </div>
         <div id="p3_2" style="display: none">
             <div class="btnrow">
@@ -585,6 +594,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v2.0.3 2024-1-8 添加更多扪敤里程碑，添加快捷键<br />
                 v2.0.2 2024-1-4 修复了一些bug<br />
                 v2.0.1 2024-1-1 修改了一些扪敤里程碑效果，添加更多统计内容<br />
                 v2.0.0 2023-10-16 新增扪敤重置和里程碑，调整了部分数值<br />
@@ -600,9 +610,12 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.2<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.3<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
+                <br />
+                快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
+                a：购买风灵升级1，s：购买风灵升级2，以此类推。z：扩散，x：扪敤，以此类推。<br />
                 <br />
                 支持所有序数增量吧吧友
             </div>
@@ -645,14 +658,14 @@
                     <td class="achno" id="ach13">13<br />挑战完成废我一辈子<span class="tooltip-text">完成所有普通挑战</span></td>
                     <td class="achno" id="ach14">14<br />找到风灵超过了9个<span class="tooltip-text">作成9~16式风灵至少一次</span></td>
                     <td class="achno" id="ach15">15<br />更好更需要DLC<span class="tooltip-text">购买所有扩散升级</span></td>
-                    <td class="achno" id="ach16">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的有限数量购买项</span></td>
+                    <td class="achno" id="ach16">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的前三行购买项</span></td>
                     <td class="achno" id="ach17">17<br />浓缩风元素能量安全吗？<span class="tooltip-text">解锁风之晶球</span></td>
                     <td class="achno" id="ach18">18<br />无相之风拟造<span class="tooltip-text">获得10个风之晶球</span></td>
                     <td class="achno" id="ach19">19<br />把它粉~~~~~~~~碎<span class="tooltip-text">进阶挑战完成次数达到16</span></td>
                     <td class="achno" id="ach1a">1a<br />出序输倒<span class="tooltip-text">8>7式风灵作成倍率</span></td>
                     <td class="achno" id="ach1b">1b<br />我忘啦……<span class="tooltip-text">没有任何风单元和风模块达到1.8e308能量</span></td>
                     <td class="achno" id="ach1c">1c<br />只有一个……<span class="tooltip-text">1~8式风灵中只作成一次壹式风灵达到1.8e308能量</span></td>
-                    <td class="achno" id="ach1d">1d<br />回退按钮是做什么的<span class="tooltip-text">没有前三行购买项达到100每次购买乘数</span></td>
+                    <td class="achno" id="ach1d">1d<br />回退按钮是做什么的<span class="tooltip-text">没有第二行购买项达到100每次购买乘数</span></td>
                     <td class="achno" id="ach1e">1e<br />扩散点挑战？<span class="tooltip-text">在进阶挑战1中至少得到1e30扩散点</span></td>
                     <td class="achno" id="ach1f">1f<br />这就要用到回退按钮<span class="tooltip-text">不用风之晶球升级到达1e200000能量</span></td>
                 </tr>

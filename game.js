@@ -74,12 +74,15 @@ function hardReset() {
         tier01: new Decimal(0),
         tier02: new Decimal(0),
         tier03: new Decimal(0),
+        tier04: new Decimal(0),
         tier01conf: true,
         tier02conf: true,
         tier03conf: true,
+        tier04conf: true,
         autobuytier01: false,
         autobuytier02: false,
         autobuytier03: false,
+        autobuytier04: false,
 
         upgd01: new Decimal(0),
         upgd02: new Decimal(0),
@@ -87,6 +90,8 @@ function hardReset() {
         upgd04: new Decimal(0),
         autobuyupgd01: false,
         autobuyupgd02: false,
+        autobuyupgd03: false,
+        autobuyupgd04: false,
 
         hasUnlockedPL1: false,
         PL1energy: new Decimal(1),
@@ -137,6 +142,19 @@ function hardReset() {
         PL2tms: new Decimal(0),
         PL2sec: new Decimal(0),
         PL2conf: true,
+        PL2tmsc: new Decimal(0),
+        PL2upg01: new Decimal(0),
+        PL2upg02: new Decimal(0),
+        PL2upg03: new Decimal(0),
+        PL2upg04: new Decimal(0),
+        elmt01: new Decimal(0),
+        elmt02: new Decimal(0),
+        elmt03: new Decimal(0),
+        elmt04: new Decimal(0),
+        elmten01: new Decimal(0),
+        elmten02: new Decimal(0),
+        elmten03: new Decimal(0),
+        elmten04: new Decimal(0),
 
         autobuywsc: [null,
             false, false, false, false, false, false, false, false,
@@ -304,6 +322,7 @@ variab = {
     tierc01: new Decimal(64),
     tierc02: new Decimal(4),
     tierc03: new Decimal(4),
+    tierc04: new Decimal(4),
 
     upgc01: new Decimal(0),
     upgc02: new Decimal(0),
@@ -319,6 +338,11 @@ variab = {
     upgcsl02: new Decimal(1024),
     upgcsl03: new Decimal(4096),
     upgcsl04: new Decimal(16384),
+
+    upgf01: new Decimal(0),
+    upgf02: new Decimal(0),
+    upgf03: new Decimal(0),
+    upgf04: new Decimal(0),
 
     upgd01mult: new Decimal(1),
     upgd02mult: new Decimal(1),
@@ -339,8 +363,8 @@ variab = {
     anmparps: new Decimal(0),
     anmparsc: new Decimal(80),
     parupgc01: new Decimal(10),
-    parupgc02: new Decimal(20),
-    parupgc03: new Decimal(40),
+    parupgc02: new Decimal(100),
+    parupgc03: new Decimal(1000),
     parupgc04: new Decimal(80),
 
     chagoa01: new Decimal("1.415461031044954e9864"),
@@ -354,9 +378,18 @@ variab = {
 
     PL2engmul: new Decimal(1),
     PL2engpow: new Decimal(1),
-
     PL2engmul2: new Decimal(1),
     PL2engpow2: new Decimal(1),
+
+    PL2upgc01: new Decimal(4),
+    PL2upgc02: new Decimal(4),
+    PL2upgc03: new Decimal(4),
+    PL2upgc04: new Decimal(4),
+
+    elmtps01: new Decimal(0),
+    elmtps02: new Decimal(0),
+    elmtps03: new Decimal(0),
+    elmtps04: new Decimal(0),
 }
 
 var tempPlayer = player;
@@ -522,6 +555,24 @@ function maxAll() {
     }
 }
 
+function maxAll08() {
+    for (let i = 1; i <= 8; i++) {
+        buyMaxWsc(i);
+    }
+}
+
+function maxAll16() {
+    for (let i = 9; i <= 16; i++) {
+        buyMaxWsc(i);
+    }
+}
+
+function maxAll24() {
+    for (let i = 17; i <= 24; i++) {
+        buyMaxWsc(i);
+    }
+}
+
 function getWscMult() {
     var mult01to08 = new Decimal(1);
     var mult09to16 = new Decimal(1);
@@ -550,15 +601,15 @@ function getWscMult() {
 
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult01to08).mul(variab.PL1engmul).mul(variab.PL2engmul2);
+        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult01to08).mul(variab.PL1engmul).mul(variab.PL2engmul2).max(1);
     }
     for (let tier = 9; tier <= 16; tier++) {
         let name = tiername[tier];
-        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult09to16).mul(variab.PL2engmul);
+        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult09to16).mul(variab.PL2engmul).max(1);
     }
     for (let tier = 17; tier <= 24; tier++) {
         let name = tiername[tier];
-        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult17to24);
+        variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult17to24).max(1);
     }
     if (player.innormcha == 8) {
         player.normchamul = player.normchamul.div(new Decimal(8).pow(new Decimal(diff))).min(1);
@@ -823,12 +874,30 @@ function abUpgd02Switch() {
     else player.autobuyupgd02 = false;
 }
 
+function abUpgd03Switch() {
+    if (player.autobuyupgd03 == false) player.autobuyupgd03 = true;
+    else player.autobuyupgd03 = false;
+}
+
+function abUpgd04Switch() {
+    if (player.autobuyupgd04 == false) player.autobuyupgd04 = true;
+    else player.autobuyupgd04 = false;
+}
+
 function autoBuyUpgd01() {
     if (player.autobuyupgd01 == true & player.tier02.gte(1)) buyUpgd(1);
 }
 
 function autoBuyUpgd02() {
     if (player.autobuyupgd02 == true & player.tier02.gte(2)) buyUpgd(2);
+}
+
+function autoBuyUpgd03() {
+    if (player.autobuyupgd03 == true & player.tier02.gte(12)) buyUpgd(3);
+}
+
+function autoBuyUpgd04() {
+    if (player.autobuyupgd04 == true & player.tier02.gte(30)) buyUpgd(4);
 }
 
 function getUpgdMult() {
@@ -859,6 +928,7 @@ PL1checkbox.addEventListener("input", function () {
 })
 
 function PL1reset() {
+    if (player.energy.lt(1.797e308)) return;
     var confirmation = true;
     if (player.PL1conf == true) confirmation = confirm("您确定要扩散吗？这将重置能量、1~8式风灵作成、风单元、风模块、风灵升级，但是可以获得扩散点！第一次扩散解锁8种新的风灵和其他内容");
     if (confirmation | !player.PL1conf) {
@@ -884,7 +954,7 @@ function PL1reset() {
         player.wsca06 = new Decimal(0);
         player.wsca07 = new Decimal(0);
         player.wsca08 = new Decimal(0);
-        if (player.PL2tms.lt(6)) {
+        if (player.PL2tms.lte(4)) {
             player.tier01 = new Decimal(0);
             player.tier02 = new Decimal(0);
         }
@@ -1130,12 +1200,14 @@ PL2checkbox.addEventListener("input", function () {
 })
 
 function PL2reset() {
+    if (player.PL1pts.lt(1.797e308)) return;
     var confirmation = true;
     if (player.PL2conf == true) confirmation = confirm("您确定要扪敤吗？这将重置之前的一切进度，但是可以获得扪敤点！第一次扪敤解锁8种新的风灵和其他内容");
     if (confirmation | !player.PL2conf) {
         player.PL2pts = player.PL2pts.add(player.PL1pts.root(1024).floor());
         player.PL2ptsttl = player.PL2ptsttl.add(player.PL1pts.root(1024).floor());
         player.PL2tms = player.PL2tms.add(1);
+        player.PL2tmsc = player.PL2tmsc.add(1);
         player.hasUnlockedPL2 = true;
 
         player.energy = new Decimal(2);
@@ -1198,11 +1270,14 @@ function PL2reset() {
             player.PL1bab07 = new Decimal(0);
             player.PL1bab08 = new Decimal(0);
             player.PL1bab09 = new Decimal(0);
+            player.PL1bab10 = new Decimal(0);
+            player.PL1bab11 = new Decimal(0);
+            player.PL1bab12 = new Decimal(0);
         }
-        player.PL1bab10= new Decimal(0);
-        player.PL1bab11= new Decimal(0);
-        player.PL1bab12= new Decimal(0);
-        if (player.PL2tms.lte(8)) player.hasunlockedanmorb= false;
+        if (player.PL2tms.lte(5)) {
+            player.hasunlockedanmorb = false;
+            player.orbupg = [false, false, false, false,];
+        }
         player.anmpar= new Decimal(0);
         player.anmorb= new Decimal(0);
         player.anmorbttl= new Decimal(0);
@@ -1210,14 +1285,16 @@ function PL2reset() {
         player.parupg02= new Decimal(0);
         player.parupg03= new Decimal(0);
         player.parupg04= new Decimal(0);
-        player.orbupg= [false, false, false, false,];
         player.innormcha= 0;
         if (player.PL2tms.lte(1)) player.normchacom= [false, false, false, false, false, false, false, false, false, false, false, false,];
         player.incha= 0;
         player.chacom01= new Decimal(0);
         player.chacom02= new Decimal(0);
         player.chacom03= new Decimal(0);
-        player.chacom04= new Decimal(0);
+        player.chacom04 = new Decimal(0);
+
+        player.PL2sec = new Decimal(0);
+        player.PL2energy = new Decimal(1);
     }
     player.energy = new Decimal(2);
 }
@@ -1230,6 +1307,14 @@ function getPL2engMul() {
 function getPL2engPow() {
     variab.PL2engpow = new Decimal(1);
     variab.PL2engpow2 = variab.PL2engpow.mul(2);
+}
+
+function getPL2upgCost() {
+
+}
+
+function buyPL2upg(tier) {
+
 }
 
 function produce() {
@@ -1440,6 +1525,10 @@ function updateGUI() {
     else document.getElementById("byatupgd01").innerHTML = "自动：关";
     if (player.autobuyupgd02 == true) document.getElementById("byatupgd02").innerHTML = "自动：开";
     else document.getElementById("byatupgd02").innerHTML = "自动：关";
+    if (player.autobuyupgd03 == true) document.getElementById("byatupgd03").innerHTML = "自动：开";
+    else document.getElementById("byatupgd03").innerHTML = "自动：关";
+    if (player.autobuyupgd04 == true) document.getElementById("byatupgd04").innerHTML = "自动：开";
+    else document.getElementById("byatupgd04").innerHTML = "自动：关";
 
     document.getElementById("PL1ptspd").innerHTML = notation(player.energy.root(1024).floor()) + "扩散点";
     document.getElementById("PL1ptsnx").innerHTML = "，下一扩散点在" + notation(player.energy.root(1024).floor().add(1).pow(1024)) + "能量";
@@ -1700,6 +1789,16 @@ function styleDisplay() {
             document.getElementById("byat" + tiername[i]).style.display = 'none';
         }
     }
+
+    if (player.PL2upg01.gte(1)) document.getElementById("byat" + tiername[9]).style.display = 'block';
+    if (player.PL2upg01.gte(2)) document.getElementById("byat" + tiername[10]).style.display = 'block';
+    if (player.PL2upg01.gte(3)) document.getElementById("byat" + tiername[11]).style.display = 'block';
+    if (player.PL2upg01.gte(4)) document.getElementById("byat" + tiername[12]).style.display = 'block';
+    if (player.PL2upg01.gte(5)) document.getElementById("byat" + tiername[13]).style.display = 'block';
+    if (player.PL2upg01.gte(6)) document.getElementById("byat" + tiername[14]).style.display = 'block';
+    if (player.PL2upg01.gte(7)) document.getElementById("byat" + tiername[15]).style.display = 'block';
+    if (player.PL2upg01.gte(8)) document.getElementById("byat" + tiername[16]).style.display = 'block';
+
     if (player.PL1upg[1] == true) {
         document.getElementById("byattier01").style.display = 'block';
         document.getElementById("byattier02").style.display = 'block';
@@ -1716,6 +1815,15 @@ function styleDisplay() {
         document.getElementById("byatupgd01").style.display = 'none';
         document.getElementById("byatupgd02").style.display = 'none';
     }
+    if (player.PL2tms.gte(7)) {
+        document.getElementById("byatupgd03").style.display = 'block';
+        document.getElementById("byatupgd04").style.display = 'block';
+    }
+    else {
+        document.getElementById("byatupgd03").style.display = 'none';
+        document.getElementById("byatupgd04").style.display = 'none';
+    }
+
     if (player.PL1upg[3] == true) document.getElementById("normchal").style.display = 'block';
     else document.getElementById("normchal").style.display = 'none';
     for (let i = 0; i < 12; i++) {
@@ -1748,10 +1856,21 @@ function styleDisplay() {
     else document.getElementById("PL2mlst03").className = "PL2mlstno";
     if (player.PL2tms.gte(4)) document.getElementById("PL2mlst04").className = "PL2mlstyes";
     else document.getElementById("PL2mlst04").className = "PL2mlstno";
-    if (player.PL2tms.gte(6)) document.getElementById("PL2mlst05").className = "PL2mlstyes";
+    if (player.PL2tms.gte(5)) document.getElementById("PL2mlst05").className = "PL2mlstyes";
     else document.getElementById("PL2mlst05").className = "PL2mlstno";
-    if (player.PL2tms.gte(8)) document.getElementById("PL2mlst06").className = "PL2mlstyes";
+    if (player.PL2tms.gte(6)) document.getElementById("PL2mlst06").className = "PL2mlstyes";
     else document.getElementById("PL2mlst06").className = "PL2mlstno";
+    if (player.PL2tms.gte(7)) document.getElementById("PL2mlst07").className = "PL2mlstyes";
+    else document.getElementById("PL2mlst07").className = "PL2mlstno";
+    if (player.PL2tms.gte(8)) {
+        document.getElementById("PL2mlst08").className = "PL2mlstyes";
+        document.getElementById("PL2tmshop").style.display = 'block';
+    }
+    else {
+        document.getElementById("PL2mlst08").className = "PL2mlstno";
+        document.getElementById("PL2tmshop").style.display = 'none';
+    }
+
 
     for (let i = 0; i < 48; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
@@ -1821,8 +1940,47 @@ function shownoti(notiname) {
 document.addEventListener("keydown", hotkeys);
 function hotkeys(event) {
     switch (event.keyCode) {
-        case 77:
+        case 32:
             maxAll();
+            break;
+        case 49:
+            maxAll08();
+            break;
+        case 50:
+            maxAll16();
+            break;
+        case 51:
+            maxAll24();
+            break;
+
+        case 81:
+            incTier1();
+            break;
+        case 87:
+            incTier2();
+            break;
+        case 69:
+            incTier3();
+            break;
+
+        case 65:
+            buyUpgd(1);
+            break;
+        case 83:
+            buyUpgd(2);
+            break;
+        case 68:
+            buyUpgd(3);
+            break;
+        case 70:
+            buyUpgd(4);
+            break;
+
+        case 90:
+            PL1reset();
+            break;
+        case 88:
+            PL2reset();
             break;
     }
 }
@@ -1900,10 +2058,20 @@ function autoBuyFast() {
     if (player.normchacom[5] == true) autoBuyWsc(6);
     if (player.normchacom[6] == true) autoBuyWsc(7);
     if (player.normchacom[7] == true) autoBuyWsc(8);
+    if (player.PL2upg01.gte(1)) autoBuyWsc(9);
+    if (player.PL2upg01.gte(2)) autoBuyWsc(10);
+    if (player.PL2upg01.gte(3)) autoBuyWsc(11);
+    if (player.PL2upg01.gte(4)) autoBuyWsc(12);
+    if (player.PL2upg01.gte(5)) autoBuyWsc(13);
+    if (player.PL2upg01.gte(6)) autoBuyWsc(14);
+    if (player.PL2upg01.gte(7)) autoBuyWsc(15);
+    if (player.PL2upg01.gte(8)) autoBuyWsc(16);
     if (player.normchacom[8] == true) autoBuyTier01();
     if (player.normchacom[9] == true) autoBuyTier02();
     if (player.normchacom[10] == true) autoBuyUpgd01();
     if (player.normchacom[11] == true) autoBuyUpgd02();
+    if (player.PL1tms.gte(7)) autoBuyUpgd03();
+    if (player.PL1tms.gte(7)) autoBuyUpgd04();
 }
 
 setInterval(mainLoop, 50);
