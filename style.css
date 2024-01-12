@@ -292,6 +292,7 @@
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
+    margin: 0px auto;
 }
 
 .PL2upgyes {
@@ -305,22 +306,42 @@
     font-size: 16px;
     text-decoration: none;
     cursor: default;
+    margin: 0px auto;
+}
+
+.PL2elmt {
+    width: 1008px;
+    height: 100px;
+    background-color: #000000;
+    border: 4px solid #ffff00;
+    padding: 8px 8px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 150%;
 }
 
 .pyro {
-    background: -webkit-linear-gradient(to bottom, #ff0000, #ff8000, #ff0000);
+    background: linear-gradient(to bottom, #ff0000, #ff5000, #ff0000);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .hydro {
-    background: -webkit-linear-gradient(to bottom, #0000ff, #0080ff, #0000ff);
+    background: linear-gradient(to bottom, #0000ff, #0080ff, #0000ff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .electro {
-    background: -webkit-linear-gradient(to bottom, #ff00ff, #8000ff, #ff00ff);
+    background: linear-gradient(to bottom, #ff00ff, #8000ff, #ff00ff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .cryo {
-    background: -webkit-linear-gradient(to bottom, #80ffff, #ffffff, #80ffff);
+    background: linear-gradient(to bottom, #50ffff, #ffffff, #50ffff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .normchalno {
@@ -466,6 +487,6 @@
 }
 
 @font-face {
-    font-family: Typewriter, monospace;
+    font-family: MonospaceTypewriter, Typewriter, monospace;
     src: url("MonospaceTypewriter") format("truetype");
 }

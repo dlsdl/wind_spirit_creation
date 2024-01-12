@@ -81,9 +81,9 @@
         </div>
         <div class="btnrow" id="row4" style="display: none">
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_1" onclick="changePg('p4_1')">扫敥升级</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_2" onclick="changePg('p4_2')">……</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_3" onclick="changePg('p4_3')">……</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_4" onclick="changePg('p4_4')">……</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_2" onclick="changePg('p4_2')">生物炼金</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_3" onclick="changePg('p4_3')">变异</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_4" onclick="changePg('p4_4')">特殊变异</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">……</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">……</button>
         </div>
@@ -182,56 +182,56 @@
             <div id="wscset2" style="display: none">
                 <div class="wsc" style="background-color: #ff5555;" id="wsc_09">
                     <span id="wscs09"></span><span>玖式风灵作成·</span><span id="wscb09">0</span>
-                    <button class="wscbt3" id="byat09" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat09" onclick="abwSwitch(9)">自动：</button>
                     <button class="wscbt2" id="bymx09" onclick="buyMaxWsc(9)">最大作成</button>
                     <button class="wscbt1" id="byon09" onclick="buyWsc(9)">作成1次花费:<br><span id="wscc09"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd09">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #ff0000;" id="wsc_10">
                     <span id="wscs10"></span><span>壹零式风灵作成·</span><span id="wscb10">0</span>
-                    <button class="wscbt3" id="byat10" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat10" onclick="abwSwitch(10)">自动：</button>
                     <button class="wscbt2" id="bymx10" onclick="buyMaxWsc(10)">最大作成</button>
                     <button class="wscbt1" id="byon10" onclick="buyWsc(10)">作成1次花费:<br><span id="wscc10"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd10">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #ff5500;" id="wsc_11">
                     <span id="wscs11"></span><span>壹壹式风灵作成·</span><span id="wscb11">0</span>
-                    <button class="wscbt3" id="byat11" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat11" onclick="abwSwitch(11)">自动：</button>
                     <button class="wscbt2" id="bymx11" onclick="buyMaxWsc(11)">最大作成</button>
                     <button class="wscbt1" id="byon11" onclick="buyWsc(11)">作成1次花费:<br><span id="wscc11"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd11">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #aa5500;" id="wsc_12">
                     <span id="wscs12"></span><span>壹贰式风灵作成·</span><span id="wscb12">0</span>
-                    <button class="wscbt3" id="byat12" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat12" onclick="abwSwitch(12)">自动：</button>
                     <button class="wscbt2" id="bymx12" onclick="buyMaxWsc(12)">最大作成</button>
                     <button class="wscbt1" id="byon12" onclick="buyWsc(12)">作成1次花费:<br><span id="wscc12"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd12">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #aa5555;" id="wsc_13">
                     <span id="wscs13"></span><span>壹叁式风灵作成·</span><span id="wscb13">0</span>
-                    <button class="wscbt3" id="byat13" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat13" onclick="abwSwitch(13)">自动：</button>
                     <button class="wscbt2" id="bymx13" onclick="buyMaxWsc(13)">最大作成</button>
                     <button class="wscbt1" id="byon13" onclick="buyWsc(13)">作成1次花费:<br><span id="wscc13"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd13">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #aa0055;" id="wsc_14">
                     <span id="wscs14"></span><span>壹肆式风灵作成·</span><span id="wscb14">0</span>
-                    <button class="wscbt3" id="byat14" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat14" onclick="abwSwitch(14)">自动：</button>
                     <button class="wscbt2" id="bymx14" onclick="buyMaxWsc(14)">最大作成</button>
                     <button class="wscbt1" id="byon14" onclick="buyWsc(14)">作成1次花费:<br><span id="wscc14"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd14">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #ff0055;" id="wsc_15">
                     <span id="wscs15"></span><span>壹伍式风灵作成·</span><span id="wscb15">0</span>
-                    <button class="wscbt3" id="byat15" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat15" onclick="abwSwitch(15)">自动：</button>
                     <button class="wscbt2" id="bymx15" onclick="buyMaxWsc(15)">最大作成</button>
                     <button class="wscbt1" id="byon15" onclick="buyWsc(15)">作成1次花费:<br><span id="wscc15"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd15">0.000</span></span>
                 </div>
                 <div class="wsc" style="background-color: #aa0000;" id="wsc_16">
                     <span id="wscs16"></span><span>壹陆式风灵作成·</span><span id="wscb16">0</span>
-                    <button class="wscbt3" id="byat16" onclick="">自动：</button>
+                    <button class="wscbt3" id="byat16" onclick="abwSwitch(16)">自动：</button>
                     <button class="wscbt2" id="bymx16" onclick="buyMaxWsc(16)">最大作成</button>
                     <button class="wscbt1" id="byon16" onclick="buyWsc(16)">作成1次花费:<br><span id="wscc16"></span>扩散点</button><br />
                     <span class="wscdat"><span id="wscd16">0.000</span></span>
@@ -328,6 +328,8 @@
             <div align="center" class="ftsz2" id="tier01rewa06" style="display: none">63式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa07" style="display: none">200式风单元：</div>
             <div align="center" class="ftsz2" id="tier01rewa08" style="display: none">630式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa09" style="display: none">1995式风单元：</div>
+            <div align="center" class="ftsz2" id="tier01rewa10" style="display: none">6308式风单元：</div>
             <br />
             <div align="center" class="ftsz2" id="tier02rewa01" style="display: none">1式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa02" style="display: none">2式风模块：</div>
@@ -335,6 +337,8 @@
             <div align="center" class="ftsz2" id="tier02rewa04" style="display: none">12式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa05" style="display: none">30式风模块：</div>
             <div align="center" class="ftsz2" id="tier02rewa06" style="display: none">75式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa07" style="display: none">237式风模块：</div>
+            <div align="center" class="ftsz2" id="tier02rewa08" style="display: none">750式风模块：</div>
             <br />
             <div align="center" class="ftsz2" id="tier03rewa01" style="display: none">1式风系统：</div>
             <div align="center" class="ftsz2" id="tier03rewa02" style="display: none">3式风系统：</div>
@@ -346,25 +350,25 @@
         <div id="p1_3" style="display: none">
             <br />
             <div class="upg" id="upg_01" style="display: none">
-                <span>风灵升级一·等级<span id="upgd01"></span> 每级使风灵每次作成乘数增加<span id="upgm01"></span></span>
+                <span>风灵升级一·等级<span id="upgd01"></span> (+<span id="pyrou"></span>) 每级使风灵每次作成乘数增加<span id="upgm01"></span></span>
                 <button class="wscbt2" id="byatupgd01" onclick="abUpgd01Switch()" style="color: #ffffff">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc01" onclick="buyUpgd(1)">花费：能量</button>
                 <span id="upge01">当前：</span>
             </div>
             <div class="upg" id="upg_02" style="display: none">
-                <span>风灵升级二·等级<span id="upgd02"></span> 每级使风灵每次作成乘数乘以<span id="upgm02"></span></span>
+                <span>风灵升级二·等级<span id="upgd02"></span> (+<span id="hydrou"></span>) 每级使风灵每次作成乘数乘以<span id="upgm02"></span></span>
                 <button class="wscbt2" id="byatupgd02" onclick="abUpgd02Switch()" style="color: #ffffff">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc02" onclick="buyUpgd(2)">花费：能量</button>
                 <span id="upge02">当前：</span>
             </div>
             <div class="upg" id="upg_03" style="display: none; border: 2px solid #ff0000">
-                <span>风灵升级三·等级<span id="upgd03"></span> 每级使风灵升级1倍率增加0.25倍</span>
+                <span>风灵升级三·等级<span id="upgd03"></span> (+<span id="electrou"></span>) 每级使风灵升级1倍率增加0.25倍</span>
                 <button class="wscbt2" id="byatupgd03" onclick="abUpgd03Switch()" style="color: #ffffff;">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc03" onclick="buyUpgd(3)">花费：能量</button>
                 <span id="upge03">当前：</span>
             </div>
             <div class="upg" id="upg_04" style="display: none; border: 2px solid #ff0000">
-                <span>风灵升级四·等级<span id="upgd04"></span> 每级使风灵升级2倍率增加0.25次方</span>
+                <span>风灵升级四·等级<span id="upgd04"></span> (+<span id="cryou"></span>) 每级使风灵升级2倍率增加0.25次方</span>
                 <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff;">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd(4)">花费：能量</button>
                 <span id="upge04">当前：</span>
@@ -548,23 +552,60 @@
             <div class="PL2mlstno" id="PL2mlst08">
                 <span>扪敤8次</span><br /><span>解锁扪敤次数商店</span>
             </div>
-            <table id="PL2tmshop" align="center">
-                <tr>
-                    <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(1)">解锁9~16风灵的自动购买(0/8)</button></td>
-                    <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(2)">双倍扪敤次数获取(0/8)</button></td>
-                    <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之晶球升级的自动购买(0/4)</button></td>
-                    <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^n乘以17~24式风灵(0/4)</button></td>
-                </tr>
-            </table>
+            <div class="ftsz2" style="color: #ffffff; text-align: center" id="PL2tms2">你有<span id="PL2tmc"></span>可用扪敤次数（通过扪敤获取）</div>
+            <div id="PL2tmshop" style="display: none">
+                <table align="center">
+                    <tr>
+                        <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(1)">解锁9~16风灵的自动购买(<span id="PL2tm01b"></span>/8)<br />需要：<span id="PL2tm01c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(2)">双倍扪敤次数获取(<span id="PL2tm02b"></span>/8)<br />需要：<span id="PL2tm02c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之晶球升级的自动购买(<span id="PL2tm03b"></span>/4)<br />需要：<span id="PL2tm03c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^n乘以17~24式风灵(<span id="PL2tm04b"></span>/4)<br />需要：<span id="PL2tm04c"></span>可用扪敤次数</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="p3_2" style="display: none">
             <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;">你有0风元素(下一个在2累计扪敤点)，你有0未使用的风元素</div>
-                <button class="ltbutton" onclick="">回退</button>
+                <div align="center" class="ftsz2" style="display: inline-block;">你有<span id="anemo"></span>风元素(下一个在<span id="anemon"></span>累计扪敤点)，你有<span id="anemot"></span>累计的风元素</div>
+                <button class="ltbutton" onclick="resetElmt()">回退</button>
             </div>
-
+            <div class="btnrow">
+                <div align="center" class="ftsz2" style="display: inline-block;">基础每秒元素能量：0.25，每次分配乘数：4</div>
+            </div>
+            <div class="PL2elmt" id="PL2elmt01">
+                <div class="pyro">
+                    你有<span id="pyroa"></span>火元素，<span id="pyroe"></span>火元素能量(+<span id="pyrop"></span>/s)<br />
+                    提供<span id="pyrou"></span>额外的风灵升级1（下一个在<span id="pyron"></span>火元素能量）<br />
+                </div>
+                <button class="wscbt1bl"  style="float:none; margin:auto" onclick="distelmt(1)">分配×1</button>
+            </div>
+            <div class="PL2elmt" id="PL2elmt02">
+                <div class="hydro">
+                    你有<span id="hydroa"></span>水元素，<span id="hydroe"></span>水元素能量(+<span id="hydrop"></span>/s)<br />
+                    提供<span id="hydrou"></span>额外的风灵升级2（下一个在<span id="hydron"></span>水元素能量）
+                </div>
+                <button class="wscbt1bl" style="float:none; margin:auto" onclick="distelmt(2)">分配×1</button>
+            </div>
+            <div class="PL2elmt" id="PL2elmt03">
+                <div class="electro">
+                    你有<span id="electroa"></span>雷元素，<span id="electroe"></span>雷元素能量(+<span id="electrop"></span>/s)<br />
+                    提供<span id="electrou"></span>额外的风灵升级3（下一个在<span id="electron"></span>雷元素能量）
+                </div>
+                <button class="wscbt1bl" style="float:none; margin:auto" onclick="distelmt(3)">分配×1</button>
+            </div>
+            <div class="PL2elmt" id="PL2elmt04">
+                <div class="cryo">
+                    你有<span id="cryoa"></span>冰元素，<span id="cryoe"></span>冰元素能量(+<span id="cryop"></span>/s)<br />
+                    提供<span id="cryou"></span>额外的风灵升级4（下一个在<span id="cryon"></span>冰元素能量）
+                </div>
+                <button class="wscbt1bl" style="float:none; margin:auto" onclick="distelmt(4)">分配×1</button>
+            </div>
         </div>
         <div id="p3_3" style="display: none">
+            <div class="btnrow">
+                <div align="center" class="ftsz2" style="display: inline-block;">你有0烧瓶（0未使用的烧瓶）</div>
+                <button class="ltbutton" onclick="">回退研究</button>
+            </div>
 
         </div>
         <div id="p3_4" style="display: none">
@@ -594,6 +635,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 更新日志<br />
+                v2.1.0 2024-1-12 添加扪敤次数商店和元素选项卡中的内容<br />
                 v2.0.3 2024-1-8 添加更多扪敤里程碑，添加快捷键<br />
                 v2.0.2 2024-1-4 修复了一些bug<br />
                 v2.0.1 2024-1-1 修改了一些扪敤里程碑效果，添加更多统计内容<br />
@@ -610,7 +652,7 @@
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.0.3<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.1.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -672,8 +714,8 @@
                 <tr>
                     <td class="achno" id="ach20">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
                     <td class="achno" id="ach21">21<br />风化<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
-                    <td class="achno" id="ach22"></td>
-                    <td class="achno" id="ach23"></td>
+                    <td class="achno" id="ach22">22<br />研究的本质</td>
+                    <td class="achno" id="ach23">23<br />寻找答案的过程</td>
                     <td class="achno" id="ach24"></td>
                     <td class="achno" id="ach25"></td>
                     <td class="achno" id="ach26"></td>
