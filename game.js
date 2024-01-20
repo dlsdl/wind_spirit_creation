@@ -1374,6 +1374,18 @@ function getfreeupg() {
     variab.upgf04 = player.elmten04.add(1).log(256).floor();
 }
 
+function buythr() {
+
+}
+
+function buystd() {
+
+}
+
+function rstd() {
+
+}
+
 function produce() {
     player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
     player.energyttl = player.energyttl.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
