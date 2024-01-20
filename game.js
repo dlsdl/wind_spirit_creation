@@ -1344,7 +1344,7 @@ function buyPL2upg(tier) {
 }
 
 function getelmtamt() {
-    player.elmttl = player.PL2ptsttl.log(2).floor();
+    player.elmttl = player.PL2ptsttl.max(1).log(2).floor();
     player.elmt = player.elmttl.sub(player.elmt01).sub(player.elmt02).sub(player.elmt03).sub(player.elmt04);
 }
 
