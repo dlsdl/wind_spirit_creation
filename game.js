@@ -1440,7 +1440,7 @@ function transformToDecimal(object) {
     for (i in object) {
         if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
         if (typeof (object[i]) == "object" && !isNaN(new Decimal(object[i]).mag)) transformToDecimal(object[i]);
-        if (isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(0);
+        if (new Decimal(object[i]).gte("F1.8e308")) object[i] = new Decimal(1);
     }
 }
 
