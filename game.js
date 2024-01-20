@@ -1368,10 +1368,10 @@ function getelmtps() {
 }
 
 function getfreeupg() {
-    variab.upgf01 = player.elmten01.log(2).floor();
-    variab.upgf02 = player.elmten02.log(4).floor();
-    variab.upgf03 = player.elmten03.log(16).floor();
-    variab.upgf04 = player.elmten04.log(256).floor();
+    variab.upgf01 = player.elmten01.log(2).floor().max(0);
+    variab.upgf02 = player.elmten02.log(4).floor().max(0);
+    variab.upgf03 = player.elmten03.log(16).floor().max(0);
+    variab.upgf04 = player.elmten04.log(256).floor().max(0);
 }
 
 function produce() {
@@ -1439,7 +1439,8 @@ function invscaleTier(x) {
 function transformToDecimal(object) {
     for (i in object) {
         if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
-        if (typeof (object[i]) == "object") transformToDecimal(object[i])
+        if (isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(0);
+        if (typeof (object[i]) == "object") transformToDecimal(object[i]);
     }
 }
 
