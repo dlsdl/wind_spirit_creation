@@ -1368,10 +1368,10 @@ function getelmtps() {
 }
 
 function getfreeupg() {
-    variab.upgf01 = player.elmten01.log(2).floor().max(0);
-    variab.upgf02 = player.elmten02.log(4).floor().max(0);
-    variab.upgf03 = player.elmten03.log(16).floor().max(0);
-    variab.upgf04 = player.elmten04.log(256).floor().max(0);
+    variab.upgf01 = player.elmten01.add(1).log(2).floor();
+    variab.upgf02 = player.elmten02.add(1).log(4).floor();
+    variab.upgf03 = player.elmten03.add(1).log(16).floor();
+    variab.upgf04 = player.elmten04.add(1).log(256).floor();
 }
 
 function produce() {
