@@ -1439,8 +1439,8 @@ function invscaleTier(x) {
 function transformToDecimal(object) {
     for (i in object) {
         if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
+        if (typeof (object[i]) == "object" && !isNaN(new Decimal(object[i]).mag)) transformToDecimal(object[i]);
         if (isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(0);
-        if (typeof (object[i]) == "object") transformToDecimal(object[i]);
     }
 }
 
