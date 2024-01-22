@@ -1979,7 +1979,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(30)) {
         document.getElementById("tier02rewa05").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "";
+        document.getElementById("tier02info").innerHTML = "在75式风模块，将...";
         document.getElementById("upg_04").style.display = 'block';
     }
     else {
