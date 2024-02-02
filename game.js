@@ -164,22 +164,26 @@ function hardReset() {
         thrmb02: new Decimal(0),
         thrmb03: new Decimal(0),
         thrmb04: new Decimal(0),
-        std: [          false,
-                        false,
-                    false, false,
-                        false,
-                        false,
-                    false, false,
-                false, false, false,
-                    false, false,
-                        false,
-                        false,
-                    false, false,
-                false, false, false,
+        std: [  false,
+                false,
+            false, false,
+            false, false,
+            false,
+            false,
+            false, false, false,
+            false, false, false,
+            false, false, false,
+            false,
+            false,
+            false,
             false, false, false, false,
-                false, false, false,
-                    false, false,
-                false, false, false,
+            false, false, false, false,
+            false, false, false, false,
+            false, false, false, false,
+            false,
+            false,
+            false,
+            false,
         ],
 
         autobuywsc: [null,
@@ -209,10 +213,10 @@ variab = {
     scal03: new Decimal(1.329227995784915e36),
     scal04: new Decimal(2.135987035920910e96),
 
-    scaltier01: new Decimal(256),
-    scaltier02: new Decimal(16777216),
-    scaltier03: new Decimal(2.62144e23),
-    scaltier04: new Decimal(2.62144e63),
+    scaltier01: new Decimal(100),
+    scaltier02: new Decimal(1e8),
+    scaltier03: new Decimal(1e24),
+    scaltier04: new Decimal(1e64),
 
     wscc01: new Decimal(2),
     wscc02: new Decimal(4),
@@ -632,6 +636,9 @@ function getWscMult() {
     if (player.tier03.gte(1)) mult17to24 = mult17to24.mul(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04).add(1).pow(4));
     mult17to24 = mult17to24.mul(player.PL2tms.pow(player.PL2upg04).max(1));
 
+    if (player.std[4] == true) mult09to16 = mult09to16.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(16).pow(player.tier01));
+    if (player.std[5] == true) mult17to24 = mult17to24.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(64).pow(player.tier01));
+
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
         variab["wscm" + name] = variab.wscmpb.pow(player["wscb" + name]).mul(mult01to08).mul(variab.PL1engmul).mul(variab.PL2engmul2).max(1);
@@ -693,14 +700,21 @@ function getWscPow() {
         }
     }
     else {
-        for (let tier = 1; tier <= 16; tier++) {
+        for (let tier = 1; tier <= 8; tier++) {
+            let name = tiername[tier];
+            variab["wscp" + name] = new Decimal(1);
+            variab["wscp" + name] = variab["wscp" + name].add(player.chacom03.pow(0.5).mul(0.01));
+            if (player.tier03.gte(3)) variab["wscp" + name] = variab["wscp" + name].add(player.tier03.mul(0.001));
+        }
+        for (let tier = 9; tier <= 16; tier++) {
             let name = tiername[tier];
             variab["wscp" + name] = new Decimal(1);
             if (player.tier03.gte(3)) variab["wscp" + name] = variab["wscp" + name].add(player.tier03.mul(0.001));
         }
-        for (let tier = 1; tier <= 8; tier++) {
+        for (let tier = 17; tier <= 24; tier++) {
             let name = tiername[tier];
-            variab["wscp" + name] = variab["wscp" + name].add(player.chacom03.pow(0.5).mul(0.01));
+            variab["wscp" + name] = new Decimal(1);
+            if (player.tier02.gte(75)) variab["wscp" + name] = variab["wscp" + name].add(player.PL2energy.add(1).log(2).add(1).log(2).div(4096));
         }
     }
 }
@@ -751,7 +765,8 @@ function getWscBaseValue() {
         let name = tiername[tier];
         variab.wscBaseValue3 = variab.wscBaseValue3.add(player["wscb" + name]);
     }
-    variab.wscBaseValue = variab.wscBaseValue1.add(variab.wscBaseValue2.mul(4)).add(variab.wscBaseValue3.mul(16));
+    if (player.std[1] == true) variab.wscBaseValue = variab.wscBaseValue1.div(16).add(1).mul(variab.wscBaseValue2.div(16).add(1)).mul(variab.wscBaseValue3.div(16).add(1));
+    else variab.wscBaseValue = variab.wscBaseValue1.add(variab.wscBaseValue2.mul(4)).add(variab.wscBaseValue3.mul(16));
     if (player.innormcha == 6 & variab.wscBaseValue1.gt(60)) quitCha();
     if (player.incha == 3) variab.wscBaseValue = new Decimal(0);
 }
@@ -1439,10 +1454,10 @@ function getelmtps() {
     variab.elmtps03 = new Decimal(0.25).mul(variab.elmmpd.pow(player.elmt03)).mul(player.elmt03);
     variab.elmtps04 = new Decimal(0.25).mul(variab.elmmpd.pow(player.elmt04)).mul(player.elmt04);
     if (player.tier03.gte(22)) {
-        variab.elmtps01 = variab.elmtps01.mul(player.PL2energy.pow(0.1));
-        variab.elmtps02 = variab.elmtps02.mul(player.PL2energy.pow(0.1));
-        variab.elmtps03 = variab.elmtps03.mul(player.PL2energy.pow(0.1));
-        variab.elmtps04 = variab.elmtps04.mul(player.PL2energy.pow(0.1));
+        variab.elmtps01 = variab.elmtps01.mul(player.PL2energy.add(1).log(2));
+        variab.elmtps02 = variab.elmtps02.mul(player.PL2energy.add(1).log(2));
+        variab.elmtps03 = variab.elmtps03.mul(player.PL2energy.add(1).log(2));
+        variab.elmtps04 = variab.elmtps04.mul(player.PL2energy.add(1).log(2));
     }
 }
 
@@ -1493,12 +1508,17 @@ function getthrcost() {
 }
 
 function buystd(tier) {
-    if (tier == 0 & player.thrm.gte(3)) { player.std[0] = true; player.thrm = player.thrm.sub(3)}
-    if (tier == 1 & player.thrm.gte(3) & player.std[0] == true) { player.std[1] = true; player.thrm = player.thrm.sub(3) }
+    if (tier == 0 & player.thrm.gte(5)) { player.std[0] = true; player.thrm = player.thrm.sub(5)}
+    if (tier == 1 & player.thrm.gte(5) & player.std[0] == true) { player.std[1] = true; player.thrm = player.thrm.sub(5) }
     if (tier == 2 & player.thrm.gte(4) & player.std[1] == true) { player.std[2] = true; player.thrm = player.thrm.sub(4) }
-    if (tier == 3 & player.thrm.gte(4) & player.std[1] == true) { player.std[3] = true; player.thrm = player.thrm.sub(4) }
-    if (tier == 4 & player.thrm.gte(5) & (player.std[2] == true | player.std[3] == true)) { player.std[4] = true; player.thrm = player.thrm.sub(5) }
-    if (tier == 5 & player.thrm.gte(5) & player.std[4] == true) player.std[5] = true;
+    if (tier == 3 & player.thrm.gte(6) & player.std[1] == true) { player.std[3] = true; player.thrm = player.thrm.sub(6) }
+    if (tier == 4 & player.thrm.gte(6) & (player.std[2] == true | player.std[3] == true)) { player.std[4] = true; player.thrm = player.thrm.sub(6) }
+    if (tier == 5 & player.thrm.gte(9) & (player.std[2] == true | player.std[3] == true)) { player.std[5] = true; player.thrm = player.thrm.sub(9) }
+    if (tier == 6 & player.thrm.gte(12) & (player.std[4] == true | player.std[5] == true)) { player.std[6] = true; player.thrm = player.thrm.sub(12) }
+    if (tier == 7 & player.thrm.gte(12) & player.std[6] == true) { player.std[7] = true; player.thrm = player.thrm.sub(12) }
+
+
+
 }
 
 function rstd() {
@@ -1525,6 +1545,7 @@ function produce() {
         player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(variab["wscm" + name]).pow(variab["wscp" + name]).mul(new Decimal(0.0125)));
     }
     player.PL2energy = player.PL2energy.add(player.wsca17.mul(variab.wscm17).pow(variab.wscp17).mul(new Decimal(0.0125)));
+    if (player.std[7] == true) player.wsca16 = player.wsca16.add(player.wsca17.mul(variab.wscm17).pow(variab.wscp17).mul(new Decimal(0.0125)));
     for (let tier = 18; tier <= 24; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier - 1];
@@ -1534,7 +1555,6 @@ function produce() {
         variab.anmparsc = new Decimal(2).pow(player.anmorbttl).mul(80).max(80);
         variab.anmparps = new Decimal(0.1).mul(new Decimal(1.2).pow(player.wscb08.sub(64))).mul(new Decimal(2).pow(player.parupg01).mul(new Decimal(2).pow(player.chacom04)))
         if (player.tier01.gte(200)) variab.anmparps = variab.anmparps.mul(player.tier01.max(200));
-        if (player.std[1] == true) variab.anmparps = variab.anmparps.mul(new Decimal(3).pow(player.wscb16));
         if (player.anmpar.gte(variab.anmparsc)) {
             if (player.tier03.gte(9)) variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc).pow(0.8));
             else variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc));
@@ -1657,7 +1677,7 @@ function updateGUI() {
     document.getElementById("wscinfo").innerHTML = "基础风灵产量：0.25/s  每次作成乘数：" + notation(variab.wscmpb);
     for (let tier = 1; tier <= 24; tier++) { 
         var name = tiername[tier];
-        document.getElementById("wscb" + name).innerHTML = player["wscb" + name].toFixed(0);
+        document.getElementById("wscb" + name).innerHTML = notatint(player["wscb" + name]);
         document.getElementById("wscc" + name).innerHTML = notation(variab["wscc" + name]);
         document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(variab["wscm" + name]).padEnd(15, '_') + "^" + notation(variab["wscp" + name]).padEnd(15, '_') + "¶1.000__________";
         if (player["wscb" + name].gte(new Decimal(33554432).div(variab["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "四阶折算|";
@@ -1668,8 +1688,9 @@ function updateGUI() {
         if (player.autobuywsc[tier] == true) document.getElementById("byat" + name).innerHTML = "自动：开";
         else document.getElementById("byat" + name).innerHTML = "自动：关";
     }
-    document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue1) + "+" + notatint(variab.wscBaseValue2) + "×4" + "+" + notatint(variab.wscBaseValue3) + "×16=" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
-    document.getElementById("tier01").innerHTML = player.tier01.toFixed(0) + "式风单元";
+    if (player.std[1] == true) document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue1.div(16).add(1)) + "×" + notation(variab.wscBaseValue2.div(16).add(1)) + "×" + notation(variab.wscBaseValue3.div(16).add(1)) + "=" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
+    else document.getElementById("wscbv").innerHTML = "你的风灵基础值为" + notation(variab.wscBaseValue1) + "+" + notatint(variab.wscBaseValue2) + "×4" + "+" + notatint(variab.wscBaseValue3) + "×16=" + notation(variab.wscBaseValue) + "（基于你作成的风灵总数而定）";
+    document.getElementById("tier01").innerHTML = notatint(player.tier01) + "式风单元";
     document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风单元式数提升1~8式风灵乘数(1+n)²。当前：×" + notation(player.tier01.add(1).pow(2));
     document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(variab.wscBaseValue.div(64).max(1));
     document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
@@ -1678,30 +1699,37 @@ function updateGUI() {
     document.getElementById("tier01rewa06").innerHTML = "63式风单元：使1和5式风单元奖励也对9~16式风灵生效。";
     document.getElementById("tier01rewa07").innerHTML = "200式风单元：基于风单元式数提升风之微粒获取。当前：×" + notation(player.tier01);
 
-    document.getElementById("tier02").innerHTML = player.tier02.toFixed(0) + "式风模块";
+    document.getElementById("tier02").innerHTML = notatint(player.tier02) + "式风模块";
     document.getElementById("tier02rewa01").innerHTML = "1式风模块：基于风模块式数提升风灵每次作成乘数(+0.05×n^0.25)，并解锁第一个升级。当前：+" + notation(player.tier02.pow(0.25).mul(0.05));
     document.getElementById("tier02rewa02").innerHTML = "2式风模块：解锁第二个升级。";
     document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.02×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.02));
     document.getElementById("tier02rewa04").innerHTML = "12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×" + notation(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
     document.getElementById("tier02rewa05").innerHTML = "30式风模块：解锁第四个升级。"
-    document.getElementById("tier03").innerHTML = player.tier03.toFixed(0) + "式风系统";
+
+    document.getElementById("tier03").innerHTML = notatint(player.tier03) + "式风系统";
     document.getElementById("tier03rewa01").innerHTML = "1式风系统：基于升级总和提升17~24式风灵乘数。当前：×" + notation(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04).add(1).pow(4));
     document.getElementById("tier03rewa02").innerHTML = "3式风系统：基于风系统提升1~16式风灵的指数。当前：+" + notation(player.tier03.mul(0.001));
     document.getElementById("tier03rewa03").innerHTML = "9式风系统：使风之微粒的软上限弱化20%";
     document.getElementById("tier03rewa04").innerHTML = "22式风系统：使元素能量生产乘以扪敤能量^0.1。当前：×" + notation(player.PL2energy.pow(0.1));
+
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(variab.tierc02) + "式风单元";
     document.getElementById("tier03cost").innerHTML = "需要：" + notation(variab.tierc03) + "式风模块";
-    if (player.tier01.gte(256)) document.getElementById("tiers01").innerHTML = "一阶折算|";
-    else if (player.tier01.gte(4096)) document.getElementById("tiers01").innerHTML = "二阶折算|";
-    else if (player.tier01.gte(65536)) document.getElementById("tiers01").innerHTML = "三阶折算|";
-    else if (player.tier01.gte(1048576)) document.getElementById("tiers01").innerHTML = "四阶折算|";
+    if (player.tier01.gte(1e16)) document.getElementById("tiers01").innerHTML = "四阶折算|";
+    else if (player.tier01.gte(1e8)) document.getElementById("tiers01").innerHTML = "三阶折算|";
+    else if (player.tier01.gte(10000)) document.getElementById("tiers01").innerHTML = "二阶折算|";
+    else if (player.tier01.gte(100)) document.getElementById("tiers01").innerHTML = "一阶折算|";
     else document.getElementById("tiers01").innerHTML = "";
-    if (player.tier02.gte(100)) document.getElementById("tiers02").innerHTML = "一阶折算|";
-    else if (player.tier02.gte(800)) document.getElementById("tiers02").innerHTML = "二阶折算|";
-    else if (player.tier02.gte(8000)) document.getElementById("tiers02").innerHTML = "三阶折算|";
-    else if (player.tier02.gte(100000)) document.getElementById("tiers02").innerHTML = "四阶折算|";
+    if (player.tier02.gte(1e16)) document.getElementById("tiers02").innerHTML = "四阶折算|";
+    else if (player.tier02.gte(1e8)) document.getElementById("tiers02").innerHTML = "三阶折算|";
+    else if (player.tier02.gte(10000)) document.getElementById("tiers02").innerHTML = "二阶折算|";
+    else if (player.tier02.gte(100)) document.getElementById("tiers02").innerHTML = "一阶折算|";
     else document.getElementById("tiers02").innerHTML = "";
+    if (player.tier03.gte(1e16)) document.getElementById("tiers03").innerHTML = "四阶折算|";
+    else if (player.tier03.gte(1e8)) document.getElementById("tiers03").innerHTML = "三阶折算|";
+    else if (player.tier03.gte(10000)) document.getElementById("tiers03").innerHTML = "二阶折算|";
+    else if (player.tier03.gte(100)) document.getElementById("tiers03").innerHTML = "一阶折算|";
+    else document.getElementById("tiers03").innerHTML = "";
     if (player.autobuytier01 == true) document.getElementById("byattier01").innerHTML = "自动：开";
     else document.getElementById("byattier01").innerHTML = "自动：关";
     if (player.autobuytier02 == true) document.getElementById("byattier02").innerHTML = "自动：开";
@@ -1777,8 +1805,10 @@ function updateGUI() {
     document.getElementById("anmpar").innerHTML = notation(player.anmpar);
     document.getElementById("anmparps").innerHTML = notation(variab.anmparps);
     document.getElementById("anmparsc").innerHTML = notation(variab.anmparsc);
-    document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(50).add(0.06));
-    document.getElementById("anmpareffe").innerHTML = notation(player.anmpar.add(2).log(2).pow(player.parupg03.div(50).add(0.06)).max(1));
+    if (player.std[0] == true) document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(100).add(0.03));
+    else document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(50).add(0.06));
+    if(player.std[0] == true) document.getElementById("anmpareffe").innerHTML = "^" + notation(player.anmpar.add(2).log(2).pow(player.parupg03.div(100).add(0.03)).max(1));
+    else document.getElementById("anmpareffe").innerHTML = "×" + notation(player.anmpar.add(2).log(2).pow(player.parupg03.div(50).add(0.06)).max(1));
     document.getElementById("anmorba").innerHTML = notation(player.anmorb);
     document.getElementById("anmorbttl").innerHTML = notation(player.anmorbttl);
 
@@ -1938,6 +1968,11 @@ function styleDisplay() {
     else document.getElementById("tier01rewa06").style.display = 'none';
     if (player.tier01.gte(200)) {
         document.getElementById("tier01rewa07").style.display = 'block';
+        document.getElementById("tier01info").innerHTML = "在630式风单元，将使炼金生物变得更好";
+    }
+    else document.getElementById("tier01rewa07").style.display = 'none';
+    if (player.tier01.gte(630)) {
+        document.getElementById("tier01rewa07").style.display = 'block';
         document.getElementById("tier01info").innerHTML = "";
     }
     else document.getElementById("tier01rewa07").style.display = 'none';
@@ -1979,12 +2014,19 @@ function styleDisplay() {
     }
     if (player.tier02.gte(30)) {
         document.getElementById("tier02rewa05").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在75式风模块，将...";
+        document.getElementById("tier02info").innerHTML = "在75式风模块，将使所有类型的能量增加与它相关的风灵的指数^1+log2(log2(x+1)+1)/4096";
         document.getElementById("upg_04").style.display = 'block';
     }
     else {
         document.getElementById("tier02rewa05").style.display = 'none';
         document.getElementById("upg_04").style.display = 'none';
+    }
+    if (player.tier02.gte(75)) {
+        document.getElementById("tier02rewa06").style.display = 'block';
+        document.getElementById("tier02info").innerHTML = "";
+    }
+    else {
+        document.getElementById("tier02rewa06").style.display = 'none';
     }
 
     if (player.tier03.eq(0)) document.getElementById("tier03info").innerHTML = "在1式风系统，将基于升级数量之和提高17~24式风灵乘数。";
@@ -2000,7 +2042,7 @@ function styleDisplay() {
     else document.getElementById("tier03rewa02").style.display = 'none';
     if (player.tier03.gte(9)) {
         document.getElementById("tier03rewa03").style.display = 'block';
-        document.getElementById("tier03info").innerHTML = "在22式风系统，将使元素能量获取速度乘以扪敤能量^0.25";
+        document.getElementById("tier03info").innerHTML = "在22式风系统，将使元素能量获取速度乘以log2(扪敤能量)";
     }
     else document.getElementById("tier03rewa03").style.display = 'none';
     if (player.tier03.gte(22)) {
@@ -2008,6 +2050,12 @@ function styleDisplay() {
         document.getElementById("tier03info").innerHTML = "";
     }
     else document.getElementById("tier03rewa04").style.display = 'none';
+
+    if (player.PL2tms.gte(1)) document.getElementById("tier_03").style.display = 'block';
+    else document.getElementById("tier_03").style.display = 'none';
+
+    if (player.std[6] == true) document.getElementById("tier_04").style.display = 'block';
+    else document.getElementById("tier_04").style.display = 'none';
 
     if (player.energy.gte(1.797693134862315e308)) document.getElementById("PL1button").style.display = 'block';
     else document.getElementById("PL1button").style.display = 'none';
@@ -2130,7 +2178,7 @@ function styleDisplay() {
         document.getElementById("PL2tmshop").style.display = 'none';
     }
 
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i <= 10; i++) {
         if (player.std[i] == true) document.getElementById("std" + tiername[i + 1]).className = "stdyes";
         else document.getElementById("std" + tiername[i + 1]).className = "stdno";
     }
@@ -2185,7 +2233,7 @@ function comAch() {
     if (player.hasunlockedanmorb == true) getAch(23);
     if (player.parupg04.gte(10)) getAch(24);
     if (player.chacom01.add(player.chacom02).add(player.chacom03).add(player.chacom04).gte(16)) getAch(25);
-    if (variab.wscm08.gte(variab.wscm07)) getAch(26);
+    if (variab.wscm08.gt(variab.wscm07)) getAch(26);
     if (player.tier01.eq(0) & player.tier02.eq(0) & player.energy.gte(1e308)) getAch(27);
     if (player.wscb01.eq(1) & player.energy.gte(1e308)) getAch(28);
     if (player.PL1bab04.eq(0) & player.PL1bab05.eq(0) & player.PL1bab06.eq(0) & variab.wscmpb.gte(100)) getAch(29);
@@ -2194,6 +2242,8 @@ function comAch() {
 
     if (player.PL2tms.gt(0)) getAch(32);
     if (player.elmt01.gte(1) & player.elmt02.gte(1) & player.elmt03.gte(1) & player.elmt04.gte(1)) getAch(33);
+    if (player.PL2tms.gte(100)) getAch(34);
+    if (player.std[6] == true) getAch(35);
 }
 
 function shownoti(notiname) {
