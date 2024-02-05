@@ -478,6 +478,7 @@ function trueHardReset() {
     let promption = prompt("您确定要硬重置吗？输入This is the future确定");
     if (promption == "This is the future") {
         hardReset();
+        hardReset();
         shownoti("#hardreset");
     }
 }
@@ -613,6 +614,7 @@ function getWscMult() {
     var mult01to08 = new Decimal(1);
     var mult09to16 = new Decimal(1);
     var mult17to24 = new Decimal(1);
+
     if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(player.tier01.add(1).pow(2));
     if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(variab.wscBaseValue.div(64).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
@@ -793,8 +795,17 @@ function incTier2() {
 function incTier3() {
     if (player.tier02.gte(variab.tierc03)) {
         player.tier03 = player.tier03.add(1);
-        tier03Reset();
-        console.log('anmhpsts')
+        if (player.PL2tms.lt(9)) tier03Reset();
+        console.log('qr,aqjl!')
+    }
+    else return
+}
+
+function incTier4() {
+    if (player.tier03.gte(variab.tierc04)) {
+        player.tier04 = player.tier04.add(1);
+        tier04Reset();
+        console.log('wxzf,nz!')
     }
     else return
 }
@@ -825,10 +836,19 @@ function incMaxTier3() {
     else return
 }
 
+function incMaxTier4() {
+    let tierbmax = invscaleTier(player.tier03.div(4)).floor();
+    if (tierbmax.gt(player.tier04)) {
+        player.tier04 = tierbmax;
+    }
+    else return
+}
+
 function getTierCost() {
     variab.tierc01 = scaleTier(player.tier01).mul(64).add(64);
     variab.tierc02 = scaleTier(player.tier02).mul(4).add(4);
     variab.tierc03 = scaleTier(player.tier03).mul(4).add(4);
+    variab.tierc04 = scaleTier(player.tier04).mul(4).add(4);
 }
 
 const tier01checkbox = document.getElementById("tier01confirm");
@@ -885,10 +905,13 @@ function tier02Reset() {
 }
 
 function tier03Reset() {
-    if (player.PL2tms.lt(9)) {
         tier02Reset();
         player.tier02 = new Decimal(0);
-    }
+}
+
+function tier04Reset() {
+        tier03Reset();
+        player.tier03 = new Decimal(0);
 }
 
 function abTier01Switch() {
@@ -1705,16 +1728,21 @@ function updateGUI() {
     document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.02×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.02));
     document.getElementById("tier02rewa04").innerHTML = "12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×" + notation(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
     document.getElementById("tier02rewa05").innerHTML = "30式风模块：解锁第四个升级。"
+    document.getElementById("tier02rewa06").innerHTML = "75式风模块：使所有类型的能量增加与它相关的风灵的指数^1+log2(log2(x+1)+1)/1024"
 
     document.getElementById("tier03").innerHTML = notatint(player.tier03) + "式风系统";
     document.getElementById("tier03rewa01").innerHTML = "1式风系统：基于升级总和提升17~24式风灵乘数。当前：×" + notation(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04).add(1).pow(4));
     document.getElementById("tier03rewa02").innerHTML = "3式风系统：基于风系统提升1~16式风灵的指数。当前：+" + notation(player.tier03.mul(0.001));
     document.getElementById("tier03rewa03").innerHTML = "9式风系统：使风之微粒的软上限弱化20%";
-    document.getElementById("tier03rewa04").innerHTML = "22式风系统：使元素能量生产乘以扪敤能量^0.1。当前：×" + notation(player.PL2energy.pow(0.1));
+    document.getElementById("tier03rewa04").innerHTML = "22式风系统：使元素能量生产乘以log2(扪敤能量)。当前：×" + notation(player.PL2energy.log(2));
+
+    document.getElementById("tier04").innerHTML = notatint(player.tier04) + "式风四倍系统";
+
 
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(variab.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(variab.tierc02) + "式风单元";
     document.getElementById("tier03cost").innerHTML = "需要：" + notation(variab.tierc03) + "式风模块";
+    document.getElementById("tier04cost").innerHTML = "需要：" + notation(variab.tierc04) + "式风系统";
     if (player.tier01.gte(1e16)) document.getElementById("tiers01").innerHTML = "四阶折算|";
     else if (player.tier01.gte(1e8)) document.getElementById("tiers01").innerHTML = "三阶折算|";
     else if (player.tier01.gte(10000)) document.getElementById("tiers01").innerHTML = "二阶折算|";
@@ -1730,12 +1758,19 @@ function updateGUI() {
     else if (player.tier03.gte(10000)) document.getElementById("tiers03").innerHTML = "二阶折算|";
     else if (player.tier03.gte(100)) document.getElementById("tiers03").innerHTML = "一阶折算|";
     else document.getElementById("tiers03").innerHTML = "";
+    if (player.tier04.gte(1e16)) document.getElementById("tiers04").innerHTML = "四阶折算|";
+    else if (player.tier04.gte(1e8)) document.getElementById("tiers04").innerHTML = "三阶折算|";
+    else if (player.tier04.gte(10000)) document.getElementById("tiers04").innerHTML = "二阶折算|";
+    else if (player.tier04.gte(100)) document.getElementById("tiers04").innerHTML = "一阶折算|";
+    else document.getElementById("tiers04").innerHTML = "";
     if (player.autobuytier01 == true) document.getElementById("byattier01").innerHTML = "自动：开";
     else document.getElementById("byattier01").innerHTML = "自动：关";
     if (player.autobuytier02 == true) document.getElementById("byattier02").innerHTML = "自动：开";
     else document.getElementById("byattier02").innerHTML = "自动：关";
     if (player.autobuytier03 == true) document.getElementById("byattier03").innerHTML = "自动：开";
     else document.getElementById("byattier03").innerHTML = "自动：关";
+    if (player.autobuytier04 == true) document.getElementById("byattier04").innerHTML = "自动：开";
+    else document.getElementById("byattier04").innerHTML = "自动：关";
 
     document.getElementById("upgd01").innerHTML = player.upgd01.toFixed(0);
     document.getElementById("upgd02").innerHTML = player.upgd02.toFixed(0);
@@ -2014,7 +2049,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(30)) {
         document.getElementById("tier02rewa05").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在75式风模块，将使所有类型的能量增加与它相关的风灵的指数^1+log2(log2(x+1)+1)/4096";
+        document.getElementById("tier02info").innerHTML = "在75式风模块，将使所有类型的能量增加与它相关的风灵的指数^1+log2(log2(x+1)+1)/1024";
         document.getElementById("upg_04").style.display = 'block';
     }
     else {
