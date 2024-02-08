@@ -1555,6 +1555,10 @@ function rstd() {
 function produce() {
     player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
     player.energyttl = player.energyttl.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
+    if (player.energy.gte("e3.485689212103262e76")) {
+        player.energy = new Decimal("e3.485689212103262e76");
+        player.energyttl = new Decimal("e3.485689212103262e76");
+    }
     for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier - 1];
