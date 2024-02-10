@@ -729,8 +729,8 @@ function getWscMultPerBuy() {
     if (player.tier02.gte(12)) variab.wscmpb = variab.wscmpb.mul(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
     if (player.PL1upg[15] == true) variab.wscmpb = variab.wscmpb.mul(1.25);
     if (player.hasunlockedanmorb == true) {
-        if (player.std[0] == true) variab.wscmpb = variab.wscmpb.pow(player.anmpar.add(2).log(2).pow(player.parupg03.div(100).add(0.03)).max(1));
-        else variab.wscmpb = variab.wscmpb.mul(player.anmpar.add(2).log(2).pow(player.parupg03.div(50).add(0.06)).max(1));
+        if (player.std[0] == true) variab.wscmpb = variab.wscmpb.pow(player.anmpar.add(1).log(2).pow(player.parupg03.min(player.parupg03.mul(4).pow(0.25).mul(16)).div(256).add(0.015625)).max(1));
+        else variab.wscmpb = variab.wscmpb.mul(player.anmpar.add(1).log(2).pow(player.parupg03.min(player.parupg03.mul(4).pow(0.25).mul(16)).div(64).add(0.0625)).max(1));
     }
     if (player.innormcha == 12) variab.wscmpb = new Decimal(1);
     if (player.incha == 3) variab.wscmpb = new Decimal(1).mul(player.anmpar.add(1).log(2).mul(0.025).add(1));
@@ -1082,8 +1082,8 @@ function getPL1engMul() {
 function getPL1engPow() {
     if (player.innormcha == 11) variab.PL1engpow = new Decimal(0.1);
     else variab.PL1engpow = new Decimal(1);
-    if (player.PL1upg[8] == true) variab.PL1engpow = variab.PL1engpow.add(1);
-    variab.PL1engpow = variab.PL1engpow.add(player.PL1bab07.add(player.PL1bab08).add(player.PL1bab09).mul(0.1)).add(player.chacom01.mul(0.125));
+    if (player.PL1upg[8] == true) variab.PL1engpow = variab.PL1engpow.add(0.5);
+    variab.PL1engpow = variab.PL1engpow.add(player.PL1bab07.add(player.PL1bab08).add(player.PL1bab09).mul(0.1)).add(player.chacom01.mul(0.25));
     if (player.std[2] == true) {
         variab.PL1engpow = variab.PL1engpow.add(1);
     }
@@ -1580,7 +1580,7 @@ function produce() {
     }
     if (player.hasunlockedanmorb == true) {
         variab.anmparsc = new Decimal(2).pow(player.anmorbttl).mul(80).max(80);
-        variab.anmparps = new Decimal(0.1).mul(new Decimal(1.2).pow(player.wscb08.sub(64))).mul(new Decimal(2).pow(player.parupg01).mul(new Decimal(2).pow(player.chacom04)))
+        variab.anmparps = new Decimal(0.1).mul(new Decimal(1.2).pow(player.wscb08.sub(64)).max(1)).mul(new Decimal(2).pow(player.parupg01).mul(new Decimal(2).pow(player.chacom04)))
         if (player.tier01.gte(200)) variab.anmparps = variab.anmparps.mul(player.tier01.max(200));
         if (player.anmpar.gte(variab.anmparsc)) {
             if (player.tier03.gte(9)) variab.anmparps = variab.anmparps.div(player.anmpar.div(variab.anmparsc).pow(0.8));
@@ -1844,10 +1844,10 @@ function updateGUI() {
     document.getElementById("anmpar").innerHTML = notation(player.anmpar);
     document.getElementById("anmparps").innerHTML = notation(variab.anmparps);
     document.getElementById("anmparsc").innerHTML = notation(variab.anmparsc);
-    if (player.std[0] == true) document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(100).add(0.03));
-    else document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(50).add(0.06));
-    if(player.std[0] == true) document.getElementById("anmpareffe").innerHTML = "^" + notation(player.anmpar.add(2).log(2).pow(player.parupg03.div(100).add(0.03)).max(1));
-    else document.getElementById("anmpareffe").innerHTML = "×" + notation(player.anmpar.add(2).log(2).pow(player.parupg03.div(50).add(0.06)).max(1));
+    if (player.std[0] == true) document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(256).add(0.015625));
+    else document.getElementById("anmparexp").innerHTML = notation(player.parupg03.div(64).add(0.0625));
+    if (player.std[0] == true) document.getElementById("anmpareffe").innerHTML = "^" + notation(player.anmpar.add(1).log(2).pow(player.parupg03.min(player.parupg03.mul(4).pow(0.25).mul(16)).div(256).add(0.015625)).max(1));
+    else document.getElementById("anmpareffe").innerHTML = "×" + notation(player.anmpar.add(1).log(2).pow(player.parupg03.min(player.parupg03.mul(4).pow(0.25).mul(16)).div(64).add(0.0625)).max(1));
     document.getElementById("anmorba").innerHTML = notation(player.anmorb);
     document.getElementById("anmorbttl").innerHTML = notation(player.anmorbttl);
 
@@ -1857,7 +1857,7 @@ function updateGUI() {
     document.getElementById("parupg04").innerHTML = notatint(player.parupg04);
     document.getElementById("parupge01").innerHTML = notation(new Decimal(2).pow(player.parupg01));
     document.getElementById("parupge02").innerHTML = notation(player.anmpar.pow(player.parupg02.mul(0.25)).max(1));
-    document.getElementById("parupge03").innerHTML = notation(player.parupg03.div(50));
+    document.getElementById("parupge03").innerHTML = notation(player.parupg03.div(64));
     document.getElementById("parupge04").innerHTML = notation(player.parupg04);
     document.getElementById("parupgc01").innerHTML = notation(variab.parupgc01);
     document.getElementById("parupgc02").innerHTML = notation(variab.parupgc02);
@@ -2526,6 +2526,16 @@ var texts =
         "Introvert,iNtuitive,Thinking,Perceiving",
         "这一切有什么意义？没有什么意义？没有没什么意义？",
         "斯马特，绝对论之神，于大数历2268年3月6日诞生，起初曾是陨石，坠落到火山口里后被欧米茄改造成机器人，拥有了正常人的意识和正常人难以想象的力量，100岁的时候提出了绝对论，成为了绝对论之神和绝对论部长",/*80*/
+        "为庆祝中秋国庆连假，宇宙学部门进行实验，在研究设施内制造黑洞，目标是将时间加速到180倍",
+        "但由于操作不当，导致黑洞反转变成大规模减慢时间，就在他们焦头烂额的研究如何解决问题的时候，设施外面已经乱作一团",
+        "只见设施外的工作人员发现设施里面的人员整整四个小时都没有任何回应，以为里面的人员发动叛乱了，准备直接武力攻破设施",
+        "但就在这时，一旁的时间异常部门主管SCP-5616敏锐的察觉到了问题:SCP-5616利用时间异常设备发现设施内的时间流速正在飞速降慢",
+        "现在已经到了设施内时间比外部时间慢几千倍的程度，再这样下去整个设施的时间将会停止，把里面的人全部像以前的SCP-5616一样永远困在里面",
+        "宇宙学部在此提醒：实验千万条，安全第一条，操作不规范，亲人两行泪",
+        "THE EVERYTHING FINAL OF Ω OF FINAL EVERYTHING THE",
+        "是用纯数学绝对连续的物质做的",
+        "EMOMOMOMO",
+        "汉化版打开游戏就能找到句号。",/*90*/
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
