@@ -513,25 +513,25 @@
                         <td>
                             <button id="chal01" class="chalno" onclick="entCha(1)">
                                 进阶挑战1<br />扩散能量对1~8式风灵的乘数在指数之前总是1e-100<br />
-                                目标：<span id="chal01goal"></span>能量<br />完成次数：<span id="chal01comp"></span>/4<br />奖励：提升扩散能量效果指数（+<span id="chal01effe"></span>）
+                                目标：<span id="chal01goal"></span>能量<br />完成次数：<span id="chal01comp"></span>/<span id="chal01cap"></span><br />奖励：提升扩散能量效果指数（+<span id="chal01effe"></span>）
                             </button>
                         </td>
                         <td>
                             <button id="chal02" class="chalno" onclick="entCha(2)">
                                 进阶挑战2<br />基于能量降低所有风灵产量的指数，这个指数总是小于1<br />
-                                目标：<span id="chal02goal"></span>能量<br />完成次数：<span id="chal02comp"></span>/4<br />奖励：增加扩散升级5和8的指数(+<span id="chal02effe"></span>)
+                                目标：<span id="chal02goal"></span>能量<br />完成次数：<span id="chal02comp"></span>/<span id="chal02cap"></span><br />奖励：增加扩散升级5和8的指数(+<span id="chal02effe"></span>)
                             </button>
                         </td>
                         <td>
                             <button id="chal03" class="chalno" onclick="entCha(3)">
                                 进阶挑战3<br />风灵基础值为0，每次作成乘数为1，但风之微粒对每次作成乘数有效<br />
-                                目标：<span id="chal03goal"></span>能量<br />完成次数：<span id="chal03comp"></span>/4<br />奖励：提升1~8式风灵指数(+<span id="chal03effe"></span>)
+                                目标：<span id="chal03goal"></span>能量<br />完成次数：<span id="chal03comp"></span>/<span id="chal03cap"></span><br />奖励：提升1~8式风灵指数(+<span id="chal03effe"></span>)
                             </button>
                         </td>
                         <td>
                             <button id="chal04" class="chalno" onclick="entCha(4)">
                                 进阶挑战4<br />1~16式风灵的指数强制为0.25<br />
-                                目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/4<br />奖励：提高风之微粒获取数量(×<span id="chal04effe"></span>)
+                                目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/<span id="chal04cap"></span><br />奖励：提高风之微粒获取数量(×<span id="chal04effe"></span>)
                             </button>
                         </td>
                     </tr>
@@ -539,7 +539,7 @@
             </div>
         </div>
         <div id="p3_1" style="display: none">
-            <div class="ftsz2" style="color: #ffffff; text-align: center" id="PL2tms"></div>
+            <div class="ftsz2" style="color: #ffffff; text-align: center" id="PL2tms2"></div>
             <div class="PL2mlstno" id="PL2mlst01">
                 <span>扪敤1次</span><br /><span>扪敤重置时保留第一行扩散升级，在元素生命选项卡中解锁"风系统"</span>
             </div>
@@ -698,39 +698,39 @@
             </table>
             <table align="center">
                 <tr>
-                    <td><button class="stdno" id="std21" onclick="buystd(24)">25式风单元效果变为原来的4次方<br />需要：56烧瓶</button></td>
-                    <td><button class="stdno" id="std22" onclick="buystd(25)">12式风模块的效果变为原来的2次方<br />需要：64烧瓶</button></td>
-                    <td><button class="stdno" id="std23" onclick="buystd(26)">3式风系统的效果乘以2<br />需要：72烧瓶</button></td>
-                    <td><button class="stdno" id="std24" onclick="buystd(27)">1式风四倍系统的效果乘以4<br />需要：80烧瓶</button></td>
+                    <td><button class="stdno" id="std25" onclick="buystd(24)">25式风单元效果变为原来的4次方<br />需要：56烧瓶</button></td>
+                    <td><button class="stdno" id="std26" onclick="buystd(25)">12式风模块的效果变为原来的2次方<br />需要：64烧瓶</button></td>
+                    <td><button class="stdno" id="std27" onclick="buystd(26)">3式风系统的效果乘以2<br />需要：72烧瓶</button></td>
+                    <td><button class="stdno" id="std28" onclick="buystd(27)">1式风四倍系统的效果乘以4<br />需要：80烧瓶</button></td>
                 </tr>
             </table>
             <table align="center">
                 <tr>
-                    <td><button class="stdno" id="std21" onclick="buystd(28)">炼金力量增加第一行购买项上限<br />需要：63烧瓶</button></td>
-                    <td><button class="stdno" id="std22" onclick="buystd(29)">炼金力量增加第二行购买项上限<br />需要：72烧瓶</button></td>
-                    <td><button class="stdno" id="std23" onclick="buystd(30)">炼金力量增加第三行购买项上限<br />需要：81烧瓶</button></td>
-                    <td><button class="stdno" id="std24" onclick="buystd(31)">炼金力量增加第四行购买项上限<br />需要：90烧瓶</button></td>
+                    <td><button class="stdno" id="std29" onclick="buystd(28)">炼金力量增加第一行购买项上限<br />需要：63烧瓶</button></td>
+                    <td><button class="stdno" id="std30" onclick="buystd(29)">炼金力量增加第二行购买项上限<br />需要：72烧瓶</button></td>
+                    <td><button class="stdno" id="std31" onclick="buystd(30)">炼金力量增加第三行购买项上限<br />需要：81烧瓶</button></td>
+                    <td><button class="stdno" id="std32" onclick="buystd(31)">炼金力量增加第四行购买项上限<br />需要：90烧瓶</button></td>
                 </tr>
             </table>
             <table align="center">
                 <tr>
-                    <td><button class="stdno" id="std21" onclick="buystd(32)">火元素能量提升炼金升级1<br />需要：70烧瓶</button></td>
-                    <td><button class="stdno" id="std22" onclick="buystd(33)">水元素能量提升炼金升级2<br />需要：80烧瓶</button></td>
-                    <td><button class="stdno" id="std23" onclick="buystd(34)">雷元素能量提升炼金升级3<br />需要：90烧瓶</button></td>
-                    <td><button class="stdno" id="std24" onclick="buystd(35)">冰元素能量提升炼金升级4<br />需要：100烧瓶</button></td>
+                    <td><button class="stdno" id="std33" onclick="buystd(32)">火元素能量提升炼金升级1<br />需要：70烧瓶</button></td>
+                    <td><button class="stdno" id="std34" onclick="buystd(33)">水元素能量提升炼金升级2<br />需要：80烧瓶</button></td>
+                    <td><button class="stdno" id="std35" onclick="buystd(34)">雷元素能量提升炼金升级3<br />需要：90烧瓶</button></td>
+                    <td><button class="stdno" id="std36" onclick="buystd(35)">冰元素能量提升炼金升级4<br />需要：100烧瓶</button></td>
                 </tr>
             </table>
             <table align="center">
-                <tr><td><button class="stdno" id="std20" onclick="buystd(36)">16式风灵作成次数提高风之徯粓<br />需要：150烧瓶</button></td></tr>
+                <tr><td><button class="stdno" id="std37" onclick="buystd(36)">16式风灵作成次数提高风之徯粓<br />需要：150烧瓶</button></td></tr>
             </table>
             <table align="center">
-                <tr><td><button class="stdno" id="std20" onclick="buystd(37)">风之徯粓提高风之微粒获取<br />需要：200烧瓶</button></td></tr>
+                <tr><td><button class="stdno" id="std38" onclick="buystd(37)">风之徯粓提高风之微粒获取<br />需要：200烧瓶</button></td></tr>
             </table>
             <table align="center">
-                <tr><td><button class="stdno" id="std20" onclick="buystd(38)">降低风灵升级3的价格，使其可购买数量×2<br />需要：250烧瓶</button></td></tr>
+                <tr><td><button class="stdno" id="std39" onclick="buystd(38)">降低风灵升级3的价格，使其可购买数量×2<br />需要：250烧瓶</button></td></tr>
             </table>
             <table align="center">
-                <tr><td><button class="stdno" id="std20" onclick="buystd(39)">降低风灵升级4的价格，使其可购买数量×4<br />需要：300烧瓶</button></td></tr>
+                <tr><td><button class="stdno" id="std40" onclick="buystd(39)">降低风灵升级4的价格，使其可购买数量×4<br />需要：300烧瓶</button></td></tr>
             </table>
         </div>
         <div id="p3_4" style="display: none">
@@ -761,6 +761,16 @@
         </div>
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
+                <br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.3.0<br />
+                <br />
+                本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
+                <br />
+                快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
+                a：购买风灵升级1，s：购买风灵升级2，以此类推。z：扩散，x：扪敤，以此类推。<br />
+                <br />
+                支持所有序数增量吧吧友
+                <br />
                 更新日志<br />
                 v2.2.1 2024-2-5 调整了一些数值，添加新的研究和风四倍系统<br />
                 v2.2.0 2024-1-22 添加研究选项卡中的内容<br />
@@ -780,15 +790,7 @@
                 v0.3.0 2023-7-26 添加风灵价格的折算、最大作成风灵<br />
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
-                <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.2.1<br />
-                <br />
-                本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
-                <br />
-                快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
-                a：购买风灵升级1，s：购买风灵升级2，以此类推。z：扩散，x：扪敤，以此类推。<br />
-                <br />
-                支持所有序数增量吧吧友
+
             </div>
         </div>
         <div id="p0_3" style="display: none">

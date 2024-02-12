@@ -372,7 +372,7 @@
 
 .normchalno {
     width: 248px;
-    height: 120px;
+    height: 104px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffffff;
@@ -384,7 +384,7 @@
 
 .normchalyes {
     width: 248px;
-    height: 120px;
+    height: 104px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffffff;
@@ -396,7 +396,7 @@
 
 .chalno {
     width: 248px;
-    height: 248px;
+    height: 184px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -408,7 +408,7 @@
 
 .chalyes {
     width: 248px;
-    height: 248px;
+    height: 184px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
