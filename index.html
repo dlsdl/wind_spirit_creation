@@ -4,7 +4,7 @@
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.25, maximum-scale=4.0, user-scalable=yes" />
         <title>风灵作成</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+        <link href="icon.png" rel="shortcut icon" type="image/x-icon" />
     </head>
     <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace ">
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
@@ -115,6 +115,7 @@
             <button align="center" class="button" id="btp0_2" onclick="changePg('p0_2')">关于</button>
             <button align="center" class="button" id="btp0_3" onclick="changePg('p0_3')">统计</button>
             <button align="center" class="button" id="btp0_4" onclick="changePg('p0_4')">成就</button>
+            <button align="center" class="button" id="btp0_5" onclick="changePg('p0_5')">故事</button>
         </div>
         <div id="p1_1">
             <div class="btnrow">
@@ -524,14 +525,44 @@
                         </td>
                         <td>
                             <button id="chal03" class="chalno" onclick="entCha(3)">
-                                进阶挑战3<br />风灵基础值为0，每次作成乘数为1，但风之微粒对每次作成乘数有效<br />
+                                进阶挑战3<br />你无法购买风灵升级<br />
                                 目标：<span id="chal03goal"></span>能量<br />完成次数：<span id="chal03comp"></span>/<span id="chal03cap"></span><br />奖励：提升1~8式风灵指数(+<span id="chal03effe"></span>)
                             </button>
                         </td>
                         <td>
                             <button id="chal04" class="chalno" onclick="entCha(4)">
-                                进阶挑战4<br />1~16式风灵的指数强制为0.25<br />
+                                进阶挑战4<br />1~16式风灵的乘数变为0.25次方<br />
                                 目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/<span id="chal04cap"></span><br />奖励：提高风之微粒获取数量(×<span id="chal04effe"></span>)
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="chal2">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button id="chal05" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(5)">
+                                进阶挑战5<br />无法生产扩散能量和扪敤能量<br />
+                                目标：<span id="chal05goal"></span>能量<br />完成次数：<span id="chal05comp"></span>/<span id="chal05cap"></span><br />奖励：提升扪敤能量效果指数(+<span id="chal05effe"></span>)
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal06" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(6)">
+                                进阶挑战6<br />风之晶球没有任何效果<br />
+                                目标：<span id="chal06goal"></span>能量<br />完成次数：<span id="chal06comp"></span>/<span id="chal06cap"></span><br />奖励：9~16式风灵指数增加(+<span id="chal06effe"></span>)
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal07" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(7)">
+                                进阶挑战7<br />元素获得的额外风灵升级数量^0.5<br />
+                                目标：<span id="chal07goal"></span>能量<br />完成次数：<span id="chal07comp"></span>/<span id="chal07cap"></span><br />奖励：提升元素每次分配乘数(×<span id="chal07effe"></span>)
+                            </button>
+                        </td>
+                        <td>
+                            <button id="chal08" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(8)">
+                                进阶挑战8<br />无法进行扩散，也无法获得扩散点，17式风灵也不会生产16式风灵<br />
+                                目标：<span id="chal08goal"></span>能量<br />完成次数：<span id="chal08comp"></span>/<span id="chal08cap"></span><br />奖励：提高风之徯粓获取数量(×<span id="chal08effe"></span>)
                             </button>
                         </td>
                     </tr>
@@ -588,7 +619,7 @@
                 <button class="ltbutton" onclick="resetElmt()">回退</button>
             </div>
             <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;">基础每秒元素能量：0.25，每次分配乘数：4</div>
+                <div align="center" class="ftsz2" style="display: inline-block;">基础每秒元素能量：0.25，每次分配乘数：<span id="elmmpd"></span></div>
                 <button class="ltbutton" onclick="dtavelmt()">平均分配</button>
             </div>
             <div class="PL2elmt" id="PL2elmt01">
@@ -638,7 +669,7 @@
                 <tr><td><button class="stdno" id="std01" onclick="buystd(0)">风之晶球效果的乘数变成指数，但效果倍率降低为^0.25<br />需要：4烧瓶</button></td></tr>
             </table>
             <table align="center">
-                <tr><td><button class="stdno" id="std02" onclick="buystd(1)">风灵基础值的公式变成“1~8/9~16/……式风灵数量之和÷16+1的乘积”<br />需要：4烧瓶</button></td></tr>
+                <tr><td><button class="stdno" id="std02" onclick="buystd(1)">风灵基础值的指数增加0.1<br />需要：4烧瓶</button></td></tr>
             </table>
             <table align="center">
                 <tr>
@@ -688,15 +719,15 @@
             <table align="center">
                 <tr><td><button class="stdno" id="std20" onclick="buystd(19)">解锁炼金选项卡<br />需要：48烧瓶</button></td></tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr>
-                    <td><button class="stdno" id="std21" onclick="buystd(20)">炼金生命通过其数量提高了1~8式风灵的指数<br />需要：49烧瓶</button></td>
-                    <td><button class="stdno" id="std22" onclick="buystd(21)">炼金生命通过其数量提高了9~16式风灵的指数<br />需要：56烧瓶</button></td>
-                    <td><button class="stdno" id="std23" onclick="buystd(22)">炼金生命通过其数量提高了17~24式风灵的指数<br />需要：63烧瓶</button></td>
-                    <td><button class="stdno" id="std24" onclick="buystd(23)">炼金生命通过其数量提高了风之微粒产量的指数<br />需要：70烧瓶</button></td>
+                    <td><button class="stdno" id="std21" onclick="buystd(20)">炼金生命1提高了1~8式风灵的指数<br />需要：49烧瓶</button></td>
+                    <td><button class="stdno" id="std22" onclick="buystd(21)">炼金生命2提高了9~16式风灵的指数<br />需要：56烧瓶</button></td>
+                    <td><button class="stdno" id="std23" onclick="buystd(22)">炼金生命3提高了17~24式风灵的指数<br />需要：63烧瓶</button></td>
+                    <td><button class="stdno" id="std24" onclick="buystd(23)">炼金生命4提高了风之微粒产量的指数<br />需要：70烧瓶</button></td>
                 </tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr>
                     <td><button class="stdno" id="std25" onclick="buystd(24)">25式风单元效果变为原来的4次方<br />需要：56烧瓶</button></td>
                     <td><button class="stdno" id="std26" onclick="buystd(25)">12式风模块的效果变为原来的2次方<br />需要：64烧瓶</button></td>
@@ -704,15 +735,15 @@
                     <td><button class="stdno" id="std28" onclick="buystd(27)">1式风四倍系统的效果乘以4<br />需要：80烧瓶</button></td>
                 </tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr>
-                    <td><button class="stdno" id="std29" onclick="buystd(28)">炼金力量增加第一行购买项上限<br />需要：63烧瓶</button></td>
-                    <td><button class="stdno" id="std30" onclick="buystd(29)">炼金力量增加第二行购买项上限<br />需要：72烧瓶</button></td>
+                    <td><button class="stdno" id="std29" onclick="buystd(28)">第一行购买项效果变为2次方<br />需要：63烧瓶</button></td>
+                    <td><button class="stdno" id="std30" onclick="buystd(29)">扩散能量指数+1<br />需要：72烧瓶</button></td>
                     <td><button class="stdno" id="std31" onclick="buystd(30)">炼金力量增加第三行购买项上限<br />需要：81烧瓶</button></td>
                     <td><button class="stdno" id="std32" onclick="buystd(31)">炼金力量增加第四行购买项上限<br />需要：90烧瓶</button></td>
                 </tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr>
                     <td><button class="stdno" id="std33" onclick="buystd(32)">火元素能量提升炼金升级1<br />需要：70烧瓶</button></td>
                     <td><button class="stdno" id="std34" onclick="buystd(33)">水元素能量提升炼金升级2<br />需要：80烧瓶</button></td>
@@ -720,27 +751,88 @@
                     <td><button class="stdno" id="std36" onclick="buystd(35)">冰元素能量提升炼金升级4<br />需要：100烧瓶</button></td>
                 </tr>
             </table>
-            <table align="center">
-                <tr><td><button class="stdno" id="std37" onclick="buystd(36)">16式风灵作成次数提高风之徯粓<br />需要：150烧瓶</button></td></tr>
+            <table align="center" style="display: none">
+                <tr><td><button class="stdno" id="std37" onclick="buystd(36)">每次16式风灵作成提高风之徯粓获取×1.01<br />需要：150烧瓶</button></td></tr>
             </table>
-            <table align="center">
-                <tr><td><button class="stdno" id="std38" onclick="buystd(37)">风之徯粓提高风之微粒获取<br />需要：200烧瓶</button></td></tr>
+            <table align="center" style="display: none">
+                <tr><td><button class="stdno" id="std38" onclick="buystd(37)">每次24式风灵作成提高风之徯粓获取×1.02<br />需要：200烧瓶</button></td></tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr><td><button class="stdno" id="std39" onclick="buystd(38)">降低风灵升级3的价格，使其可购买数量×2<br />需要：250烧瓶</button></td></tr>
             </table>
-            <table align="center">
+            <table align="center" style="display: none">
                 <tr><td><button class="stdno" id="std40" onclick="buystd(39)">降低风灵升级4的价格，使其可购买数量×4<br />需要：300烧瓶</button></td></tr>
             </table>
         </div>
         <div id="p3_4" style="display: none">
-
-        </div>
-        <div id="p3_5" style="display: none">
-            <div class="btnrow2">
-                <button align="center" class="xxButton" onclick="ulAnm2()" style="background-color:#80ff00">解锁增压坍缩<br />花费：1e1000扪敤点</button>
+            <div id="alch" style="display: block">
+                <div align="center" class="ftsz2">点击炼金生命进行炼金，再次点击取消<br /></div>
+                <div align="center" class="ftsz2">你有<span id="alch00"></span>实验装置，它乘以炼金生命转化数量<br /></div>
+                <div class="btnrow2">
+                    <button class="xxButton" onclick="buyalc()" style="background-color: #ffffff">获得实验装置<br />花费<span id="alcost"></span>扪敤能量</button>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td><button class="alc" id="alch01" onclick="alchsw(1)">炼金生命1<br />数量：<span id="alca01"></span><br />合成不需要任何东西</button></td>
+                        <td><button class="alc" id="alch02" onclick="alchsw(2)">炼金生命2<br />数量：<span id="alca02"></span><br />合成1个需要4炼金生命1</button></td>
+                        <td><button class="alc" id="alch03" onclick="alchsw(3)">炼金生命3<br />数量：<span id="alca03"></span><br />合成1个需要4炼金生命2</button></td>
+                        <td><button class="alc" id="alch04" onclick="alchsw(4)">炼金生命4<br />数量：<span id="alca04"></span><br />合成1个需要4炼金生命3</button></td>
+                    </tr>
+                </table>
+                <table align="center">
+                    <tr>
+                        <td><button class="alc" id="alcu11" onclick="buyalcu(1)">每级使炼金时额外获得10%高一级的产物(<span id="alcu01"></span>/10)<br />花费：<span id="alcc01"></span>炼金生命1</button></td>
+                        <td><button class="alc" id="alcu12" onclick="buyalcu(2)">炼金生命1的获取数量×1.2(<span id="alcu02"></span>/10)<br />花费：<span id="alcc02"></span>炼金生命2</button></td>
+                        <td><button class="alc" id="alcu13" onclick="buyalcu(3)">1~8式风灵指数增加0.01(<span id="alcu03"></span>/10)<br />花费：<span id="alcc03"></span>炼金生命3</button></td>
+                        <td><button class="alc" id="alcu14" onclick="buyalcu(4)">9~16式风灵指数增加0.01(<span id="alcu04"></span>/10)<br />花费：<span id="alcc04"></span>炼金生命4</button></td>
+                        <td><button class="alc" id="alcu15" onclick="buyalcu(5)">17~24式风灵指数增加0.01(<span id="alcu05"></span>/10)<br />花费：<span id="alcc05"></span>炼金生命1</button></td>
+                        <td><button class="alc" id="alcu16" onclick="buyalcu(6)">风灵基础值指数增加0.01(<span id="alcu06"></span>/10)<br />花费：<span id="alcc06"></span>炼金生命2</button></td>
+                    </tr>
+                </table>
+                <table align="center">
+                    <tr>
+                        <td><button class="alc" id="alcv01" onclick="buyalcu(7)">自动获得风四倍系统，它不再重置任何东西<br />花费：20炼金生命3</button></td>
+                        <td><button class="alc" id="alcv02" onclick="buyalcu(8)">每秒自动获得扩散次数<br />花费：25炼金生命4</button></td>
+                        <td><button class="alc" id="alcv03" onclick="buyalcu(9)">分配的元素乘数基于分配的元素总数量<br />花费：32炼金生命1</button></td>
+                        <td><button class="alc" id="alcv04" onclick="buyalcu(10)">75式风模块的效果变为原来的4倍<br />花费：40炼金生命2</button></td>
+                        <td><button class="alc" id="alcv05" onclick="buyalcu(11)">再次使扩散能量转换指数增加1<br />花费：50炼金生命3</button></td>
+                        <td><button class="alc" id="alcv06" onclick="buyalcu(12)">再次使扪敤能量转换指数增加1<br />花费：64炼金生命4</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
+        <div id="p3_5" style="display: none">
+            <div id="ulanm2">
+                <div class="btnrow2">
+                    <button align="center" class="xxButton" onclick="ulAnm2()" style="background-color:#80ff00">解锁增压坍缩<br />花费：1e5000扪敤点</button>
+                </div>
+            </div>
+            <div id="anm2" style="display: block">
+                <table align="center">
+                    <tr>
+                        <td>
+                        <button class="zyts" id="jrzyts" align="center" onclick="entzyts()">
+                        <div align="center" class="ftsz4">点击进入/退出增压坍缩<br /><br /></div>
+                        <div align="center" class="ftsz2" style="color: #80ff00">进行扪敤重置，在增压坍缩中，所有风灵乘数基于能量降低<br /><span id="anm2st"></span></div>
+                        </button>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">你有<span id="anm2am"></span>风之徯粓(+<span id="anm2ps"></span>/s)，它以log2x^<span id="anm2exp"></span>的效果使风之微粒获取^<span id="anm2effe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">每秒风之徯粓基于在增压坍缩中获取的最大能量<br /></div>
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button class="PL2bab" id="anm2u1" onclick="buyanm2u(1)">双倍风之徯粓产量<br />等级<span id="anm2upg01"></span><br />当前：×<span id="anm2upge01"></span><br />花费：<span id="anm2upgc01"></span>风之徯粓</button></td>
+                        <td><button class="PL2bab" id="anm2u2" onclick="buyanm2u(2)">风之徯粓提升17~24式风灵乘数<br />等级<span id="anm2upg02"></span><br />当前：×<span id="anm2upge02"></span><br />花费：<span id="anm2upgc02"></span>风之徯粓</button></td>
+                        <td><button class="PL2bab" id="anm2u3" onclick="buyanm2u(3)">增加风之徯粓效果指数<br />等级<span id="anm2upg03"></span><br />当前：+<span id="anm2upge03"></span><br />花费：<span id="anm2upgc03"></span>风之徯粓</button></td>
+                        <td><button class="PL2bab" id="anm2u4" onclick="buyanm2u(4)">增加1~24式风灵指数<br />等级<span id="anm2upg04"></span><br />当前：+<span id="anm2upge04"></span><br />花费：<span id="anm2upgc04"></span>风之徯粓</button></td>
+                    </tr>
+                </table>
+            </div>
+            </div>
         <div id="p0_1" style="display: none">
             <div class="ftsz2" align="center">
                 风单元确认：<input type="checkbox" id="tier01confirm"><br />
@@ -756,13 +848,13 @@
                 <button align="center" class="xxButton" onclick="load()">恢复存档</button>
             </div>
             <form align="center">
-                <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 256px;" class='input' type="text" id='importExportText' ;></textarea>
+                <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 1024px;" class='input' type="text" id='importExportText' ;></textarea>
             </form>
         </div>
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.2.2<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：2.3.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -772,6 +864,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v2.3.0 2024-2-22 添加进阶挑战5~8、炼金、增压坍缩<br />
                 v2.2.2 2024-2-12 添加了一些软上限，添加新的研究<br />
                 v2.2.1 2024-2-5 调整了一些数值，添加新的研究和风四倍系统<br />
                 v2.2.0 2024-1-22 添加研究选项卡中的内容<br />
@@ -791,7 +884,6 @@
                 v0.3.0 2023-7-26 添加风灵价格的折算、最大作成风灵<br />
                 v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
                 v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
-
             </div>
         </div>
         <div id="p0_3" style="display: none">
@@ -830,7 +922,7 @@
                     <td class="achno" id="ach11">11<br />100万能量很多<span class="tooltip-text">获得1e6扩散能量</span></td>
                     <td class="achno" id="ach12">12<br />百岁珊（？<span class="tooltip-text">一次扩散获得100扩散点</span></td>
                     <td class="achno" id="ach13">13<br />挑战完成废我一辈子<span class="tooltip-text">完成所有普通挑战</span></td>
-                    <td class="achno" id="ach14">14<br />找到风灵超过了9个<span class="tooltip-text">作成9~16式风灵至少一次</span></td>
+                    <td class="achno" id="ach14">14<br />找到风灵超过了9个<span class="tooltip-text">作成16式风灵至少一次</span></td>
                     <td class="achno" id="ach15">15<br />更好更需要DLC<span class="tooltip-text">购买所有扩散升级</span></td>
                     <td class="achno" id="ach16">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的前三行购买项</span></td>
                     <td class="achno" id="ach17">17<br />浓缩风元素能量安全吗？<span class="tooltip-text">解锁风之晶球</span></td>
@@ -846,14 +938,14 @@
                 <tr>
                     <td class="achno" id="ach20">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
                     <td class="achno" id="ach21">21<br />灌木丛中<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
-                    <td class="achno" id="ach22">22<br />里程碑上的一切都有点紧张<span class="tooltip-text">扩散次数达到100</span></td>
-                    <td class="achno" id="ach23">23<br />研究的本质是……<span class="tooltip-text">购买“解锁风四倍系统”研究</span></td>
-                    <td class="achno" id="ach24">24</td>
-                    <td class="achno" id="ach25">25</td>
-                    <td class="achno" id="ach26">26</td>
-                    <td class="achno" id="ach27">27</td>
-                    <td class="achno" id="ach28">28</td>
-                    <td class="achno" id="ach29">29</td>
+                    <td class="achno" id="ach22">22<br />里程碑上的一切都有点紧张<span class="tooltip-text">扪敤次数达到1000</span></td>
+                    <td class="achno" id="ach23">23<br />研究的本质是……<span class="tooltip-text">解锁风四倍系统</span></td>
+                    <td class="achno" id="ach24">24<br />风灵增强<span class="tooltip-text">作成24式风灵至少一次</span></td>
+                    <td class="achno" id="ach25">25<br />下一级重置的1/2进度<span class="tooltip-text">获得1.797e308扪敤点</span></td>
+                    <td class="achno" id="ach26">26<br />新型蝴蝶效应<span class="tooltip-text">炼金升级1达到10级</span></td>
+                    <td class="achno" id="ach27">27<br />抟风秘道<span class="tooltip-text">解锁增压坍缩</span></td>
+                    <td class="achno" id="ach28">28<br />诡秘之风的虚无<span class="tooltip-text">在增压坍缩中获得e1e10能量</span></td>
+                    <td class="achno" id="ach29">29<br />虔诚之风的赐福<span class="tooltip-text">获得1e30风之徯粓</span></td>
                     <td class="achno" id="ach2a">2a</td>
                     <td class="achno" id="ach2b">2b</td>
                     <td class="achno" id="ach2c">2c</td>
@@ -862,6 +954,18 @@
                     <td class="achno" id="ach2f">2f</td>
                 </tr>
             </table>
+        </div>
+        <div id="p0_5" style="display: none">
+            <div class="ftsz4" style="color: #ffffff; text-align: center">风灵</div>
+            <br />
+            <div class="ftsz2" style="color: #ffffff; text-align: center">
+                传说在纤细脆弱的蝴蝶体内，也藏有引发飓风的力量。
+                这由纯粹的风构成的蝴蝶，无疑在等待着再次召来暴风的那一天。
+                纯粹的风如此纯粹，以至于可以声望变成风灵，也意味着风灵扇一下翅膀可能永远改变天气进程。
+                创造第一个风灵需要很小的能量，然而，它会让能量出现明显变化，而且风灵由风元素构成。
+                因此风灵之间可以相互造成更多的变化，全然不顾这让能量对比又差了几个数量级。
+                这在世界上可能至少误导了数亿民众——或者误导了宇宙中的所有文明。
+            </div>
         </div>
         <script type="text/javascript" src="break_eternity.js"></script>
         <script type="text/javascript" src="game.js"></script>
@@ -902,8 +1006,12 @@
             <div class="noti" id="notiach21">完成成就：灌木丛中</div>
             <div class="noti" id="notiach22">完成成就：里程碑上的一切都有点紧张</div>
             <div class="noti" id="notiach23">完成成就：研究的本质是……</div>
-            <div class="noti" id="notiach24">完成成就：</div>
-            <div class="noti" id="notiach25">完成成就：</div>
+            <div class="noti" id="notiach24">完成成就：超级风模块</div>
+            <div class="noti" id="notiach25">完成成就：下一级重置的1/2进度</div>
+            <div class="noti" id="notiach26">完成成就：新型蝴蝶效应</div>
+            <div class="noti" id="notiach27">完成成就：抟风秘道</div>
+            <div class="noti" id="notiach28">完成成就：诡秘之风的虚无</div>
+            <div class="noti" id="notiach29">完成成就：虔诚之风的赐福</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>
