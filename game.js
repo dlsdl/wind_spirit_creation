@@ -1742,7 +1742,7 @@ function buyalcu(tier) {
     }
     if (tier > 6 & tier <= 12) {
         if (player.alcu[tier - 7] == false & variab["alcuc" + name].lte(player["alch" + name2])) {
-            player.alcu[tier - 7] == true;
+            player.alcu[tier - 7] = true;
             player["alch" + name2] = player["alch" + name2].sub(variab["alcuc" + name]);
         }
     }

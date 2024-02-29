@@ -525,6 +525,16 @@
     position: relative;
 }
 
+.singul {
+    width: 136px;
+    height: 136px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff80;
+    cursor: pointer;
+    padding: 0px;
+}
+
 .tooltip-text {
     display: none;
     position: absolute;
