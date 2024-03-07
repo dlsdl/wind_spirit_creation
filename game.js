@@ -1999,7 +1999,7 @@ async function PL3reset() {
         player.PL3ptsttl = player.PL3ptsttl.add(player.PL2pts.root(1048576).floor());
         player.PL3tms = player.PL3tms.add(1);
 
-        hasUnlockedPL3 = true;
+        player.hasUnlockedPL3 = true;
 
         clearInterval(prod);
         prod = null;
