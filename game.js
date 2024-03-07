@@ -2214,12 +2214,12 @@ function getPL3engPow() {
 
 function research(tier) {
     let name = tiername[tier];
-    if (player.inres >= 5 & player["resa" + name].gte(1)) return;
     if (player.inres == tier) player.inres = 0;
     else {
         player.inres = 0;
         player.inres = tier;
     }
+    if (player.inres >= 5 & player["resa" + name].gte(1)) player.inres = 0;
 }
 
 function getres() {
@@ -2977,6 +2977,12 @@ function styleDisplay() {
     for (let i = 1; i <= 8; i++) {
         if (player.PL2upg01.gte(i)) document.getElementById("byat" + tiername[i+8]).style.display = 'block';
     }
+    if (player.resa05.gte(1)) {
+        for (let i = 1; i <= 8; i++) {
+            document.getElementById("byat" + tiername[i+16]).style.display = 'block';
+        }
+    }
+
 
     if (player.PL1upg[1] == true) {
         document.getElementById("byattier01").style.display = 'block';
@@ -3099,7 +3105,7 @@ function styleDisplay() {
         else document.getElementById("res" + name).className = "resno";
     }
 
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 50; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
         else document.getElementById("ach" + hexdigit[i]).className = "achno";
     }
@@ -3169,8 +3175,15 @@ function comAch() {
     if (player.hasunlockedanm2 == true) getAch(39);
     if (player.inzyts == true & player.energy.gte("1e1e10")) getAch(40);
     if (player.anm2.gte(1e30)) getAch(41);
+    if (player.tier01.eq(0) & player.PL1pts.gte("1.8e308")) getAch(42);
+    if (player.upgd01.eq(0) & player.upgd02.eq(0) & player.upgd03.eq(0) & player.upgd04.eq(0) & player.PL1pts.gte("1e1233")) getAch(43);
+    if (player.std[0] == false & player.PL1pts.gte("1e4932")) getAch(44);
+    if (player.elmt01.eq(2) & player.elmt02.eq(8) & player.elmt03.eq(18) & player.elmt04.eq(32)) getAch(45);
+    if (player.inzyts == true & player.incha != 0) getAch(46);
+    if (player.thrmttl.gte(1200) & player.alcspd.gte(400)) getAch(47);
 
-
+    if (player.PL3tms.gt(0)) getAch(48);
+    if (player.resa01.gte(6)) getAch(49);
 }
 
 /*弹出提示*/
