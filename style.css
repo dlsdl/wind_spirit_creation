@@ -191,7 +191,7 @@
 }
 
 .PL1button {
-    width: 240px;
+    width: 16%;
     height: 80px;
     position: absolute;
     top: 64px;
@@ -201,13 +201,14 @@
     border: 1px solid #ffffff;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
+    line-height:20px;
     text-decoration: none;
     cursor: pointer;
 }
 
 .PL1upgno {
     width: 184px;
-    height: 120px;
+    height: 136px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -220,7 +221,7 @@
 
 .PL1upgyes {
     width: 184px;
-    height: 120px;
+    height: 136px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
@@ -245,7 +246,7 @@
 }
 
 .PL2button {
-    width: 240px;
+    width: 16%;
     height: 80px;
     position: absolute;
     top: 64px;
@@ -255,6 +256,7 @@
     border: 1px solid #ffffff;
     font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
+    line-height: 18px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -421,6 +423,67 @@
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
+}
+
+.PL3button {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 160px;
+    left: 16px;
+    background-color: #00ff00;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resno {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    border-radius: 8px;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resyes {
+    width: 184px;
+    height: 184px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ff00;
+    border-radius: 8px;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.probarcon {
+    width: 1020px;
+    height: 20px;
+    margin:auto;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    color: #00ff80;
+    z-index: 0;
+    background-color: #000000;
+}
+
+.probar {
+    width: 1%;
+    height: 20px;
+    text-align:center;
+    z-index: 1;
+    background-color: #008040;
 }
 
 .normchalno {
