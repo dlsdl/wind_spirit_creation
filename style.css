@@ -1,4 +1,9 @@
-﻿.ftsz1 {
+﻿@font-face {
+    font-family: MonospaceTypewriter;
+    src: url('MonospaceTypewriter.ttf') format("truetype");
+}
+
+.ftsz1 {
     margin: 4px 2px;
     font-size: 12px;
     color: #ffffff;
@@ -486,6 +491,87 @@
     background-color: #008040;
 }
 
+.PL4button {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 160px;
+    right: 16px;
+    background-color: #00ffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL5button {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 256px;
+    left: 16px;
+    background-color: #0000ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL6button {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 256px;
+    right: 16px;
+    background-color: #ff00ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL7button {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 352px;
+    left: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PLomegabutton {
+    width: 16%;
+    height: 80px;
+    position: absolute;
+    top: 352px;
+    right: 16px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 .normchalno {
     width: 248px;
     height: 104px;
@@ -662,7 +748,4 @@
     position: absolute;
 }
 
-@font-face {
-    font-family: MonospaceTypewriter, Typewriter, monospace;
-    src: url('MonospaceTypewriter.ttf') format("truetype");
-}
+

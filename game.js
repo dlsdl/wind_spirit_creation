@@ -285,11 +285,19 @@ variab = {
     scal02: new Decimal(1099511627776),
     scal03: new Decimal(1.329227995784915e36),
     scal04: new Decimal(2.135987035920910e96),
+    scal05: new Decimal(6.668014432879854e240),
+    scal06: new Decimal("9.497114518078914e577"),
+    scal07: new Decimal("4.115101717688653e1348"),
+    scal08: new Decimal("3.524971412108382e3082"),
 
     scaltier01: new Decimal(100),
     scaltier02: new Decimal(1e8),
     scaltier03: new Decimal(1e24),
     scaltier04: new Decimal(1e64),
+    scaltier05: new Decimal(1e160),
+    scaltier06: new Decimal("1e384"),
+    scaltier07: new Decimal("1e896"),
+    scaltier08: new Decimal("1e2048"),
 
     wscc01: new Decimal(2),
     wscc02: new Decimal(4),
@@ -1857,7 +1865,8 @@ function getthrcost() {
 }
 
 function buystd(tier) {
-    if (tier == 0 & player.thrm.gte(4)) { player.std[0] = true; player.thrm = player.thrm.sub(4)}
+    if (player.std[tier] == true) return;
+    if (tier == 0 & player.thrm.gte(4) ) { player.std[0] = true; player.thrm = player.thrm.sub(4)}
     if (tier == 1 & player.thrm.gte(4) & player.std[0] == true) { player.std[1] = true; player.thrm = player.thrm.sub(4) }
     if (tier == 2 & player.thrm.gte(4) & player.std[1] == true) { player.std[2] = true; player.thrm = player.thrm.sub(4) }
     if (tier == 3 & player.thrm.gte(6) & player.std[1] == true) { player.std[3] = true; player.thrm = player.thrm.sub(6) }
@@ -2028,15 +2037,8 @@ player.        wscb20= new Decimal(0);
 player.        wscb21= new Decimal(0);
 player.        wscb22= new Decimal(0);
 player.        wscb23= new Decimal(0);
-player.        wscb24= new Decimal(0);
-player.        wscb25= new Decimal(0);
-player.        wscb26= new Decimal(0);
-player.        wscb27= new Decimal(0);
-player.        wscb28= new Decimal(0);
-player.        wscb29= new Decimal(0);
-player.        wscb30= new Decimal(0);
-player.        wscb31= new Decimal(0);
-player.        wscb32= new Decimal(0);
+        player.wscb24 = new Decimal(0);
+
 player.        wsca01= new Decimal(0);
 player.        wsca02= new Decimal(0);
 player.        wsca03= new Decimal(0);
@@ -2060,15 +2062,8 @@ player.        wsca20= new Decimal(0);
 player.        wsca21= new Decimal(0);
 player.        wsca22= new Decimal(0);
 player.        wsca23= new Decimal(0);
-player.        wsca24= new Decimal(0);
-player.        wsca25= new Decimal(0);
-player.        wsca26= new Decimal(0);
-player.        wsca27= new Decimal(0);
-player.        wsca28= new Decimal(0);
-player.        wsca29= new Decimal(0);
-player.        wsca30= new Decimal(0);
-player.        wsca31= new Decimal(0);
-player.        wsca32 = new Decimal(0);
+        player.wsca24 = new Decimal(0);
+
 player.        tier01 = new Decimal(0);
 player.        tier02= new Decimal(0);
 player.        tier03= new Decimal(0);
@@ -2086,18 +2081,6 @@ player.        PL1upg= [false, false, false, false,
                  false, false, false, false,
                  false, false, false, false,
                 false, false, false, false,];
-player.        PL1bab01= new Decimal(0);
-player.        PL1bab02= new Decimal(0);
-player.        PL1bab03= new Decimal(0);
-player.        PL1bab04= new Decimal(0);
-player.        PL1bab05= new Decimal(0);
-player.        PL1bab06= new Decimal(0);
-player.        PL1bab07= new Decimal(0);
-player.        PL1bab08= new Decimal(0);
-player.        PL1bab09= new Decimal(0);
-player.        PL1bab10= new Decimal(0);
-player.        PL1bab11= new Decimal(0);
-player.        PL1bab12= new Decimal(0);
 player.        hasunlockedanmorb = false;
 player.        anmpar= new Decimal(0);
 player.        anmorb= new Decimal(0);
@@ -2110,7 +2093,6 @@ player.        orbupg= [false, false, false, false,];
 player.        innormcha= 0;
 player.        normchamul= new Decimal(0);
 player.        normchapow= new Decimal(1);
-player.        normchacom= [false, false, false, false, false, false, false, false, false, false, false, false,];
 player.        incha= 0;
 player.        chacom01= new Decimal(0);
 player.        chacom02= new Decimal(0);
@@ -2121,11 +2103,11 @@ player.        chacom06= new Decimal(0);
 player.        chacom07= new Decimal(0);
 player.        chacom08= new Decimal(0);
 
-player.        PL2energy= new Decimal(1);
-player.        PL2pts= new Decimal(0);
-player.        PL2ptsttl= new Decimal(0);
-player.        PL2tms= new Decimal(0);
-player.        PL2sec= new Decimal(0);
+        player.PL2energy = new Decimal(1);
+        player.PL2pts = new Decimal(0);
+        player.PL2ptsttl = new Decimal(0);
+        player.PL2tms = new Decimal(2).pow(player.PL3tms).min(player.PL3tms.mul(4));
+        player.PL2sec = new Decimal(0);
         player.PL2tmsc = new Decimal(0);
         if (player.resa06.eq(0)) {
             player.PL2upg01 = new Decimal(0);
@@ -2254,10 +2236,7 @@ function getres() {
 function produce() {
     player.energy = player.energy.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
     player.energyttl = player.energyttl.add(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(new Decimal(0.0125)));
-    if (player.energy.gte("e3.485689212103262e76")) {
-        player.energy = new Decimal("e3.485689212103262e76");
-        player.energyttl = new Decimal("e3.485689212103262e76");
-    }
+
     for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
         let prev = tiername[tier - 1];
@@ -2398,18 +2377,22 @@ function notation(amount) {
     let mantissa2 = power.div(Decimal.pow(10, power2));
     let power3 = Decimal.floor(Decimal.log10(power2));
     let mantissa3 = power2.div(Decimal.pow(10, power3));
+    let layer = Decimal.floor(amount.slog());
+    let magnitude = new Decimal(10).pow(amount.slog().sub(layer));
     if (amount == 0) return "0";
     if (power < -3) return mantissa.mul(10).toFixed(3) + "e" + power;
-    if (power < -2) return amount.toFixed(6);
-    if (power < -1) return amount.toFixed(5);
-    if (power < 0) return amount.toFixed(4);
+    if (power < -2) return amount.toFixed(7);
+    if (power < -1) return amount.toFixed(6);
+    if (power < 0) return amount.toFixed(5);
     if (power < 1) return amount.toFixed(3);
     if (power < 2) return amount.toFixed(2);
     if (power < 3) return amount.toFixed(1);
     if (power < 6) return amount.toFixed(0);
     if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
+    if (power2 < 1000) return mantissa.toFixed(3) + "e" + mantissa2.toFixed(3) + "e" + power2;
     if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
-    if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
+    if (power3 < 10) return "e" + mantissa2.toFixed(3) + "e" + mantissa3.toFixed(3) + "e" + power3;
+    if (layer < 1000000) return magnitude.toFixed(3) + "f" + layer;
     return "END";
 }
 
@@ -2425,11 +2408,15 @@ function notatint(amount) {
     let mantissa2 = power.div(Decimal.pow(10, power2));
     let power3 = Decimal.floor(Decimal.log10(power2));
     let mantissa3 = power2.div(Decimal.pow(10, power3));
+    let layer = Decimal.floor(amount.slog());
+    let magnitude = new Decimal(10).pow(amount.slog().sub(layer));
     if (amount == 0) return "0";
     if (power < 6) return amount.toFixed(0);
     if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
+    if (power2 < 1000) return mantissa.toFixed(3) + "e" + mantissa2.toFixed(3) + "e" + power2;
     if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
-    if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
+    if (power3 < 10) return "e" + mantissa2.toFixed(3) + "e" + mantissa3.toFixed(3) + "e" + power3;
+    if (layer < 1000000) return magnitude.toFixed(3) + "f" + layer;
     return "END";
 }
 
@@ -2512,10 +2499,10 @@ function updateGUI() {
     if (player.autobuytier04 == true) document.getElementById("byattier04").innerHTML = "自动：开";
     else document.getElementById("byattier04").innerHTML = "自动：关";
 
-    document.getElementById("upgd01").innerHTML = player.upgd01.toFixed(0);
-    document.getElementById("upgd02").innerHTML = player.upgd02.toFixed(0);
-    document.getElementById("upgd03").innerHTML = player.upgd03.toFixed(0);
-    document.getElementById("upgd04").innerHTML = player.upgd04.toFixed(0);
+    document.getElementById("upgd01").innerHTML = notatint(player.upgd01);
+    document.getElementById("upgd02").innerHTML = notatint(player.upgd02);
+    document.getElementById("upgd03").innerHTML = notatint(player.upgd03);
+    document.getElementById("upgd04").innerHTML = notatint(player.upgd04);
     document.getElementById("upgc01").innerHTML = "花费：" + notation(variab.upgc01) + "能量";
     document.getElementById("upgc02").innerHTML = "花费：" + notation(variab.upgc02) + "能量";
     document.getElementById("upgc03").innerHTML = "花费：" + notation(variab.upgc03) + "能量";
@@ -2706,7 +2693,7 @@ function updateGUI() {
         document.getElementById("alcc" + name).innerHTML = notation(variab["alcuc" + name]);
     }
 
-    if (player.inzyts == true) document.getElementById("anm2st").innerHTML = "（你当前在增压坍缩中）";
+    if (player.inzyts == true) document.getElementById("anm2st").innerHTML = "（你当前在风压坍陷中）";
     else document.getElementById("anm2st").innerHTML = "";
     document.getElementById("anm2am").innerHTML = notation(player.anm2);
     document.getElementById("anm2ps").innerHTML = notation(variab.anm2ps);

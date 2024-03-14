@@ -1,16 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.25, maximum-scale=4.0, user-scalable=yes" />
+        <meta charset="utf-8" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=0.25, maximum-scale=4.0, user-scalable=yes" />
         <title>风灵作成</title>
         <link href="style.css" rel="stylesheet" type="text/css" />
         <link href="icon.png" rel="shortcut icon" type="image/x-icon" />
     </head>
-    <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace ">
+    <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace">
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
         <button class="PL1button" onclick="PL1reset()" id="PL1button">扩散重置：获得<span id="PL1ptspd"></span><span id="PL1ptsnx"></span></button>
         <button class="PL2button" onclick="PL2reset()" id="PL2button">扪敤重置：获得<span id="PL2ptspd"></span><span id="PL2ptsnx"></span></button>
         <button class="PL3button" onclick="PL3reset()" id="PL3button">扫敥重置：获得<span id="PL3ptspd"></span><span id="PL3ptsnx"></span></button>
+        <button class="PL4button" onclick="PL4reset()" id="PL4button" style="display: none">扬敦重置：获得<span id="PL4ptspd"></span><span id="PL4ptsnx"></span></button>
+        <button class="PL5button" onclick="PL5reset()" id="PL5button" style="display: none">扭敧重置：获得<span id="PL5ptspd"></span><span id="PL5ptsnx"></span></button>
+        <button class="PL6button" onclick="PL6reset()" id="PL6button" style="display: none">扮敨重置：获得<span id="PL6ptspd"></span><span id="PL6ptsnx"></span></button>
+        <button class="PL7button" onclick="PL7reset()" id="PL7button" style="display: none">扯敩重置：获得<span id="PL7ptspd"></span><span id="PL7ptsnx"></span></button>
+        <button class="PLomegabutton" onclick="PLomegareset()" id="PLomegabutton" style="display: none">如果将e5.409e307能量给风神之奇物，将会发生一些事情</button>
         <br />
         <p align="center" class="ftsz2">
             <span id="chalstat">你当前不在任何挑战中</span>
@@ -78,19 +83,19 @@
             <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">挑战</button>
         </div>
         <div class="btnrow" id="row3" style="display: none">
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">里程碑</button>
+            <button align="center" class="slbutton" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">里程碑</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_2" onclick="changePg('p3_2')">元素</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_3" onclick="changePg('p3_3')">研究</button>
             <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_4" onclick="changePg('p3_4')">炼金</button>
-            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_5" onclick="changePg('p3_5')">增压坍缩</button>
+            <button align="center" class="button" style="background-color: #ffff00; color: #000000;" id="btp3_5" onclick="changePg('p3_5')">风压坍陷</button>
         </div>
         <div class="btnrow" id="row4" style="display: none">
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_1" onclick="changePg('p4_1')">进度研究</button>
+            <button align="center" class="slbutton" style="background-color: #00ff00; color: #000000;" id="btp4_1" onclick="changePg('p4_1')">进度研究</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_2" onclick="changePg('p4_2')">药剂</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_3" onclick="changePg('p4_3')">种甜甜花</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_4" onclick="changePg('p4_4')">热力学</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">投射</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">触媒置换</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">触媒</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">置换术</button>
         </div>
         <div class="btnrow" id="row5" style="display: none">
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">扬敦升级</button>
@@ -870,9 +875,9 @@
                         <td><button class="alc" id="alcv01" onclick="buyalcu(7)">自动获得风四倍系统，它不再重置任何东西<br />花费：48炼金生命3</button></td>
                         <td><button class="alc" id="alcv02" onclick="buyalcu(8)">每秒自动获得扩散次数<br />花费：64炼金生命4</button></td>
                         <td><button class="alc" id="alcv03" onclick="buyalcu(9)">分配的元素乘数基于分配的元素总数量<br />花费：96炼金生命1</button></td>
-                        <td><button class="alc" id="alcv05" onclick="buyalcu(10)">再次使扩散能量转换指数增加1<br />花费：128炼金生命2</button></td>
-                        <td><button class="alc" id="alcv06" onclick="buyalcu(11)">再次使扪敤能量转换指数增加1<br />花费：192炼金生命3</button></td>
-                        <td><button class="alc" id="alcv04" onclick="buyalcu(12)">75式风模块的效果变为原来的4倍<br />花费：256炼金生命4</button></td>
+                        <td><button class="alc" id="alcv04" onclick="buyalcu(10)">再次使扩散能量转换指数增加1<br />花费：128炼金生命2</button></td>
+                        <td><button class="alc" id="alcv05" onclick="buyalcu(11)">再次使扪敤能量转换指数增加1<br />花费：192炼金生命3</button></td>
+                        <td><button class="alc" id="alcv06" onclick="buyalcu(12)">75式风模块的效果变为原来的4倍<br />花费：256炼金生命4</button></td>
                     </tr>
                 </table>
             </div>
@@ -880,7 +885,7 @@
         <div id="p3_5" style="display: none">
             <div id="ulanm2">
                 <div class="btnrow2">
-                    <button align="center" class="xxButton" onclick="ulAnm2()" style="background-color:#80ff00">解锁增压坍缩<br />花费：1e5000扪敤点</button>
+                    <button align="center" class="xxButton" onclick="ulAnm2()" style="background-color:#80ff00">解锁风压坍陷<br />花费：1e5000扪敤点</button>
                 </div>
             </div>
             <div id="anm2" style="display: block">
@@ -888,8 +893,8 @@
                     <tr>
                         <td>
                             <button class="zyts" id="jrzyts" align="center" onclick="entzyts()">
-                                <div align="center" class="ftsz4">点击进入/退出增压坍缩<br /><br /></div>
-                                <div align="center" class="ftsz2" style="color: #80ff00">进行扪敤重置，在增压坍缩中，所有风灵乘数基于能量降低<br /><span id="anm2st"></span></div>
+                                <div align="center" class="ftsz4">点击进入/退出风压坍陷<br /><br /></div>
+                                <div align="center" class="ftsz2" style="color: #80ff00">进行扪敤重置，在风压坍陷中，所有风灵乘数基于能量降低<br /><span id="anm2st"></span></div>
                             </button>
                         </td>
                     </tr>
@@ -897,7 +902,7 @@
 
                 <div class="btnrow">
                     <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">你有<span id="anm2am"></span>风之徯粓(+<span id="anm2ps"></span>/s)，它以log2x^<span id="anm2exp"></span>的效果使风之微粒获取^<span id="anm2effe"></span></div><br />
-                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">每秒风之徯粓基于在增压坍缩中获取的最大能量<br /></div>
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">每秒风之徯粓基于在风压坍陷中获取的最大能量<br /></div>
                 </div><br />
                 <table align="center">
                     <tr>
@@ -911,7 +916,7 @@
         </div>
         <div id="p4_1" style="display: none">
             <div align="center" class="ftsz2">进度研究需要时间进行研究，当前每秒研究速度为<span id="resped"></span></div>
-            <div align="center" class="ftsz2">你扫敥了<span id="PL3tms2"></span>次，它将扪敤次数乘以<span id="PL3tef1"></span>，研究速度乘以<span id="PL3tef2"></span></div>
+            <div align="center" class="ftsz2">你扫敥了<span id="PL3tms2"></span>次，保留扪敤次数并将它乘以<span id="PL3tef1"></span>，研究速度乘以<span id="PL3tef2"></span></div>
             <div class="probarcon">
                 <div class="probar" id="probar"></div>
             </div>
@@ -976,7 +981,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.0.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.0.1<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -986,6 +991,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v3.0.1 2024-3-14 修复一些bug<br />
                 v3.0.0 2024-3-7 添加扫敥重置和一些新内容<br />
                 v2.3.0 2024-2-22 添加进阶挑战5~8、炼金、增压坍缩<br />
                 v2.2.2 2024-2-12 添加了一些软上限，添加新的研究<br />
@@ -1069,8 +1075,8 @@
                     <td class="achno" id="ach24">24<br />风灵增强<span class="tooltip-text">作成24式风灵至少一次</span></td>
                     <td class="achno" id="ach25">25<br />下一级重置的1/2进度<span class="tooltip-text">获得1.797e308扪敤点</span></td>
                     <td class="achno" id="ach26">26<br />新型蝴蝶效应<span class="tooltip-text">炼金升级1达到10级</span></td>
-                    <td class="achno" id="ach27">27<br />抟风秘道<span class="tooltip-text">解锁增压坍缩</span></td>
-                    <td class="achno" id="ach28">28<br />诡秘之风的虚无<span class="tooltip-text">在增压坍缩中获得e1e10能量</span></td>
+                    <td class="achno" id="ach27">27<br />抟风秘道<span class="tooltip-text">解锁风压坍陷</span></td>
+                    <td class="achno" id="ach28">28<br />诡秘之风的虚无<span class="tooltip-text">在风压坍陷中获得e1e10能量</span></td>
                     <td class="achno" id="ach29">29<br />虔诚之风的赐福<span class="tooltip-text">获得1e30风之徯粓</span></td>
                     <td class="achno" id="ach2a">2a<br />前面忘了，中间忘了<span class="tooltip-text">没有风单元获得1.8e308扩散点</span></td>
                     <td class="achno" id="ach2b">2b<br />后面也忘了<span class="tooltip-text">没有购买升级获得1e1233扩散点</span></td>
@@ -1082,6 +1088,7 @@
                 <tr>
                     <td class="achno" id="ach30">30<br />欢迎来到扫敥重置的领域<span class="tooltip-text">扫敥重置1次</span></td>
                     <td class="achno" id="ach31">31<br />增量进度条<span class="tooltip-text">第一个进度研究到达6级</span></td>
+
 
                 </tr>
             </table>
@@ -1163,11 +1170,11 @@
                 <div class="ftsz4" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; color: transparent; text-align: center; ">扰敪</div>
                 <div class="ftsz2" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; color: transparent; text-align: center; width: 1024px; margin: auto ">
                     风灵需要break_infinity极限的能量来扰敪宇宙的根本法则。
-                    在这一刻，风灵成为了宇宙的主宰，它的每一个翅膀的振动都牵动着整个宇宙的命脉。
+                    在这一刻，风灵成为了宇宙的主宰，每一次翅膀的振动都牵动着整个宇宙的命脉。
                     在决定进入第一次扰敪的那一刻，祂感受到了一股前所未有的能量涌动。这股能量如同狂暴的飓风，席卷了祂的整个灵魂，让祂仿佛置身于一个全新的宇宙之中。
-                    周围的一切都在迅速变化着，时间和空间似乎都在这一刻失去了意义。祂感觉到正在被一股无形的力量牵引着，这股力量强大而神秘，穿透了祂的身体，融入了祂的每一个细胞。
+                    周围的一切都在迅速变化着，时间和空间似乎都在这一刻失去了意义。祂感觉到正在被一股无形的力量牵引着，这股力量强大而神秘，穿透了祂的身体，融入了祂的每一个元素。
                     祂回首望去，看到了一路走来的足迹，每一个风灵、每一次扩散、扪敤、扫敥、扬敦、扭敧、扮敨、扯敩，都记录着祂的努力和成就。这些成果是祂辛苦炼金的证明，也是祂在这个仙境中的宝贵回忆。
-                    然而，祂也深知，这个仙境已经无法满足祂的渴望。祂的力量已经超越了这个世界的极限，祂需要一个更广阔的舞台来展现自己。而风灵作成的多元仙境，正是一个无穷无尽的世界，等待着祂去探索、去创造。
+                    然而，祂也深知，这个仙境已经无法满足祂的渴望。祂的力量已经超越了这个世界的极限，需要一个更广阔的舞台来展现自己。而风灵作成的多元仙境，正是一个无穷无尽的世界，等待着祂去探索、去创造。
                 </div>
             </div>
             <div id="comp9" style="display: none">
@@ -1176,7 +1183,7 @@
                     突然，一道耀眼的光芒从祂体内迸发出来，那是金色风灵的光芒，如同太阳般璀璨夺目，照亮了整个宇宙。祂感受到自己的力量在这道光芒的照耀下不断膨胀着，仿佛要冲破一切束缚和限制。
                     这一刻，祂终于明白了什么是真正的风灵之力，不仅仅是一种能量或者力量，更是一种宇宙的意识，一种连接万物、穿越时空的神秘存在。祂感受到了宇宙的脉动和节奏，让祂成为了宇宙的一部分。
                     随着金色风灵的形成，祂感觉到自己与宇宙之间的联系更加紧密了。祂可以感受到星辰的呼吸、感受到宇宙的律动，甚至可以感受到生命体的情感和意识。这种联系让祂更加深刻地理解了宇宙的本质和生命的意义。
-                    现在，祂已经准备好迎接新的挑战和机遇了。祂将带着金色风灵的力量去创造属于我自己的下一个仙境，去探索更加广阔和神秘的宇宙世界，最终到达2↑↑65536能量。祂相信，在风灵的指引下将不断超越自己，成为真正的炼金术士。
+                    现在，祂已经准备好迎接新的挑战和机遇了。祂将带着金色风灵的力量去创造属于自己的下一个仙境，去探索更加广阔和神秘的宇宙世界，最终到达2↑↑65536能量。祂相信，在风灵的指引下将不断超越自己，成为真正的炼金术士。
                 </div>
             </div>
             <br />
