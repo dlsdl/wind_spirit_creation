@@ -274,6 +274,7 @@ function hardReset() {
         hours: new Decimal(0),
         days: new Decimal(0),
         totalSeconds: new Decimal(0),
+        nowtime: 0,
     }
     player.energy = new Decimal(2);
 }
@@ -618,6 +619,28 @@ player = tempPlayer;
 player.ach.length = 64;
 
 player.ach = player.ach.map(item => item === null | item === undefined ? false : item);
+
+function get_offline_time() {
+    let nt = Date.now();
+    if (nt - player.nowtime > 0 && player.nowtime > 1000) {
+        if (nt - player.nowtime >= 1000000) {
+            nt = player.nowtime + 1000000;
+        }
+        document.getElementById("offline").style.display = "block";
+        document.getElementById("offlt").innerHTML = "您离线了" + ((nt - player.nowtime) / 1000) + "秒（最大1000秒）";
+        for (let i = 0; i < (nt - player.nowtime) / 100; i++) {
+            gui_mod = 0;
+            mainLoop();
+            produce();
+        }
+    }
+    gui_mod = 1;
+}
+get_offline_time();
+
+function closeModal() {
+    document.getElementById("offline").style.display = "none";
+}
 
 /*存档*/
 function save() {
@@ -2420,6 +2443,7 @@ function notatint(amount) {
     return "END";
 }
 
+var gui_mod = 1;
 function updateGUI() {
     document.getElementById("energy").innerHTML = notation(player.energy);
     document.getElementById("energyPs").innerHTML = notation(player.wsca01.mul(variab.wscm01).pow(variab.wscp01).mul(0.25));
@@ -2618,8 +2642,6 @@ function updateGUI() {
     document.getElementById("PL2Eng").innerHTML = notation(player.PL2energy);
     document.getElementById("PL2EngPow").innerHTML = notation(variab.PL2engpow);
     document.getElementById("PL2EngMul").innerHTML = notation(variab.PL2engmul);
-    document.getElementById("PL2EngPow2").innerHTML = notation(variab.PL2engpow2);
-    document.getElementById("PL2EngMul2").innerHTML = notation(variab.PL2engmul2);
     document.getElementById("PL2EngPs").innerHTML = notation(player.wsca17.mul(variab.wscm17).pow(variab.wscp17).mul(new Decimal(0.25)));
 
     document.getElementById("PL2tms2").innerHTML = "总计扪敤次数：" + notatint(player.PL2tms) + "次";
@@ -2716,10 +2738,6 @@ function updateGUI() {
     document.getElementById("PL3Eng").innerHTML = notation(player.PL3energy);
     document.getElementById("PL3EngPow").innerHTML = notation(variab.PL3engpow);
     document.getElementById("PL3EngMul").innerHTML = notation(variab.PL3engmul);
-    document.getElementById("PL3EngPow2").innerHTML = notation(variab.PL3engpow2);
-    document.getElementById("PL3EngMul2").innerHTML = notation(variab.PL3engmul2);
-    document.getElementById("PL3EngPow3").innerHTML = notation(variab.PL3engpow3);
-    document.getElementById("PL3EngMul3").innerHTML = notation(variab.PL3engmul3);
     document.getElementById("PL3EngPs").innerHTML = notation(player.wsca25.mul(variab.wscm25).pow(variab.wscp25).mul(new Decimal(0.25)));
 
     document.getElementById("PL3tms2").innerHTML = notatint(player.PL3tms);
@@ -2776,7 +2794,7 @@ function updateGUI() {
     document.getElementById("PL3tms").innerHTML = "您扫敥了" + notatint(player.PL3tms) + "次";
     document.getElementById("PL3sec").innerHTML = "上次扫敥到现在过了" + player.PL3sec.toFixed(0) + "秒";
     document.getElementById("PL3pts").innerHTML = "总计扫敥点：" + notatint(player.PL3ptsttl);
-
+    if (gui_mod == 1) player.nowtime = Date.now();
 }
 
 function styleDisplay() {
@@ -3150,7 +3168,7 @@ function comAch() {
     if (player.wscb01.eq(1) & player.energy.gte(1e308)) getAch(28);
     if (player.PL1bab04.eq(0) & player.PL1bab05.eq(0) & player.PL1bab06.eq(0) & variab.wscmpb.gte(100) & player.energy.gte(4)) getAch(29);
     if (player.incha == 1 & player.energy.gte("1e30720")) getAch(30);
-    if (player.energy.gte("1e200000") & player.orbupg == [0,0,0,0] ) getAch(31);
+    if (player.energy.gte("1e200000") & player.orbupg == [false, false, false, false] ) getAch(31);
 
     if (player.PL2tms.gt(0)) getAch(32);
     if (player.elmt01.gte(1) & player.elmt02.gte(1) & player.elmt03.gte(1) & player.elmt04.gte(1)) getAch(33);

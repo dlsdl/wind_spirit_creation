@@ -35,14 +35,11 @@
         </p>
         <p align="center" id="PL2info" style="margin: auto; font-size: 16px; color: #ffff00; width: 64%; display: none ">
             <span>你有</span><span id="PL2Pts">0</span><span>扪敤点,</span><span id="PL2Eng">1</span><span>扪敤能量(+</span><span id="PL2EngPs">0</span><span>/s),</span>
-            <span>它以</span><span id="PL2EngPow">1</span><span>的指数将9~16式风灵的效果乘以</span><span id="PL2EngMul">1</span><span>倍,</span>
-            <span>以</span><span id="PL2EngPow2">2</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL2EngMul2">1</span><span>倍。</span>
+            <span>它以</span><span id="PL2EngPow">1</span><span>的指数将1~16式风灵的效果乘以</span><span id="PL2EngMul">1</span><span>倍,</span>
         </p>
         <p align="center" id="PL3info" style="margin: auto; font-size: 16px; color: #00ff00; width: 64%; display: none ">
             <span>你有</span><span id="PL3Pts">0</span><span>扫敥点,</span><span id="PL3Eng">1</span><span>扫敥能量(+</span><span id="PL3EngPs">0</span><span>/s),</span>
-            <span>它以</span><span id="PL3EngPow">1</span><span>的指数将17~24式风灵的效果乘以</span><span id="PL3EngMul">1</span><span>倍,</span>
-            <span>以</span><span id="PL3EngPow2">2</span><span>的指数将9~16式风灵的效果乘以</span><span id="PL3EngMul2">1</span><span>倍,</span>
-            <span>以</span><span id="PL3EngPow3">4</span><span>的指数将1~8式风灵的效果乘以</span><span id="PL3EngMul3">1</span><span>倍。</span>
+            <span>它以</span><span id="PL3EngPow">1</span><span>的指数将1~24式风灵的效果乘以</span><span id="PL3EngMul">1</span><span>倍,</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #00ffff; display: none">
             <span>你有</span><span id="PL4pts">0</span><span>扬敦点</span>
@@ -79,8 +76,8 @@
         <div class="btnrow" id="row2" style="display: none">
             <button align="center" class="slbutton" style="background-color: #ff0000; color: #ffffff;" id="btp2_1" onclick="changePg('p2_1')">扩散升级</button>
             <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_2" onclick="changePg('p2_2')">购买项</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_3" onclick="changePg('p2_3')">风之晶球</button>
-            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">挑战</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_3" onclick="changePg('p2_3')">挑战</button>
+            <button align="center" class="button" style="background-color: #ff0000; color: #ffffff;" id="btp2_4" onclick="changePg('p2_4')">风之晶球</button>
         </div>
         <div class="btnrow" id="row3" style="display: none">
             <button align="center" class="slbutton" style="background-color: #ffff00; color: #000000;" id="btp3_1" onclick="changePg('p3_1')">里程碑</button>
@@ -526,40 +523,6 @@
             </div>
         </div>
         <div id="p2_3" style="display: none">
-            <div id="ulanmorb" style="display: none">
-                <div class="btnrow2">
-                    <button align="center" class="xxButton" onclick="ulAnmOrb()" style="background-color:#ff8000">解锁风之晶球<br />花费：1e60扩散点</button>
-                </div>
-            </div>
-            <div id="anmorb" style="display: none">
-                <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以log2x^<span id="anmparexp"></span>的效果使每次作成乘数<span id="anmpareffe"></span></div><br />
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">每次捌式风灵作成都会将风之微粒的获取乘以1.2，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
-                </div><br />
-                <table align="center">
-                    <tr>
-                        <td><button class="PL1bab" onclick="buyparupg(1)">双倍风之微粒获取<br />等级<span id="parupg01"></span><br />当前：×<span id="parupge01"></span><br />花费：<span id="parupgc01"></span>风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒提升9~16式风灵<br />等级<span id="parupg02"></span><br />当前：×<span id="parupge02"></span><br />花费：<span id="parupgc02"></span>风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.01875<br />等级<span id="parupg03"></span><br />当前：+<span id="parupge03"></span><br />花费：<span id="parupgc03"></span>风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />等级<span id="parupg04"></span><br />当前：+<span id="parupge04"></span><br />花费：<span id="parupgc04"></span>风之微粒</button></td>
-                    </tr>
-                </table>
-                <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你拥有<span id="anmorba"></span>风之晶球（总计<span id="anmorbttl"></span>）</div><br />
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">点击回退风之晶球升级，进行扩散重置并退还风之晶球</div>
-                    <button class="ltbutton" onclick="resetOrb()">回退</button>
-                </div><br />
-                <table align="center">
-                    <tr>
-                        <td><button id="orbupg01" class="PL1upgno" onclick="buyorbupg(1)">扩散能量→1~8式风灵协同增强×log2x^16<br />效果：×<span id="orbupge01"></span><br />花费：2风之晶球</button></td>
-                        <td><button id="orbupg02" class="PL1upgno" onclick="buyorbupg(2)">能量→1~8式风灵协同增强×log2x^16<br />效果：×<span id="orbupge02"></span><br />花费：4风之晶球</button></td>
-                        <td><button id="orbupg03" class="PL1upgno" onclick="buyorbupg(3)">扩散能量→9~16式风灵协同增强×log2x^4<br />效果：×<span id="orbupge03"></span><br />花费：6风之晶球</button></td>
-                        <td><button id="orbupg04" class="PL1upgno" onclick="buyorbupg(4)">能量→9~16式风灵协同增强×log2x^4<br />效果：×<span id="orbupge04"></span><br />花费：8风之晶球</button></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div id="p2_4" style="display: none">
             <div id="normchal" style="display: none">
                 <div class="btnrow">
                     <div align="center" class="ftsz2" style="display: inline-block;">点击挑战框以开始挑战，到达1.797e308能量完成普通挑战</div>
@@ -644,6 +607,40 @@
                                 目标：<span id="chal08goal"></span>能量<br />完成次数：<span id="chal08comp"></span>/<span id="chal08cap"></span><br />奖励：提高风之徯粓获取数量(×<span id="chal08effe"></span>)
                             </button>
                         </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="p2_4" style="display: none">
+            <div id="ulanmorb" style="display: none">
+                <div class="btnrow2">
+                    <button align="center" class="xxButton" onclick="ulAnmOrb()" style="background-color:#ff8000">解锁风之晶球<br />花费：1e60扩散点</button>
+                </div>
+            </div>
+            <div id="anmorb" style="display: none">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以log2x^<span id="anmparexp"></span>的效果使每次作成乘数<span id="anmpareffe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">每次捌式风灵作成都会将风之微粒的获取乘以1.2，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button class="PL1bab" onclick="buyparupg(1)">双倍风之微粒获取<br />等级<span id="parupg01"></span><br />当前：×<span id="parupge01"></span><br />花费：<span id="parupgc01"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒提升9~16式风灵<br />等级<span id="parupg02"></span><br />当前：×<span id="parupge02"></span><br />花费：<span id="parupgc02"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.01875<br />等级<span id="parupg03"></span><br />当前：+<span id="parupge03"></span><br />花费：<span id="parupgc03"></span>风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />等级<span id="parupg04"></span><br />当前：+<span id="parupge04"></span><br />花费：<span id="parupgc04"></span>风之微粒</button></td>
+                    </tr>
+                </table>
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你拥有<span id="anmorba"></span>风之晶球（总计<span id="anmorbttl"></span>）</div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">点击回退风之晶球升级，进行扩散重置并退还风之晶球</div>
+                    <button class="ltbutton" onclick="resetOrb()">回退</button>
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button id="orbupg01" class="PL1upgno" onclick="buyorbupg(1)">扩散能量→1~8式风灵协同增强×log2x^16<br />效果：×<span id="orbupge01"></span><br />花费：2风之晶球</button></td>
+                        <td><button id="orbupg02" class="PL1upgno" onclick="buyorbupg(2)">能量→1~8式风灵协同增强×log2x^16<br />效果：×<span id="orbupge02"></span><br />花费：4风之晶球</button></td>
+                        <td><button id="orbupg03" class="PL1upgno" onclick="buyorbupg(3)">扩散能量→9~16式风灵协同增强×log2x^4<br />效果：×<span id="orbupge03"></span><br />花费：6风之晶球</button></td>
+                        <td><button id="orbupg04" class="PL1upgno" onclick="buyorbupg(4)">能量→9~16式风灵协同增强×log2x^4<br />效果：×<span id="orbupge04"></span><br />花费：8风之晶球</button></td>
                     </tr>
                 </table>
             </div>
@@ -1263,6 +1260,12 @@
             <div class="noti" id="export">已导出存档</div>
             <div class="noti" id="import">已导入存档</div>
             <div class="noti" id="hardreset">已全部重置</div>
+        </div>
+        <div id="offline">
+            <div id="offlcont">
+                <span id="offlt">您离线了秒</span><br /><br />
+                <button class="ltbutton" onclick="closeModal()">确定</button>
+            </div>
         </div>
         <script type="text/javascript" src="break_eternity.js"></script>
         <script type="text/javascript" src="game.js"></script>
