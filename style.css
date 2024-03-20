@@ -748,6 +748,21 @@
     height: 20%;
 }
 
+#offlbtn {
+    background-color: #00ff80;
+    color: #000000;
+    width: 96px;
+    height: 24px;
+    padding: 2px;
+    margin: 5% auto;
+    border: hidden;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
 .news { /*滚动新闻*/
     color: #000000;
     width: 90%;

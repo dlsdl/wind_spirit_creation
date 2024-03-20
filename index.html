@@ -27,7 +27,7 @@
             <span>你的能量每秒增加</span><span id="energyPs"></span>
         </p>
         <p>
-            <div class="ftsz3" id="fixinf" style="display: none; text-align: center;">你需要扩散一次才能走得更远！</div>
+            <div class="ftsz3" id="fixinf" style="display: none; text-align: center;">点击“扩散重置”，对蒲公英籽释放风元素，将会发生一些事情</div>
         </p>
         <p align="center" id="PL1info" style="margin: auto; font-size: 16px; color: #ff0000; width: 64%; display: none">
             <span>你有</span><span id="PL1Pts">0</span><span>扩散点,</span><span id="PL1Eng">1</span><span>扩散能量(+</span><span id="PL1EngPs">0</span><span>/s),</span>
@@ -619,7 +619,7 @@
             </div>
             <div id="anmorb" style="display: none">
                 <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以log2x^<span id="anmparexp"></span>的效果使每次作成乘数<span id="anmpareffe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">你有<span id="anmpar"></span>风之微粒(+<span id="anmparps"></span>/s)，它以<span id="anmparexp"></span>的效果使每次作成乘数<span id="anmpareffe"></span></div><br />
                     <div align="center" class="ftsz2" style="display:inline-block; color:#ff8000">每次捌式风灵作成都会将风之微粒的获取乘以1.2，当前风之微粒软上限为<span id="anmparsc"></span>（每个风之晶球加倍）</div><br />
                 </div><br />
                 <table align="center">
@@ -743,7 +743,7 @@
                     <button class="xxButton" onclick="buythr03()" style="background-color: #ffff00">用扪敤点获得1烧瓶<br />花费扪敤点：<br /><span id="thrmc03"></span></button>
                 </div>
                 <table align="center">
-                    <tr><td><button class="stdno" id="std01" onclick="buystd(0)">风之晶球效果的乘数变成指数，但效果倍率降低为^0.25<br />需要：4烧瓶</button></td></tr>
+                    <tr><td><button class="stdno" id="std01" onclick="buystd(0)">风之晶球效果的乘数变成指数，但公式变为log2(log2(x))^指数<br />需要：4烧瓶</button></td></tr>
                 </table>
                 <table align="center">
                     <tr><td><button class="stdno" id="std02" onclick="buystd(1)">风灵基础值的指数增加0.05<br />需要：4烧瓶</button></td></tr>
@@ -898,7 +898,7 @@
                 </table>
 
                 <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">你有<span id="anm2am"></span>风之徯粓(+<span id="anm2ps"></span>/s)，它以log2x^<span id="anm2exp"></span>的效果使风之微粒获取^<span id="anm2effe"></span></div><br />
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">你有<span id="anm2am"></span>风之徯粓(+<span id="anm2ps"></span>/s)，它以log2(log2(x+1)+1)^<span id="anm2exp"></span>的效果使风之微粒获取^<span id="anm2effe"></span></div><br />
                     <div align="center" class="ftsz2" style="display: inline-block; color: #80ff00">每秒风之徯粓基于在风压坍陷中获取的最大能量<br /></div>
                 </div><br />
                 <table align="center">
@@ -958,11 +958,14 @@
 
         <div id="p0_1" style="display: none">
             <div class="ftsz2" align="center">
-                风单元确认：<input type="checkbox" id="tier01confirm"><br />
+                重置确认
+                风单元确认：<input type="checkbox" id="tier01confirm">
                 风模块确认：<input type="checkbox" id="tier02confirm"><br />
-                扩散时确认：<input type="checkbox" id="PL1confirm"><br />
-                扪敤时确认：<input type="checkbox" id="PL2confirm"><br />
+                扩散时确认：<input type="checkbox" id="PL1confirm">
+                扪敤时确认：<input type="checkbox" id="PL2confirm">
                 扫敥时确认：<input type="checkbox" id="PL3confirm"><br />
+                显示滚动新闻：<input type="checkbox" id="swnews">
+                启用快捷键：<input type="checkbox" id="swhotk">
             </div>
             <div class="btnrow2">
                 <button align="center" class="xxButton" onclick="save()">保存游戏</button>
@@ -978,7 +981,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.0.1<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.0.2<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -988,6 +991,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v3.0.2 2024-3-20 添加离线时间，添加滚动新闻和快捷键开关，修改了一些数值<br />
                 v3.0.1 2024-3-14 修复一些bug<br />
                 v3.0.0 2024-3-7 添加扫敥重置和一些新内容<br />
                 v2.3.0 2024-2-22 添加进阶挑战5~8、炼金、风压坍陷<br />
@@ -1262,9 +1266,9 @@
             <div class="noti" id="hardreset">已全部重置</div>
         </div>
         <div id="offline">
-            <div id="offlcont">
-                <span id="offlt">您离线了秒</span><br /><br />
-                <button class="ltbutton" onclick="closeModal()">确定</button>
+            <div id="offlcont" onclick="closeModal()">
+                <div id="offlt" style="text-align: center; margin: 5% auto">您离线了秒</div>
+                <div class="btnrow"><button id="offlbtn" onclick="closeModal()">确定</button></div>
             </div>
         </div>
         <script type="text/javascript" src="break_eternity.js"></script>
