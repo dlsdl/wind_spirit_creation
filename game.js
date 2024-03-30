@@ -2498,14 +2498,14 @@ function gettth() {
 }
 
 function ulatplt() {
-    if (player.tthseed.gte(1000)) {
+    if (player.tthseed.gte(1000) & player.tthatunl[0] != true) {
         player.tthatunl[0] = true;
         player.tthseed = player.tthseed.sub(1000);
     }
 }
 
 function ulathar() {
-    if (player.tthseed.gte(1000000)) {
+    if (player.tthseed.gte(1000000) & player.tthatunl[1] != true) {
         player.tthatunl[1] = true;
         player.tthseed = player.tthseed.sub(1000000);
     }
