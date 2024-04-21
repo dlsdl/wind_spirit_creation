@@ -1067,9 +1067,9 @@ function getWscPow() {
         powe01to08 = powe01to08.add(player.alcu03.mul(0.01));
         powe09to16 = powe09to16.add(player.alcu04.mul(0.01));
         powe17to24 = powe17to24.add(player.alcu05.mul(0.01));
-        powe01to08 = powe01to08.add(player.anm2u04.pow(0.5).mul(0.01));
-        powe09to16 = powe09to16.add(player.anm2u04.pow(0.5).mul(0.01));
-        powe17to24 = powe17to24.add(player.anm2u04.pow(0.5).mul(0.01));
+        powe01to08 = powe01to08.add(player.anm2u04.pow(0.75).mul(0.01));
+        powe09to16 = powe09to16.add(player.anm2u04.pow(0.75).mul(0.01));
+        powe17to24 = powe17to24.add(player.anm2u04.pow(0.75).mul(0.01));
         if (player.resa03.gte(1)) {
             powe01to08 = powe01to08.mul(new Decimal(1.010889286).pow(player.resa03.pow(0.5)));
             powe09to16 = powe09to16.mul(new Decimal(1.010889286).pow(player.resa03.pow(0.5)));
@@ -2467,17 +2467,17 @@ function buyptnupg2() {
 
 function gettth() {
     variab.tthgspd = new Decimal(1.5).pow(player.tthu01);
-    variab.tthgreq = new Decimal(5).pow(player.tthsize).div(new Decimal(1.01).pow(player.tthu03)).mul(2);
+    variab.tthgreq = new Decimal(5).pow(player.tthsize).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize))).mul(2);
     variab.tthimpc = new Decimal(5).add(player.tthimpr);
-    variab.tthseedpd = new Decimal(1.5).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04)).max(1);
+    variab.tthseedpd = new Decimal(1.5).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04.mul(player.tthsize))).max(1);
     variab.tthgenepd = new Decimal(5).pow(player.tthsize);
     variab.tthsucrpd = new Decimal(5).pow(player.tthsize);
     variab.tthuc01 = new Decimal(3).pow(player.tthu01.add(1));
     variab.tthuc02 = new Decimal(3).pow(player.tthu02.add(1));
     variab.tthuc03 = new Decimal(3).pow(player.tthu03.add(1));
     variab.tthuc04 = new Decimal(3).pow(player.tthu04.add(1));
-    variab.tthue01 = new Decimal(1.5).pow(player.tthu01);
-    variab.tthue02 = new Decimal(1.5).pow(player.tthu02);
+    variab.tthue01 = new Decimal(2).pow(player.tthu01);
+    variab.tthue02 = new Decimal(2).pow(player.tthu02);
     variab.tthue03 = new Decimal(1.01).pow(player.tthu03);
     variab.tthue04 = new Decimal(1.01).pow(player.tthu04);
     variab.tthmul = player.tthseed.pow(256).max(1);
@@ -3098,7 +3098,7 @@ function updateGUI() {
     document.getElementById("anm2upge01").innerHTML = notation(new Decimal(2).pow(player.anm2u01));
     document.getElementById("anm2upge02").innerHTML = notation(player.anm2.pow(player.anm2u02.mul(4)).max(1));
     document.getElementById("anm2upge03").innerHTML = notation(player.anm2u03.div(64));
-    document.getElementById("anm2upge04").innerHTML = notation(player.anm2u04.pow(0.5).mul(0.01));
+    document.getElementById("anm2upge04").innerHTML = notation(player.anm2u04.pow(0.75).mul(0.01));
     document.getElementById("anm2upgc01").innerHTML = notation(variab.anm2c01);
     document.getElementById("anm2upgc02").innerHTML = notation(variab.anm2c02);
     document.getElementById("anm2upgc03").innerHTML = notation(variab.anm2c03);
