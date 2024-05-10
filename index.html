@@ -1202,7 +1202,7 @@
             <div align="center" class="ftsz2">研究进度：<span id="respro"></span></div>
             <table align="center">
                 <tr>
-                    <td><button class="resno" id="res01" onclick="research(1)">使25~32式风灵乘数乘以能量¶0.25^等级^0.5<br />进度：<span id="resp01"></span>/<span id="resr01"></span><br />次数：<span id="resa01"></span><br />当前：×<span id="rese01"></span></button></td>
+                    <td><button class="resno" id="res01" onclick="research(1)">使25~32式风灵乘数乘以能量¶0.25^等级^0.25<br />进度：<span id="resp01"></span>/<span id="resr01"></span><br />次数：<span id="resa01"></span><br />当前：×<span id="rese01"></span></button></td>
                     <td><button class="resno" id="res02" onclick="research(2)">使元素的每次分配乘数乘以1.011<br />进度：<span id="resp02"></span>/<span id="resr02"></span><br />次数：<span id="resa02"></span><br />当前：×<span id="rese02"></span></button></td>
                     <td><button class="resno" id="res03" onclick="research(3)">使1~32式风灵的指数乘以1.011^等级^0.5<br />进度：<span id="resp03"></span>/<span id="resr03"></span><br />次数：<span id="resa03"></span><br />当前：×<span id="rese03"></span></button></td>
                     <td><button class="resno" id="res04" onclick="research(4)">使额外的风灵升级数量增加(10×等级^0.5)%<br />进度：<span id="resp04"></span>/<span id="resr04"></span><br />次数：<span id="resa04"></span><br />当前：+<span id="rese04">%</span></button></td>
@@ -1229,7 +1229,7 @@
                     <td><button class="PL3upgno" id="ptn01" onclick="ptnchs(0)">1~8式风灵乘数×<span id="ptnm01"></span></button></td>
                     <td><button class="PL3upgno" id="ptn02" onclick="ptnchs(1)">9~16式风灵乘数×<span id="ptnm02"></span></button></td>
                     <td><button class="PL3upgno" id="ptn03" onclick="ptnchs(2)">17~24式风灵乘数×<span id="ptnm03"></span></button></td>
-                    <td><button class="PL3upgno" id="ptn04" onclick="ptnchs(3)"><span id="ptnunl1">未解锁</span><span id="ptnm04" style="display: none"></span></button></td>
+                    <td><button class="PL3upgno" id="ptn04" onclick="ptnchs(3)"><span id="ptnul1">未解锁</span>25~32式风灵乘数×<span id="ptnm04" style="display: none"></span></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL3upgno" id="ptn05" onclick="ptnchs(4)">研究速度×<span id="ptnm05"></span></button></td>
@@ -1300,43 +1300,61 @@
                     </tr>
                 </table>
                 <div align="center" class="ftsz2">到达8倍大甜甜花，可以进行声望，重置甜甜花及其升级，获得甜甜花香味特化版</div>
-                <div class="btnrow2" style="display: none">
-                    <div><button class="tthupg" onclick="tthpre()">声望获得<span id="tthprepd">0</span>甜甜花香味特化版</button></div>
+                <div class="btnrow2">
+                    <div><button class="tthupg" onclick="tthpre()" align="center">声望获得<span id="tthprespd"></span>特殊甜甜花，+<span id="tthprempd"></span>声望速度倍率</button></div>
                 </div>
-                <br />
-                <table align="center" style="display: none">
+                <div align="center" class="ftsz2">你有<span id="tthpres">0</span>特殊甜甜花，你有<span id="tthprem">1</span>声望速度倍率</div>
+                <table align="center">
                     <tr>
-                        <td><button class="tthupg2" onclick="buytthpu(1)">贰伍式风灵可以生产贰肆式风灵</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(2)">每秒自动获得100%判定中的扪敤点，直到扪敤点等于判定中的扪敤点为止</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(3)">解锁药剂第一行的最后一个效果</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(4)">解锁“吸引子”选项卡</button></td>
+                        <td><button id="tthu01" class="tthupg2" onclick="buytthpu(1)">贰伍式风灵可以生产贰肆式风灵<br />花费：1特殊甜甜花</button></td>
+                        <td><button id="tthu02" class="tthupg2" onclick="buytthpu(2)">每秒自动获得100%判定中的扪敤点，直到扪敤点等于判定中的扪敤点为止<br />花费：4特殊甜甜花</button></td>
+                        <td><button id="tthu03" class="tthupg2" onclick="buytthpu(3)">解锁药剂第一行的最后一个效果（基于扫敥时间增加25~32式风灵乘数）<br />花费：64特殊甜甜花</button></td>
+                        <td><button id="tthu04" class="tthupg2" onclick="buytthpu(4)">解锁“吸引子”选项卡<br />花费：4096特殊甜甜花</button></td>
                     </tr>
                     <tr>
-                        <td><button class="tthupg2" onclick="buytthpu(5)">每秒自动获得10%种子</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(6)">每秒自动获得10%基因</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(7)">每秒自动获得10%糖分</button></td>
-                        <td><button class="tthupg2" onclick="buytthpu(8)">自动甜甜花升级且升级不消耗资源</button></td>
+                        <td><button class="tthupg2" onclick="buytthpu2(1)">每秒自动获得(等级²)%种子(<span id="tthpu1"></span>/10)<br />花费：<span id="tthpuc1"></span>特殊甜甜花</button></td>
+                        <td><button class="tthupg2" onclick="buytthpu2(2)">每秒自动获得(等级²)%基因(<span id="tthpu2"></span>/10)<br />花费：<span id="tthpuc2"></span>特殊甜甜花</button></td>
+                        <td><button class="tthupg2" onclick="buytthpu2(3)">每秒自动获得(等级²)%糖分(<span id="tthpu3"></span>/10)<br />花费：<span id="tthpuc3"></span>特殊甜甜花</button></td>
+                        <td><button class="tthupg2" onclick="buytthpu2(4)">8n+1生产8n式风灵的指数乘以对应能量效果指数的0.1次方(<span id="tthpu4"></span>/10)<br />花费：<span id="tthpuc4"></span>特殊甜甜花</button></td>
                     </tr>
                 </table>
             </div>
         </div>
         <div id="p4_4" style="display: none">
-            <span class="ftsz3">5小时后更新</span>
-            <div id="xyz" style="display: none">
+            <div id="xyz">
+                <div align="center" class="ftsz3">你的slog(x吸引子)等于<span id="slogxyz"></span>，<br />额外风灵升级数量增加<span id="xyze1"></span>%，25~32风灵指数额外增加<span id="xyze2"></span></div>
+                <div align="center" id="xxyz" class="ftsz2">你有 <span id="xyzx"></span> x吸引子</div>
+                <div align="center" id="yxyz" class="ftsz2" style="display: none">你有 <span id="xyzy"></span> y吸引子</div>
+                <div align="center" id="zxyz" class="ftsz2" style="display: none">你有 <span id="xyzz"></span> z吸引子</div>
+                <div align="center" id="txyz" class="ftsz2" style="display: none">你有 <span id="xyzt"></span> t吸引子</div>
                 <table align="center">
                     <tr>
-                        <td><button class="PL3upgno" id="ptn01" onclick="">你有0 x吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn02" onclick="">你有0 y吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn03" onclick="">你有0 z吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn04" onclick="">你有0 t吸引子<span id=""></span></button></td>
-                    </tr>
-                    <tr>
-                        <td><button class="PL3upgno" id="ptn01" onclick="">x吸引子与y吸引子的乘积产生z吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn02" onclick="">x吸引子与y吸引子的乘积产生z吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn03" onclick="">x吸引子与y吸引子的乘积产生z吸引子<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="ptn04" onclick="">x吸引子与y吸引子的乘积产生z吸引子<span id=""></span></button></td>
+                        <td><button class="PL3upgno" id="xyzu01" onclick="buyxyzu(1)">其他吸引子的乘积产生x吸引子<br />需要：0x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu02" onclick="buyxyzu(2)">其他吸引子的乘积产生y吸引子<br />需要：100x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu03" onclick="buyxyzu(3)">其他吸引子的乘积产生z吸引子<br />需要：e100x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu04" onclick="buyxyzu(4)">其他吸引子的乘积产生t吸引子<br />需要：ee1000x吸引子</button></td>
                     </tr>
                 </table>
+                <table align="center">
+                    <tr>
+                        <td><button class="tthupg" id="xyzsw" onclick="xyzsw()">重置吸引子数量，解锁新的吸引子，需要：<span id="xyzswr"></span></button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="ddm" style="display: none">
+                <div align="center">你有 0 e迭代幂</div>
+                <div align="center">你有 0 f迭代幂</div>
+                <div align="center">你有 0 g迭代幂</div>
+                <div align="center">你有 0 h迭代幂</div>
+                <table align="center">
+                    <tr>
+                        <td><button class="PL3upgno" id="xyzu01" onclick="">购买e迭代幂（价格不增长）花费e迭代幂<span id=""></span></button></td>
+                        <td><button class="PL3upgno" id="xyzu02" onclick="">购买f迭代幂（价格不增长）花费f迭代幂<span id=""></span></button></td>
+                        <td><button class="PL3upgno" id="xyzu03" onclick="">购买g迭代幂（价格不增长）花费g迭代幂<span id=""></span></button></td>
+                        <td><button class="PL3upgno" id="xyzu04" onclick="">购买h迭代幂（价格不增长）花费h迭代幂<span id=""></span></button></td>
+                    </tr>
+                </table>
+
             </div>
         </div>
         <div id="p4_5" style="display: none">
@@ -1378,7 +1396,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.1.2<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.2.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -1388,6 +1406,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v3.2.0 2024-5-10 添加甜甜花声望、声望升级、吸引子<br />
                 v3.1.2 2024-5-5 一些游戏体验上的改动<br />
                 v3.1.1 2024-4-21 修改了一些数值<br />
                 v3.1.0 2024-3-30 添加药剂、种甜甜花、部分进度研究以及其他内容<br />
