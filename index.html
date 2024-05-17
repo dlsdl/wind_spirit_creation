@@ -24,7 +24,7 @@
             <span>你有</span><span class="ftsz4" id="energy"></span><span>能量</span>
         </p>
         <p align="center" class="ftsz2">
-            <span>你的能量每秒增加</span><span id="energyPs"></span><span id="softcap" style="display: none;">(能量产量超过e9.002e15时受软上限限制，变为1次方根)</span>
+            <span>你的能量每秒增加</span><span id="energyPs"></span><span id="softcap" style="display: none;">(超过e9.002e15时受软上限限制，变为1次方根)</span>
         </p>
         <p>
             <div class="ftsz3" id="fixinf" style="display: none; text-align: center;">点击“扩散重置”，对蒲公英籽释放风元素，将会发生一些事情</div>
@@ -91,12 +91,12 @@
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_2" onclick="changePg('p4_2')">药剂</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_3" onclick="changePg('p4_3')">种甜甜花</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_4" onclick="changePg('p4_4')">吸引子</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">触媒</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">置换术</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_5" onclick="changePg('p4_5')">催化剂</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">转化</button>
         </div>
         <div class="btnrow" id="row5" style="display: none">
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">扬敦升级</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">里程碑2</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">目标</button>
+            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">扬敦碎片</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_3" onclick="changePg('p5_3')">惊奇风盒</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_4" onclick="changePg('p5_4')">四阶之风</button>
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_5" onclick="changePg('p5_5')">五阶之风</button>
@@ -1330,7 +1330,7 @@
                 <table align="center">
                     <tr>
                         <td><button class="PL3upgno" id="xyzu01" onclick="buyxyzu(1)">其他吸引子的乘积产生x吸引子<br />需要：0x吸引子</button></td>
-                        <td><button class="PL3upgno" id="xyzu02" onclick="buyxyzu(2)">其他吸引子的乘积产生y吸引子<br />需要：100x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu02" onclick="buyxyzu(2)">其他吸引子的乘积产生y吸引子<br />需要：10x吸引子</button></td>
                         <td><button class="PL3upgno" id="xyzu03" onclick="buyxyzu(3)">其他吸引子的乘积产生z吸引子<br />需要：e100x吸引子</button></td>
                         <td><button class="PL3upgno" id="xyzu04" onclick="buyxyzu(4)">其他吸引子的乘积产生t吸引子<br />需要：ee1000x吸引子</button></td>
                     </tr>
@@ -1341,20 +1341,19 @@
                     </tr>
                 </table>
             </div>
-            <div id="ddm" style="display: none">
-                <div align="center">你有 0 e迭代幂</div>
-                <div align="center">你有 0 f迭代幂</div>
-                <div align="center">你有 0 g迭代幂</div>
-                <div align="center">你有 0 h迭代幂</div>
+            <div id="xyz2">
+                <div align="center" id="exyz" class="ftsz2">你有 <span id="xyze"></span> e吸引子</div>
+                <div align="center" id="fxyz" class="ftsz2" style="display: none">你有 <span id="xyzf"></span> f吸引子</div>
+                <div align="center" id="gxyz" class="ftsz2" style="display: none">你有 <span id="xyzg"></span> g吸引子</div>
+                <div align="center" id="hxyz" class="ftsz2" style="display: none">你有 <span id="xyzh"></span> h吸引子</div>
                 <table align="center">
                     <tr>
-                        <td><button class="PL3upgno" id="xyzu01" onclick="">购买e迭代幂（价格不增长）花费e迭代幂<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="xyzu02" onclick="">购买f迭代幂（价格不增长）花费f迭代幂<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="xyzu03" onclick="">购买g迭代幂（价格不增长）花费g迭代幂<span id=""></span></button></td>
-                        <td><button class="PL3upgno" id="xyzu04" onclick="">购买h迭代幂（价格不增长）花费h迭代幂<span id=""></span></button></td>
+                        <td><button class="PL3upgno" id="xyzu05" onclick="buyxyze()">购买e生成器，每个花费1e吸引子（价格不增长），e吸引子增加xyzt吸引子迭代速度</button></td>
+                        <td><button class="PL3upgno" id="xyzu06" onclick="buyxyzf()">购买f生成器，每个花费1e吸引子（价格不增长），f吸引子增加e吸引子产量</button></td>
+                        <td><button class="PL3upgno" id="xyzu07" onclick="buyxyzg()">购买g生成器，每个花费1e吸引子（价格不增长），g吸引子增加f吸引子产量</button></td>
+                        <td><button class="PL3upgno" id="xyzu08" onclick="buyxyzh()">购买h生成器，每个花费1e吸引子（价格不增长），h吸引子增加g吸引子产量</button></td>
                     </tr>
                 </table>
-
             </div>
         </div>
         <div id="p4_5" style="display: none">
@@ -1363,7 +1362,7 @@
                     <button align="center" class="xxButton" onclick="ulAnm3()" style="background-color:#00ff80">解锁催化剂<br />花费：1e10000扫敥点</button>
                 </div>
             </div>
-            <div>
+            <div id="anm3" align="center" class="ftsz3">
                 5小时后更新
             </div>
         </div>
@@ -1396,7 +1395,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.2.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.2.1<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -1406,6 +1405,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v3.2.1 2024-5-17 增加一些新的吸引子，调整吸引子数值<br />
                 v3.2.0 2024-5-10 添加甜甜花声望、声望升级、吸引子<br />
                 v3.1.2 2024-5-5 一些游戏体验上的改动<br />
                 v3.1.1 2024-4-21 修改了一些数值<br />
@@ -1498,7 +1498,7 @@
                     <td class="achno" id="ach27">27<br />抟风秘道<span class="tooltip-text">解锁风压坍陷</span></td>
                     <td class="achno" id="ach28">28<br />诡秘之风的虚无<span class="tooltip-text">在风压坍陷中获得e1e10能量</span></td>
                     <td class="achno" id="ach29">29<br />虔诚之风的赐福<span class="tooltip-text">获得1e30风之徯粓</span></td>
-                    <td class="achno" id="ach2a">2a<br />前面忘了，中间忘了<span class="tooltip-text">没有风单元获得1.8e308扩散点</span></td>
+                    <td class="achno" id="ach2a">2a<br />前面忘了，中间忘了<span class="tooltip-text">没有风单元获得1.797e308扩散点</span></td>
                     <td class="achno" id="ach2b">2b<br />后面也忘了<span class="tooltip-text">没有购买升级获得1e1233扩散点</span></td>
                     <td class="achno" id="ach2c">2c<br />没有实验不值得过<span class="tooltip-text">在不购买研究时获得1e4932扩散点</span></td>
                     <td class="achno" id="ach2d">2d<br />元素周期表<span class="tooltip-text">转化为火、水、雷、冰的元素数量分别为2,8,18,32</span></td>
@@ -1512,6 +1512,10 @@
                     <td class="achno" id="ach33">33<br />比一个甜甜花更快<span class="tooltip-text">将你的甜甜花转化为种子</span></td>
                     <td class="achno" id="ach34">34<br />甜甜花生命：进化<span class="tooltip-text">拥有一个四倍大种子甜甜花</span></td>
                     <td class="achno" id="ach35">35<br />上面不是有个一样的吗<span class="tooltip-text">获得1.797e308扫敥点</span></td>
+                    <td class="achno" id="ach36">36<br />无相之风重制版<span class="tooltip-text">解锁8个吸引子</span></td>
+                    <td class="achno" id="ach37">37<br />催化反应进程<span class="tooltip-text">解锁催化剂</span></td>
+                    <td class="achno" id="ach38">38<br />分子碰撞增量<span class="tooltip-text">使一阶全局速度达到256</span></td>
+                    <td class="achno" id="ach39">39<br />庙算无遗策<span class="tooltip-text">升级3种转化升级</span></td>
 
                 </tr>
             </table>
@@ -1701,6 +1705,7 @@
             <div class="noti" id="notiach33">完成成就：比一个甜甜花更快</div>
             <div class="noti" id="notiach34">完成成就：甜甜花生命：进化</div>
             <div class="noti" id="notiach35">完成成就：上面不是有个一样的吗</div>
+            <div class="noti" id="notiach36">完成成就：无相之风重制版</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>

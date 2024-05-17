@@ -311,7 +311,16 @@ function hardReset() {
         xyzu: [false, false, false, false,],
         xyzsw: new Decimal(0),
         xyzbo: new Decimal(0),
+        xyze: new Decimal(0),
+        xyzf: new Decimal(0),
+        xyzg: new Decimal(0),
+        xyzh: new Decimal(0),
+        xyzegn: new Decimal(0),
+        xyzfgn: new Decimal(0),
+        xyzggn: new Decimal(0),
+        xyzhgn: new Decimal(0),
 
+        hasunlockedanm3: false,
 
         autobuywsc: [null,
             false, false, false, false, false, false, false, false,
@@ -710,6 +719,7 @@ v = {
     tthpuc3: new Decimal(512),
     tthpuc4: new Decimal(65536),
     cpper: new Decimal(0),
+
     xyze1: new Decimal(0),
     xyze2: new Decimal(0),
 
@@ -2717,18 +2727,51 @@ function getxyz(tier) {
 
 
 function buyxyzu(tier) {
-    let p = [0, 100, 1e100, "ee1000"]
+    let p = [0, 10, 1e100, "ee1000"]
     if (player.xyzx.gte(new Decimal(p[tier - 1]))) player.xyzu[tier - 1] = true;
 }
 
 function xyzsw(tier) {
-    if (player.xyzsw.eq(0) & player.xyzx.gte(100)) player.xyzsw = new Decimal(1);
+    if (player.xyzsw.eq(0) & player.xyzx.gte(10)) player.xyzsw = new Decimal(1);
     if (player.xyzsw.eq(1) & player.xyzx.gte(1e100)) player.xyzsw = new Decimal(2);
     if (player.xyzsw.eq(2) & player.xyzx.gte("ee1000")) player.xyzsw = new Decimal(3);
+    if (player.xyzsw.eq(3) & player.xyzx.gte("ee10000")) player.xyzsw = new Decimal(4);
+    if (player.xyzsw.eq(4) & player.xyzx.gte("eee30")) player.xyzsw = new Decimal(5);
+    if (player.xyzsw.eq(5) & player.xyzx.gte("eee1000")) player.xyzsw = new Decimal(6);
+    if (player.xyzsw.eq(6) & player.xyzx.gte("eee10000000000")) player.xyzsw = new Decimal(7);
     player.xyzx = new Decimal(0);
     player.xyzy = new Decimal(0);
     player.xyzz = new Decimal(0);
     player.xyzt = new Decimal(0);
+    player.xyze = new Decimal(1);
+    player.xyzf = new Decimal(1);
+    player.xyzg = new Decimal(1);
+    player.xyzh = new Decimal(1);
+    player.xyzegn = new Decimal(0);
+    player.xyzfgn = new Decimal(0);
+    player.xyzggn = new Decimal(0);
+    player.xyzhgn = new Decimal(0);
+    player.xyzu = [false, false, false, false,];
+}
+
+function buyxyze() {
+    player.xyzegn = player.xyzegn.add(player.xyze);
+}
+
+function buyxyzf() {
+    player.xyzfgn = player.xyzfgn.add(player.xyze);
+}
+
+function buyxyzg() {
+    player.xyzggn = player.xyzggn.add(player.xyze);
+}
+
+function buyxyzh() {
+    player.xyzhgn = player.xyzhgn.add(player.xyze);
+}
+
+function ulAnm3() {
+    if (player.PL3pts.gte("1e10000") & player.hasunlockedanm3 == false) player.hasunlockedanm3 = true;
 }
 
 function produce(spd = 1) {
@@ -2805,10 +2848,14 @@ function produce(spd = 1) {
     player.tthgene = player.tthgene.add(v.tthgenepd.mul(player.tthpu2.pow(2)).div(100).mul(speed).mul(4));
     player.tthsucr = player.tthsucr.add(v.tthsucrpd.mul(player.tthpu3.pow(2)).div(100).mul(speed).mul(4));
 
-    if (player.xyzu[0] == true) player.xyzx = player.xyzx.add(player.xyzy.max(1).mul(player.xyzz.max(1)).mul(player.xyzt.max(1)).mul(speed).mul(4));
-    if (player.xyzu[1] == true) player.xyzy = player.xyzy.add(player.xyzx.max(1).mul(player.xyzz.max(1)).mul(player.xyzt.max(1)).mul(speed).mul(4));
-    if (player.xyzu[2] == true) player.xyzz = player.xyzz.add(player.xyzx.max(1).mul(player.xyzy.max(1)).mul(player.xyzt.max(1)).mul(speed).mul(4));
-    if (player.xyzu[3] == true) player.xyzt = player.xyzt.add(player.xyzx.max(1).mul(player.xyzy.max(1)).mul(player.xyzz.max(1)).mul(speed).mul(4));
+    if (player.xyzu[0] == true) player.xyzx = player.xyzx.add(player.xyzy.max(1).mul(player.xyzz.max(1)).mul(player.xyzt.max(1)).mul(new Decimal(2).pow(new Decimal(2).pow(player.xyze)).max(1)).mul(speed).mul(4));
+    if (player.xyzu[1] == true) player.xyzy = player.xyzy.add(player.xyzx.max(1).mul(player.xyzz.max(1)).mul(player.xyzt.max(1)).mul(new Decimal(2).pow(new Decimal(2).pow(player.xyze)).max(1)).mul(speed).mul(4));
+    if (player.xyzu[2] == true) player.xyzz = player.xyzz.add(player.xyzx.max(1).mul(player.xyzy.max(1)).mul(player.xyzt.max(1)).mul(new Decimal(2).pow(new Decimal(2).pow(player.xyze)).max(1)).mul(speed).mul(4));
+    if (player.xyzu[3] == true) player.xyzt = player.xyzt.add(player.xyzx.max(1).mul(player.xyzy.max(1)).mul(player.xyzz.max(1)).mul(new Decimal(2).pow(new Decimal(2).pow(player.xyze)).max(1)).mul(speed).mul(4));
+    player.xyze = player.xyze.add(player.xyzegn.mul(player.xyzf.max(1)).mul(speed).mul(4));
+    player.xyzf = player.xyzf.add(player.xyzfgn.mul(player.xyzg.max(1)).mul(speed).mul(4));
+    player.xyzg = player.xyzg.add(player.xyzggn.mul(player.xyzh.max(1)).mul(speed).mul(4));
+    player.xyzh = player.xyzh.add(player.xyzhgn.mul(player.xyze.max(1)).mul(speed).mul(4));
 
     if (player.incha == 5) {
         player.PL1energy = new Decimal(1);
@@ -3352,8 +3399,14 @@ function updateGUI() {
     document.getElementById("xyzy").innerHTML = notation(player.xyzy);
     document.getElementById("xyzz").innerHTML = notation(player.xyzz);
     document.getElementById("xyzt").innerHTML = notation(player.xyzt);
+    document.getElementById("xyze").innerHTML = notation(player.xyze);
+    document.getElementById("xyzf").innerHTML = notation(player.xyzf);
+    document.getElementById("xyzg").innerHTML = notation(player.xyzg);
+    document.getElementById("xyzh").innerHTML = notation(player.xyzh);
+
+
     if (player.xyzsw.eq(0)) {
-        document.getElementById("xyzswr").innerHTML = "100x吸引子";
+        document.getElementById("xyzswr").innerHTML = "10x吸引子";
     }
     if (player.xyzsw.eq(1)) {
         document.getElementById("xyzswr").innerHTML = "e100x吸引子";
@@ -3362,6 +3415,18 @@ function updateGUI() {
         document.getElementById("xyzswr").innerHTML = "ee1000x吸引子";
     }
     if (player.xyzsw.eq(3)) {
+        document.getElementById("xyzswr").innerHTML = "ee10000x吸引子";
+    }
+    if (player.xyzsw.eq(4)) {
+        document.getElementById("xyzswr").innerHTML = "eee30x吸引子";
+    }
+    if (player.xyzsw.eq(5)) {
+        document.getElementById("xyzswr").innerHTML = "eee1000x吸引子";
+    }
+    if (player.xyzsw.eq(6)) {
+        document.getElementById("xyzswr").innerHTML = "1f5x吸引子";
+    }
+    if (player.xyzsw.eq(7)) {
         document.getElementById("xyzswr").innerHTML = "无限x吸引子";
     }
 
@@ -3836,8 +3901,49 @@ function styleDisplay() {
         document.getElementById("txyz").style.display = 'none';
         document.getElementById("xyzu04").style.display = 'none';
     }
+    if (player.xyzsw.gte(4)) {
+        document.getElementById("exyz").style.display = 'block';
+        document.getElementById("xyzu05").style.display = 'block';
+    }
+    else {
+        document.getElementById("exyz").style.display = 'none';
+        document.getElementById("xyzu05").style.display = 'none';
+    }
+    if (player.xyzsw.gte(5)) {
+        document.getElementById("fxyz").style.display = 'block';
+        document.getElementById("xyzu06").style.display = 'block';
+    }
+    else {
+        document.getElementById("fxyz").style.display = 'none';
+        document.getElementById("xyzu06").style.display = 'none';
+    }
+    if (player.xyzsw.gte(6)) {
+        document.getElementById("gxyz").style.display = 'block';
+        document.getElementById("xyzu07").style.display = 'block';
+    }
+    else {
+        document.getElementById("gxyz").style.display = 'none';
+        document.getElementById("xyzu07").style.display = 'none';
+    }
+    if (player.xyzsw.gte(7)) {
+        document.getElementById("hxyz").style.display = 'block';
+        document.getElementById("xyzu08").style.display = 'block';
+    }
+    else {
+        document.getElementById("hxyz").style.display = 'none';
+        document.getElementById("xyzu08").style.display = 'none';
+    }
 
-    for (let i = 0; i < 54; i++) {
+    if (player.hasunlockedanm3 == true) {
+        document.getElementById("anm3").style.display = 'block';
+        document.getElementById("ulanm3").style.display = 'none';
+    }
+    else {
+        document.getElementById("anm3").style.display = 'none';
+        document.getElementById("ulanm3").style.display = 'block';
+    }
+
+    for (let i = 0; i < 58; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
         else document.getElementById("ach" + hexdigit[i]).className = "achno";
     }
@@ -3927,6 +4033,9 @@ function comAch() {
     if (player.tthseed.gte(2)) getAch(51);
     if (player.tthsize.gte(4) & player.tthamnt.gte(1)) getAch(52);
     if (player.PL3pts.gte("1.797e308")) getAch(53);
+    if (player.xyzsw.gte(7)) getAch(54);
+
+
 }
 
 /*弹出提示*/
