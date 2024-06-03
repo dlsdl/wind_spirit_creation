@@ -2593,7 +2593,8 @@ function ptnchs(tier) {
 
 function buyptnupg(tier) {
     let name = tiername[tier];
-    if (player.PL3pts.gte(v["ptnuc" + name]) & player["ptnu" + name].lt(8)) {
+    let cap = [8, 16, 4, 4];
+    if (player.PL3pts.gte(v["ptnuc" + name]) & player["ptnu" + name].lt(new Decimal(cap[tier-1]))) {
         player["ptnu" + name] = player["ptnu" + name].add(1);
         player.PL3pts = player.PL3pts.sub(v["ptnuc" + name]);
     }
