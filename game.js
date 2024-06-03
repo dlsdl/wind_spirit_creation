@@ -3259,7 +3259,7 @@ function updateGUI() {
     document.getElementById("tier04rewa01").innerHTML = "1式风四倍系统：基于风四倍系统提升进阶挑战1~4上限（最多提升12）。当前：+" + notation(player.tier04.min(12));
     document.getElementById("tier04rewa02").innerHTML = "3式风四倍系统：使3式风系统也对17~24式风灵生效";
     document.getElementById("tier04rewa03").innerHTML = "10式风四倍系统：基于风四倍系统提升元素能量产量。当前：×" + notation(new Decimal(2).pow(player.tier04));
-    document.getElementById("tier04rewa04").innerHTML = "30式风四倍系统：进阶挑战1~4上限增加48次，进阶挑战5~8上限增加12次";
+    document.getElementById("tier04rewa04").innerHTML = "30式风四倍系统：基于风四倍系统提升一阶游戏速度";
 
     document.getElementById("tier01cost").innerHTML = "需要：" + notation(v.tierc01) + "风灵基础值";
     document.getElementById("tier02cost").innerHTML = "需要：" + notation(v.tierc02) + "式风单元";
