@@ -11,7 +11,7 @@
         <button class="PL1button" onclick="PL1reset()" id="PL1button">扩散重置：获得<span id="PL1ptspd"></span><span id="PL1ptsnx"></span></button>
         <button class="PL2button" onclick="PL2reset()" id="PL2button">扪敤重置：获得<span id="PL2ptspd"></span><span id="PL2ptsnx"></span></button>
         <button class="PL3button" onclick="PL3reset()" id="PL3button">扫敥重置：获得<span id="PL3ptspd"></span><span id="PL3ptsnx"></span></button>
-        <button class="PL4button" onclick="PL4reset()" id="PL4button" style="display: none">扬敦重置：获得<span id="PL4ptspd"></span><span id="PL4ptsnx"></span></button>
+        <button class="PL4button" onclick="PL4reset()" id="PL4button" style="display: none">扬敦重置：获得<span id="PL4ptspd"></span>扬敦点<span id="PL4ptsnx"></span>(5小时后更新)</button>
         <button class="PL5button" onclick="PL5reset()" id="PL5button" style="display: none">扭敧重置：获得<span id="PL5ptspd"></span><span id="PL5ptsnx"></span></button>
         <button class="PL6button" onclick="PL6reset()" id="PL6button" style="display: none">扮敨重置：获得<span id="PL6ptspd"></span><span id="PL6ptsnx"></span></button>
         <button class="PL7button" onclick="PL7reset()" id="PL7button" style="display: none">扯敩重置：获得<span id="PL7ptspd"></span><span id="PL7ptsnx"></span></button>
@@ -24,10 +24,13 @@
             <span>你有</span><span class="ftsz4" id="energy"></span><span>能量</span>
         </p>
         <p align="center" class="ftsz2">
-            <span>你的能量每秒增加</span><span id="energyPs"></span><span id="softcap" style="display: none;">(超过e9.002e15时受软上限限制，变为1次方根)</span>
+            <span>你的能量每秒增加</span><span id="energyPs"></span><span id="softcap" style="display: none;">(由于能量超过e3.470e17，受软上限限制，变为<span id="softcapx"></span>次方根)</span>
         </p>
-        <p>
-            <div class="ftsz3" id="fixinf" style="display: none; text-align: center;">点击“扩散重置”，对蒲公英籽释放风元素，将会发生一些事情</div>
+        <p align="center" class="ftsz3">
+            <span id="fixinf" style="display: none;">点击“扩散重置”，对蒲公英籽释放风元素，将会发生一些事情</span>
+        </p>
+        <p align="center" id="speed" style="margin: auto; font-size: 16px; color: #ffffff; width: 64%;">
+            <span>一阶游戏速度：×</span><span id="speed1">1.000</span>
         </p>
         <p align="center" id="PL1info" style="margin: auto; font-size: 16px; color: #ff0000; width: 64%; display: none">
             <span>你有</span><span id="PL1Pts">0</span><span>扩散点,</span><span id="PL1Eng">1</span><span>扩散能量(+</span><span id="PL1EngPs">0</span><span>/s),</span>
@@ -54,7 +57,7 @@
             <span>你有</span><span id="PL7pts">0</span><span>扯敩点,1扯敩能量,它以1的指数将1~56式风灵的效果×1</span>
         </p>
         <p align="center" style="margin: 4px 2px; font-size: 16px; color: #000000; display: none">
-            <span>你有</span><span id="PL8pts">0</span><span>扰敪点，0金色风灵，将所有风灵效果×1</span>
+            <span>你有</span><span id="PL8pts">0</span><span>扰敪点，0金色风灵，将所有风灵效果×1。当前你在第0次扰敪中</span>
         </p>
         <div class="btnrow" id="btnrowm">
             <button align="center" class="slbutton" style="background-color: #ffffff; color: #000000; " id="btrow1" onclick="changeBt('row1')">风灵</button>
@@ -95,25 +98,32 @@
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">转化</button>
         </div>
         <div class="btnrow" id="row5" style="display: none">
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">目标</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">扬敦碎片</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_3" onclick="changePg('p5_3')">惊奇风盒</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_4" onclick="changePg('p5_4')">四阶之风</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_5" onclick="changePg('p5_5')">五阶之风</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_6" onclick="changePg('p5_6')">六阶之风</button>
-            <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp5_6" onclick="changePg('p5_7')">七阶之风</button>
+            <button align="center" class="slbutton" style="background-color: #00ffff; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">扬敦目标</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">碎片</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_3" onclick="changePg('p5_3')">惊奇风盒</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_4" onclick="changePg('p5_4')">试炼场</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_5" onclick="changePg('p5_5')">巧施协同</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_6" onclick="changePg('p5_6')">刺影征标</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_7" onclick="changePg('p5_7')">……</button>
         </div>
         <div class="btnrow" id="row6" style="display: none">
-            <button align="center" class="button">placeholder</button>
+            <button align="center" class="slbutton" style="background-color: #0000ff; color: #ffffff;" id="btp6_1" onclick="changePg('p6_1')">扭敧</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_2" onclick="changePg('p6_2')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_3" onclick="changePg('p6_3')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_4" onclick="changePg('p6_4')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_5" onclick="changePg('p6_5')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_6" onclick="changePg('p6_6')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_7" onclick="changePg('p6_7')"></button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff;" id="btp6_8" onclick="changePg('p6_8')"></button>
         </div>
         <div class="btnrow" id="row7" style="display: none">
-            <button align="center" class="button">placeholder</button>
+            <button align="center" class="slbutton" style="background-color: #ff00ff; color: #ffffff;" id="btp7_1" onclick="changePg('p7_1')">扮敨</button>
         </div>
         <div class="btnrow" id="row8" style="display: none">
-            <button align="center" class="button">placeholder</button>
+            <button align="center" class="slbutton" style="background-color: #000000; color: #ffffff; border: 1px solid #808080" id="btp8_1" onclick="changePg('p8_1')">扯敩</button>
         </div>
         <div class="btnrow" id="row9" style="display: none">
-            <button align="center" class="button">placeholder</button>
+            <button align="center" class="button" style="background-image: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); display: none; color: #000000; " id="btp9_1" onclick="changePg('p9_1')">扰敪</button>
         </div>
         <div class="btnrow" id="row0" style="display: none">
             <button align="center" class="button" id="btp0_1" onclick="changePg('p0_1')">选项</button>
@@ -699,9 +709,9 @@
             <br />
             <table align="center">
                 <tr>
-                    <td><button class="PL1upgno" id="PL1upg01" onclick="buyPL1upg(0)">解锁慢速自动作成1~8式风灵<br />花费：2扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg02" onclick="buyPL1upg(1)">解锁慢速自动获得风单元和风模块<br />花费：4扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg03" onclick="buyPL1upg(2)">解锁慢速自动购买风灵升级<br />花费：8扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg01" onclick="buyPL1upg(0)">解锁自动作成1~8式风灵<br />花费：4扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg02" onclick="buyPL1upg(1)">解锁自动获得风单元和风模块<br />花费：8扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg03" onclick="buyPL1upg(2)">解锁自动购买风灵升级<br />花费：12扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg04" onclick="buyPL1upg(3)">解锁普通挑战<br />花费：16扩散点</button></td>
                 </tr>
                 <tr>
@@ -762,22 +772,22 @@
                 </div>
                 <table align="center">
                     <tr>
-                        <td><button id="normchal01" class="normchalno" onclick="entNormCha(1)">普通挑战1<br />除了壹式风灵之外所有风灵指数强制为0，但壹式风灵指数为2<br />奖励：快速自动作成壹式风灵</button></td>
-                        <td><button id="normchal02" class="normchalno" onclick="entNormCha(2)">普通挑战2<br />1~8式风灵的价格增长倍数是原来的2次方，且禁用全部最大<br />奖励：快速自动作成贰式风灵</button></td>
-                        <td><button id="normchal03" class="normchalno" onclick="entNormCha(3)">普通挑战3<br />1~8式风灵的指数在3秒内从0增加到1，作成1~8式风灵后重置<br />奖励：快速自动作成叁式风灵</button></td>
-                        <td><button id="normchal04" class="normchalno" onclick="entNormCha(4)">普通挑战4<br />你只能作成前4式风灵（无法作成5~8式风灵）<br />奖励：快速自动作成肆式风灵</button></td>
+                        <td><button id="normchal01" class="normchalno" onclick="entNormCha(1)">普通挑战1<br />除了壹式风灵之外所有风灵指数强制为0，但壹式风灵指数为2<br />奖励：自动最大化作成壹式风灵</button></td>
+                        <td><button id="normchal02" class="normchalno" onclick="entNormCha(2)">普通挑战2<br />1~8式风灵的价格增长倍数是原来的2次方，且禁用全部最大<br />奖励：自动最大化作成贰式风灵</button></td>
+                        <td><button id="normchal03" class="normchalno" onclick="entNormCha(3)">普通挑战3<br />1~8式风灵的指数在3秒内从0增加到1，作成1~8式风灵后重置<br />奖励：自动最大化作成叁式风灵</button></td>
+                        <td><button id="normchal04" class="normchalno" onclick="entNormCha(4)">普通挑战4<br />你只能作成前4式风灵（无法作成5~8式风灵）<br />奖励：自动最大化作成肆式风灵</button></td>
                     </tr>
                     <tr>
-                        <td><button id="normchal05" class="normchalno" onclick="entNormCha(5)">普通挑战5<br />作成1~8式风灵将重置之前风灵作成，且禁用全部最大<br />奖励：快速自动作成伍式风灵</button></td>
-                        <td><button id="normchal06" class="normchalno" onclick="entNormCha(6)">普通挑战6<br />你的风灵作成总数限制在60，超过将退出挑战<br />奖励：快速自动作成陆式风灵</button></td>
-                        <td><button id="normchal07" class="normchalno" onclick="entNormCha(7)">普通挑战7<br />作成1~8式风灵将重置已作成1~8式风灵的加数到0.001<br />奖励：快速自动作成柒式风灵</button></td>
-                        <td><button id="normchal08" class="normchalno" onclick="entNormCha(8)">普通挑战8<br />风灵乘数每秒除以8，作成风灵时重置<br />奖励：快速自动作成捌式风灵</button></td>
+                        <td><button id="normchal05" class="normchalno" onclick="entNormCha(5)">普通挑战5<br />作成1~8式风灵将重置之前风灵作成，且禁用全部最大<br />奖励：自动最大化作成伍式风灵</button></td>
+                        <td><button id="normchal06" class="normchalno" onclick="entNormCha(6)">普通挑战6<br />你的风灵作成总数限制在60，超过将退出挑战<br />奖励：自动最大化作成陆式风灵</button></td>
+                        <td><button id="normchal07" class="normchalno" onclick="entNormCha(7)">普通挑战7<br />作成1~8式风灵将重置已作成1~8式风灵的加数到0.001<br />奖励：自动最大化作成柒式风灵</button></td>
+                        <td><button id="normchal08" class="normchalno" onclick="entNormCha(8)">普通挑战8<br />风灵乘数每秒除以8，作成风灵时重置<br />奖励：自动最大化作成捌式风灵</button></td>
                     </tr>
                     <tr>
-                        <td><button id="normchal09" class="normchalno" onclick="entNormCha(9)">普通挑战9<br />你无法获得风单元，1~8式风灵作成次数降低1~8式风灵指数<br />奖励：快速自动获得风单元</button></td>
-                        <td><button id="normchal10" class="normchalno" onclick="entNormCha(10)">普通挑战10<br />你无法获得风单元，1~8式风灵作成次数降低1~8式风灵乘数<br />奖励：快速自动获得风模块</button></td>
-                        <td><button id="normchal11" class="normchalno" onclick="entNormCha(11)">普通挑战11<br />扩散能量指数总是为0.1<br />奖励：快速自动购买风灵升级1</button></td>
-                        <td><button id="normchal12" class="normchalno" onclick="entNormCha(12)">普通挑战12<br />每次作成乘数总是为1<br />奖励：快速自动购买风灵升级2</button></td>
+                        <td><button id="normchal09" class="normchalno" onclick="entNormCha(9)">普通挑战9<br />你无法获得风单元，1~8式风灵作成次数降低1~8式风灵指数<br />奖励：自动最大化获得风单元</button></td>
+                        <td><button id="normchal10" class="normchalno" onclick="entNormCha(10)">普通挑战10<br />你无法获得风单元，1~8式风灵作成次数降低1~8式风灵乘数<br />奖励：自动最大化获得风模块</button></td>
+                        <td><button id="normchal11" class="normchalno" onclick="entNormCha(11)">普通挑战11<br />扩散能量指数总是为0.1<br />奖励：自动最大化购买风灵升级1</button></td>
+                        <td><button id="normchal12" class="normchalno" onclick="entNormCha(12)">普通挑战12<br />每次作成乘数总是为1<br />奖励：自动最大化购买风灵升级2</button></td>
                     </tr>
                 </table>
                 <div class="ftsz2" align="center">完成所有普通挑战后，将解锁进阶挑战，进阶挑战的完成目标随完成次数增加</div>
@@ -806,7 +816,7 @@
                         <td>
                             <button id="chal04" class="chalno" onclick="entCha(4)">
                                 进阶挑战4<br />1~16式风灵的乘数变为0.25次方<br />
-                                目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/<span id="chal04cap"></span><br />奖励：提高风之微粒获取数量(×<span id="chal04effe"></span>)
+                                目标：<span id="chal04goal"></span>能量<br />完成次数：<span id="chal04comp"></span>/<span id="chal04cap"></span><br />奖励：风之微粒获取数量(×<span id="chal04effe"></span>)
                             </button>
                         </td>
                     </tr>
@@ -829,14 +839,14 @@
                         </td>
                         <td>
                             <button id="chal07" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(7)">
-                                进阶挑战7<br />元素获得的额外风灵升级数量^0.5<br />
+                                进阶挑战7<br />元素获得的额外风灵升级数量^0.25<br />
                                 目标：<span id="chal07goal"></span>能量<br />完成次数：<span id="chal07comp"></span>/<span id="chal07cap"></span><br />奖励：提升元素每次分配乘数(×<span id="chal07effe"></span>)
                             </button>
                         </td>
                         <td>
                             <button id="chal08" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(8)">
                                 进阶挑战8<br />无法进行扩散，也无法获得扩散点，17式风灵也不会生产16式风灵<br />
-                                目标：<span id="chal08goal"></span>能量<br />完成次数：<span id="chal08comp"></span>/<span id="chal08cap"></span><br />奖励：提高风之徯粓获取数量(×<span id="chal08effe"></span>)
+                                目标：<span id="chal08goal"></span>能量<br />完成次数：<span id="chal08comp"></span>/<span id="chal08cap"></span><br />奖励：风之徯粓获取数量(×<span id="chal08effe"></span>)
                             </button>
                         </td>
                     </tr>
@@ -847,26 +857,26 @@
                     <tr>
                         <td>
                             <button id="chal09" class="chalno" style="border: 4px solid #00ff00;" onclick="entCha(9)">
-                                进阶挑战9<br />同时运行进阶挑战1~8，且强制进行增压坍陷<br />
-                                目标：<span id="chal09goal"></span>能量<br />完成次数：<span id="chal09comp"></span>/<span id="chal09cap"></span><br />奖励：提升扫敥能量效果指数(+<span id="chal05effe"></span>)
+                                进阶挑战9<br />同时运行进阶挑战1~8，且强制进入风压坍陷<br />
+                                目标：<span id="chal09goal"></span>能量<br />完成次数：<span id="chal09comp"></span>/<span id="chal09cap"></span><br />奖励：提升扫敥能量效果指数(+<span id="chal09effe"></span>)
                             </button>
                         </td>
                         <td>
-                            <button id="chal10" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(10)">
-                                进阶挑战10<br />游戏速度变为原来的1e-10倍<br />
-                                目标：<span id="chal06goal"></span>能量<br />完成次数：<span id="chal06comp"></span>/<span id="chal06cap"></span><br />奖励：游戏速度乘以(+<span id="chal06effe"></span>)
+                            <button id="chal10" class="chalno" style="border: 4px solid #00ff00;" onclick="entCha(10)">
+                                进阶挑战10<br />游戏速度变为原来的1e-308倍<br />
+                                目标：<span id="chal10goal"></span>能量<br />完成次数：<span id="chal10comp"></span>/<span id="chal10cap"></span><br />奖励：游戏速度乘以(×<span id="chal10effe"></span>)
                             </button>
                         </td>
                         <td>
-                            <button id="chal11" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(11)">
-                                进阶挑战11<br />扩散时间、扪敤时间、扫敥时间降低对应风灵效果<br />
-                                目标：<span id="chal07goal"></span>能量<br />完成次数：<span id="chal07comp"></span>/<span id="chal07cap"></span><br />奖励：提升(×<span id="chal07effe"></span>)
+                            <button id="chal11" class="chalno" style="border: 4px solid #00ff00;" onclick="entCha(11)">
+                                进阶挑战11<br />扩散时间、扪敤时间、扫敥时间降低对应风灵指数<br />
+                                目标：<span id="chal11goal"></span>能量<br />完成次数：<span id="chal11comp"></span>/<span id="chal11cap"></span><br />奖励：提升药剂效果(×<span id="chal11effe"></span>)
                             </button>
                         </td>
                         <td>
-                            <button id="chal12" class="chalno" style="border: 4px solid #ffff00;" onclick="entCha(12)">
-                                进阶挑战12<br />能量的软上限提前到1能量，且效果变为4次方<br />
-                                目标：<span id="chal08goal"></span>能量<br />完成次数：<span id="chal08comp"></span>/<span id="chal08cap"></span><br />奖励：提高风之徰粔获取数量(×<span id="chal08effe"></span>)
+                            <button id="chal12" class="chalno" style="border: 4px solid #00ff00;" onclick="entCha(12)">
+                                进阶挑战12<br />只有1、9、17、25式风灵生产资源<br />
+                                目标：<span id="chal12goal"></span>能量<br />完成次数：<span id="chal12comp"></span>/<span id="chal12cap"></span><br />奖励：风之徰粔获取数量(×<span id="chal12effe"></span>)
                             </button>
                         </td>
                     </tr>
@@ -1113,7 +1123,7 @@
         <div id="p3_4" style="display: none">
             <div id="alch" style="display: block">
                 <div align="center" class="ftsz2">点击炼金生命进行炼金，再次点击取消<br /></div>
-                <div align="center" class="ftsz2">你有<span id="alch00"></span>实验装置，它乘以炼金生命转化数量<br /></div>
+                <div align="center" class="ftsz2">你有<span id="alch00"></span>实验装置，它乘以炼金生命转化数量<span id="alchmu"></span><br /></div>
                 <div class="btnrow2">
                     <button class="xxButton" onclick="buyalc()" style="background-color: #ffffff">获得实验装置<br />花费<span id="alcost"></span>扪敤能量</button>
                 </div>
@@ -1123,26 +1133,28 @@
                         <td><button class="alc" id="alch02" onclick="alchsw(2)">炼金生命2<br />数量：<span id="alca02"></span><br />合成1个需要4炼金生命1</button></td>
                         <td><button class="alc" id="alch03" onclick="alchsw(3)">炼金生命3<br />数量：<span id="alca03"></span><br />合成1个需要4炼金生命2</button></td>
                         <td><button class="alc" id="alch04" onclick="alchsw(4)">炼金生命4<br />数量：<span id="alca04"></span><br />合成1个需要4炼金生命3</button></td>
+                        <td><button class="alc" id="alch05" onclick="alchsw(5)">炼金生命5<br />数量：<span id="alca05"></span><br />合成1个需要4炼金生命4</button></td>
+                        <td><button class="alc" id="alch06" onclick="alchsw(6)">炼金生命6<br />数量：<span id="alca06"></span><br />合成1个需要4炼金生命5</button></td>
                     </tr>
                 </table>
                 <table align="center">
                     <tr>
-                        <td><button class="alc" id="alcu11" onclick="buyalcu(1)">每级使炼金时额外获得10%高一级的产物(<span id="alcu01"></span>/10)<br />花费：<span id="alcc01"></span>炼金生命1</button></td>
-                        <td><button class="alc" id="alcu12" onclick="buyalcu(2)">炼金生命1的获取数量×1.2(<span id="alcu02"></span>/10)<br />花费：<span id="alcc02"></span>炼金生命2</button></td>
+                        <td><button class="alc" id="alcu11" onclick="buyalcu(1)">每级使合成时额外获得5%高一级的产物(<span id="alcu01"></span>/10)<br />花费：<span id="alcc01"></span>炼金生命1</button></td>
+                        <td><button class="alc" id="alcu12" onclick="buyalcu(2)">每级使合成时返还2.5%低一级的产物(<span id="alcu02"></span>/10)<br />花费：<span id="alcc02"></span>炼金生命2</button></td>
                         <td><button class="alc" id="alcu13" onclick="buyalcu(3)">1~8式风灵指数增加0.01(<span id="alcu03"></span>/10)<br />花费：<span id="alcc03"></span>炼金生命3</button></td>
                         <td><button class="alc" id="alcu14" onclick="buyalcu(4)">9~16式风灵指数增加0.01(<span id="alcu04"></span>/10)<br />花费：<span id="alcc04"></span>炼金生命4</button></td>
-                        <td><button class="alc" id="alcu15" onclick="buyalcu(5)">17~24式风灵指数增加0.01(<span id="alcu05"></span>/10)<br />花费：<span id="alcc05"></span>炼金生命1</button></td>
-                        <td><button class="alc" id="alcu16" onclick="buyalcu(6)">风灵基础值指数增加0.005(<span id="alcu06"></span>/10)<br />花费：<span id="alcc06"></span>炼金生命2</button></td>
+                        <td><button class="alc" id="alcu15" onclick="buyalcu(5)">17~24式风灵指数增加0.01(<span id="alcu05"></span>/10)<br />花费：<span id="alcc05"></span>炼金生命5</button></td>
+                        <td><button class="alc" id="alcu16" onclick="buyalcu(6)">风灵基础值指数增加0.005(<span id="alcu06"></span>/10)<br />花费：<span id="alcc06"></span>炼金生命6</button></td>
                     </tr>
                 </table>
                 <table align="center">
                     <tr>
-                        <td><button class="alc" id="alcv01" onclick="buyalcu(7)">自动获得风四倍系统，它不再重置任何东西<br />花费：48炼金生命3</button></td>
-                        <td><button class="alc" id="alcv02" onclick="buyalcu(8)">每秒自动获得扩散次数<br />花费：64炼金生命4</button></td>
-                        <td><button class="alc" id="alcv03" onclick="buyalcu(9)">分配的元素乘数基于分配的元素总数量<br />花费：96炼金生命1</button></td>
-                        <td><button class="alc" id="alcv04" onclick="buyalcu(10)">再次使扩散能量转换指数增加1<br />花费：128炼金生命2</button></td>
-                        <td><button class="alc" id="alcv05" onclick="buyalcu(11)">再次使扪敤能量转换指数增加1<br />花费：192炼金生命3</button></td>
-                        <td><button class="alc" id="alcv06" onclick="buyalcu(12)">基于风灵对应的能量提升该类型风灵的指数log2(log2(x)/4096)<br />花费：256炼金生命4</button></td>
+                        <td><button class="alc" id="alcv01" onclick="buyalcu(7)">自动获得风四倍系统，它不再重置任何东西<br />花费：128炼金生命1</button></td>
+                        <td><button class="alc" id="alcv02" onclick="buyalcu(8)">每秒自动获得扩散次数<br />花费：256炼金生命2</button></td>
+                        <td><button class="alc" id="alcv03" onclick="buyalcu(9)">分配的元素乘数基于分配的元素总数量<br />花费：512炼金生命3</button></td>
+                        <td><button class="alc" id="alcv04" onclick="buyalcu(10)">再次使扩散能量转换指数增加1<br />花费：1024炼金生命4</button></td>
+                        <td><button class="alc" id="alcv05" onclick="buyalcu(11)">再次使扪敤能量转换指数增加1<br />花费：2048炼金生命5</button></td>
+                        <td><button class="alc" id="alcv06" onclick="buyalcu(12)">基于风灵对应的能量提升该类型风灵的指数log2(log2(x)/4096)<br />花费：4096炼金生命6</button></td>
                     </tr>
                 </table>
             </div>
@@ -1219,6 +1231,12 @@
                     <td><button class="resno" id="res11" onclick="research(11)">解锁自动风之徯粓升级，并保留风压坍陷中获取的最高能量<br /><span id="resp11"></span>/<span id="resr11"></span><br />次数：<span id="resa11"></span>/1</button></td>
                     <td><button class="resno" id="res12" onclick="research(12)">解锁“种甜甜花”选项卡<br /><span id="resp12"></span>/<span id="resr12"></span><br />次数：<span id="resa12"></span>/1</button></td>
                 </tr>
+                <tr>
+                    <td><button class="resno" id="res13" onclick="research(13)">解锁进阶挑战9~12<br /><span id="resp13"></span>/<span id="resr13"></span><br />次数：<span id="resa13"></span>/1</button></td>
+                    <td><button class="resno" id="res14" onclick="research(14)">解锁两个新的药剂升级<br /><span id="resp14"></span>/<span id="resr14"></span><br />次数：<span id="resa14"></span>/1</button></td>
+                    <td><button class="resno" id="res15" onclick="research(15)">风灵基础值指数+0.1<br /><span id="resp15"></span>/<span id="resr15"></span><br />次数：<span id="resa15"></span>/1</button></td>
+                    <td><button class="resno" id="res16" onclick="research(16)">自动更新在风压坍陷中获取的最大能量<br /><span id="resp16"></span>/<span id="resr16"></span><br />次数：<span id="resa16"></span>/1</button></td>
+                </tr>
             </table>
 
         </div>
@@ -1229,19 +1247,19 @@
                     <td><button class="PL3upgno" id="ptn01" onclick="ptnchs(0)">1~8式风灵乘数×<span id="ptnm01"></span></button></td>
                     <td><button class="PL3upgno" id="ptn02" onclick="ptnchs(1)">9~16式风灵乘数×<span id="ptnm02"></span></button></td>
                     <td><button class="PL3upgno" id="ptn03" onclick="ptnchs(2)">17~24式风灵乘数×<span id="ptnm03"></span></button></td>
-                    <td><button class="PL3upgno" id="ptn04" onclick="ptnchs(3)"><span id="ptnul1">未解锁</span>25~32式风灵乘数×<span id="ptnm04" style="display: none"></span></button></td>
+                    <td><button class="PL3upgno" id="ptn04" onclick="ptnchs(3)"><span id="ptnul1">未解锁<br /></span>25~32式风灵乘数×<span id="ptnm04" style="display: none"></span></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL3upgno" id="ptn05" onclick="ptnchs(4)">研究速度×<span id="ptnm05"></span></button></td>
                     <td><button class="PL3upgno" id="ptn06" onclick="ptnchs(5)">风之微粒获取×<span id="ptnm06"></span></button></td>
                     <td><button class="PL3upgno" id="ptn07" onclick="ptnchs(6)">风之徯粓获取×<span id="ptnm07"></span></button></td>
-                    <td><button class="PL3upgno" id="ptn08" onclick="ptnchs(7)">未解锁<span id="ptnm08" style="display: none"></span></button></td>
+                    <td><button class="PL3upgno" id="ptn08" onclick="ptnchs(7)"><span id="ptnul2">未解锁<br /></span>风之徰粔获取×<span id="ptnm08" style="display: none"></span></button></td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td><button class="PL3upgno" onclick="buyptnupg1()">增加最多效果数+1<br />花费：<span id="ptnuc01"></span>扫敥点</button></td>
-                    <td><button class="PL3upgno" onclick="buyptnupg2()">增加效果值倍数×2<br />花费：<span id="ptnuc02"></span>扫敥点</button></td>
-                    <td></td>
+                    <td><button class="PL3upgno" onclick="buyptnupg(1)">增加最多效果数+1<br />(<span id="ptnu01"></span>/8)<br />花费：<span id="ptnuc01"></span>扫敥点</button></td>
+                    <td><button class="PL3upgno" onclick="buyptnupg(2)">增加效果值倍数×2<br />(<span id="ptnu02"></span>/16)<br />花费：<span id="ptnuc02"></span>扫敥点</button></td>
+                    <td><button class="PL3upgno" onclick="buyptnupg(3)" id="ptnu3">进阶挑战1~4上限增加5，5~8上限增加3<br />(<span id="ptnu03"></span>/4)<br />花费：<span id="ptnuc03"></span>扫敥点</button></td>
+                    <td><button class="PL3upgno" onclick="buyptnupg(4)" id="ptnu4">一阶游戏速度×2<br />(<span id="ptnu04"></span>/4)<br />花费：<span id="ptnuc04"></span>扫敥点</button></td>
                 </tr>
             </table>
         </div>
@@ -1322,7 +1340,9 @@
         </div>
         <div id="p4_4" style="display: none">
             <div id="xyz">
-                <div align="center" class="ftsz3">你的slog(x吸引子)等于<span id="slogxyz"></span>，<br />额外风灵升级数量增加<span id="xyze1"></span>%，25~32风灵指数额外增加<span id="xyze2"></span></div>
+                <div align="center" class="ftsz3">你的slog(x吸引子)等于<span id="slogxyz"></span>，<br /></div>
+                <div align="center" class="ftsz2">额外风灵升级数量增加<span id="xyze1"></span>%，25~32风灵指数额外增加<span id="xyze2"></span></div>
+                <div align="center" class="ftsz2"><span id="xyze3"></span></div>
                 <div align="center" id="xxyz" class="ftsz2">你有 <span id="xyzx"></span> x吸引子</div>
                 <div align="center" id="yxyz" class="ftsz2" style="display: none">你有 <span id="xyzy"></span> y吸引子</div>
                 <div align="center" id="zxyz" class="ftsz2" style="display: none">你有 <span id="xyzz"></span> z吸引子</div>
@@ -1330,9 +1350,9 @@
                 <table align="center">
                     <tr>
                         <td><button class="PL3upgno" id="xyzu01" onclick="buyxyzu(1)">其他吸引子的乘积产生x吸引子<br />需要：0x吸引子</button></td>
-                        <td><button class="PL3upgno" id="xyzu02" onclick="buyxyzu(2)">其他吸引子的乘积产生y吸引子<br />需要：10x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu02" onclick="buyxyzu(2)">其他吸引子的乘积产生y吸引子<br />需要：30x吸引子</button></td>
                         <td><button class="PL3upgno" id="xyzu03" onclick="buyxyzu(3)">其他吸引子的乘积产生z吸引子<br />需要：e100x吸引子</button></td>
-                        <td><button class="PL3upgno" id="xyzu04" onclick="buyxyzu(4)">其他吸引子的乘积产生t吸引子<br />需要：ee1000x吸引子</button></td>
+                        <td><button class="PL3upgno" id="xyzu04" onclick="buyxyzu(4)">其他吸引子的乘积产生t吸引子，t吸引子增加迭代速度<br />需要：ee300x吸引子</button></td>
                     </tr>
                 </table>
                 <table align="center">
@@ -1340,18 +1360,21 @@
                         <td><button class="tthupg" id="xyzsw" onclick="xyzsw()">重置吸引子数量，解锁新的吸引子，需要：<span id="xyzswr"></span></button></td>
                     </tr>
                 </table>
-            </div>
-            <div id="xyz2">
                 <div align="center" id="exyz" class="ftsz2">你有 <span id="xyze"></span> e吸引子</div>
                 <div align="center" id="fxyz" class="ftsz2" style="display: none">你有 <span id="xyzf"></span> f吸引子</div>
                 <div align="center" id="gxyz" class="ftsz2" style="display: none">你有 <span id="xyzg"></span> g吸引子</div>
                 <div align="center" id="hxyz" class="ftsz2" style="display: none">你有 <span id="xyzh"></span> h吸引子</div>
                 <table align="center">
                     <tr>
-                        <td><button class="PL3upgno" id="xyzu05" onclick="buyxyze()">购买e生成器，每个花费1e吸引子（价格不增长），e吸引子增加h吸引子产量，增加xyzt吸引子迭代速度</button></td>
+                        <td><button class="PL3upgno" id="xyzu05" onclick="buyxyze()">购买e生成器，每个花费1e吸引子（价格不增长），e吸引子增加xyzt吸引子迭代速度</button></td>
                         <td><button class="PL3upgno" id="xyzu06" onclick="buyxyzf()">购买f生成器，每个花费1e吸引子（价格不增长），f吸引子增加e吸引子产量</button></td>
-                        <td><button class="PL3upgno" id="xyzu07" onclick="buyxyzg()">购买g生成器，每个花费1e吸引子（价格不增长），g吸引子增加f吸引子产量</button></td>
-                        <td><button class="PL3upgno" id="xyzu08" onclick="buyxyzh()">购买h生成器，每个花费1e吸引子（价格不增长），h吸引子增加g吸引子产量</button></td>
+                        <td><button class="PL3upgno" id="xyzu07" onclick="buyxyzg()">购买g生成器，每个花费1e吸引子（价格不增长），g吸引子增加f、e吸引子产量</button></td>
+                        <td><button class="PL3upgno" id="xyzu08" onclick="buyxyzh()">购买h生成器，每个花费1e吸引子（价格不增长），h吸引子增加g、f、e吸引子产量</button></td>
+                    </tr>
+                </table>
+                <table align="center">
+                    <tr>
+                        <td><button class="tthupg" id="xyzbo" onclick="xyzbo()">重置吸引子数量，解锁新的效果<span id="xyzbor"></span></button></td>
                     </tr>
                 </table>
             </div>
@@ -1362,14 +1385,101 @@
                     <button align="center" class="xxButton" onclick="ulAnm3()" style="background-color:#00ff80">解锁催化剂<br />花费：1e10000扫敥点</button>
                 </div>
             </div>
-            <div id="anm3" align="center" class="ftsz3">
-                5小时后更新
+            <div id="anm3" align="center" class="ftsz2">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #00ff80">
+                        你有<span id="reacm1"></span>反应物，<span id="reacm2"></span>生成物，<span id="cata"></span>催化剂
+                    </div>
+                </div>
+                <div class="probarcon">
+                    <div class="probar" id="probar3"></div>
+                </div>
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #00ff80">
+                        你的平衡值为<span id="blcnt"></span>，它除以反应速率，并提供<span id="anm3psb"></span>基础风之徰粔产量
+                    </div><br />
+                </div>
+                <table align="center">
+                    <tr>
+                        <td><button class="tthupg2" onclick="reastart()">开始/停止反应</button></td>
+                        <td><button class="tthupg2" onclick="reareset()">重置生成物，增加反应物和催化剂（需要反应完成）</button></td>
+                    </tr>
+                </table>
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block; color: #00ff80">你有<span id="anm3am"></span>风之徰粔(+<span id="anm3ps"></span>/s)，它以log2(log2(x+1)+1)^<span id="anm3exp"></span>的效果使风之徯粓获取^<span id="anm3effe"></span></div><br />
+                </div>
+                <table align="center">
+                    <tr>
+                        <td><button class="PL3bab" id="anm3u1" onclick="buyanm3u(1)">双倍风之徰粔产量<br />等级<span id="anm3upg01"></span><br />当前：×<span id="anm3upge01"></span><br />花费：<span id="anm3upgc01"></span>风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u2" onclick="buyanm3u(2)">风之徰粔提升25~32式风灵乘数<br />等级<span id="anm3upg02"></span><br />当前：×<span id="anm3upge02"></span><br />花费：<span id="anm3upgc02"></span>风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u3" onclick="buyanm3u(3)">增加风之徰粔效果指数<br />等级<span id="anm3upg03"></span><br />当前：+<span id="anm3upge03"></span><br />花费：<span id="anm3upgc03"></span>风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u4" onclick="buyanm3u(4)">增加一阶游戏速度<br />等级<span id="anm3upg04"></span><br />当前：×<span id="anm3upge04"></span><br />花费：<span id="anm3upgc04"></span>风之徰粔</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL3bab" id="anm3u01" onclick="buyanm3u2(0)">解锁药剂第二行第四个效果<br />花费：1e8风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u02" onclick="buyanm3u2(1)">扫敥次数提升反应速度(×<span id="anm3upge05"></span>)<br />花费：1e16风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u03" onclick="buyanm3u2(2)">风之徰粔提升扫敥次数(×<span id="anm3upge06"></span>)<br />花费：1e24风之徰粔</button></td>
+                        <td><button class="PL3bab" id="anm3u04" onclick="buyanm3u2(3)">解锁转化升级<br />花费：1e32风之徰粔</button></td>
+                    </tr>
+                </table>
+
+
             </div>
         </div>
         <div id="p4_6" style="display: none">
-            <div></div>
+            <div id="conv">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block;">每行每列最多只能开启1个转化升级<br />回退升级将进行扫敥重置</div>
+                    <button class="ltbutton" onclick="rconv()">回退</button>
+                </div><br />
+                <table align="center">
+                    <tr>
+                        <td><button class="PL3bab" id="conv01" onclick="buyconv(0,0)">能量转化为1~8式风灵指数+<span id="convp01"></span></button></td>
+                        <td><button class="PL3bab" id="conv02" onclick="buyconv(0,1)">扩散能量转化为1~8式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv03" onclick="buyconv(0,2)">扪敤能量转化为1~8式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv04" onclick="buyconv(0,3)">扫敥能量转化为1~8式风灵指数</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL3bab" id="conv05" onclick="buyconv(1,0)">能量转化为9~16式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv06" onclick="buyconv(1,1)">扩散能量转化为9~16式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv07" onclick="buyconv(1,2)">扪敤能量转化为9~16式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv08" onclick="buyconv(1,3)">扫敥能量转化为9~16式风灵指数</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL3bab" id="conv09" onclick="buyconv(2,0)">能量转化为17~24式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv10" onclick="buyconv(2,1)">扩散能量转化为17~24式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv11" onclick="buyconv(2,2)">扪敤能量转化为17~24式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv12" onclick="buyconv(2,3)">扫敥能量转化为17~24式风灵指数</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="PL3bab" id="conv13" onclick="buyconv(3,0)">能量转化为25~32式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv14" onclick="buyconv(3,1)">扩散能量转化为25~32式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv15" onclick="buyconv(3,2)">扪敤能量转化为25~32式风灵指数</button></td>
+                        <td><button class="PL3bab" id="conv16" onclick="buyconv(3,3)">扫敥能量转化为25~32式风灵指数</button></td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
+        <div id="p5_1" style="display: none">
+            <div></div>
+        </div>
+        <div id="p6_1" style="display: none">
+            <div></div>
+        </div>
+        <div id="p7_1" style="display: none">
+            <div></div>
+        </div>
+        <div id="p8_1" style="display: none">
+            <div></div>
+        </div>
+        <div id="p9_1" style="display: none">
+            <div>
+                <div id="end" align="center" class="ftsz6">
+                    5^5小时后更新
+                </div>
+            </div>
+        </div>
         <div id="p0_1" style="display: none">
             <div class="ftsz2" align="center">
                 重置确认
@@ -1395,7 +1505,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.2.1<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：3.3.0<br />
                 <br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
@@ -1405,6 +1515,7 @@
                 支持所有序数增量吧吧友
                 <br />
                 更新日志<br />
+                v3.3.0 2024-6-3 添加催化剂的内容，并改动一部分内容<br />
                 v3.2.1 2024-5-17 增加一些新的吸引子，调整吸引子数值<br />
                 v3.2.0 2024-5-10 添加甜甜花声望、声望升级、吸引子<br />
                 v3.1.2 2024-5-5 一些游戏体验上的改动<br />
@@ -1465,7 +1576,7 @@
                     <td class="achno" id="ach0a">0a<br />二↑段↑跳<span class="tooltip-text">前3式风灵作成次数的排布为1,0,1</span></td>
                     <td class="achno" id="ach0b">0b<br />我应该告诉他们购买吗…<span class="tooltip-text">作成10次壹式风灵但是2~8式风灵作成次数都为0</span></td>
                     <td class="achno" id="ach0c">0c<br />醒醒！我们不再需要维度提升了！<span class="tooltip-text">没有5~8式风灵作成但是达到1e24能量</span></td>
-                    <td class="achno" id="ach0d">0d<br />我不到那玩意为啥这么难<span class="tooltip-text">至少有1e10能量，且生产的能量/秒需要至少是拥有的1e10倍</span></td>
+                    <td class="achno" id="ach0d">0d<br />我不到那玩意为啥这么难<span class="tooltip-text">至少有1e10能量，且生产的能量/秒至少是拥有的1e10倍</span></td>
                     <td class="achno" id="ach0e">0e<br />只有8个<span class="tooltip-text">1~8式风灵作成都有且只有1个</span></td>
                     <td class="achno" id="ach0f">0f<br />你维度提升了！<span class="tooltip-text">作成20次肆式风灵但是没有作成5~8式风灵</span></td>
                 </tr>
@@ -1502,8 +1613,8 @@
                     <td class="achno" id="ach2b">2b<br />后面也忘了<span class="tooltip-text">没有购买升级获得1e1233扩散点</span></td>
                     <td class="achno" id="ach2c">2c<br />没有实验不值得过<span class="tooltip-text">在不购买研究时获得1e4932扩散点</span></td>
                     <td class="achno" id="ach2d">2d<br />元素周期表<span class="tooltip-text">转化为火、水、雷、冰的元素数量分别为2,8,18,32</span></td>
-                    <td class="achno" id="ach2e">2e<br />套娃多方面体<span class="tooltip-text">在增压坍缩中进入进阶挑战</span></td>
-                    <td class="achno" id="ach2f">2f<br />炼金的狂怒<span class="tooltip-text">获得1200烧瓶和400实验装置</span></td>
+                    <td class="achno" id="ach2e">2e<br />套娃多方面体<span class="tooltip-text">在风压坍陷中进入进阶挑战</span></td>
+                    <td class="achno" id="ach2f">2f<br />炼金的狂怒<span class="tooltip-text">获得1000烧瓶和15实验装置</span></td>
                 </tr>
                 <tr>
                     <td class="achno" id="ach30">30<br />欢迎来到扫敥重置的领域<span class="tooltip-text">扫敥重置1次</span></td>
@@ -1515,7 +1626,7 @@
                     <td class="achno" id="ach36">36<br />无相之风重制版<span class="tooltip-text">解锁8个吸引子</span></td>
                     <td class="achno" id="ach37">37<br />催化反应进程<span class="tooltip-text">解锁催化剂</span></td>
                     <td class="achno" id="ach38">38<br />分子碰撞增量<span class="tooltip-text">使一阶全局速度达到256</span></td>
-                    <td class="achno" id="ach39">39<br />庙算无遗策<span class="tooltip-text">升级3种转化升级</span></td>
+                    <td class="achno" id="ach39">39<br />庙算无遗策<span class="tooltip-text">升级4种转化升级</span></td>
 
                 </tr>
             </table>
@@ -1706,6 +1817,9 @@
             <div class="noti" id="notiach34">完成成就：甜甜花生命：进化</div>
             <div class="noti" id="notiach35">完成成就：上面不是有个一样的吗</div>
             <div class="noti" id="notiach36">完成成就：无相之风重制版</div>
+            <div class="noti" id="notiach37">完成成就：催化反应进程</div>
+            <div class="noti" id="notiach38">完成成就：分子碰撞增量</div>
+            <div class="noti" id="notiach39">完成成就：庙算无遗策</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>
