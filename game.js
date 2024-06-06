@@ -1771,7 +1771,7 @@ function getParupgCost() {
     v.parupgc01 = new Decimal(10).mul(new Decimal(10).pow(player.parupg01.add(player.parupg01.sub(100).max(0).pow(2))));
     v.parupgc02 = new Decimal(100).mul(new Decimal(100).pow(player.parupg02.add(player.parupg02.sub(50).max(0).pow(2))));
     v.parupgc03 = new Decimal(1000).mul(new Decimal(1000).pow(player.parupg03.add(player.parupg03.sub(33).max(0).pow(2))));
-    v.parupgc04 = new Decimal(80).mul(new Decimal(2.143546925).pow(player.parupg04).mul(new Decimal(1.071773463).pow(player.parupg04.sub(25).max(0).pow(2))));
+    v.parupgc04 = new Decimal(80).mul(new Decimal(2.143546925).pow(player.parupg04).mul(new Decimal(1.059463094).pow(player.parupg04.sub(40).max(0).pow(2))));
 }
 
 function buyorbupg(tier) {
