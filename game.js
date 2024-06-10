@@ -3249,7 +3249,7 @@ function notation(amount) {
     if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
     if (layer < 1000000) return magnt.toFixed(3) + "f" + layer;
     if (layer < 1.797e308) return "f" + layerm.toFixed(3) + "e" + layerp;
-    return "无限";
+    return "114514";
 }
 
 function notatint(amount) {
@@ -3275,7 +3275,7 @@ function notatint(amount) {
     if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
     if (layer < 1000000) return magnt.toFixed(3) + "f" + layer;
     if (layer < 1.797e308) return "f" + layerm.toFixed(3) + "e" + layerp;
-    return "无限";
+    return "1919810";
 }
 
 var gui_mod = 1;
