@@ -4079,7 +4079,7 @@ function updateGUI() {
     document.getElementById("tier02rewa05").innerHTML = "30式风模块：解锁第四个升级。"
     document.getElementById("tier02rewa06").innerHTML = "75式风模块：使每次作成乘数的指数乘以：1~8式风灵为16，9~16式风灵为4"
     document.getElementById("tier02rewa07").innerHTML = "237式风模块：使风灵升级1和3的效果指数增加0.5";
-    document.getElementById("tier02rewa08").innerHTML = "750式风模块：使每次作成1~24式风灵乘数的指数乘以4";
+    document.getElementById("tier02rewa08").innerHTML = "750式风模块：分别使1~24和25~32式风灵每次作成乘数的指数乘以16和4";
 
     document.getElementById("tier03").innerHTML = notatint(player.tier03) + "式风系统";
     document.getElementById("tier03rewa01").innerHTML = "1式风系统：基于升级总和提升17~24式风灵乘数。当前：×" + notation(new Decimal(1.189207115002721).pow(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04)));
@@ -4702,7 +4702,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(237)) {
         document.getElementById("tier02rewa07").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在750式风模块，将使1~24式风灵每次作成乘数的指数乘以4";
+        document.getElementById("tier02info").innerHTML = "在750式风模块，将分别使1~24和25~32式风灵每次作成乘数的指数乘以16和4";
     }
     else {
         document.getElementById("tier02rewa07").style.display = 'none';
@@ -5228,8 +5228,16 @@ function comAch() {
     if (player.hasunlockedanm3 == true) getAch(55);
     if (v.gamespd1.gte(256)) getAch(56);
     if (player.convn.gte(4)) getAch(57);
+    if (v.gamespd1.lt(1) & player.inres != 0) getAch(58);
+    if (player.ptn[0] != true & player.ptn[1] != true & player.ptn[2] != true & player.ptn[3] != true & player.ptn[4] != true & player.ptn[5] != true & player.ptn[6] != true & player.ptn[7] != true & player.energy.gte("ee16")) getAch(59);
+    if (player.tthamnt.gte(2000)) getAch(60);
+    if (player.xyzx.gte("eeee10")) getAch(61);
+    if (player.inreac != true & player.reacm1.lt(1) & player.reacm1.gt(0)) getAch(62);
+    if (player.convn.eq(0) & player.energy.gte("e1.5e17")) getAch(63);
 
-
+    if (player.PL4tms.gt(0)) getAch(64);
+    if (player.PL4goal[7] == true) getAch(65);
+    if (player.frau01.gte(20) & player.frau02.gte(20)) getAch(66);
 }
 
 /*弹出提示*/
