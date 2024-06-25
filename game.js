@@ -1220,9 +1220,9 @@ function getWscMult() {
     if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(v.wscbaseValue.div(64).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
     if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.2).max(1));
-    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01.mul(wbpw)));
+    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01.mul(wbpw)).max(1));
     if (player.tier01.gte(63)) mult09to16 = mult09to16.mul(player.tier01.add(1).pow(2)).mul(player.tier02.add(1).pow(3));
-
+    
     if (player.PL1upg[4] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(2).max(1).pow(player.chacom02.mul(1).add(2)));
     if (player.PL1upg[5] == true) mult09to16 = mult09to16.mul(player.PL1ptsttl.min(player.PL1ptsttl.add(1).log(1.189207115002721).pow(4).mul(4294967296)).max(1));
     if (player.PL1upg[6] == true) mult09to16 = mult09to16.mul(player.PL1tms.pow(4).min(player.PL1tms.pow(0.25).mul(1.152921505e18)).max(1)); 
@@ -1230,7 +1230,7 @@ function getWscMult() {
 
     mult01to08 = mult01to08.mul(new Decimal(16).pow(player.PL1bab10));
     mult09to16 = mult09to16.mul(new Decimal(2).pow(player.PL1bab12)).mul(player.anmpar.pow(player.parupg02.mul(0.25)).max(1));
-
+    
     if (player.orbupg[0] == true) mult01to08 = mult01to08.mul(player.PL1energy.add(1).log(2).pow(16));
     if (player.orbupg[1] == true) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(16));
     if (player.orbupg[2] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(2).pow(4));
@@ -1239,15 +1239,15 @@ function getWscMult() {
     if (player.orbupg[5] == true) mult01to08 = mult01to08.mul(hyp(player.energy, 0.75));
     if (player.orbupg[6] == true) mult09to16 = mult09to16.mul(hyp(player.PL1energy, 0.75));
     if (player.orbupg[7] == true) mult09to16 = mult09to16.mul(hyp(player.energy, 0.625));
-
+    
     if (player.tier03.gte(1)) mult17to24 = mult17to24.mul(new Decimal(1.044273782427413).pow(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04)));
     mult17to24 = mult17to24.mul(player.PL2tms.pow(player.PL2upg04).max(1)).mul(player.anm2.pow(player.anm2u02.mul(4)).max(1));
-
+    
     if (player.std[4] == true) mult09to16 = mult09to16.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(8).pow(player.tier01).pow(player.tier03.sub(44).mul(0.2).max(1)));
     if (player.std[5] == true) mult17to24 = mult17to24.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(64).pow(player.tier01).pow(player.tier03.sub(44).mul(0.2).max(1)));
-    if (player.std[8] == true) mult01to08 = mult01to08.mul(player.PL2energy.max(1).log(2).pow(4096));
-    if (player.std[9] == true) mult09to16 = mult09to16.mul(player.PL2energy.max(1).log(2).pow(256));
-    if (player.std[10] == true) mult17to24 = mult17to24.mul(player.PL2energy.max(1).log(2).pow(16));
+    if (player.std[8] == true) mult01to08 = mult01to08.mul(player.PL2energy.max(1).log(2).pow(4096).max(1));
+    if (player.std[9] == true) mult09to16 = mult09to16.mul(player.PL2energy.max(1).log(2).pow(256).max(1));
+    if (player.std[10] == true) mult17to24 = mult17to24.mul(player.PL2energy.max(1).log(2).pow(16).max(1));
 
     if (player.resa01.gte(1)) mult25to32 = mult25to32.mul(v.rese01);
 
@@ -1255,19 +1255,19 @@ function getWscMult() {
     if (player.ptn[1] == true) mult09to16 = mult09to16.mul(v.ptnm02);
     if (player.ptn[2] == true) mult17to24 = mult17to24.mul(v.ptnm03);
     if (player.ptn[3] == true & player.tthpu[2] == true) mult25to32 = mult25to32.mul(v.ptnm04);
-
+    
     mult01to08 = mult01to08.mul(v.tthmul.max(1));
     mult09to16 = mult09to16.mul(v.tthmul.max(1));
     mult17to24 = mult17to24.mul(v.tthmul.max(1));
     mult25to32 = mult25to32.mul(v.tthmul.max(1));
-
+    
     mult33to40 = mult33to40.mul(v.fraue02);
-
+    
     mult01to08 = mult01to08.mul(v.PL1engmul).mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul);
     mult09to16 = mult09to16.mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul);
     mult17to24 = mult17to24.mul(v.PL3engmul).mul(v.PL4engmul);
     mult25to32 = mult25to32.mul(v.PL4engmul);
-
+    
     if (player.tier02.gte(750)) {
         wmpb01to08 = v.wscmpb.pow(256);
         wmpb09to16 = v.wscmpb.pow(64);
@@ -3449,7 +3449,7 @@ async function PL4reset() {
         player.PL1tms = new Decimal(0);
         player.PL1sec = new Decimal(0);
         if (player.PL2tms.eq(0)) player.PL1upg = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,];
-        if (player.PL2tms.eq(1)) player.PL1upg = [true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false,];
+        if (player.PL2tms.eq(1) | player.PL4goal[1] == true) player.PL1upg = [true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false,];
         if (player.PL2tms.eq(2)) player.PL1upg = [true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false,];
         if (player.PL2tms.eq(3)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false,];
         if (player.PL2tms.gte(4)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,];
@@ -3491,7 +3491,8 @@ async function PL4reset() {
         player.PL2energy = new Decimal(1);
         player.PL2pts = new Decimal(0);
         player.PL2ptsttl = new Decimal(0);
-        player.PL2tms = new Decimal(2).pow(player.PL3tms).min(player.PL3tms.mul(4));
+        player.PL2tms = new Decimal(0);
+        if (player.PL4goal[4] == true) player.PL2tms = new Decimal(10);
         player.PL2sec = new Decimal(0);
         player.PL2tmsc = new Decimal(0);
         if (player.PL4goal[4] != true) {
@@ -3625,7 +3626,8 @@ async function PL4reset() {
         player.resp15= new Decimal(0);
         player.resp16= new Decimal(0);
         player.ptn= [false, false, false, false, false, false, false, false,];
-        player.ptnu01= new Decimal(0);
+        player.ptnu01 = new Decimal(0);
+        if (player.PL4goal[3] == true) player.ptnu01 = new Decimal(1);
         player.ptnu02= new Decimal(0);
         player.ptnu03= new Decimal(0);
         player.ptnu04= new Decimal(0);
