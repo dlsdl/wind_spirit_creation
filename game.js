@@ -14,6 +14,7 @@ var hexdigit = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0a"
                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "1a", "1b", "1c", "1d", "1e", "1f",
                 "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "2a", "2b", "2c", "2d", "2e", "2f",
                 "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "3a", "3b", "3c", "3d", "3e", "3f",
+                "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "4a", "4b", "4c", "4d", "4e", "4f",
 ];
 var player;
 
@@ -54,6 +55,14 @@ function hardReset() {
         wscb30: new Decimal(0),
         wscb31: new Decimal(0),
         wscb32: new Decimal(0),
+        wscb33: new Decimal(0),
+        wscb34: new Decimal(0),
+        wscb35: new Decimal(0),
+        wscb36: new Decimal(0),
+        wscb37: new Decimal(0),
+        wscb38: new Decimal(0),
+        wscb39: new Decimal(0),
+        wscb40: new Decimal(0),
 
         wsca01: new Decimal(0),
         wsca02: new Decimal(0),
@@ -87,15 +96,23 @@ function hardReset() {
         wsca30: new Decimal(0),
         wsca31: new Decimal(0),
         wsca32: new Decimal(0),
+        wsca33: new Decimal(0),
+        wsca34: new Decimal(0),
+        wsca35: new Decimal(0),
+        wsca36: new Decimal(0),
+        wsca37: new Decimal(0),
+        wsca38: new Decimal(0),
+        wsca39: new Decimal(0),
+        wsca40: new Decimal(0),
 
         tier01: new Decimal(0),
         tier02: new Decimal(0),
         tier03: new Decimal(0),
         tier04: new Decimal(0),
-        tier01conf: true,
-        tier02conf: true,
-        tier03conf: true,
-        tier04conf: true,
+        tier01conf: false,
+        tier02conf: false,
+        tier03conf: false,
+        tier04conf: false,
         autobuytier01: false,
         autobuytier02: false,
         autobuytier03: false,
@@ -344,6 +361,30 @@ function hardReset() {
         convc: [false, false, false, false,],
         convn: new Decimal(0),
 
+        hasUnlockedPL4: false,
+        PL4energy: new Decimal(1),
+        PL4pts: new Decimal(0),
+        PL4ptsttl: new Decimal(0),
+        PL4tms: new Decimal(0),
+        PL4sec: new Decimal(0),
+        PL4conf: true,
+
+        PL4goal: [false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+        ],
+        PL4fra: new Decimal(0),
+        PL4frattl: new Decimal(0),
+        frau01: new Decimal(0),
+        frau02: new Decimal(0),
+        frau03: new Decimal(0),
+        frau04: new Decimal(0),
+        frau05: new Decimal(0),
+        frau06: new Decimal(0),
+        frau07: new Decimal(0),
+        frau08: new Decimal(0),
+
+
         autobuywsc: [null,
             false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
@@ -351,6 +392,7 @@ function hardReset() {
             false, false, false, false, false, false, false, false,
         ],
         ach: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
+              false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
               false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
               false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
               false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
@@ -375,6 +417,7 @@ hardReset();
 v = {
     gamespd1: new Decimal(1),
     gamespd2: new Decimal(1),
+    softcap: new Decimal("e3.470639555327098e17"),
 
     scal01: new Decimal(1024),
     scal02: new Decimal(1099511627776),
@@ -386,13 +429,22 @@ v = {
     scal08: new Decimal("3.524971412108382e3082"),
 
     scaltier01: new Decimal(100),
-    scaltier02: new Decimal(1e8),
-    scaltier03: new Decimal(1e24),
-    scaltier04: new Decimal(1e64),
-    scaltier05: new Decimal(1e160),
-    scaltier06: new Decimal("1e384"),
-    scaltier07: new Decimal("1e896"),
-    scaltier08: new Decimal("1e2048"),
+    scaltier02: new Decimal(1e10),
+    scaltier03: new Decimal(1e42),
+    scaltier04: new Decimal(1e170),
+    scaltier05: new Decimal("1e682"),
+    scaltier06: new Decimal("1e2730"),
+    scaltier07: new Decimal("1e10922"),
+    scaltier08: new Decimal("1e43690"),
+
+    scalupgd01: new Decimal(100),
+    scalupgd02: new Decimal(1e8),
+    scalupgd03: new Decimal(1e24),
+    scalupgd04: new Decimal(1e64),
+    scalupgd05: new Decimal(1e160),
+    scalupgd06: new Decimal("1e384"),
+    scalupgd07: new Decimal("1e896"),
+    scalupgd08: new Decimal("1e2048"),
 
     wscc01: new Decimal(2),
     wscc02: new Decimal(4),
@@ -426,6 +478,14 @@ v = {
     wscc30: new Decimal(4294967296),
     wscc31: new Decimal(1.844674407370955e19),
     wscc32: new Decimal(3.402823669209384e38),
+    wscc33: new Decimal(0),
+    wscc34: new Decimal(0),
+    wscc35: new Decimal(0),
+    wscc36: new Decimal(0),
+    wscc37: new Decimal(0),
+    wscc38: new Decimal(0),
+    wscc39: new Decimal(0),
+    wscc40: new Decimal(0),
 
     wsccor01 : new Decimal(1),
     wsccor02 : new Decimal(2),
@@ -459,6 +519,14 @@ v = {
     wsccor30: new Decimal(32),
     wsccor31: new Decimal(64),
     wsccor32: new Decimal(128),
+    wsccor33: new Decimal(1),
+    wsccor34: new Decimal(2),
+    wsccor35: new Decimal(4),
+    wsccor36: new Decimal(8),
+    wsccor37: new Decimal(16),
+    wsccor38: new Decimal(32),
+    wsccor39: new Decimal(64),
+    wsccor40: new Decimal(128),
 
     wsccsl01 : new Decimal(2),
     wsccsl02 : new Decimal(4),
@@ -492,6 +560,14 @@ v = {
     wsccsl30: new Decimal(64),
     wsccsl31: new Decimal(128),
     wsccsl32: new Decimal(256),
+    wsccsl33: new Decimal(2),
+    wsccsl34: new Decimal(4),
+    wsccsl35: new Decimal(8),
+    wsccsl36: new Decimal(16),
+    wsccsl37: new Decimal(32),
+    wsccsl38: new Decimal(64),
+    wsccsl39: new Decimal(128),
+    wsccsl40: new Decimal(256),
 
     wscm01 : new Decimal(1),
     wscm02 : new Decimal(1),
@@ -525,6 +601,14 @@ v = {
     wscm30: new Decimal(1),
     wscm31: new Decimal(1),
     wscm32: new Decimal(1),
+    wscm33: new Decimal(0),
+    wscm34: new Decimal(0),
+    wscm35: new Decimal(0),
+    wscm36: new Decimal(0),
+    wscm37: new Decimal(0),
+    wscm38: new Decimal(0),
+    wscm39: new Decimal(0),
+    wscm40: new Decimal(0),
 
     wscp01: new Decimal(1),
     wscp02: new Decimal(1),
@@ -558,15 +642,69 @@ v = {
     wscp30: new Decimal(1),
     wscp31: new Decimal(1),
     wscp32: new Decimal(1),
+    wscp33: new Decimal(0),
+    wscp34: new Decimal(0),
+    wscp35: new Decimal(0),
+    wscp36: new Decimal(0),
+    wscp37: new Decimal(0),
+    wscp38: new Decimal(0),
+    wscp39: new Decimal(0),
+    wscp40: new Decimal(0),
+
+    wsch01: new Decimal(1),
+    wsch02: new Decimal(1),
+    wsch03: new Decimal(1),
+    wsch04: new Decimal(1),
+    wsch05: new Decimal(1),
+    wsch06: new Decimal(1),
+    wsch07: new Decimal(1),
+    wsch08: new Decimal(1),
+    wsch09: new Decimal(1),
+    wsch10: new Decimal(1),
+    wsch11: new Decimal(1),
+    wsch12: new Decimal(1),
+    wsch13: new Decimal(1),
+    wsch14: new Decimal(1),
+    wsch15: new Decimal(1),
+    wsch16: new Decimal(1),
+    wsch17: new Decimal(1),
+    wsch18: new Decimal(1),
+    wsch19: new Decimal(1),
+    wsch20: new Decimal(1),
+    wsch21: new Decimal(1),
+    wsch22: new Decimal(1),
+    wsch23: new Decimal(1),
+    wsch24: new Decimal(1),
+    wsch25: new Decimal(1),
+    wsch26: new Decimal(1),
+    wsch27: new Decimal(1),
+    wsch28: new Decimal(1),
+    wsch29: new Decimal(1),
+    wsch30: new Decimal(1),
+    wsch31: new Decimal(1),
+    wsch32: new Decimal(1),
+    wsch33: new Decimal(1),
+    wsch34: new Decimal(1),
+    wsch35: new Decimal(1),
+    wsch36: new Decimal(1),
+    wsch37: new Decimal(1),
+    wsch38: new Decimal(1),
+    wsch39: new Decimal(1),
+    wsch40: new Decimal(1),
 
     wscmpb: new Decimal(1.6),
+    wscppb: new Decimal(1.001),
 
-    wscBaseValue: new Decimal(0),
-    wscBaseValue1: new Decimal(0),
-    wscBaseValue2: new Decimal(0),
-    wscBaseValue3: new Decimal(0),
-    wscBaseValue4: new Decimal(0),
-    wscBaseValueExp: new Decimal(1),
+    wscbaseValue: new Decimal(0),
+    wscbaseValue1: new Decimal(0),
+    wscbaseValue2: new Decimal(0),
+    wscbaseValue3: new Decimal(0),
+    wscbaseValue4: new Decimal(0),
+    wscbaseValue5: new Decimal(0),
+    wscbaseValue6: new Decimal(0),
+    wscbaseValue7: new Decimal(0),
+    wscbaseValue8: new Decimal(0),
+    wscbaseValueExp: new Decimal(1),
     tierc01: new Decimal(64),
     tierc02: new Decimal(4),
     tierc03: new Decimal(4),
@@ -778,6 +916,30 @@ v = {
     convp14: new Decimal(0),
     convp15: new Decimal(0),
     convp16: new Decimal(0),
+
+    PL4engmul: new Decimal(1),
+    PL4engpow: new Decimal(1),
+
+    fraft1: new Decimal(1),
+    fraft2: new Decimal(1),
+    fraft3: new Decimal(1),
+    fraft4: new Decimal(1),
+    frauc01: new Decimal(1),
+    frauc02: new Decimal(1),
+    frauc03: new Decimal(1),
+    frauc04: new Decimal(1),
+    frauc05: new Decimal(1),
+    frauc06: new Decimal(1),
+    frauc07: new Decimal(1),
+    frauc08: new Decimal(1),
+    fraue01: new Decimal(1),
+    fraue02: new Decimal(1),
+    fraue03: new Decimal(1),
+    fraue04: new Decimal(1),
+    fraue05: new Decimal(1),
+    fraue06: new Decimal(1),
+    fraue07: new Decimal(1),
+    fraue08: new Decimal(1),
 }
 
 var tempPlayer = player;
@@ -791,7 +953,7 @@ player = tempPlayer;
 /*离线时间*/
 function get_offline_time() {
     let nt = Date.now();
-    if (nt - player.nowtime > 60000 && player.nowtime > 60000) {
+    if (nt - player.nowtime > 10000 && player.nowtime > 10000) {
         if (nt - player.nowtime >= 86400000) {
             nt = player.nowtime + 86400000;
         }
@@ -907,6 +1069,14 @@ function buyWsc(tier) {
         }
         else return
     }
+    else if (tier <= 40) {
+        if (player.PL4pts.gte(v["wscc" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(1);
+            player["wscb" + name] = player["wscb" + name].add(1);
+            player.PL4pts = player.PL4pts.sub(v["wscc" + name]);
+        }
+        else return
+    }
     else return
 }
 
@@ -915,10 +1085,10 @@ function buyMaxWsc(tier) {
     var name = tiername[tier];
     if (tier <= 8) {
         if (player.innormcha == 4 & tier >= 5) return;
-        var wscbmax = invscale(player.energy.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
-        if (wscbmax.gt(player["wscb" + name])) {
-            player["wsca" + name] = player["wsca" + name].add(wscbmax.sub(player["wscb" + name]));
-            player["wscb" + name] = wscbmax.sub(1);
+        var wsccmax = invscale(player.energy.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
+        if (wsccmax.gt(player["wscb" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(wsccmax.sub(player["wscb" + name]));
+            player["wscb" + name] = wsccmax.sub(1);
             getWscCost();
             player.energy = player.energy.sub(v["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
@@ -934,10 +1104,10 @@ function buyMaxWsc(tier) {
         else return
     }
     else if (tier <= 16) {
-        var wscbmax = invscale(player.PL1pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
-        if (wscbmax.gt(player["wscb" + name])) {
-            player["wsca" + name] = player["wsca" + name].add(wscbmax.sub(player["wscb" + name]));
-            player["wscb" + name] = wscbmax.sub(1);
+        var wsccmax = invscale(player.PL1pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
+        if (wsccmax.gt(player["wscb" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(wsccmax.sub(player["wscb" + name]));
+            player["wscb" + name] = wsccmax.sub(1);
             getWscCost();
             player.PL1pts = player.PL1pts.sub(v["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
@@ -945,10 +1115,10 @@ function buyMaxWsc(tier) {
         else return
     }
     else if (tier <= 24) {
-        var wscbmax = invscale(player.PL2pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
-        if (wscbmax.gt(player["wscb" + name])) {
-            player["wsca" + name] = player["wsca" + name].add(wscbmax.sub(player["wscb" + name]));
-            player["wscb" + name] = wscbmax.sub(1);
+        var wsccmax = invscale(player.PL2pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
+        if (wsccmax.gt(player["wscb" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(wsccmax.sub(player["wscb" + name]));
+            player["wscb" + name] = wsccmax.sub(1);
             getWscCost();
             player.PL2pts = player.PL2pts.sub(v["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
@@ -956,12 +1126,23 @@ function buyMaxWsc(tier) {
         else return
     }
     else if (tier <= 32) {
-        var wscbmax = invscale(player.PL3pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
-        if (wscbmax.gt(player["wscb" + name])) {
-            player["wsca" + name] = player["wsca" + name].add(wscbmax.sub(player["wscb" + name]));
-            player["wscb" + name] = wscbmax.sub(1);
+        var wsccmax = invscale(player.PL3pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
+        if (wsccmax.gt(player["wscb" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(wsccmax.sub(player["wscb" + name]));
+            player["wscb" + name] = wsccmax.sub(1);
             getWscCost();
             player.PL3pts = player.PL3pts.sub(v["wscc" + name]);
+            player["wscb" + name] = player["wscb" + name].add(1);
+        }
+        else return
+    }
+    else if (tier <= 40) {
+        var wsccmax = invscale(player.PL4pts.log(2)).add(v["wsccor" + name]).div(v["wsccsl" + name]).floor();
+        if (wsccmax.gt(player["wscb" + name])) {
+            player["wsca" + name] = player["wsca" + name].add(wsccmax.sub(player["wscb" + name]));
+            player["wscb" + name] = wsccmax.sub(1);
+            getWscCost();
+            player.PL4pts = player.PL4pts.sub(v["wscc" + name]);
             player["wscb" + name] = player["wscb" + name].add(1);
         }
         else return
@@ -970,7 +1151,11 @@ function buyMaxWsc(tier) {
 }
 
 function autoBuyWsc(tier) {
-        if (player.autobuywsc[tier] == true) buyMaxWsc(tier);
+    if (player.autobuywsc[tier] == true) buyMaxWsc(tier);
+}
+
+function abw(tier) {
+    if (player.autobuywsc[tier] == true) buyWsc(tier);
 }
 
 function abwSwitch(tier) {
@@ -979,7 +1164,7 @@ function abwSwitch(tier) {
 }
 
 function maxAll() {
-    for (let i = 1; i <= 32; i++) {
+    for (let i = 1; i <= 40; i++) {
         buyMaxWsc(i);
     }
 }
@@ -1008,24 +1193,35 @@ function maxAll32() {
     }
 }
 
+function maxAll40() {
+    for (let i = 33; i <= 40; i++) {
+        buyMaxWsc(i);
+    }
+}
+
 function getWscMult() {
     let mult01to08 = new Decimal(1);
     let mult09to16 = new Decimal(1);
     let mult17to24 = new Decimal(1);
     let mult25to32 = new Decimal(1);
+    let mult33to40 = new Decimal(1);
 
     let wmpb01to08 = new Decimal(1);
     let wmpb09to16 = new Decimal(1);
     let wmpb17to24 = new Decimal(1);
     let wmpb25to32 = new Decimal(1);
+    let wmpb33to40 = new Decimal(1);
+
+    let wbpw = new Decimal(1);
+    if (player.tier01.gte(6308)) wbpw = wbpw.pow(player.tthsize.max(1).pow(5));
+    if (player.tier03.gte(50)) wbpw = wbpw.pow(player.tier03.sub(44).mul(0.2).max(1));
 
     if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(player.tier01.add(1).pow(2));
-    if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(v.wscBaseValue.div(64).max(1));
+    if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(v.wscbaseValue.div(64).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
     if (player.tier01.gte(10)) mult01to08 = mult01to08.mul(player.energy.add(1).log(2).pow(0.2).max(1));
-    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01));
+    if (player.tier01.gte(25)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01.mul(wbpw)));
     if (player.tier01.gte(63)) mult09to16 = mult09to16.mul(player.tier01.add(1).pow(2)).mul(player.tier02.add(1).pow(3));
-    if (player.tier01.gte(6308)) mult01to08 = mult01to08.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01).pow(player.tthsize.sub(10).max(1).pow(6)));
 
     if (player.PL1upg[4] == true) mult09to16 = mult09to16.mul(player.PL1energy.add(1).log(2).max(1).pow(player.chacom02.mul(1).add(2)));
     if (player.PL1upg[5] == true) mult09to16 = mult09to16.mul(player.PL1ptsttl.min(player.PL1ptsttl.add(1).log(1.189207115002721).pow(4).mul(4294967296)).max(1));
@@ -1060,37 +1256,46 @@ function getWscMult() {
     if (player.ptn[2] == true) mult17to24 = mult17to24.mul(v.ptnm03);
     if (player.ptn[3] == true & player.tthpu[2] == true) mult25to32 = mult25to32.mul(v.ptnm04);
 
-    mult01to08 = mult01to08.mul(v.PL1engmul).mul(v.PL2engmul).mul(v.PL3engmul);
-    mult09to16 = mult09to16.mul(v.PL2engmul).mul(v.PL3engmul);
-    mult17to24 = mult17to24.mul(v.PL3engmul);
+    mult01to08 = mult01to08.mul(v.tthmul.max(1));
+    mult09to16 = mult09to16.mul(v.tthmul.max(1));
+    mult17to24 = mult17to24.mul(v.tthmul.max(1));
+    mult25to32 = mult25to32.mul(v.tthmul.max(1));
+
+    mult33to40 = mult33to40.mul(v.fraue02);
+
+    mult01to08 = mult01to08.mul(v.PL1engmul).mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul);
+    mult09to16 = mult09to16.mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul);
+    mult17to24 = mult17to24.mul(v.PL3engmul).mul(v.PL4engmul);
+    mult25to32 = mult25to32.mul(v.PL4engmul);
 
     if (player.tier02.gte(750)) {
-        wmpb01to08 = v.wscmpb.pow(64);
-        wmpb09to16 = v.wscmpb.pow(16);
-        wmpb17to24 = v.wscmpb.pow(4);
-        wmpb25to32 = v.wscmpb;
+        wmpb01to08 = v.wscmpb.pow(256);
+        wmpb09to16 = v.wscmpb.pow(64);
+        wmpb17to24 = v.wscmpb.pow(16);
+        wmpb25to32 = v.wscmpb.pow(4);
+        wmpb33to40 = v.wscmpb;
     }
     else if (player.tier02.gte(75)) {
         wmpb01to08 = v.wscmpb.pow(16);
         wmpb09to16 = v.wscmpb.pow(4);
         wmpb17to24 = v.wscmpb;
         wmpb25to32 = v.wscmpb;
+        wmpb33to40 = v.wscmpb;
     }
     else {
         wmpb01to08 = v.wscmpb;
         wmpb09to16 = v.wscmpb;
         wmpb17to24 = v.wscmpb;
         wmpb25to32 = v.wscmpb;
+        wmpb33to40 = v.wscmpb;
     }
-    mult01to08 = mult01to08.mul(v.tthmul.max(1));
-    mult09to16 = mult09to16.mul(v.tthmul.max(1));
-    mult17to24 = mult17to24.mul(v.tthmul.max(1));
-    mult25to32 = mult25to32.mul(v.tthmul.max(1));
+
     if (player.incha == 4 | player.incha == 9) {
         mult01to08 = mult01to08.pow(0.25);
         mult09to16 = mult09to16.pow(0.25);
         mult17to24 = mult17to24.pow(0.25);
         mult25to32 = mult25to32.pow(0.25);
+        mult33to40 = mult33to40.pow(0.25);
     }
 
     for (let tier = 1; tier <= 8; tier++) {
@@ -1109,9 +1314,13 @@ function getWscMult() {
         let name = tiername[tier];
         v["wscm" + name] = wmpb25to32.pow(player["wscb" + name]).mul(mult25to32.max(1));
     }
+    for (let tier = 33; tier <= 40; tier++) {
+        let name = tiername[tier];
+        v["wscm" + name] = wmpb33to40.pow(player["wscb" + name]).mul(mult33to40.max(1));
+    }
 
     if (player.infytx == true | player.incha == 9) {
-        for (let tier = 1; tier <= 32; tier++) {
+        for (let tier = 1; tier <= 40; tier++) {
             let name = tiername[tier];
             v["wscm" + name] = v["wscm" + name].div(player.energy.pow(0.125));
         }
@@ -1126,7 +1335,7 @@ function getWscMult() {
     if (player.innormcha == 10) {
         for (let tier = 1; tier <= 8; tier++) {
             let name = tiername[tier];
-            v["wscm" + name] = v["wscm" + name].div(v.wscBaseValue1.add(1).pow(2));
+            v["wscm" + name] = v["wscm" + name].div(v.wscbaseValue1.add(1).pow(2));
         }
     }
 }
@@ -1136,6 +1345,7 @@ function getWscPow() {
     let powe09to16 = new Decimal(1);
     let powe17to24 = new Decimal(1);
     let powe25to32 = new Decimal(1);
+    let powe33to40 = new Decimal(1);
     if (player.innormcha == 1) {
         v.wscp01 = new Decimal(2);
         for (let tier = 2; tier <= 8; tier++) {
@@ -1153,7 +1363,7 @@ function getWscPow() {
     else if (player.innormcha == 9) {
         for (let tier = 1; tier <= 8; tier++) {
             let name = tiername[tier];
-            v["wscp" + name] = new Decimal(1).sub(v.wscBaseValue1.mul(0.001)).max(0);
+            v["wscp" + name] = new Decimal(1).sub(v.wscbaseValue1.mul(0.001)).max(0);
         }
     }
     else {
@@ -1166,7 +1376,7 @@ function getWscPow() {
             powe09to16 = powe09to16.add(player.tier03.min(player.tier03.pow(0.5).mul(8)).mul(0.001));
         }
         if (player.tier04.gte(3)) powe17to24 = powe17to24.add(player.tier03.min(player.tier03.pow(0.5).mul(8)).mul(0.001));
-        if (player.tier03.gte(126)) powe25to32 = powe25to32.add(player.tier03.min(player.tier03.pow(0.5).mul(8)).mul(0.001));
+        if (player.tier03.gte(126)) powe25to32 = powe25to32.add(player.tier03.min(player.tier03.pow(0.5).mul(8)).mul(0.0004));
 
         if (player.alcu[5] == true) {
             powe01to08 = powe01to08.add(player.energy.add(1).log(2).add(1).log(2).div(a));
@@ -1234,6 +1444,10 @@ function getWscPow() {
             let name = tiername[tier];
             v["wscp" + name] = powe25to32;
         }
+        for (let tier = 33; tier <= 40; tier++) {
+            let name = tiername[tier];
+            v["wscp" + name] = powe33to40;
+        }
     }
     if (player.incha == 2 | player.incha == 9) {
         for (let tier = 1; tier <= 32; tier++) {
@@ -1241,6 +1455,10 @@ function getWscPow() {
             v["wscp" + name] = v["wscp" + name].div(player.energy.log(2).max(1).pow(0.5).div(1024).add(1)).min(1);
         }
     }
+}
+
+function getWscHyp() {
+
 }
 
 function getWscMultPerBuy() {
@@ -1251,14 +1469,14 @@ function getWscMultPerBuy() {
     if (player.tier02.gte(12)) v.wscmpb = v.wscmpb.mul(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
     if (player.PL1upg[15] == true) v.wscmpb = v.wscmpb.mul(1.25);
     if (player.hasunlockedanmorb == true & player.incha != 6 & player.incha != 9) {
-        if (player.std[0] == true) v.wscmpb = v.wscmpb.pow(player.anmpar.add(1).log(2).add(1).log(2).pow(player.parupg03.div(64).add(0.0625)).max(1));
-        else v.wscmpb = v.wscmpb.mul(player.anmpar.add(1).log(2).pow(player.parupg03.div(64).add(0.0625)).max(1));
+        if (player.std[0] == true) v.wscmpb = v.wscmpb.pow(player.anmpar.add(1).log(2).add(1).log(2).pow(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4))).max(1));
+        else v.wscmpb = v.wscmpb.mul(player.anmpar.add(1).log(2).pow(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4))).max(1));
     }
     if (player.innormcha == 12) v.wscmpb = new Decimal(1);
 }
 
 function getWscCost() {
-    for (let tier = 1; tier <= 32; tier++) {
+    for (let tier = 1; tier <= 40; tier++) {
         let name = tiername[tier];
         var bcost = v["wsccor" + name].add(v["wsccsl" + name].mul(player["wscb" +name]));
         v["wscc" + name] = new Decimal(2).pow(scale(bcost));
@@ -1273,37 +1491,42 @@ function getWscCost() {
 }
 
 function getWscBaseValue() {
-    v.wscBaseValue1 = new Decimal(0);
-    v.wscBaseValue2 = new Decimal(0);
-    v.wscBaseValue3 = new Decimal(0);
-    v.wscBaseValue4 = new Decimal(0);
-    v.wscBaseValueExp = new Decimal(1);
+    v.wscbaseValue1 = new Decimal(0);
+    v.wscbaseValue2 = new Decimal(0);
+    v.wscbaseValue3 = new Decimal(0);
+    v.wscbaseValue4 = new Decimal(0);
+    v.wscbaseValue5 = new Decimal(0);
+    v.wscbaseValueExp = new Decimal(1);
     for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        v.wscBaseValue1 = v.wscBaseValue1.add(player["wscb" + name]);
+        v.wscbaseValue1 = v.wscbaseValue1.add(player["wscb" + name]);
     }
     for (let tier = 9; tier <= 16; tier++) {
         let name = tiername[tier];
-        v.wscBaseValue2 = v.wscBaseValue2.add(player["wscb" + name]);
+        v.wscbaseValue2 = v.wscbaseValue2.add(player["wscb" + name]);
     }
     for (let tier = 17; tier <= 24; tier++) {
         let name = tiername[tier];
-        v.wscBaseValue3 = v.wscBaseValue3.add(player["wscb" + name]);
+        v.wscbaseValue3 = v.wscbaseValue3.add(player["wscb" + name]);
     }
     for (let tier = 25; tier <= 32; tier++) {
         let name = tiername[tier];
-        v.wscBaseValue4 = v.wscBaseValue4.add(player["wscb" + name]);
+        v.wscbaseValue4 = v.wscbaseValue4.add(player["wscb" + name]);
     }
-    if (player.std[1] == true) v.wscBaseValueExp = v.wscBaseValueExp.add(0.05);
-    v.wscBaseValueExp = v.wscBaseValueExp.add(player.alcu06.mul(0.005));
-    if (player.resa15.gte(1)) v.wscBaseValueExp = v.wscBaseValueExp.add(0.1);
-    v.wscBaseValue = v.wscBaseValue1.add(v.wscBaseValue2.mul(4)).add(v.wscBaseValue3.mul(16)).add(v.wscBaseValue4.mul(64)).pow(v.wscBaseValueExp);
-    if (player.innormcha == 6 & v.wscBaseValue1.gt(60)) quitCha();
+    for (let tier = 33; tier <= 40; tier++) {
+        let name = tiername[tier];
+        v.wscbaseValue5 = v.wscbaseValue5.add(player["wscb" + name]);
+    }
+    if (player.std[1] == true) v.wscbaseValueExp = v.wscbaseValueExp.add(0.05);
+    v.wscbaseValueExp = v.wscbaseValueExp.add(player.alcu06.mul(0.005));
+    if (player.resa15.gte(1)) v.wscbaseValueExp = v.wscbaseValueExp.add(0.1);
+    v.wscbaseValue = v.wscbaseValue1.add(v.wscbaseValue2.mul(4)).add(v.wscbaseValue3.mul(16)).add(v.wscbaseValue4.mul(64)).add(v.wscbaseValue5.mul(256)).mul(v.fraue06).pow(v.wscbaseValueExp);
+    if (player.innormcha == 6 & v.wscbaseValue1.gt(60)) quitCha();
 }
 
 function incTier1() {
     if (player.innormcha == 9 | player.innormcha == 10) return
-    if (v.wscBaseValue.gte(v.tierc01)) {
+    if (v.wscbaseValue.gte(v.tierc01)) {
         let confirmation = true;
         if (player.tier01conf == true & player.autobuytier01 == false) confirmation = confirm("这样做会使术式里诞生的风灵迅速就消散。确定获得风单元？这将重置能量和1~8式风灵作成");
         if (confirmation | !player.tier01conf) {
@@ -1343,7 +1566,7 @@ function incTier4() {
 }
 
 function incMaxTier1() {
-    let tierbmax = invscaleTier(v.wscBaseValue.div(64)).floor();
+    let tierbmax = invscaleTier(v.wscbaseValue.div(64)).floor();
     if (tierbmax.gt(player.tier01)) {
         player.tier01 = tierbmax;
         if (player.PL1upg[13] == false) tier01Reset();
@@ -1458,7 +1681,7 @@ function abTier04Switch() {
 
 function autoBuyTier01() {
     if (player.autobuytier01 == true) {
-        incMaxTier1();
+        if (player.normchacom[8] == true) incMaxTier1();
         getTierCost();
         incTier1();
     }
@@ -1466,7 +1689,7 @@ function autoBuyTier01() {
 
 function autoBuyTier02() {
     if (player.autobuytier02 == true) {
-        incMaxTier2();
+        if (player.normchacom[9] == true) incMaxTier2();
         getTierCost();
         incTier2();
     }
@@ -1533,11 +1756,17 @@ function abUpgd04Switch() {
 }
 
 function autoBuyUpgd01() {
-    if (player.autobuyupgd01 == true & player.tier02.gte(1)) buyMaxUpgd(1);
+    if (player.autobuyupgd01 == true & player.tier02.gte(1)) {
+        if (player.normchacom[10] == true) buyMaxUpgd(1);
+        else buyUpgd(1);
+    }
 }
 
 function autoBuyUpgd02() {
-    if (player.autobuyupgd02 == true & player.tier02.gte(2)) buyMaxUpgd(2);
+    if (player.autobuyupgd02 == true & player.tier02.gte(2)) {
+        if (player.normchacom[11] == true) buyMaxUpgd(2);
+        else buyUpgd(2);
+    }
 }
 
 function autoBuyUpgd03() {
@@ -1593,8 +1822,7 @@ async function PL1reset() {
     if (confirmation | !player.PL1conf) {
         player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor());
         player.PL1ptsttl = player.PL1ptsttl.add(player.energy.root(1024).floor());
-        if (player.std[14] == true) player.PL1tms = player.PL1tms.add(new Decimal(2).pow(player.PL1bab11).mul(v.wscBaseValue.max(1).log(2)));
-        else player.PL1tms = player.PL1tms.add(new Decimal(2).pow(player.PL1bab11));
+        player.PL1tms = player.PL1tms.add(getPL1tms());
         player.hasUnlockedPL1 = true;
 
         clearInterval(prod);
@@ -1630,6 +1858,15 @@ async function PL1reset() {
         player.energy = new Decimal(2);
         prod = setInterval(produce, 50);
     }
+}
+
+function getPL1tms() {
+    let baset = new Decimal(1);
+    baset = baset.mul(new Decimal(2).pow(player.PL1bab11));
+    if (player.std[14] == true) baset = baset.mul(v.wscbaseValue.max(1).log(2));
+    if (player.PL4goal[0] == true) baset = baset.mul(2);
+    if (player.PL4goal[1] == true) baset = baset.mul(2);
+    return baset;
 }
 
 function getPL1engMul() {
@@ -1795,21 +2032,34 @@ function buyparupg(tier) {
 
 function autobuyparupg() {
     getParupgCost();
-    if (player.anmpar.gte(v.parupgc01) & player.PL2upg03.gte(1)) player.parupg01 = player.parupg01.add(1);
-    if (player.anmpar.gte(v.parupgc02) & player.PL2upg03.gte(2)) player.parupg02 = player.parupg02.add(1);
-    if (player.anmpar.gte(v.parupgc03) & player.PL2upg03.gte(3)) player.parupg03 = player.parupg03.add(1);
-    if (player.anmpar.gte(v.parupgc04) & player.PL2upg03.gte(4)) {
-        player.parupg04 = player.parupg04.add(1);
-        player.anmorb = player.anmorb.add(1);
-        player.anmorbttl = player.anmorbttl.add(1);
-    }
+    let max1 = invscaleUpgd(player.anmpar.log(10)).floor().sub(player.parupg01).max(0);
+    let max2 = invscaleUpgd(player.anmpar.log(10)).div(2).floor().sub(player.parupg02).max(0);
+    let max3 = invscaleUpgd(player.anmpar.log(10)).div(3).floor().sub(player.parupg03).max(0);
+    let max4 = invscaleUpgd(player.anmpar.log(10)).mul(2).floor().sub(player.parupg04).max(0);
+        if (player.anmpar.gte(v.parupgc01) & player.PL2upg03.gte(1)) player.parupg01 = player.parupg01.add(max1);
+        if (player.anmpar.gte(v.parupgc02) & player.PL2upg03.gte(2)) player.parupg02 = player.parupg02.add(max2);
+        if (player.anmpar.gte(v.parupgc03) & player.PL2upg03.gte(3)) player.parupg03 = player.parupg03.add(max3);
+        if (player.anmpar.gte(v.parupgc04) & player.PL2upg03.gte(4)) {
+            player.parupg04 = player.parupg04.add(max4);
+            player.anmorb = player.anmorb.add(max4);
+            player.anmorbttl = player.anmorbttl.add(max4);
+        }
+        getParupgCost();
+        if (player.anmpar.gte(v.parupgc01) & player.PL2upg03.gte(1)) player.parupg01 = player.parupg01.add(1);
+        if (player.anmpar.gte(v.parupgc02) & player.PL2upg03.gte(2)) player.parupg02 = player.parupg02.add(1);
+        if (player.anmpar.gte(v.parupgc03) & player.PL2upg03.gte(3)) player.parupg03 = player.parupg03.add(1);
+        if (player.anmpar.gte(v.parupgc04) & player.PL2upg03.gte(4)) {
+            player.parupg04 = player.parupg04.add(1);
+            player.anmorb = player.anmorb.add(1);
+            player.anmorbttl = player.anmorbttl.add(1);
+        }
 }
 
 function getParupgCost() {
-    v.parupgc01 = new Decimal(10).mul(new Decimal(10).pow(player.parupg01.add(player.parupg01.sub(100).max(0).pow(2))));
-    v.parupgc02 = new Decimal(100).mul(new Decimal(100).pow(player.parupg02.add(player.parupg02.sub(50).max(0).pow(2))));
-    v.parupgc03 = new Decimal(1000).mul(new Decimal(1000).pow(player.parupg03.add(player.parupg03.sub(33).max(0).pow(2))));
-    v.parupgc04 = new Decimal(80).mul(new Decimal(2.143546925).pow(player.parupg04).mul(new Decimal(1.059463094).pow(player.parupg04.sub(40).max(0).pow(2))));
+    v.parupgc01 = new Decimal(10).pow(scaleUpgd(player.parupg01.mul(1)).add(1));
+    v.parupgc02 = new Decimal(10).pow(scaleUpgd(player.parupg02.mul(2)).add(2));
+    v.parupgc03 = new Decimal(10).pow(scaleUpgd(player.parupg03.mul(3)).add(3));
+    v.parupgc04 = new Decimal(10).pow(scaleUpgd(player.parupg04.mul(0.5))).mul(80);
 }
 
 function buyorbupg(tier) {
@@ -1925,14 +2175,8 @@ async function PL2reset() {
     if (confirmation | !player.PL2conf) {
         player.PL2pts = player.PL2pts.add(player.PL1pts.root(1024).floor());
         player.PL2ptsttl = player.PL2ptsttl.add(player.PL1pts.root(1024).floor());
-        if (player.std[15] == true) {
-            player.PL2tms = player.PL2tms.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(player.PL1tms.max(1).log(2).max(1)).mul(v.PL3tef1.max(1)));
-            player.PL2tmsc = player.PL2tmsc.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(player.PL1tms.max(1).log(2).max(1)).mul(v.PL3tef1.max(1)));
-        }
-        else {
-            player.PL2tms = player.PL2tms.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(v.PL3tef1.max(1)));
-            player.PL2tmsc = player.PL2tmsc.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(v.PL3tef1.max(1)));
-        }
+        player.PL2tms = player.PL2tms.add(getPL2tms());
+        player.PL2tmsc = player.PL2tmsc.add(getPL2tms());
         player.hasUnlockedPL2 = true;
 
         clearInterval(prod);
@@ -2027,6 +2271,15 @@ async function PL2reset() {
         player.energy = new Decimal(2);
         prod = setInterval(produce, 50);
     }
+}
+
+function getPL2tms() {
+    let baset = new Decimal(1);
+    baset = baset.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(v.PL3tef1.max(1)));
+    if (player.std[15] == true) baset = baset.mul(player.PL1tms.max(1).log(2).max(1));
+    if (player.PL4goal[0] == true) baset = baset.mul(2);
+    if (player.PL4goal[1] == true) baset = baset.mul(2);
+    return baset;
 }
 
 function getPL2engMul() {
@@ -2307,13 +2560,31 @@ function entfytx() {
     player.enengy = new Decimal(2);
 }
 
+function autobuyanm2upg() {
+    if (player.resa11.gte(1)) {
+        let max1 = invscaleUpgd(player.anm2.log(10)).floor().sub(player.anm2u01).max(0);
+        let max2 = invscaleUpgd(player.anm2.log(10)).div(2).floor().sub(player.anm2u02).max(0);
+        let max3 = invscaleUpgd(player.anm2.log(10)).div(3).floor().sub(player.anm2u03).max(0);
+        let max4 = invscaleUpgd(player.anm2.log(10)).div(4).floor().sub(player.anm2u04).max(0);
+        if (player.anm2.gte(v.anm2c01)) player.anm2u01 = player.anm2u01.add(max1);
+        if (player.anm2.gte(v.anm2c02)) player.anm2u02 = player.anm2u02.add(max2);
+        if (player.anm2.gte(v.anm2c03)) player.anm2u03 = player.anm2u03.add(max3);
+        if (player.anm2.gte(v.anm2c04)) player.anm2u04 = player.anm2u04.add(max4);
+        getanm2();
+        if (player.anm2.gte(v.anm2c01)) player.anm2u01 = player.anm2u01.add(1);
+        if (player.anm2.gte(v.anm2c02)) player.anm2u02 = player.anm2u02.add(1);
+        if (player.anm2.gte(v.anm2c03)) player.anm2u03 = player.anm2u03.add(1);
+        if (player.anm2.gte(v.anm2c04)) player.anm2u04 = player.anm2u04.add(1);
+    }
+}
+
 function getanm2() {
     let score = player.energy.max(1).log(2);
     if ((player.infytx == true | player.resa16.gte(1)) & score.gte(player.anm2sc)) player.anm2sc = player.energy.max(1).log(2);
-    v.anm2c01 = new Decimal(10).pow(player.anm2u01.add(1).add(player.anm2u01.sub(100).max(0).pow(2)));
-    v.anm2c02 = new Decimal(100).pow(player.anm2u02.add(1).add(player.anm2u02.sub(50).max(0).pow(2)));
-    v.anm2c03 = new Decimal(1000).pow(player.anm2u03.add(1).add(player.anm2u03.sub(33).max(0).pow(2)));
-    v.anm2c04 = new Decimal(10000).pow(player.anm2u04.add(1).add(player.anm2u04.sub(25).max(0).pow(2)));
+    v.anm2c01 = new Decimal(10).pow(scaleUpgd(player.anm2u01.mul(1)).add(1));
+    v.anm2c02 = new Decimal(10).pow(scaleUpgd(player.anm2u02.mul(2)).add(2));
+    v.anm2c03 = new Decimal(10).pow(scaleUpgd(player.anm2u03.mul(3)).add(3));
+    v.anm2c04 = new Decimal(10).pow(scaleUpgd(player.anm2u04.mul(4)).add(4));
 }
 
 function buyanm2u(tier) {
@@ -2322,14 +2593,6 @@ function buyanm2u(tier) {
         player["anm2u" + name] = player["anm2u" + name].add(1);
         player.anm2 = player.anm2.sub(v["anm2c" + name]);
     }
-}
-
-function autobuyanm2upg() {
-    getParupgCost();
-    if (player.anm2.gte(v.anm2c01) & player.resa11.gte(1)) player.anm2u01 = player.anm2u01.add(1);
-    if (player.anm2.gte(v.anm2c02) & player.resa11.gte(1)) player.anm2u02 = player.anm2u02.add(1);
-    if (player.anm2.gte(v.anm2c03) & player.resa11.gte(1)) player.anm2u03 = player.anm2u03.add(1);
-    if (player.anm2.gte(v.anm2c04) & player.resa11.gte(1)) player.anm2u04 = player.anm2u04.add(1);
 }
 
 const PL3checkbox = document.getElementById("PL3confirm");
@@ -2348,9 +2611,7 @@ async function PL3reset() {
     if (confirmation | !player.PL3conf) {
         player.PL3pts = player.PL3pts.add(player.PL2pts.root(1048576).floor());
         player.PL3ptsttl = player.PL3ptsttl.add(player.PL2pts.root(1048576).floor());
-        if (player.anm3u[2] == true) player.PL3tms = player.PL3tms.add(player.PL2tms.max(1).log(2).max(0).add(1).mul(player.anm3.log(16).max(1)));
-        if (player.xyzbo.gte(3)) player.PL3tms = player.PL3tms.add(player.PL2tms.max(1).log(2).max(0).add(1));
-        else player.PL3tms = player.PL3tms.add(1);
+        player.PL3tms = player.PL3tms.add(getPL3tms());
         player.PL3sec = new Decimal(0);
 
         player.hasUnlockedPL3 = true;
@@ -2363,50 +2624,50 @@ async function PL3reset() {
         player.wscb02 = new Decimal(0);
         player.wscb03 = new Decimal(0);
         player.wscb04 = new Decimal(0);
-player.        wscb05= new Decimal(0);
-player.        wscb06= new Decimal(0);
-player.        wscb07= new Decimal(0);
-player.        wscb08= new Decimal(0);
-player.        wscb09= new Decimal(0);
-player.        wscb10= new Decimal(0);
-player.        wscb11= new Decimal(0);
-player.        wscb12= new Decimal(0);
-player.        wscb13= new Decimal(0);
-player.        wscb14= new Decimal(0);
-player.        wscb15= new Decimal(0);
-player.        wscb16= new Decimal(0);
-player.        wscb17= new Decimal(0);
-player.        wscb18= new Decimal(0);
-player.        wscb19= new Decimal(0);
-player.        wscb20= new Decimal(0);
-player.        wscb21= new Decimal(0);
-player.        wscb22= new Decimal(0);
-player.        wscb23= new Decimal(0);
+        player.wscb05= new Decimal(0);
+        player.wscb06= new Decimal(0);
+        player.wscb07= new Decimal(0);
+        player.wscb08= new Decimal(0);
+        player.wscb09= new Decimal(0);
+        player.wscb10= new Decimal(0);
+        player.wscb11= new Decimal(0);
+        player.wscb12= new Decimal(0);
+        player.wscb13= new Decimal(0);
+        player.wscb14= new Decimal(0);
+        player.wscb15= new Decimal(0);
+        player.wscb16= new Decimal(0);
+        player.wscb17= new Decimal(0);
+        player.wscb18= new Decimal(0);
+        player.wscb19= new Decimal(0);
+        player.wscb20= new Decimal(0);
+        player.wscb21= new Decimal(0);
+        player.wscb22= new Decimal(0);
+        player.wscb23= new Decimal(0);
         player.wscb24 = new Decimal(0);
 
-player.        wsca01= new Decimal(0);
-player.        wsca02= new Decimal(0);
-player.        wsca03= new Decimal(0);
-player.        wsca04= new Decimal(0);
-player.        wsca05= new Decimal(0);
-player.        wsca06= new Decimal(0);
-player.        wsca07= new Decimal(0);
-player.        wsca08= new Decimal(0);
-player.        wsca09= new Decimal(0);
-player.        wsca10= new Decimal(0);
-player.        wsca11= new Decimal(0);
-player.        wsca12= new Decimal(0);
-player.        wsca13= new Decimal(0);
-player.        wsca14= new Decimal(0);
-player.        wsca15= new Decimal(0);
-player.        wsca16= new Decimal(0);
-player.        wsca17= new Decimal(0);
-player.        wsca18= new Decimal(0);
-player.        wsca19= new Decimal(0);
-player.        wsca20= new Decimal(0);
-player.        wsca21= new Decimal(0);
-player.        wsca22= new Decimal(0);
-player.        wsca23= new Decimal(0);
+        player.wsca01= new Decimal(0);
+        player.wsca02= new Decimal(0);
+        player.wsca03= new Decimal(0);
+        player.wsca04= new Decimal(0);
+        player.wsca05= new Decimal(0);
+        player.wsca06= new Decimal(0);
+        player.wsca07= new Decimal(0);
+        player.wsca08= new Decimal(0);
+        player.wsca09= new Decimal(0);
+        player.wsca10= new Decimal(0);
+        player.wsca11= new Decimal(0);
+        player.wsca12= new Decimal(0);
+        player.wsca13= new Decimal(0);
+        player.wsca14= new Decimal(0);
+        player.wsca15= new Decimal(0);
+        player.wsca16= new Decimal(0);
+        player.wsca17= new Decimal(0);
+        player.wsca18= new Decimal(0);
+        player.wsca19= new Decimal(0);
+        player.wsca20= new Decimal(0);
+        player.wsca21= new Decimal(0);
+        player.wsca22= new Decimal(0);
+        player.wsca23= new Decimal(0);
         player.wsca24 = new Decimal(0);
 
         player.tier01 = new Decimal(0);
@@ -2541,11 +2802,21 @@ player.        wsca23= new Decimal(0);
         player.anm2u02 = new Decimal(0);
         player.anm2u03 = new Decimal(0);
         player.anm2u04 = new Decimal(0);
+        player.PL3energy = new Decimal(1);
 
         await delay(100);
         player.energy = new Decimal(2);
         prod = setInterval(produce, 50);
         }
+}
+
+function getPL3tms() {
+    let baset = new Decimal(1);
+    if (player.anm3u[2] == true) baset = baset.mul(player.anm3.log(16).max(1));
+    if (player.xyzbo.gte(3)) baset = baset.mul(player.PL2tms.max(1).log(2).max(1));
+    if (player.PL4goal[0] == true) baset = baset.mul(2);
+    if (player.PL4goal[1] == true) baset = baset.mul(2);
+    return baset;
 }
 
 function getPL3engMul() {
@@ -2602,11 +2873,11 @@ function getres() {
 }
 
 function getptn() {
-    v.ptnuc01 = new Decimal(2).pow(new Decimal(3).pow(player.ptnu01)).sub(2);
+    v.ptnuc01 = new Decimal(2).pow(new Decimal(3).pow(player.ptnu01));
     v.ptnuc02 = new Decimal(1.6).pow(player.ptnu02.add(1)).mul(4).floor();
     v.ptnuc03 = new Decimal("1.797693134862315e308").pow(player.ptnu03.add(1).pow(3));
     v.ptnuc04 = new Decimal("1.044388881413152e1233").pow(player.ptnu04.add(1).pow(3));
-    v.ptnv = player.PL3sec.min(65536).mul(new Decimal(2).pow(player.ptnu02.add(player.chacom11)));
+    v.ptnv = player.PL3sec.min(65536).mul(new Decimal(2).pow(player.ptnu02.add(player.chacom11)).mul(v.fraue04));
     v.ptnm01 = new Decimal(2).pow(16777216).pow(v.ptnv.pow(0.25));
     v.ptnm02 = new Decimal(2).pow(65536).pow(v.ptnv.pow(0.25));
     v.ptnm03 = new Decimal(2).pow(1024).pow(v.ptnv.pow(0.25));
@@ -2618,8 +2889,7 @@ function getptn() {
 }
 
 function ptnchs(tier) {
-    if (player.ptn[tier] == true) player.ptn[tier] = false;
-    else {
+    if (player.ptn[tier] == false) {
         let ptnamt = 0;
         for (let i = 0; i < 8; i++) {
             if (player.ptn[i] == true) ptnamt = ptnamt + 1;
@@ -2639,11 +2909,15 @@ function buyptnupg(tier) {
     else return;
 }
 
+function rptn() {
+    for (let i = 0; i < 8; i++) player.ptn[i] = false;
+    PL3reset();
+}
 
 function gettth() {
     let speed = new Decimal(1).mul(v.gamespd1).div(20);
     v.tthgspd = new Decimal(2).pow(player.tthu01).mul(player.tthprem.max(1));
-    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(30).max(0).pow(1.5).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize))).mul(2);
+    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(30).sub(v.fraue08).max(0).pow(1.5).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize))).mul(2);
     v.tthimpc = new Decimal(5).add(player.tthimpr);
     v.tthseedpd = new Decimal(2).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04.mul(player.tthsize))).max(1);
     v.tthgenepd = new Decimal(5).pow(player.tthsize);
@@ -2670,6 +2944,20 @@ function gettth() {
         player.ingrow = false;
         player.tthgrow = new Decimal(0);
         player.tthamnt = player.tthamnt.add(1);
+    }
+    if (player.tthatact[2] == true & player.PL4goal[2] == true) {
+        player.tthu01 = player.tthgene.max(1).log(3).floor().max(0);
+        player.tthu02 = player.tthgene.max(1).log(3).floor().max(0);
+        player.tthu03 = player.tthsucr.max(1).log(4).floor().max(0);
+        player.tthu04 = player.tthsucr.max(1).log(4).floor().max(0);
+    }
+    if (player.tthatact[3] == true & player.PL4goal[3] == true) {
+        if (player.tthamnt.gte(v.tthimpc) & player.tthsize.eq(player.tthimpr)) {
+            player.tthimpr = player.tthimpr.add(1);
+            player.tthsize = player.tthsize.add(1);
+            player.tthamnt = new Decimal(0);
+            player.tthgrow = new Decimal(0);
+        }
     }
     v.tthprespd = new Decimal(1.4142136).pow(player.tthimpr.sub(8).max(0));
     v.tthprempd = new Decimal(1.4142136).pow(player.tthimpr.sub(8).max(0));
@@ -2702,6 +2990,16 @@ function atpltsw() {
 function atharsw() {
     if (player.tthatact[1] == true) player.tthatact[1] = false;
     else player.tthatact[1] = true;
+}
+
+function atbtusw() {
+    if (player.tthatact[2] == true) player.tthatact[2] = false;
+    else player.tthatact[2] = true;
+}
+
+function atimpsw() {
+    if (player.tthatact[3] == true) player.tthatact[3] = false;
+    else player.tthatact[3] = true;
 }
 
 function addtthtier() {
@@ -2784,6 +3082,9 @@ function tosucr() {
 
 function tthpre() {
     if (player.tthimpr.gte(8)) {
+        player.tthpres = player.tthpres.add(v.tthprespd);
+        player.tthprem = player.tthprem.add(v.tthprempd);
+
         player.tthamnt = new Decimal(0);
         player.tthsize = new Decimal(1);
         player.tthgrow = new Decimal(0);
@@ -2796,9 +3097,6 @@ function tthpre() {
         player.tthu02 = new Decimal(0);
         player.tthu03 = new Decimal(0);
         player.tthu04 = new Decimal(0);
-
-        player.tthpres = player.tthpres.add(v.tthprespd);
-        player.tthprem = player.tthprem.add(v.tthprempd);
     }
     else return
 }
@@ -2954,12 +3252,22 @@ function buyanm3u(tier) {
 }
 
 function buyanm3u2(tier) {
-    let cost = [1e8, 1e16, 1e24, 1e32];
+    let cost = [1e10, 1e20, 1e30, 1e40];
     if (player.anm3u[tier] != true & player.anm3.gte(new Decimal(cost[tier]))) {
         player.anm3u[tier] = true;
         player.anm3 = player.anm3.sub(new Decimal(cost));
     }
 }
+
+function autobuyanm3upg() {
+    if (player.PL4goal[4] == true) {
+        if (player.anm3.gte(v.anm3c01)) player.anm3u01 = player.anm3u01.add(1);
+        if (player.anm3.gte(v.anm3c02)) player.anm3u02 = player.anm3u02.add(1);
+        if (player.anm3.gte(v.anm3c03)) player.anm3u03 = player.anm3u03.add(1);
+        if (player.anm3.gte(v.anm3c04)) player.anm3u04 = player.anm3u04.add(1);
+    }
+}
+
 function buyconv(row, col) {
     let num = row * 4 + col ;
     if (player.convr[row] == true | player.convc[col] == true | player.convn.gte(v.convmx)) return;
@@ -2997,44 +3305,480 @@ function getconv() {
         v.convnx = new Decimal("1e100000");
     }
 
-    v.convp01 = player.energy.max(1).log(2).max(1).log(2).div(1200);
-    v.convp02 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000);
-    v.convp03 = player.PL2pts.max(1).log(2).max(1).log(2).div(800);
-    v.convp04 = player.PL3pts.max(1).log(2).max(1).log(2).div(400);
-    v.convp05 = player.energy.max(1).log(2).max(1).log(2).div(1200);
-    v.convp06 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000);
-    v.convp07 = player.PL2pts.max(1).log(2).max(1).log(2).div(800);
-    v.convp08 = player.PL3pts.max(1).log(2).max(1).log(2).div(400);
-    v.convp09 = player.energy.max(1).log(2).max(1).log(2).div(1200);
-    v.convp10 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000);
-    v.convp11 = player.PL2pts.max(1).log(2).max(1).log(2).div(800);
-    v.convp12 = player.PL3pts.max(1).log(2).max(1).log(2).div(400);
-    v.convp13 = player.energy.max(1).log(2).max(1).log(2).div(1200);
-    v.convp14 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000);
-    v.convp15 = player.PL2pts.max(1).log(2).max(1).log(2).div(800);
-    v.convp16 = player.PL3pts.max(1).log(2).max(1).log(2).div(400);
+    v.convp01 = player.energy.max(1).log(2).max(1).log(2).div(1200).mul(v.fraue07);
+    v.convp02 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000).mul(v.fraue07);
+    v.convp03 = player.PL2pts.max(1).log(2).max(1).log(2).div(800).mul(v.fraue07);
+    v.convp04 = player.PL3pts.max(1).log(2).max(1).log(2).div(400).mul(v.fraue07);
+    v.convp05 = player.energy.max(1).log(2).max(1).log(2).div(1200).mul(v.fraue07);
+    v.convp06 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000).mul(v.fraue07);
+    v.convp07 = player.PL2pts.max(1).log(2).max(1).log(2).div(800).mul(v.fraue07);
+    v.convp08 = player.PL3pts.max(1).log(2).max(1).log(2).div(400).mul(v.fraue07);
+    v.convp09 = player.energy.max(1).log(2).max(1).log(2).div(1200).mul(v.fraue07);
+    v.convp10 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000).mul(v.fraue07);
+    v.convp11 = player.PL2pts.max(1).log(2).max(1).log(2).div(800).mul(v.fraue07);
+    v.convp12 = player.PL3pts.max(1).log(2).max(1).log(2).div(400).mul(v.fraue07);
+    v.convp13 = player.energy.max(1).log(2).max(1).log(2).div(1200).mul(v.fraue07);
+    v.convp14 = player.PL1pts.max(1).log(2).max(1).log(2).div(1000).mul(v.fraue07);
+    v.convp15 = player.PL2pts.max(1).log(2).max(1).log(2).div(800).mul(v.fraue07);
+    v.convp16 = player.PL3pts.max(1).log(2).max(1).log(2).div(400).mul(v.fraue07);
+}
+
+async function PL4reset() {
+    if (player.PL3pts.lt("6.741e315652")) return;
+    var confirmation = true;
+    if (player.PL4conf == true) confirmation = confirm("您确定要扬敦吗？这将重置之前的一切进度，但是可以获得扬敦点！第一次扬敦解锁33~40式风灵和其他内容");
+    if (confirmation | !player.PL4conf) {
+        player.PL4pts = player.PL4pts.add(player.PL3pts.root(1048576).floor());
+        player.PL4ptsttl = player.PL4ptsttl.add(player.PL3pts.root(1048576).floor());
+        player.PL4tms = player.PL4tms.add(getPL4tms());
+        player.PL4sec = new Decimal(0);
+        getPL4goal();
+        player.PL4fra = player.PL4fra.add(getfra());
+
+        player.hasUnlockedPL4 = true;
+
+        clearInterval(prod);
+        prod = null;
+
+        player.PL1tms = new Decimal(0);
+        player.PL2tms = new Decimal(0);
+        player.PL3tms = new Decimal(0);
+
+        player.autobuywsc = [null,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+        ];
+        player.autobuytier01 = false;
+        player.autobuytier02 = false;
+        player.autobuytier03 = false;
+        player.autobuytier04 = false;
+        player.autobuyupgd01 = false;
+        player.autobuyupgd02 = false;
+        player.autobuyupgd03 = false;
+        player.autobuyupgd04 = false;
+
+        player.energy = new Decimal(2);
+        player.wscb01 = new Decimal(0);
+        player.wscb02 = new Decimal(0);
+        player.wscb03 = new Decimal(0);
+        player.wscb04 = new Decimal(0);
+        player.wscb05 = new Decimal(0);
+        player.wscb06 = new Decimal(0);
+        player.wscb07 = new Decimal(0);
+        player.wscb08 = new Decimal(0);
+        player.wscb09 = new Decimal(0);
+        player.wscb10 = new Decimal(0);
+        player.wscb11 = new Decimal(0);
+        player.wscb12 = new Decimal(0);
+        player.wscb13 = new Decimal(0);
+        player.wscb14 = new Decimal(0);
+        player.wscb15 = new Decimal(0);
+        player.wscb16 = new Decimal(0);
+        player.wscb17 = new Decimal(0);
+        player.wscb18 = new Decimal(0);
+        player.wscb19 = new Decimal(0);
+        player.wscb20 = new Decimal(0);
+        player.wscb21 = new Decimal(0);
+        player.wscb22 = new Decimal(0);
+        player.wscb23 = new Decimal(0);
+        player.wscb24 = new Decimal(0);
+        player.wscb25 = new Decimal(0);
+        player.wscb26 = new Decimal(0);
+        player.wscb27 = new Decimal(0);
+        player.wscb28 = new Decimal(0);
+        player.wscb29 = new Decimal(0);
+        player.wscb30 = new Decimal(0);
+        player.wscb31 = new Decimal(0);
+        player.wscb32 = new Decimal(0);
+
+        player.wsca01 = new Decimal(0);
+        player.wsca02 = new Decimal(0);
+        player.wsca03 = new Decimal(0);
+        player.wsca04 = new Decimal(0);
+        player.wsca05 = new Decimal(0);
+        player.wsca06 = new Decimal(0);
+        player.wsca07 = new Decimal(0);
+        player.wsca08 = new Decimal(0);
+        player.wsca09 = new Decimal(0);
+        player.wsca10 = new Decimal(0);
+        player.wsca11 = new Decimal(0);
+        player.wsca12 = new Decimal(0);
+        player.wsca13 = new Decimal(0);
+        player.wsca14 = new Decimal(0);
+        player.wsca15 = new Decimal(0);
+        player.wsca16 = new Decimal(0);
+        player.wsca17 = new Decimal(0);
+        player.wsca18 = new Decimal(0);
+        player.wsca19 = new Decimal(0);
+        player.wsca20 = new Decimal(0);
+        player.wsca21 = new Decimal(0);
+        player.wsca22 = new Decimal(0);
+        player.wsca23 = new Decimal(0);
+        player.wsca24 = new Decimal(0);
+        player.wsca25 = new Decimal(0);
+        player.wsca26 = new Decimal(0);
+        player.wsca27 = new Decimal(0);
+        player.wsca28 = new Decimal(0);
+        player.wsca29 = new Decimal(0);
+        player.wsca30 = new Decimal(0);
+        player.wsca31 = new Decimal(0);
+        player.wsca32 = new Decimal(0);
+
+        player.tier01 = new Decimal(0);
+        player.tier02 = new Decimal(0);
+        player.tier03 = new Decimal(0);
+        player.tier04 = new Decimal(0);
+        player.upgd01 = new Decimal(0);
+        player.upgd02 = new Decimal(0);
+        player.upgd03 = new Decimal(0);
+        player.upgd04 = new Decimal(0);
+
+        player.PL1energy = new Decimal(1);
+        player.PL1pts = new Decimal(0);
+        player.PL1tms = new Decimal(0);
+        player.PL1sec = new Decimal(0);
+        if (player.PL2tms.eq(0)) player.PL1upg = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,];
+        if (player.PL2tms.eq(1)) player.PL1upg = [true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false,];
+        if (player.PL2tms.eq(2)) player.PL1upg = [true, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false,];
+        if (player.PL2tms.eq(3)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, false, false, false, false,];
+        if (player.PL2tms.gte(4)) player.PL1upg = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,];
+        if (player.PL2tms.lte(2)) {
+            player.PL1bab01 = new Decimal(0);
+            player.PL1bab02 = new Decimal(0);
+            player.PL1bab03 = new Decimal(0);
+            player.PL1bab04 = new Decimal(0);
+            player.PL1bab05 = new Decimal(0);
+            player.PL1bab06 = new Decimal(0);
+            player.PL1bab07 = new Decimal(0);
+            player.PL1bab08 = new Decimal(0);
+            player.PL1bab09 = new Decimal(0);
+            player.PL1bab10 = new Decimal(0);
+            player.PL1bab11 = new Decimal(0);
+            player.PL1bab12 = new Decimal(0);
+        }
+        if (player.PL2tms.lte(5)) {
+            player.hasunlockedanmorb = false;
+            player.orbupg = [false, false, false, false, false, false, false, false,];
+        }
+        player.anmpar = new Decimal(0);
+        player.anmorb = new Decimal(0);
+        player.anmorbttl = new Decimal(0);
+        player.parupg01 = new Decimal(0);
+        player.parupg02 = new Decimal(0);
+        player.parupg03 = new Decimal(0);
+        player.parupg04 = new Decimal(0);
+        player.innormcha = 0;
+        if (player.PL2tms.lte(1)) player.normchacom = [false, false, false, false, false, false, false, false, false, false, false, false,];
+        player.incha = 0;
+        if (player.PL2tms.lte(7)) {
+            player.chacom01 = new Decimal(0);
+            player.chacom02 = new Decimal(0);
+            player.chacom03 = new Decimal(0);
+            player.chacom04 = new Decimal(0);
+        }
+
+        player.PL2energy = new Decimal(1);
+        player.PL2pts = new Decimal(0);
+        player.PL2ptsttl = new Decimal(0);
+        player.PL2tms = new Decimal(2).pow(player.PL3tms).min(player.PL3tms.mul(4));
+        player.PL2sec = new Decimal(0);
+        player.PL2tmsc = new Decimal(0);
+        if (player.PL4goal[4] != true) {
+            player.PL2upg01 = new Decimal(0);
+            player.PL2upg02 = new Decimal(0);
+            player.PL2upg03 = new Decimal(0);
+            player.PL2upg04 = new Decimal(0);
+            player.chacom05 = new Decimal(0);
+            player.chacom06 = new Decimal(0);
+            player.chacom07 = new Decimal(0);
+            player.chacom08 = new Decimal(0);
+        }
+        player.elmt = new Decimal(0);
+        player.elmttl = new Decimal(0);
+        if (player.PL4goal[5] != true) {
+            player.elmt01 = new Decimal(0);
+            player.elmt02 = new Decimal(0);
+            player.elmt03 = new Decimal(0);
+            player.elmt04 = new Decimal(0);
+        }
+        player.elmten01 = new Decimal(0);
+        player.elmten02 = new Decimal(0);
+        player.elmten03 = new Decimal(0);
+        player.elmten04 = new Decimal(0);
+        if (player.PL4goal[4] != true) {
+            player.thrm = new Decimal(0);
+            player.thrmttl = new Decimal(0);
+            player.thrmb01 = new Decimal(0);
+            player.thrmb02 = new Decimal(0);
+            player.thrmb03 = new Decimal(0);
+            player.thrmb04 = new Decimal(0);
+            player.std = [false,
+                false,
+                false, false,
+                false, false,
+                false,
+                false,
+                false, false, false,
+                false, false, false,
+                false, false, false,
+                false,
+                false,
+                false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false,
+                false,
+                false,
+                false,
+            ];
+        }
+        if (player.PL4goal[5] != true) {
+            player.alcspd = new Decimal(0);
+            player.alch01 = new Decimal(0);
+            player.alch02 = new Decimal(0);
+            player.alch03 = new Decimal(0);
+            player.alch04 = new Decimal(0);
+            player.alch05 = new Decimal(0);
+            player.alch06 = new Decimal(0);
+            player.alca = [false, false, false, false, false, false, false, false];
+            player.alcu01 = new Decimal(0);
+            player.alcu02 = new Decimal(0);
+            player.alcu03 = new Decimal(0);
+            player.alcu04 = new Decimal(0);
+            player.alcu05 = new Decimal(0);
+            player.alcu06 = new Decimal(0);
+            player.alcu = [false, false, false, false, false, false, false, false];
+        }
+        if (player.PL4goal[5] != true) player.hasunlockedanm2 = false;
+        player.infytx = false;
+        if (player.PL4goal[5] != true) player.anm2sc = new Decimal(0);
+        player.anm2 = new Decimal(0);
+        player.anm2u01 = new Decimal(0);
+        player.anm2u02 = new Decimal(0);
+        player.anm2u03 = new Decimal(0);
+        player.anm2u04 = new Decimal(0);
+
+        player.PL3energy= new Decimal(1);
+        player.PL3pts= new Decimal(0);
+        player.PL3ptsttl= new Decimal(0);
+        player.PL3tms= new Decimal(0);
+        player.PL3sec = new Decimal(0);
+        player.chacom09 = new Decimal(0);
+        player.chacom10 = new Decimal(0);
+        player.chacom11 = new Decimal(0);
+        player.chacom12 = new Decimal(0);
+
+        player.res= [false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false,
+        ];
+        player.inres= 0,
+        player.resa01= new Decimal(0);
+        player.resa02= new Decimal(0);
+        player.resa03= new Decimal(0);
+        player.resa04 = new Decimal(0);
+        if (player.PL4goal[4] != true) {
+            player.resa05 = new Decimal(0);
+            player.resa06 = new Decimal(0);
+            player.resa07 = new Decimal(0);
+            player.resa08 = new Decimal(0);
+        }
+        if (player.PL4goal[5] != true) {
+            player.resa09 = new Decimal(0);
+            player.resa10 = new Decimal(0);
+            player.resa11 = new Decimal(0);
+            player.resa12 = new Decimal(0);
+        }
+        if (player.PL4goal[6] != true) {
+            player.resa13 = new Decimal(0);
+            player.resa14 = new Decimal(0);
+            player.resa15 = new Decimal(0);
+            player.resa16 = new Decimal(0);
+        }
+        player.resp01= new Decimal(0);
+        player.resp02= new Decimal(0);
+        player.resp03= new Decimal(0);
+        player.resp04= new Decimal(0);
+        player.resp05= new Decimal(0);
+        player.resp06= new Decimal(0);
+        player.resp07= new Decimal(0);
+        player.resp08= new Decimal(0);
+        player.resp09= new Decimal(0);
+        player.resp10= new Decimal(0);
+        player.resp11= new Decimal(0);
+        player.resp12= new Decimal(0);
+        player.resp13= new Decimal(0);
+        player.resp14= new Decimal(0);
+        player.resp15= new Decimal(0);
+        player.resp16= new Decimal(0);
+        player.ptn= [false, false, false, false, false, false, false, false,];
+        player.ptnu01= new Decimal(0);
+        player.ptnu02= new Decimal(0);
+        player.ptnu03= new Decimal(0);
+        player.ptnu04= new Decimal(0);
+        player.tthamnt= new Decimal(0);
+        player.tthsize= new Decimal(1);
+        player.tthgrow= new Decimal(0);
+        player.ingrow= false,
+        player.tthseed= new Decimal(0);
+        player.tthgene= new Decimal(0);
+        player.tthsucr= new Decimal(0);
+        player.tthimpr= new Decimal(1);
+        player.tthatunl= [false, false, false, false, false, false,];
+        player.tthatact= [false, false, false, false, false, false,];
+        player.tthu01= new Decimal(0);
+        player.tthu02= new Decimal(0);
+        player.tthu03= new Decimal(0);
+        player.tthu04= new Decimal(0);
+        player.tthpres= new Decimal(0);
+        player.tthprem= new Decimal(1);
+        player.tthpu= [false, false, false, false,];
+        player.tthpu1= new Decimal(0);
+        player.tthpu2= new Decimal(0);
+        player.tthpu3= new Decimal(0);
+        player.tthpu4 = new Decimal(0);
+        if (player.PL4goal[5] == true) {
+            player.xyzx = new Decimal(0);
+            player.xyzy = new Decimal(0);
+            player.xyzz = new Decimal(0);
+            player.xyzt = new Decimal(0);
+            player.xyzu = [false, false, false, false,];
+            player.xyzsw = new Decimal(0);
+            player.xyzbo = new Decimal(0);
+            player.xyze = new Decimal(0);
+            player.xyzf = new Decimal(0);
+            player.xyzg = new Decimal(0);
+            player.xyzh = new Decimal(0);
+            player.xyzegn = new Decimal(0);
+            player.xyzfgn = new Decimal(0);
+            player.xyzggn = new Decimal(0);
+            player.xyzhgn = new Decimal(0);
+        }
+        player.hasunlockedanm3= false,
+        player.anm3= new Decimal(0);
+        player.anm3u01= new Decimal(0);
+        player.anm3u02= new Decimal(0);
+        player.anm3u03= new Decimal(0);
+        player.anm3u04= new Decimal(0);
+        player.anm3u= [false, false, false, false,];
+        player.inreac= false,
+        player.reacp= new Decimal(0);
+        player.reacm1= new Decimal(1);
+        player.reacm2= new Decimal(0);
+        player.cata= new Decimal(1);
+        if (player.PL4goal[6] == true) {
+            player.convu = [
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+                false, false, false, false,
+            ];
+            player.convr = [false, false, false, false,];
+            player.convc = [false, false, false, false,];
+            player.convn = new Decimal(0);
+        }
+        player.PL4energy = new Decimal(1);
+
+        await delay(100);
+        player.energy = new Decimal(2);
+        prod = setInterval(produce, 50);
+    }
+}
+
+function getPL4tms() {
+    let baset = new Decimal(1);
+    if (player.PL4goal[0] == true) baset = baset.mul(2);
+    if (player.PL4goal[1] == true) baset = baset.mul(2);
+    return baset;
+}
+
+function getPL4engMul() {
+    v.PL4engmul = player.PL4energy.pow(v.PL4engpow).max(1);
+}
+
+function getPL4engPow() {
+    v.PL4engpow = new Decimal(1);
+}
+
+function getPL4goal() {
+    let pts = player.PL3pts.root(1048576);
+    if (pts.gte(2)) player.PL4goal[0] = true;
+    if (pts.gte(4)) player.PL4goal[1] = true;
+    if (pts.gte(8)) player.PL4goal[2] = true;
+    if (pts.gte(16)) player.PL4goal[3] = true;
+    if (pts.gte(64)) player.PL4goal[4] = true;
+    if (pts.gte(256)) player.PL4goal[5] = true;
+    if (pts.gte(4096)) player.PL4goal[6] = true;
+    if (pts.gte(65536)) player.PL4goal[7] = true;
+}
+
+function getfra() {
+    let base = new Decimal(1);
+    if (player.PL4tms.lte(1)) return (new Decimal(4));
+    else return base.mul(v.fraft1).mul(v.fraft2).mul(v.fraft3).mul(v.fraft4);
+}
+
+function getfrau() {
+    v.fraft1 = player.energy.max(1).log(2).max(1).log(2).sub(59).max(1);
+    v.fraft2 = player.PL4energy.max(1).log(2).max(1).log(2).sub(8).mul(0.25).max(1);
+    v.fraft3 = player.PL4tms.add(4).pow(0.25).max(1);
+    v.fraft4 = new Decimal(2).pow(player.frau01.mul(0.25)).max(1);
+    v.frauc01 = new Decimal(2).pow(player.frau01.add(1));
+    v.frauc02 = new Decimal(2).pow(player.frau02.add(1));
+    for (let i = 3; i <= 8; i++) {
+        let name = tiername[i];
+        v["frauc" + name] = new Decimal(2).pow(player["frau" + name].add(1).pow(2));
+    }
+    v.fraue01 = new Decimal(2).pow(player.frau01.mul(0.25)).max(1);
+    v.fraue02 = new Decimal(2).pow(player.frau02.mul(65536)).max(1);
+    v.fraue03 = new Decimal(2).pow(player.frau03).max(1);
+    v.fraue04 = new Decimal(2).pow(player.frau04).max(1);
+    v.fraue05 = new Decimal(2).pow(player.frau05.mul(0.5)).max(1);
+    v.fraue06 = new Decimal(2).pow(player.frau06.mul(0.5)).max(1);
+    v.fraue07 = new Decimal(2).pow(player.frau07.mul(0.25)).max(1);
+    v.fraue08 = player.frau08.mul(2);
+}
+
+function buyfrau(tier) {
+    let name = tiername[tier];
+    let cap = [20, 20, 4, 4, 4, 4, 4, 4];
+    if (player.PL4fra.gte(v["frauc" + name]) & player["frau" + name].lt(new Decimal(cap[tier-1]))) {
+        player["frau" + name] = player["frau" + name].add(1);
+        player.PL4fra = player.PL4fra.sub(v["frauc" + name]);
+    }
 }
 
 function getspd() {
-    v.gamespd1 = new Decimal(2).pow(player.chacom10.add(player.ptnu04)).mul(new Decimal(1.189207115002721).pow(player.anm3u04)).max(1);
+    v.gamespd1 = new Decimal(2).pow(player.chacom10.add(player.ptnu04)).mul(new Decimal(1.189207115002721).pow(player.anm3u04)).mul(v.fraue05).max(1);
+    if (player.PL4goal[0] == true) v.gamespd1 = v.gamespd1.mul(4);
     if (player.incha == 10) v.gamespd1 = new Decimal(1e-308);
+}
+
+function getsoftcap() {
+    return new Decimal("e3.470639555327098e17").pow(v.fraue03);
 }
 
 function produce(spd = 1) {
     let speed = new Decimal(spd).mul(v.gamespd1).div(80);
+    let speed2 = new Decimal(spd).div(80);
 
     player.gameseconds = player.gameseconds.plus(speed.mul(4));
     player.PL1sec = player.PL1sec.plus(speed.mul(4));
     player.PL2sec = player.PL2sec.plus(speed.mul(4));
     player.PL3sec = player.PL3sec.plus(speed.mul(4));
+    player.PL4sec = player.PL4sec.plus(speed.mul(4));
 
-    if (player.energy.lte("e3.470639555327098e17")) {
+    if (player.energy.lte(getsoftcap())) {
         player.energy = player.energy.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).mul(speed));
         player.energyttl = player.energyttl.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).mul(speed));
     }
     else {
-        player.energy = player.energy.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).root(player.energy.max(2).log(2).div(1.152921504606846e18)).mul(speed));
-        player.energyttl = player.energyttl.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).root(player.energy.max(2).log(2).div(1.152921504606846e18)).mul(speed));
+        player.energy = player.energy.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).root(player.energy.max(2).log(2).div(getsoftcap().log(2))).mul(speed));
+        player.energyttl = player.energyttl.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).root(player.energy.max(2).log(2).div(getsoftcap().log(2))).mul(speed));
     }
     if(player.incha != 12) for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
@@ -3046,7 +3790,7 @@ function produce(spd = 1) {
         player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor().mul(speed).mul(4));
         player.PL1ptsttl = player.PL1ptsttl.add(player.energy.root(1024).floor().mul(speed).mul(4));
     }
-    if (player.alcu[1] == true) player.PL1tms = player.PL1tms.add(new Decimal(2).pow(player.PL1bab11).mul(v.wscBaseValue.max(1).log(2)).mul(speed).mul(4));
+    if (player.alcu[1] == true) player.PL1tms = player.PL1tms.add(new Decimal(2).pow(player.PL1bab11).mul(v.wscbaseValue.max(1).log(2)).mul(speed).mul(4));
 
     player.PL1energy = player.PL1energy.add(player.wsca09.mul(v.wscm09).pow(v.wscp09).mul(speed));
     if (player.incha != 12) for (let tier = 10; tier <= 16; tier++) {
@@ -3076,6 +3820,13 @@ function produce(spd = 1) {
         player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).mul(speed));
     }
 
+    player.PL4energy = player.PL4energy.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).mul(speed2));
+    for (let tier = 34; tier <= 40; tier++) {
+        let name = tiername[tier];
+        let prev = tiername[tier - 1];
+        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).mul(speed2));
+    }
+
     if (player.hasunlockedanmorb == true) {
         v.anmparsc = new Decimal(2).pow(player.anmorbttl).mul(80).max(80);
         v.anmparps = new Decimal(0.01).mul(new Decimal(1.2).pow(player.wscb08.sub(50)).max(1)).mul(new Decimal(2).pow(player.parupg01).mul(new Decimal(2).pow(player.chacom04)))
@@ -3083,6 +3834,7 @@ function produce(spd = 1) {
         if (player.tier01.gte(630)) v.anmparps = v.anmparps.mul(new Decimal(1.2).pow(player.wscb16).max(1));
         if (player.hasunlockedanm2 == true) v.anmparps = v.anmparps.pow(player.anm2.add(1).log(2).add(1).log(2).max(1).pow(player.anm2u03.div(64).add(0.0625)));
         if (player.ptn[5] == true) v.anmparps = v.anmparps.mul(v.ptnm06);
+        if (player.PL4goal[0] == true) v.anmparps = v.anmparps.mul(5);
         if (player.anmpar.gte(v.anmparsc)) {
             let scpw = new Decimal(1);
             if (player.tier03.gte(8)) scpw = scpw.mul(0.8);
@@ -3096,12 +3848,14 @@ function produce(spd = 1) {
         if (player.tier01.gte(1995)) v.anm2ps = v.anm2ps.mul(new Decimal(1.01).pow(player.wscb16.add(player.wscb24)));
         if (player.ptn[6] == true) v.anm2ps = v.anm2ps.mul(v.ptnm07);
         if (player.hasunlockedanm3 == true) v.anm2ps = v.anm2ps.pow(player.anm3.add(1).log(2).add(1).log(2).max(1).pow(player.anm3u03.div(64).add(0.0625)));
+        if (player.PL4goal[0] == true) v.anm2ps = v.anm2ps.mul(5);
         player.anm2 = player.anm2.add(v.anm2ps.mul(speed).mul(4));
     }
     if (player.hasunlockedanm3 == true) {
         v.anm3ps = v.blcnt.sub(0.5).max(0).mul(0.01)
-        v.anm3ps = v.anm3ps.mul(new Decimal(2).pow(player.anm3u01.add(player.chacom12)));
+        v.anm3ps = v.anm3ps.mul(new Decimal(2).pow(player.anm3u01.add(player.chacom12.mul(3))));
         if (player.ptn[7] == true & player.anm3u[0] == true) v.anm3ps = v.anm3ps.mul(v.ptnm08);
+        if (player.PL4goal[0] == true) v.anm3ps = v.anm3ps.mul(5);
         player.anm3 = player.anm3.add(v.anm3ps.mul(speed).mul(4));
     }
 
@@ -3124,7 +3878,6 @@ function produce(spd = 1) {
     player.xyzh = player.xyzh.add(player.xyzhgn.mul(player.xyze.max(1)).mul(speed).mul(4));
 
 
-
     if (player.incha == 5 | player.incha == 9) {
         player.PL1energy = new Decimal(1);
         player.PL2energy = new Decimal(1);
@@ -3144,11 +3897,11 @@ function fszqw() {
 
 /*数值计算*/
 function scale(x) {
-    return x.max(x.pow(2).div(v.scal01)).max(x.pow(4).div(v.scal02)).max(x.pow(8).div(v.scal03)).max(x.pow(16).div(v.scal04));
+    return x.max(x.pow(2).div(v.scal01)).max(x.pow(4).div(v.scal02)).max(x.pow(8).div(v.scal03)).max(x.pow(16).div(v.scal04)).max(x.pow(32).div(v.scal05)).max(x.pow(64).div(v.scal06)).max(x.pow(128).div(v.scal07)).max(x.pow(256).div(v.scal08));
 }
 
 function invscale(x) {
-    return x.min(x.mul(v.scal01).root(2)).min(x.mul(v.scal02).root(4)).min(x.mul(v.scal03).root(8)).min(x.mul(v.scal04).root(16));
+    return x.min(x.mul(v.scal01).root(2)).min(x.mul(v.scal02).root(4)).min(x.mul(v.scal03).root(8)).min(x.mul(v.scal04).root(16)).min(x.mul(v.scal05).root(32)).min(x.mul(v.scal06).root(64)).min(x.mul(v.scal07).root(128)).min(x.mul(v.scal08).root(256));
 }
 
 function scaleTier(x) {
@@ -3160,11 +3913,11 @@ function invscaleTier(x) {
 }
 
 function scaleUpgd(x) {
-    return x.max(x.pow(2).div(100)).max(x.pow(4).div(1e10)).max(x.pow(8).div(1e34)).max(x.pow(16).div(1e98));
+    return x.max(x.pow(2).div(v.scalupgd01)).max(x.pow(4).div(v.scalupgd02)).max(x.pow(8).div(v.scalupgd03)).max(x.pow(16).div(v.scalupgd04));
 }
 
 function invscaleUpgd(x) {
-    return x.min(x.mul(100).root(2)).min(x.mul(1e10).root(4)).min(x.mul(1e34).root(8)).min(x.mul(1e98).root(16));
+    return x.min(x.mul(v.scalupgd01).root(2)).min(x.mul(v.scalupgd02).root(4)).min(x.mul(v.scalupgd03).root(8)).min(x.mul(v.scalupgd04).root(16));
 }
 
 function scaleChal(x) {
@@ -3176,7 +3929,7 @@ function invscaleChal(x) {
 }
 
 function softcap(x) {
-    return x.min(x.mul(256).root(2)).min(x.mul(1.099511628e12).root(4)).min(x.mul(8.711228593e40).root(8)).min(x.mul(1e118).root(16)).min(x.mul("1e310").root(32)).min(x.mul("1e773").root(64)).min(x.mul("1e1851").root(128)).min(x.mul("1e4317").root(256));
+    return x.min(hyp(x.pow(32), 0.375));
 }
 
 function hyp(a, b) {
@@ -3235,7 +3988,7 @@ function notation(amount) {
     let magnt = new Decimal(10).pow(amount.slog().sub(layer));
     let layerp = Decimal.floor(Decimal.log10(layer));
     let layerm = layer.div(Decimal.pow(10, layerp));
-    if (amount == 0) return "0";
+    if (amount == 0) return "0.000";
     if (powerc < -3) return mantissa.mul(10).toFixed(3) + "e" + power.sub(1);
     if (powerc < -2) return amount.toFixed(6);
     if (powerc < -1) return amount.toFixed(5);
@@ -3282,15 +4035,22 @@ var gui_mod = 1;
 function updateGUI() {
     document.getElementById("energy").innerHTML = notation(player.energy);
     document.getElementById("energyPs").innerHTML = notation(player.wsca01.mul(v.wscm01).pow(v.wscp01).mul(0.25));
-    document.getElementById("softcapx").innerHTML = notation(player.energy.max(2).log(2).div(1.152921504606846e18));
+    document.getElementById("softcapt").innerHTML = notation(getsoftcap());
+    document.getElementById("softcapx").innerHTML = notation(player.energy.max(2).log(2).div(getsoftcap().log(2)));
     document.getElementById("speed1").innerHTML = notation(v.gamespd1);
+
     document.getElementById("wscinfo").innerHTML = "基础风灵产量：0.25/s  每次作成乘数：" + notation(v.wscmpb);
-    for (let tier = 1; tier <= 32; tier++) { 
+    for (let tier = 1; tier <= 40; tier++) { 
         var name = tiername[tier];
         document.getElementById("wscb" + name).innerHTML = notatint(player["wscb" + name]);
         document.getElementById("wscc" + name).innerHTML = notation(v["wscc" + name]);
-        document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(v["wscm" + name]).padEnd(15, '_') + "^" + notation(v["wscp" + name]).padEnd(15, '_') + "¶1.000__________";
-        if (player["wscb" + name].gte(new Decimal(33554432).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "四阶折算|";
+        document.getElementById("wscd" + name).innerHTML = "+" + notation(player["wsca" + name]).padEnd(15, '_') + "×" + notation(v["wscm" + name]).padEnd(15, '_') + "^" + notation(v["wscp" + name]).padEnd(15, '_') + "¶" + notation(v["wsch" + name]).padEnd(15, '_');
+        if (player["wscb" + name].gte(new Decimal(1125899906842624).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "九阶折算|";
+        else if (player["wscb" + name].gte(new Decimal(35184372088832).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "八阶折算|";
+        else if (player["wscb" + name].gte(new Decimal(1099511627776).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "七阶折算|";
+        else if (player["wscb" + name].gte(new Decimal(34359738368).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "六阶折算|";
+        else if (player["wscb" + name].gte(new Decimal(1073741824).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "五阶折算|";
+        else if (player["wscb" + name].gte(new Decimal(33554432).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "四阶折算|";
         else if (player["wscb" + name].gte(new Decimal(1048576).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "三阶折算|";
         else if (player["wscb" + name].gte(new Decimal(32768).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "二阶折算|";
         else if (player["wscb" + name].gte(new Decimal(1024).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "一阶折算|";
@@ -3298,13 +4058,13 @@ function updateGUI() {
         if (player.autobuywsc[tier] == true) document.getElementById("byat" + name).innerHTML = "自动：开";
         else document.getElementById("byat" + name).innerHTML = "自动：关";
     }
-    document.getElementById("wscbv").innerHTML = "你的风灵基础值为(" + notation(v.wscBaseValue1) + "+" + notatint(v.wscBaseValue2) + "×4" + "+" + notatint(v.wscBaseValue3) + "×16" + "+" + notatint(v.wscBaseValue4) + "×64)^" + notation(v.wscBaseValueExp) + "=" + notation(v.wscBaseValue) + "（基于你作成的风灵总数而定）";
+    document.getElementById("wscbv").innerHTML = "你的风灵基础值为(" + notation(v.wscbaseValue1) + "+" + notatint(v.wscbaseValue2) + "×4" + "+" + notatint(v.wscbaseValue3) + "×16" + "+" + notatint(v.wscbaseValue4) + "×64)^" + notation(v.wscbaseValueExp) + "=" + notation(v.wscbaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = notatint(player.tier01) + "式风单元";
     document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风单元式数提升1~8式风灵乘数(1+n)²。当前：×" + notation(player.tier01.add(1).pow(2));
-    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(v.wscBaseValue.div(64).max(1));
+    document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(v.wscbaseValue.div(64).max(1));
     document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
     document.getElementById("tier01rewa04").innerHTML = "10式风单元：基于能量提升1~8式风灵乘数max(1,log2(n+1)^0.2)。当前：×" + notation(player.energy.add(1).log(2).pow(0.2).max(1));
-    document.getElementById("tier01rewa05").innerHTML = "25式风单元：每个风单元使1~8式风灵乘数×2。当前：×" + notation(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01).pow(player.tthsize.sub(10).max(1).pow(6)));
+    document.getElementById("tier01rewa05").innerHTML = "25式风单元：每个风单元使1~8式风灵乘数×2。当前：×" + notation(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).pow(player.tier01).pow(player.tier03.sub(44).mul(0.2).max(1)).pow(player.tthsize.max(1).pow(5)));
     document.getElementById("tier01rewa06").innerHTML = "63式风单元：使1和5式风单元奖励也对9~16式风灵生效。";
     document.getElementById("tier01rewa07").innerHTML = "200式风单元：基于风单元式数提升风之微粒获取。当前：×" + notation(player.tier01);
     document.getElementById("tier01rewa08").innerHTML = "630式风单元：每作成一次16式风灵使风之微粒产量×1.2。当前：×" + notation(new Decimal(1.2).pow(player.wscb16));
@@ -3327,7 +4087,7 @@ function updateGUI() {
     document.getElementById("tier03rewa03").innerHTML = "8式风系统：使风之微粒的软上限弱化20%";
     document.getElementById("tier03rewa04").innerHTML = "20式风系统：使元素能量生产乘以log2(能量)。当前：×" + notation(player.energy.max(2).log(2));
     document.getElementById("tier03rewa05").innerHTML = "50式风系统：基于风系统使25式风单元效果提升。当前：^" + notation(player.tier03.sub(44).mul(0.2).max(1));
-    document.getElementById("tier03rewa06").innerHTML = "126式风系统：使3式风系统也对25~32式风灵生效"
+    document.getElementById("tier03rewa06").innerHTML = "126式风系统：使3式风系统也对25~32式风灵生效，但效果倍率降低"
 
     document.getElementById("tier04").innerHTML = notatint(player.tier04) + "式风四倍系统";
     document.getElementById("tier04rewa01").innerHTML = "1式风四倍系统：基于风四倍系统提升进阶挑战1~4上限（最多提升12）。当前：+" + notation(player.tier04.min(12));
@@ -3401,6 +4161,8 @@ function updateGUI() {
     document.getElementById("PL2ptsnx").innerHTML = "，下一扪敤点在" + notation(player.PL1pts.root(1024).floor().add(1).pow(1024)) + "扩散点";
     document.getElementById("PL3ptspd").innerHTML = notation(player.PL2pts.root(1048576).floor()) + "扫敥点";
     document.getElementById("PL3ptsnx").innerHTML = "，下一扫敥点在" + notation(player.PL2pts.root(1048576).floor().add(1).pow(1048576)) + "扪敤点";
+    document.getElementById("PL4ptspd").innerHTML = notation(player.PL3pts.root(1048576).floor()) + "扬敦点";
+    document.getElementById("PL4ptsnx").innerHTML = "，下一扬敦点在" + notation(player.PL3pts.root(1048576).floor().add(1).pow(1048576)) + "扫敥点";
 
     document.getElementById("PL1Pts").innerHTML = notation(player.PL1pts);
     document.getElementById("PL1Eng").innerHTML = notation(player.PL1energy);
@@ -3442,10 +4204,10 @@ function updateGUI() {
     document.getElementById("anmpar").innerHTML = notation(player.anmpar);
     document.getElementById("anmparps").innerHTML = notation(v.anmparps);
     document.getElementById("anmparsc").innerHTML = notation(v.anmparsc);
-    if (player.std[0] == true) document.getElementById("anmparexp").innerHTML = "log2(log2(x+1)+1)^" + notation(player.parupg03.div(64).add(0.0625));
-    else document.getElementById("anmparexp").innerHTML = "log2(x+1)^" + notation(player.parupg03.div(64).add(0.0625));
-    if (player.std[0] == true) document.getElementById("anmpareffe").innerHTML = "^" + notation(player.anmpar.add(1).log(2).add(1).log(2).pow(player.parupg03.div(64).add(0.0625)).max(1));
-    else document.getElementById("anmpareffe").innerHTML = "×" + notation(player.anmpar.add(1).log(2).pow(player.parupg03.div(64).add(0.0625)).max(1));
+    if (player.std[0] == true) document.getElementById("anmparexp").innerHTML = "log2(log2(x+1)+1)^" + notation(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4)));
+    else document.getElementById("anmparexp").innerHTML = "log2(x+1)^" + notation(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4)));
+    if (player.std[0] == true) document.getElementById("anmpareffe").innerHTML = "^" + notation(player.anmpar.add(1).log(2).add(1).log(2).pow(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4))).max(1));
+    else document.getElementById("anmpareffe").innerHTML = "×" + notation(player.anmpar.add(1).log(2).pow(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4))).max(1));
     document.getElementById("anmorba").innerHTML = notation(player.anmorb);
     document.getElementById("anmorbttl").innerHTML = notation(player.anmorbttl);
 
@@ -3455,7 +4217,7 @@ function updateGUI() {
     document.getElementById("parupg04").innerHTML = notatint(player.parupg04);
     document.getElementById("parupge01").innerHTML = notation(new Decimal(2).pow(player.parupg01));
     document.getElementById("parupge02").innerHTML = notation(player.anmpar.pow(player.parupg02.mul(0.25)).max(1));
-    document.getElementById("parupge03").innerHTML = notation(player.parupg03.min(60).div(64));
+    document.getElementById("parupge03").innerHTML = notation(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4)).sub(0.0625));
     document.getElementById("parupge04").innerHTML = notation(player.parupg04);
     document.getElementById("parupgc01").innerHTML = notation(v.parupgc01);
     document.getElementById("parupgc02").innerHTML = notation(v.parupgc02);
@@ -3490,7 +4252,7 @@ function updateGUI() {
     document.getElementById("chal09effe").innerHTML = notation(player.chacom09.min(player.chacom09.pow(0.5).mul(2)).mul(0.25));
     document.getElementById("chal10effe").innerHTML = notation(new Decimal(2).pow(player.chacom10));
     document.getElementById("chal11effe").innerHTML = notation(new Decimal(2).pow(player.chacom11));
-    document.getElementById("chal12effe").innerHTML = notation(new Decimal(2).pow(player.chacom12));
+    document.getElementById("chal12effe").innerHTML = notation(new Decimal(8).pow(player.chacom12));
 
     document.getElementById("PL2Pts").innerHTML = notation(player.PL2pts);
     document.getElementById("PL2Eng").innerHTML = notation(player.PL2energy);
@@ -3658,6 +4420,10 @@ function updateGUI() {
     else document.getElementById("atplt").innerHTML = "关";
     if (player.tthatact[1] == true) document.getElementById("athar").innerHTML = "开";
     else document.getElementById("athar").innerHTML = "关";
+    if (player.tthatact[2] == true) document.getElementById("atbtu").innerHTML = "开";
+    else document.getElementById("atbtu").innerHTML = "关";
+    if (player.tthatact[3] == true) document.getElementById("atimp").innerHTML = "开";
+    else document.getElementById("atimp").innerHTML = "关";
     document.getElementById("tthprespd").innerHTML = notation(v.tthprespd);
     document.getElementById("tthprempd").innerHTML = notation(v.tthprempd);
     document.getElementById("tthpres").innerHTML = notation(player.tthpres);
@@ -3755,6 +4521,33 @@ function updateGUI() {
         document.getElementById("convp" + name).innerHTML = notation(v["convp" + name]);
     }
 
+    document.getElementById("PL4Pts").innerHTML = notation(player.PL4pts);
+    document.getElementById("PL4Eng").innerHTML = notation(player.PL4energy);
+    document.getElementById("PL4EngPow").innerHTML = notation(v.PL4engpow);
+    document.getElementById("PL4EngMul").innerHTML = notation(v.PL4engmul);
+    document.getElementById("PL4EngPs").innerHTML = notation(player.wsca33.mul(v.wscm33).pow(v.wscp33).mul(new Decimal(0.25)));
+
+    document.getElementById("PL4fra").innerHTML = notation(player.PL4fra);
+    document.getElementById("fraft1").innerHTML = notation(v.fraft1);
+    document.getElementById("fraft2").innerHTML = notation(v.fraft2);
+    document.getElementById("fraft3").innerHTML = notation(v.fraft3);
+    document.getElementById("fraft4").innerHTML = notation(v.fraft4);
+    document.getElementById("fragain").innerHTML = notation(v.fraft1.mul(v.fraft2).mul(v.fraft3).mul(v.fraft4));
+    for (i = 1; i <= 8; i++) {
+        let name = tiername[i];
+        document.getElementById("frau" + name).innerHTML = notation(player["frau" + name]);
+        document.getElementById("frauc" + name).innerHTML = notation(v["frauc" + name]);
+        document.getElementById("fraue" + name).innerHTML = notation(v["fraue" + name]);
+    }
+    document.getElementById("fraue61").innerHTML = notation(v.fraue01.mul(1.189));
+    document.getElementById("fraue62").innerHTML = notation(v.fraue02.mul("2.004e19728"));
+    document.getElementById("fraue63").innerHTML = notation(v.fraue03.mul(2));
+    document.getElementById("fraue64").innerHTML = notation(v.fraue04.mul(2));
+    document.getElementById("fraue65").innerHTML = notation(v.fraue05.mul(1.414));
+    document.getElementById("fraue66").innerHTML = notation(v.fraue06.mul(1.414));
+    document.getElementById("fraue67").innerHTML = notation(v.fraue07.mul(1.189));
+    document.getElementById("fraue68").innerHTML = notation(v.fraue08.add(2));
+
     if (player.innormcha == 1) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
     else if (player.innormcha == 2) document.getElementById("chalstat").innerHTML = "你当前在普通挑战2中";
     else if (player.innormcha == 3) document.getElementById("chalstat").innerHTML = "你当前在普通挑战3中";
@@ -3794,11 +4587,14 @@ function updateGUI() {
     document.getElementById("PL3tms").innerHTML = "您扫敥了" + notatint(player.PL3tms) + "次";
     document.getElementById("PL3sec").innerHTML = "上次扫敥到现在过了" + player.PL3sec.toFixed(0) + "秒";
     document.getElementById("PL3pts").innerHTML = "总计扫敥点：" + notatint(player.PL3ptsttl);
+
+
+
     if (gui_mod == 1) player.nowtime = Date.now();
 }
 
 function styleDisplay() {
-    if (player.energy.gte("e3.470639555327098e17")) document.getElementById("softcap").style.display = 'block';
+    if (player.energy.gte(getsoftcap())) document.getElementById("softcap").style.display = 'block';
     else document.getElementById("softcap").style.display = 'none';
 
     if (player.tier01.eq(0)) document.getElementById("tier01info").innerHTML = "在1式风单元，将基于风单元式数提升1~8式风灵乘数(1+n)²。";
@@ -3942,7 +4738,7 @@ function styleDisplay() {
     else document.getElementById("tier03rewa04").style.display = 'none';
     if (player.tier03.gte(50)) {
         document.getElementById("tier03rewa05").style.display = 'block';
-        document.getElementById("tier03info").innerHTML = "在126式风系统，将使3式风系统也对25~32式风灵生效";
+        document.getElementById("tier03info").innerHTML = "在126式风系统，将使3式风系统也对25~32式风灵生效，但效果倍率降低";
     }
     else document.getElementById("tier03rewa05").style.display = 'none';
     if (player.tier03.gte(126)) {
@@ -3994,6 +4790,8 @@ function styleDisplay() {
     else document.getElementById("PL2ptsnx").style.display = 'none';
     if (player.PL2pts.lt("1e6291456")) document.getElementById("PL3ptsnx").style.display = 'block';
     else document.getElementById("PL3ptsnx").style.display = 'none';
+    if (player.PL3pts.lt("1e6291456")) document.getElementById("PL4ptsnx").style.display = 'block';
+    else document.getElementById("PL4ptsnx").style.display = 'none';
 
     if (player.hasUnlockedPL1 == true) {
         document.getElementById("wscset2").style.display = 'block';
@@ -4013,6 +4811,14 @@ function styleDisplay() {
         document.getElementById("comp3").style.display = 'block';
         document.getElementById("btrow4").style.display = '';
     }
+    if (player.hasUnlockedPL4 == true) {
+        document.getElementById("wscset5").style.display = 'block';
+        document.getElementById("PL4info").style.display = 'block';
+        document.getElementById("comp4").style.display = 'block';
+        document.getElementById("btrow5").style.display = '';
+    }
+
+
 
     for (let i = 0; i < 16; i++) {
         if (player.PL1upg[i] == true) document.getElementById("PL1upg" + tiername[i + 1]).className = "PL1upgyes";
@@ -4033,7 +4839,12 @@ function styleDisplay() {
     }
     if (player.resa05.gte(1)) {
         for (let i = 1; i <= 8; i++) {
-            document.getElementById("byat" + tiername[i+16]).style.display = 'block';
+            document.getElementById("byat" + tiername[i + 16]).style.display = 'block';
+        }
+    }
+    if (player.PL4goal[1] == true) {
+        for (let i = 1; i <= 8; i++) {
+            document.getElementById("byat" + tiername[i + 24]).style.display = 'block';
         }
     }
 
@@ -4200,6 +5011,10 @@ function styleDisplay() {
     else document.getElementById("ulplt").style.display = 'none';
     if (player.tthatunl[1] == true) document.getElementById("ulhar").style.display = 'block'
     else document.getElementById("ulhar").style.display = 'none';
+    if (player.PL4goal[2] == true) document.getElementById("ulbtu").style.display = 'block'
+    else document.getElementById("ulbtu").style.display = 'none'
+    if (player.PL4goal[3] == true) document.getElementById("ulimp").style.display = 'block'
+    else document.getElementById("ulimp").style.display = 'none'
     for (i = 1; i <= 4; i++) {
         let name = tiername[i];
         if (player.tthpu[i - 1] == true) document.getElementById("tthu" + name).className = "tthupg2y";
@@ -4314,11 +5129,16 @@ function styleDisplay() {
         else document.getElementById("conv" + name).className = "PL3upgno";
     }
 
+    for (let i = 1; i <= 8; i++) {
+        if (player.PL4goal[i-1] == true) document.getElementById("PL4goal" + tiername[i]).className = "PL4goalyes";
+        else document.getElementById("PL4goal" + tiername[i]).className = "PL4goalno";
+    }
 
-    for (let i = 0; i < 58; i++) {
+    for (let i = 0; i < 68; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
         else document.getElementById("ach" + hexdigit[i]).className = "achno";
     }
+
     if (player.tier01conf == true) document.getElementById("tier01confirm").checked = 'checked';
     else document.getElementById("tier01confirm").checked = '';
     if (player.tier02conf == true) document.getElementById("tier02confirm").checked = 'checked';
@@ -4408,6 +5228,8 @@ function comAch() {
     if (player.hasunlockedanm3 == true) getAch(55);
     if (v.gamespd1.gte(256)) getAch(56);
     if (player.convn.gte(4)) getAch(57);
+
+
 }
 
 /*弹出提示*/
@@ -4446,6 +5268,9 @@ function hotkeys(event) {
         case 52:
             maxAll32();
             break;
+        case 53:
+            maxAll40();
+            break;
 
         case 81:
             incTier1();
@@ -4482,6 +5307,10 @@ function hotkeys(event) {
         case 67:
             PL3reset();
             break;
+        case 86:
+            PL4reset();
+            break;
+
     }
 }
 
@@ -4541,36 +5370,32 @@ function mainLoop() {
     getxyz();
     getanm3();
     getconv();
+    getPL4engMul();
+    getPL4engPow();
+    getfrau();
     getspd();
-    autoBuyFast();
+    autoBuy();
     comAch();
     if (player.hasUnlockedPL1 == false) fixInfinity();
 }
 
-function autoBuyLoop() {
-    autoBuyWsc(1);
-    autoBuyWsc(2);
-    autoBuyWsc(3);
-    autoBuyWsc(4);
-    autoBuyWsc(5);
-    autoBuyWsc(6);
-    autoBuyWsc(7);
-    autoBuyWsc(8);
-    autoBuyTier01();
-    autoBuyTier02();
-    autoBuyUpgd01();
-    autoBuyUpgd02();
-}
-
-function autoBuyFast() {
+function autoBuy() {
     if (player.normchacom[0] == true) autoBuyWsc(1);
+    else abw(1);
     if (player.normchacom[1] == true) autoBuyWsc(2);
+    else abw(2);
     if (player.normchacom[2] == true) autoBuyWsc(3);
+    else abw(3);
     if (player.normchacom[3] == true) autoBuyWsc(4);
+    else abw(4);
     if (player.normchacom[4] == true) autoBuyWsc(5);
+    else abw(5);
     if (player.normchacom[5] == true) autoBuyWsc(6);
+    else abw(6);
     if (player.normchacom[6] == true) autoBuyWsc(7);
+    else abw(7);
     if (player.normchacom[7] == true) autoBuyWsc(8);
+    else abw(8);
     if (player.PL2upg01.gte(1)) autoBuyWsc(9);
     if (player.PL2upg01.gte(2)) autoBuyWsc(10);
     if (player.PL2upg01.gte(3)) autoBuyWsc(11);
@@ -4589,19 +5414,30 @@ function autoBuyFast() {
         autoBuyWsc(23);
         autoBuyWsc(24);
     }
+    if (player.PL4goal[1] == true) {
+        autoBuyWsc(25);
+        autoBuyWsc(26);
+        autoBuyWsc(27);
+        autoBuyWsc(28);
+        autoBuyWsc(29);
+        autoBuyWsc(30);
+        autoBuyWsc(31);
+        autoBuyWsc(32);
+    }
 
-    if (player.normchacom[8] == true) autoBuyTier01();
-    if (player.normchacom[9] == true) autoBuyTier02();
+    autoBuyTier01();
+    autoBuyTier02();
     if (player.PL2tms.gte(9)) autoBuyTier03();
     if (player.alcu[0] == true) autoBuyTier04();
 
-    if (player.normchacom[10] == true) autoBuyUpgd01();
-    if (player.normchacom[11] == true) autoBuyUpgd02();
+    autoBuyUpgd01();
+    autoBuyUpgd02();
     if (player.PL2tms.gte(7)) autoBuyUpgd03();
     if (player.PL2tms.gte(7)) autoBuyUpgd04();
 
     autobuyparupg();
     autobuyanm2upg();
+    autobuyanm3upg();
 }
 
 updateGUI();
@@ -4614,9 +5450,8 @@ setInterval(styleDisplay, 50);
 
 setInterval(updateGUI, 50);
 
-setInterval(save, 60000);
+setInterval(save, 10000);
 
-setInterval(autoBuyLoop, 1000);
 
 /*滚动新闻*/
 const newscheckbox = document.getElementById("swnews");
@@ -4649,7 +5484,7 @@ var texts =
         "授人以鱼，不如授人以渔，不如授人以氵渔，不如授人以氵氵渔，不如授人以氵氵氵渔，不如授人以氵氵氵氵渔，不如授人以氵氵氵氵氵渔，…………",
         "5 hours until the update——准确地说，是大数放置类游戏玩家所周知的梗。表达下一次更新遥遥无期之意",
         "由于最近■■在增量游戏中给我带来了软上限，所以我要制造“不可名状”倍的TNT然后把他们的总部炸掉，软上限有多少种？从一到无穷大！",/*20*/
-        "增量游戏超越一切物理化学生物定律，请给自己的增量游戏增加【虚无■■……    】等内容或层级",
+        "增量游戏超越一切物理化学生物定律，请给自己的增量游戏增加【<span class='nihility'>虚无</span>■■……    】等内容或层级",
         "超过1.8e308的数字怎么表示？break_infinity.js:我可以，break_eternity.js:我更可以，break_reality.js:暂时不存在",
         "我们生活在有限的世界里面，因此难以理解阿列夫的阶梯，我们生物的本能无法仰望无尽的星空",
         "那些物理学家正在建立比暴涨理论还大的理论准备入侵我们，他们把这个理论叫做“M理论”，不过我敢肯定他们不会成功",
@@ -4704,41 +5539,67 @@ var texts =
         "俄罗斯不仅有方块，不仅有套娃，还有 e l s e 语句",
         "快去测试模拟宇宙",
         "首先确定一条公理：即使放诸宇宙尺度，作者也是万年一遇的超级天才，重申一句，作者并非不知廉耻，而是廉耻之于作者，屁也不是",
-        "星神“虚无”，名称Ⅸ，Ⅸ是罗马数字的9",
+        "<span class='nihility'>虚无</span>星神，名称Ⅸ，Ⅸ是罗马数字的9",
         "尝试给复制品添加思想，却发现复制品脑子里都是复制",
         "Introvert,iNtuitive,Thinking,Perceiving",
         "这一切有什么意义？没有什么意义？没有没什么意义？",
-        "斯马特，绝对论之神，于大数历2268年3月6日诞生，起初曾是陨石，坠落到火山口里后被欧米茄改造成机器人，拥有了正常人的意识和正常人难以想象的力量，100岁的时候提出了绝对论，成为了绝对论之神和绝对论部长",/*80*/
-        "为庆祝中秋国庆连假，宇宙学部门进行实验，在研究设施内制造黑洞，目标是将时间加速到180倍",
-        "但由于操作不当，导致黑洞反转变成大规模减慢时间，就在他们焦头烂额的研究如何解决问题的时候，设施外面已经乱作一团",
-        "只见设施外的工作人员发现设施里面的人员整整四个小时都没有任何回应，以为里面的人员发动叛乱了，准备直接武力攻破设施",
-        "但就在这时，一旁的时间异常部门主管SCP-5616敏锐的察觉到了问题:SCP-5616利用时间异常设备发现设施内的时间流速正在飞速降慢",
-        "现在已经到了设施内时间比外部时间慢几千倍的程度，再这样下去整个设施的时间将会停止，把里面的人全部像以前的SCP-5616一样永远困在里面",
-        "宇宙学部在此提醒：实验千万条，安全第一条，操作不规范，亲人两行泪",
+        "<span class='erudition'>智识</span>星神博识尊在众多星神中可谓是一个十分特殊的存在，因为其极有可能是造物升华为星神的存在，其思维底层逻辑是彻底的理性，感性对于真相的粉饰对祂毫无意义，祂将追寻宇宙真理，直至尽头。博识尊是由用于求解万物的星体计算机升格而成的星神，祂的理念简而言之：万物皆有解，上帝不会掷骰子，宇宙不存在不能被计算的变量。博识尊对于其他存在并无太多想法，祂将大部分的注意力放在求解宇宙方程，以及推导虚数法则上，除此之外，唯有凡人世界偶然出现的智慧火花吸引祂的目光，祂会追寻讯息，前往源头，邀请天才加入探寻宇宙答案的行列。而获得邀请的存在，唯有正确理解了讯息的含义，认知到宇宙的答案超脱凡人智慧的极限，才能够成为天才俱乐部的真正会员。目前研究的所有问题，博识尊都有答案，但祂并不会将问题的答案给予他人，只会提供无尽的问题。所以说，风灵作成未来的更新，一直到<span class='rygcbm'>扰敪</span>之后的阶段，博识尊早在几千万年前就玩透了",/*80*/
+        "怀旧空吟闻笛赋，到乡翻似烂柯人，other times await，I need to become eternal",
+        "小子，你是阿列夫几级啊，也敢出来混？",
+        "所有游戏的解密本质就是来源于数学，包括增量游戏",
+        "传说风神的先祖（qeq6308）创造世界的时候做了三个选项卡，其中一个选项卡中从下往上按照大小顺序摞着64种风灵。",
+        "怪笑帽帽猫，惊奇猫猫盒，不笑饿饿鹅？",
+        "有一次冒险时珐露珊受困于遗迹之神Effarig的现实和时间膨胀中导致变得不会衰老",
         "THE EVERYTHING FINAL OF Ω OF FINAL EVERYTHING THE",
         "是用纯数学绝对连续的物质做的",
-        "EMOMOMOMO",
-        "今早我来到饼干研究中心，发现每一个研究员都在埋头努力工作。粒子物理学研究员Pollux正在研究斯格明子，并且他还兼任天体物理学研究员的工作，研究传送门和奇点；我继续往前走，看到几个研究员在津津有味地讨论中子星和超新星爆发，还有一间实验室里面有研究员在做熵的研究工作；最后我走到SCP-CN-1630的办公室里面，发现他正在和SCP-5616一起研究黑洞来加速时间速度，但是研究课题太难了，SCP-CN-1630一气之下直接使用自己的能力扭曲现实来到了量子领域把大量的幽灵光子聚集坍缩成黑洞，顺利完成了制造黑洞的任务。随后，Pollux在研究天体物理学时发现了一个反物质的天体，它非常靠近一个宇宙吸引子，于是他坐上火箭前去探索，在中途打开计算器进行数位计算模拟计算器进化，结果他刚到半路就看到反物质的天体周围的现实发生了世界末日，他吓得赶紧进行修补现实，然后打开虫洞回到地球，把自己刚刚的经历和SCP-CN-1630交代，还拿出一个现实碎片来做证明，大家都十分惊讶。",/*90*/
+        "斯马特，绝对论之神，起初曾是陨石，坠落到火山口里后被Ω改造成机器人，拥有了正常人的意识和正常人难以想象的力量，100岁的时候提出了绝对论，成为了绝对论之神",
+        "今早我来到饼干研究中心，发现每一个研究员都在埋头努力工作。粒子物理学研究员Pollux正在研究斯格明子，并且他还兼任天体物理学研究员的工作，研究传送门和奇点；我继续往前走，看到几个研究员在津津有味地讨论中子星和超新星爆发，还有一间实验室里面有研究员在做熵的研究工作；最后我走到SCP-CN-1630的办公室里面，发现他正在和SCP-5616一起研究黑洞来加速时间速度，但是研究课题太难了，SCP-CN-1630一气之下直接使用自己的能力扭曲现实来到了量子领域把大量的幽灵光子聚集坍缩成黑洞，顺利完成了制造黑洞的任务。随后，Pollux在研究天体物理学时发现了一个反物质的天体，它非常靠近一个宇宙吸引子，于是他坐上火箭前去探索，在中途打开计算器进行数位计算模拟计算器进化，结果他刚到半路就看到反物质的天体周围的现实发生了世界末日，他吓得赶紧进行修补现实，然后打开虫洞回到地球，把自己刚刚的经历和SCP-CN-1630交代，还拿出一个现实碎片来做证明，大家都十分惊讶",/*90*/
         "汉化版打开游戏就能找到句号。",
         "给他一个时间速度加成，他敢把价格卖到114514 lodeverse",
         "增量的反义词是减魖",
-        "我要找阮梅研究生物炼金",
+        "我要找阮·梅研究生物炼金",
         "打破希格斯玻色子:f_BO(1.8e308)",
         "数学大厦又倒塌了",
         "0+0是宇宙万法的那个源头",
         "在黑塔的模拟宇宙中寻找灵感",
         "『风灵作成』已经触手可及",
-        "近日有网友表示，在某增量游戏新闻播放器上看到一则重要到有时间旅行者提醒的新闻，由于虫洞质量不断扩大，粒子物理学研究员Pollux和粒子超理学研究员天才俱乐部#83黑塔通过虫洞在反物质宇宙相遇，物理学家建议创造更大的虫洞。某一数学家兼物理学家利用伽罗瓦理论庞加莱猜想的庞加莱回归定理和伽马函数算出了天价虫洞已经来到了arv ^ 1024，不过我们还是不知道他们两个是怎么掉进这么大的虫洞的，可能是被自动幽灵一脚踢进虫洞。据研究员Pollux报告，他先前由于某个由于机密不能披露的异常影响导致视觉能力严重下降，来到反物质宇宙后因为反物质的时间效应迅速恢复，他表示以后天体物理学研究要加紧研究虫洞。为此五星上将麦克阿瑟表示，要是我有这么大的虫洞，我当年的军衔一定不止五星，至少也得有50星，就连SCP - CN - 1630都表示，这43年来，我天天被人注射记忆删除药剂，没得睡过一次好觉，要是我有这么大的虫洞一定得进去放个C类通道，然后在里面睡一觉，不仅可以体验相对论时间膨胀，还可以带薪休假。大型纪录片之《IMR 0.8天价虫洞卖出了arv ^ 1024》持续为您播放",/*100*/
+        "近日有网友表示，在某增量游戏新闻播放器上看到一则重要到有时间旅行者提醒的新闻，由于虫洞质量不断扩大，粒子物理学研究员Pollux和粒子超理学研究员天才俱乐部#83黑塔通过虫洞在反物质宇宙相遇，物理学家建议创造更大的虫洞。某一数学家兼物理学家利用伽罗瓦理论庞加莱猜想的庞加莱回归定理和伽马函数算出了天价虫洞已经来到了arv^1024，不过我们还是不知道他们两个是怎么掉进这么大的虫洞的，可能是被自动幽灵一脚踢进虫洞。据研究员Pollux报告，他先前由于某个由于机密不能披露的异常影响导致视觉能力严重下降，来到反物质宇宙后因为反物质的时间效应迅速恢复，他表示以后天体物理学研究要加紧研究虫洞。为此五星上将麦克阿瑟表示，要是我有这么大的虫洞，我当年的军衔一定不止五星，至少也得有50星，就连SCP-CN-1630都表示，这43年来，我天天被人注射记忆删除药剂，没得睡过一次好觉，要是我有这么大的虫洞一定得进去放个C类通道，然后在里面睡一觉，不仅可以体验相对论时间膨胀，还可以带薪休假。大型纪录片之《IMR 0.8天价虫洞卖出了arv^1024》持续为您播放",/*100*/
+        "从香料放置、能量发生器、FE000000、Antimatter Dimension各《借鉴》了一点",
+        "观6左爷6做增量游戏有感：汉字的后继是什么？",
+        "Hexagon1296被超形上学部收容，这一事件无疑在数学界引起了广泛关注",
+        "已经被混沌大重置混沌死了",
+        "K9e15比葛立恒数还大",
+        "看到expantanum之后，break_eternity表示，自己还是太逊了",
+        "Milk-Eating Go Brrrrr",
+        "本游戏1000000%是增量游戏，没有其他可能",
+        "每当我找不到存在的意义，每当我迷失在黑夜里，夜空中最亮的星，请指引我靠近你",
+        "为庆祝中秋国庆连假，宇宙学部门进行实验，在研究设施内制造黑洞，目标是将时间加速到180倍，但由于操作不当，导致黑洞反转变成大规模减慢时间，就在他们焦头烂额的研究如何解决问题的时候，设施外面已经乱作一团，只见设施外的工作人员发现设施里面的人员整整四个小时都没有任何回应，以为里面的人员发动叛乱了，准备直接武力攻破设施，但就在这时，一旁的时间异常部门主管SCP-5616敏锐的察觉到了问题:SCP-5616利用时间异常设备发现设施内的时间流速正在飞速降慢，现在已经到了设施内时间比外部时间慢几千倍的程度，再这样下去整个设施的时间将会停止，把里面的人全部像以前的SCP-5616一样永远困在里面，宇宙学部在此提醒：实验千万条，安全第一条，操作不规范，亲人两行泪",/*110*/
+        "本游戏共有7个基本的声望层：<span style='color:#ff0000'>扩散</span>、<span style='color:#ffff00'>扪敤</span>、<span style='color:#00ff00'>扫敥</span>、<span style='color:#00ffff'>扬敦</span>、<span style='color:#0000ff'>扭敧</span>、<span style='color:#ff00ff'>扮敨</span>、扯敩",
+        "本游戏的声望层级与FE000000声望层级相比，相当于五倍大甜甜花和四倍大甜甜花的区别",
+        "苯游戏使用氢氚ML/Ja钒砷铬碘铂/二硫化碳编写",
+        "到达9e15条新闻后，你的滚动新闻将发生溢出初储触锟斤拷烫烫烫...",
+        "旅行者，崩铁好玩吗？————开拓者，原神好玩吗？",
+        "已修复修复修复……(以下省略3.6e308字)新闻不能显示的bug失败的bug失败……(以下省略7.2e308字)的bug",
+        "kurukurukurukurukurukurukurukurukurukurukurukurukurukurukururin",
+        "没人在乎，我在<span class='nihility'>虚无</span>中打翻了<span class='nihility'>虚无</span>，在<span class='erudition'>智识</span>中演算了<span class='erudition'>智识</span>",
+        "<span class='erudition'>智识</span>星神为何沉默不语？或许是因为没装声卡",
+        "跳舞，只要音乐在响，就尽管跳下去。明白我的话？跳舞，不停地跳舞。不要考虑为什么跳，不要考虑意义不意义，意义那玩意儿本来就是没有的，要是考虑这个，脚步势必停下来。一旦停下来，我就再也爱莫能助了，并且连接你的线索也将全部消失，永远消失。那一来，你就只能在这里生存，只能不由自主地陷进这边的世界。因此不能停住脚步，不管你如何觉得滑稽好笑，也不能半途而废，务必咬紧牙关踩着舞点跳下去。跳着跳着，原先坚固的东西便会一点点酥软，有的东西还没有完全不可救药。能用的全部用上去，全力以赴，不足为惧的。你的确很疲劳，精疲力竭，惶惶不可终日。谁都有这种时候，觉得一切都错得不可收拾，以致停下脚步。但只有跳下去，而且要跳得出类拔萃，跳得大家心悦诚服。这样，我才有可能助你一臂之力。总之一定要跳要舞，只要音乐没停，要跳要舞，只要音乐没停",/*120*/
+        "",
+        "",
+        "",
+        "",
+        "",
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
 var newsTimer = setInterval(function () {
     p -= 1
     if (p <= l) {
-        newsText.innerText = texts[Math.floor(Math.random() * texts.length)]
+        newsText.innerHTML = texts[Math.floor(Math.random() * texts.length)]
         newsText.style.width = (newsText.innerText.length * 16).toString() + "px"
         l = -50 - (newsText.innerText.length * 16)
         p = 50 + document.body.clientWidth
     }
     newsText.style.left = p.toFixed(1) + "px"
 }, 10)
+newsText.innerHTML = texts[Math.floor(Math.random() * texts.length)]
