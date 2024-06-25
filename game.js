@@ -3323,6 +3323,15 @@ function getconv() {
     v.convp16 = player.PL3pts.max(1).log(2).max(1).log(2).div(400).mul(v.fraue07);
 }
 
+const PL4checkbox = document.getElementById("PL4confirm");
+PL4checkbox.addEventListener("input", function () {
+    if (PL4checkbox.checked) {
+        player.PL4conf = true;
+    } else {
+        player.PL4conf = false;
+    }
+})
+
 async function PL4reset() {
     if (player.PL3pts.lt("6.741e315652")) return;
     var confirmation = true;
@@ -5149,6 +5158,8 @@ function styleDisplay() {
     else document.getElementById("PL2confirm").checked = '';
     if (player.PL3conf == true) document.getElementById("PL3confirm").checked = 'checked';
     else document.getElementById("PL3confirm").checked = '';
+    if (player.PL4conf == true) document.getElementById("PL4confirm").checked = 'checked';
+    else document.getElementById("PL4confirm").checked = '';
     if (player.news == true) document.getElementById("swnews").checked = 'checked';
     else document.getElementById("swnews").checked = '';
     if (player.hotk == true) document.getElementById("swhotk").checked = 'checked';
