@@ -3639,7 +3639,6 @@ async function PL4reset() {
         player.tthgene= new Decimal(0);
         player.tthsucr= new Decimal(0);
         player.tthimpr= new Decimal(1);
-        player.tthatunl= [false, false, false, false, false, false,];
         player.tthatact= [false, false, false, false, false, false,];
         player.tthu01= new Decimal(0);
         player.tthu02= new Decimal(0);
