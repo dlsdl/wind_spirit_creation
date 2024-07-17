@@ -15,7 +15,7 @@
         <button class="PL5button" onclick="PL5reset()" id="PL5button" style="display: none">扭敧重置：获得<span id="PL5ptspd"></span><span id="PL5ptsnx"></span></button>
         <button class="PL6button" onclick="PL6reset()" id="PL6button" style="display: none">扮敨重置：获得<span id="PL6ptspd"></span><span id="PL6ptsnx"></span></button>
         <button class="PL7button" onclick="PL7reset()" id="PL7button" style="display: none">扯敩重置：获得<span id="PL7ptspd"></span><span id="PL7ptsnx"></span></button>
-        <button class="PLomegabutton" onclick="PLomegareset()" id="PLomegabutton" style="display: none">如果将e5.409e307能量给风神之奇物，将会发生一些事情</button>
+        <button class="PLomegabutton" onclick="PLomegareset()" id="PLomegabutton" style="display: none">进入第1次扰敪，风神将赐予您金色风灵</button>
         <br />
         <p align="center" class="ftsz2">
             <span id="chalstat">你当前不在任何挑战中</span>
@@ -27,10 +27,16 @@
             <span>你的能量每秒增加</span><span id="energyPs"></span><span id="softcap" style="display: none;">(由于能量超过<span id="softcapt"></span>，受软上限限制，变为<span id="softcapx"></span>次方根)</span>
         </p>
         <p align="center" class="ftsz3">
-            <span id="fixinf" style="display: none;">点击“扩散重置”，对蒲公英籽释放风元素，将会发生一些事情</span>
+            <span id="fixinf" style="display: none;">仙境由于能量过多，坍塌了。</span>
+        </p>
+        <p align="center" class="ftsz3">
+            <span id="fixete" style="display: none;">多元仙境由于能量过多，坍塌了。</span>
         </p>
         <p align="center" id="speed" style="margin: auto; font-size: 16px; color: #ffffff; width: 64%;">
-            <span>一阶游戏速度：×</span><span id="speed1">1.000</span>
+            <span>一阶游戏速度(影响扫敥及之前内容)：×</span><span id="speed1">1.000</span>
+        </p>
+        <p align="center" id="speed2" style="margin: auto; font-size: 16px; color: #ffffff; width: 64%; display: none">
+            <span>二阶游戏速度(影响扯敩及之前内容)：×</span><span id="speed2x">1.000</span>
         </p>
         <p align="center" id="PL1info" style="margin: auto; font-size: 16px; color: #ff0000; width: 64%; display: none">
             <span>你有</span><span id="PL1Pts">0</span><span>扩散点,</span><span id="PL1Eng">1</span><span>扩散能量(+</span><span id="PL1EngPs">0</span><span>/s),</span>
@@ -99,13 +105,13 @@
             <button align="center" class="button" style="background-color: #00ff00; color: #000000;" id="btp4_6" onclick="changePg('p4_6')">转化</button>
         </div>
         <div class="btnrow" id="row5" style="display: none">
-            <button align="center" class="slbutton" style="background-color: #00ffff; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">扬敦目标</button>
-            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">碎片</button>
+            <button align="center" class="slbutton" style="background-color: #00ffff; color: #000000;" id="btp5_1" onclick="changePg('p5_1')">目标</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_2" onclick="changePg('p5_2')">碎片升级</button>
             <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_3" onclick="changePg('p5_3')">惊奇风盒</button>
             <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_4" onclick="changePg('p5_4')">试炼场</button>
             <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_5" onclick="changePg('p5_5')">巧施协同</button>
             <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_6" onclick="changePg('p5_6')">刺影征标</button>
-            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_7" onclick="changePg('p5_7')">星空</button>
+            <button align="center" class="button" style="background-color: #00ffff; color: #000000;" id="btp5_7" onclick="changePg('p5_7')">星辰</button>
         </div>
         <div class="btnrow" id="row6" style="display: none">
             <button align="center" class="slbutton" style="background-color: #0000ff; color: #ffffff;" id="btp6_1" onclick="changePg('p6_1')">扭敧</button>
@@ -136,7 +142,7 @@
         </div>
         <div id="p1_1">
             <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;" id="wscinfo">基础风灵产量：0.25/s  每次作成乘数：1.6</div>
+                <div align="center" class="ftsz2" style="display: inline-block;" id="wscinfo">基础风灵产量：每次作成乘数：</div>
                 <button class="ltbutton" id="buymax" onclick="maxAll()">全部最大</button>
             </div>
             <div id="wscset1">
@@ -712,7 +718,7 @@
                 <tr>
                     <td><button class="PL1upgno" id="PL1upg01" onclick="buyPL1upg(0)">解锁自动作成1~8式风灵<br />花费：4扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg02" onclick="buyPL1upg(1)">解锁自动获得风单元和风模块<br />花费：8扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg03" onclick="buyPL1upg(2)">解锁自动购买风灵升级<br />花费：12扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg03" onclick="buyPL1upg(2)">解锁自动购买风灵升级1和2<br />花费：12扩散点</button></td>
                     <td><button class="PL1upgno" id="PL1upg04" onclick="buyPL1upg(3)">解锁普通挑战<br />花费：16扩散点</button></td>
                 </tr>
                 <tr>
@@ -768,7 +774,7 @@
         <div id="p2_3" style="display: none">
             <div id="normchal" style="display: none">
                 <div class="btnrow">
-                    <div align="center" class="ftsz2" style="display: inline-block;">点击挑战框以开始挑战，到达1.797e308能量完成普通挑战</div>
+                    <div align="center" class="ftsz2" style="display: inline-block;">点击挑战框以开始普通挑战，目标为1.797e308能量。已完成<span id="ncc"></span>/12个普通挑战，因此基础风灵产量增加<span id="bpa"></span>。</div>
                     <button class="ltbutton" onclick="quitCha()">退出挑战</button>
                 </div>
                 <table align="center">
@@ -939,22 +945,28 @@
                 <span>扪敤4次</span><br /><span>扪敤重置时保留第四行扩散升级</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst05">
-                <span>扪敤5次</span><br /><span>扩散不再重置风单元和风模块</span>
+                <span>扪敤5次</span><br /><span>扪敤重置后直接解锁风之晶球</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst06">
-                <span>扪敤6次</span><br /><span>扪敤重置时保留风之晶球和风之晶球升级</span>
+                <span>扪敤6次</span><br /><span>扪敤重置时保留风之晶球升级</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst07">
-                <span>扪敤7次</span><br /><span>你可以自动购买风灵升级3和升级4</span>
+                <span>扪敤7次</span><br /><span>解锁自动购买风灵升级3</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst08">
-                <span>扪敤8次</span><br /><span>扪敤重置时保留进阶挑战1~4</span>
+                <span>扪敤8次</span><br /><span>解锁自动购买风灵升级4</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst09">
-                <span>扪敤9次</span><br /><span>自动获得风系统，风系统不再重置任何东西</span>
+                <span>扪敤9次</span><br /><span>扪敤重置时保留进阶挑战1~4</span>
             </div>
             <div class="PL2mlstno" id="PL2mlst10">
-                <span>扪敤10次</span><br /><span>解锁扪敤次数商店和研究</span>
+                <span>扪敤10次</span><br /><span>解锁自动获得风系统</span>
+            </div>
+            <div class="PL2mlstno" id="PL2mlst11">
+                <span>扪敤11次</span><br /><span>风系统不再重置任何东西</span>
+            </div>
+            <div class="PL2mlstno" id="PL2mlst12">
+                <span>扪敤12次</span><br /><span>解锁扪敤次数商店</span>
             </div>
             <div class="ftsz2" style="color: #ffffff; text-align: center" id="PL2tms2">你有<span id="PL2tmc"></span>可用扪敤次数（通过扪敤获取）</div>
             <div id="PL2tmshop" style="display: none">
@@ -962,8 +974,8 @@
                     <tr>
                         <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(1)">解锁9~16风灵的自动购买(<span id="PL2tm01b"></span>/8)<br />需要：<span id="PL2tm01c"></span>可用扪敤次数</button></td>
                         <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(2)">双倍扪敤次数获取(<span id="PL2tm02b"></span>/8)<br />需要：<span id="PL2tm02c"></span>可用扪敤次数</button></td>
-                        <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之晶球升级的自动购买(<span id="PL2tm03b"></span>/4)<br />需要：<span id="PL2tm03c"></span>可用扪敤次数</button></td>
-                        <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^n乘以17~24式风灵(<span id="PL2tm04b"></span>/4)<br />需要：<span id="PL2tm04c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之微粒升级的自动购买(<span id="PL2tm03b"></span>/4)<br />需要：<span id="PL2tm03c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^2n乘以17~24式风灵(<span id="PL2tm04b"></span>/4)<br />需要：<span id="PL2tm04c"></span>可用扪敤次数</button></td>
                     </tr>
                 </table>
             </div>
@@ -1011,11 +1023,12 @@
             </div>
         </div>
         <div id="p3_3" style="display: none">
-            <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;">你有<span id="thrm"></span>烧瓶（<span id="thrmttl"></span>总计的烧瓶）,回退研究将进行扪敤重置</div>
-                <button class="ltbutton" onclick="rstd()">回退研究</button>
-            </div>
+            <div align="center" class="ftsz2">到达e1.000e6总计能量后解锁研究</div>
             <div id="stdtree">
+                <div class="btnrow">
+                    <div align="center" class="ftsz2" style="display: inline-block;">你有<span id="thrm"></span>烧瓶（<span id="thrmttl"></span>总计的烧瓶）,回退研究将进行扪敤重置</div>
+                    <button class="ltbutton" onclick="rstd()">回退研究</button>
+                </div>
                 <div class="btnrow2">
                     <button class="xxButton" onclick="buythr01()" style="background-color: #ffffff">用能量获得1烧瓶<br />花费能量：<br /><span id="thrmc01"></span></button>
                     <button class="xxButton" onclick="buythr02()" style="background-color: #ff0000">用扩散点获得1烧瓶<br />花费扩散点：<br /><span id="thrmc02"></span></button>
@@ -1244,7 +1257,7 @@
         <div id="p4_2" style="display: none">
             <div class="btnrow">
                 <div align="center" class="ftsz2">当前最多效果数为<span id="ptnmax"></span>，药剂效果值为<span id="ptnval"></span>（倍数为<span id="ptnmul"></span>/65536，基于扫敥时间，在65536秒到达最大值）</div>
-                <div align="center" class="ftsz2">点击药剂以获得效果，点击回退清除全部效果但进行扫敥重置<button class="ltbutton" onclick="rptn()">回退</button></div>
+                <div align="center" class="ftsz2">点击药剂以获得效果，点击回退将清除全部效果且进行扫敥重置 <button class="ltbutton" onclick="rptn()">回退</button></div>
             </div><br />
             <table align="center">
                 <tr>
@@ -1473,30 +1486,35 @@
         <div id="p5_1" style="display: none">
             <div class="ftsz2" style="color: #ffffff; text-align: center">扬敦点数目标</div>
             <div class="PL4goalno" id="PL4goal01">
-                <span>一次扬敦获得2扬敦点</span><br /><span>全局速度×4，重置次数获取×2，风之微粒、徯粓、徰粔获取×5。成就40意味着它们的乘积就等于40。</span>
+                <span>一次扬敦获得2扬敦点</span><br /><span>全局速度×4，重置次数获取×2，甜甜花生长速度×5×扬敦次数。成就40意味着它们的乘积就等于40。</span>
             </div>
             <div class="PL4goalno" id="PL4goal02">
-                <span>一次扬敦获得4扬敦点</span><br /><span>您常时完成全部普通挑战，重置次数获取再次×2，解锁自动购买25~32式风灵</span>
+                <span>一次扬敦获得3扬敦点</span><br /><span>您常时完成全部普通挑战，重置次数获取再次×2，解锁自动购买25~32式风灵</span>
             </div>
             <div class="PL4goalno" id="PL4goal03">
-                <span>一次扬敦获得8扬敦点</span><br /><span>您常时获得全部扪敤里程碑和扪敤次数升级，解锁自动购买甜甜花升级</span>
+                <span>一次扬敦获得4扬敦点</span><br /><span>您常时获得全部扪敤里程碑和全部扪敤次数升级，解锁自动购买甜甜花升级</span>
             </div>
             <div class="PL4goalno" id="PL4goal04">
-                <span>一次扬敦获得16扬敦点</span><br /><span>每次扬敦重置开始就获得1级药剂最多效果数，解锁自动提升甜甜花倍数</span>
+                <span>一次扬敦获得8扬敦点</span><br /><span>每次扬敦重置开始就获得1级药剂最多效果数，解锁自动提升甜甜花倍数</span>
             </div>
             <div class="PL4goalno" id="PL4goal05">
-                <span>一次扬敦获得64扬敦点</span><br /><span>您常时保留第2行进度研究，解锁自动购买风之徰粔升级</span>
+                <span>一次扬敦获得16扬敦点</span><br /><span>您常时保留第2行进度研究，解锁自动购买风之徰粔升级</span>
             </div>
             <div class="PL4goalno" id="PL4goal06">
-                <span>一次扬敦获得256扬敦点</span><br /><span>您常时保留第3行进度研究，解锁全部吸引子和升级</span>
+                <span>一次扬敦获得64扬敦点</span><br /><span>您常时保留第3行进度研究，解锁全部吸引子及其升级</span>
             </div>
             <div class="PL4goalno" id="PL4goal07">
-                <span>一次扬敦获得4096扬敦点</span><br /><span>您常时保留第4行进度研究，保留全部转化升级</span>
+                <span>一次扬敦获得256扬敦点</span><br /><span>您常时保留第4行进度研究，保留全部甜甜花声望升级</span>
             </div>
             <div class="PL4goalno" id="PL4goal08">
-                <span>一次扬敦获得65536扬敦点</span><br /><span>解锁惊奇风盒，开启它们可以获得柏拉图立体（制作中）</span>
+                <span>一次扬敦获得4096扬敦点</span><br /><span>解锁惊奇风盒，开启它们可以获得柏拉图立体</span>
             </div>
-
+            <div class="PL4goalno" id="PL4goal09">
+                <span>一次扬敦获得65536扬敦点</span><br /><span>扩散、扪敤、扫敥能量的效果指数+1，保留转化升级</span>
+            </div>
+            <div class="PL4goalno" id="PL4goal10">
+                <span>一次扬敦获得1.677e7扬敦点</span><br /><span>所有风灵的超指数+0.001（也就是¶1.001）,保留进阶挑战9~12</span>
+            </div>
         </div>
         <div id="p5_2" style="display: none">
             <div class="btnrow2">
@@ -1507,7 +1525,7 @@
             <table align="center">
                 <tr>
                     <td><button class="fraupg" onclick="buyfrau(1)">扬敦碎片获取数量<br />×<span id="fraue01"></span>→×<span id="fraue61"></span><br />等级<span id="frau01"></span>/20<br />花费<span id="frauc01"></span>扬敦碎片</button></td>
-                    <td><button class="fraupg" onclick="buyfrau(2)">33~40式风灵乘数<br />×<span id="fraue02"></span>→×<span id="fraue62"></span><br />等级<span id="frau02"></span>/20<br />花费<span id="frauc02"></span>扬敦碎片</button></td>
+                    <td><button class="fraupg" onclick="buyfrau(2)">33~40式风灵指数<br />+<span id="fraue02"></span>→+<span id="fraue62"></span><br />等级<span id="frau02"></span>/20<br />花费<span id="frauc02"></span>扬敦碎片</button></td>
                 </tr>
                 <tr>
                     <td><button class="fraupg" onclick="buyfrau(3)">能量软上限延后倍数<br />×<span id="fraue03"></span>→×<span id="fraue63"></span><br />等级<span id="frau03"></span>/4<br />花费<span id="frauc03"></span>扬敦碎片</button></td>
@@ -1524,7 +1542,49 @@
             </table>
         </div>
         <div id="p5_3" style="display: none">
-            <div></div>
+            <div id="bogglebox">
+                <div align="center" class="ftsz2">你有<span id="bglboxa">0</span>惊奇!风盒，开启它们可以随机获得柏拉图!立体<br />当拥有的柏拉图!立体数量大于0时，会产生立体波，否则立体波会衰减</div>
+                <table align="center">
+                    <tr>
+                        <td><button class="boggle" onclick="getbox1()">从扬敦点中获取惊奇!风盒<br />花费：<span id="boxc1"></span>扬敦点</button></td>
+                        <td><button class="boggle" onclick="getbox2()">从扬敦碎片中获取惊奇!风盒<br />花费：<span id="boxc2"></span>扬敦碎片</button></td>
+                        <td><button class="boggle" onclick="openbox1()">开启1个惊奇!风盒</button></td>
+                        <td><button class="boggle" onclick="openbox2()">开启全部惊奇!风盒</button></td>
+                        <td><button class="boggle" onclick="resbox()">返还惊奇!风盒，但进行扬敦重置</button></td>
+                    </tr>
+                </table>
+                <div align="center" class="ftsz2">
+                    你有<span id="hdrn4" class="ftsz3">0</span>柏拉图!四面体, 每秒产生<span id="hdrn4wps">0</span>四面体波,
+                    你的<span id="hdrn4w">0</span>四面体波将1~8式风灵指数×<span id="hdrn4e">0</span>
+                </div>
+                <div align="center" class="ftsz2" style="color:#ff0000">
+                    你有<span id="hdrn6" class="ftsz3" style="color:#ff0000">0</span>柏拉图!六面体, 每秒产生<span id="hdrn6wps">0</span>六面体波,
+                    你的<span id="hdrn6w">0</span>六面体波将9~16式风灵指数×<span id="hdrn6e">0</span>
+                </div>
+                <div align="center" class="ftsz2" style="color:#ffff00">
+                    你有<span id="hdrn8" class="ftsz3" style="color:#ffff00">0</span>柏拉图!八面体, 每秒产生<span id="hdrn8wps">0</span>八面体波,
+                    你的<span id="hdrn8w">0</span>八面体波将17~24式风灵指数×<span id="hdrn8e">0</span>
+                </div>
+                <div align="center" class="ftsz2" style="color:#00ff00">
+                    你有<span id="hdrn12" class="ftsz3" style="color:#00ff00">0</span>柏拉图!十二面体, 每秒产生<span id="hdrn12wps">0</span>十二面体波,
+                    你的<span id="hdrn12w">0</span>十二面体波将25~32式风灵指数×<span id="hdrn12e">0</span>
+                </div>
+                <div align="center" class="ftsz2" style="color:#00ffff">
+                    你有<span id="hdrn20" class="ftsz3" style="color:#00ffff">0</span>柏拉图!二十面体, 每秒产生<span id="hdrn20wps">0</span>二十面体波,
+                    你的<span id="hdrn20w">0</span>二十面体波将33~40式风灵指数×<span id="hdrn20e">0</span>
+                </div>
+                <div align="center" class="ftsz2">将柏拉图!立体锻造为以下物品：</div>
+                <table align="center">
+                    <tr>
+                        <td><button class="bglfrg" onclick="forge(1)">锻造1无相之风晶核：<br />需要1六面体+1八面体</button></td>
+                        <td><button class="bglfrg" onclick="forge(2)">锻造1赫耀多方面体：<br />需要1四面体+1二十面体</button></td>
+                        <td><button class="bglfrg" onclick="forge(3)">锻造1虚空物质：<br />需要2十二面体</button></td>
+                    </tr>
+                </table>
+                <div align="center" class="ftsz2">你有<span id="wxzf" class="ftsz3">0</span>无相之风晶核，风灵升级1和3效果^<span id="wxzfe">0</span></div>
+                <div align="center" class="ftsz2">你有<span id="hydf" class="ftsz3">0</span>赫耀多方面体，风灵升级2和4效果^<span id="hydfe">0</span></div>
+                <div align="center" class="ftsz2">你有<span id="xkwz" class="ftsz3">0</span>虚空物质，额外的风灵升级数量+<span id="xkwze">0</span>%</div>
+            </div>
         </div>
         <div id="p5_4" style="display: none">
             <div></div>
@@ -1550,7 +1610,7 @@
         <div id="p9_1" style="display: none">
             <div>
                 <div id="end" align="center" class="ftsz6">
-                    5^5小时后更新
+                    多元仙境由于能量过多，坍塌了。
                 </div>
             </div>
         </div>
@@ -1567,9 +1627,13 @@
                 启用快捷键：<input type="checkbox" id="swhotk">
             </div>
             <div class="btnrow2">
-                <button align="center" class="xxButton" onclick="save()">保存游戏</button>
+                <button align="center" class="xxButton" onclick="save()">手动保存</button>
                 <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
                 <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
+                <!--
+    <button align="center" class="xxButton" onclick="">导出到文件</button>
+    <button align="center" class="xxButton" onclick="">从文件导入</button>
+    -->
                 <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
                 <button align="center" class="xxButton" onclick="load()">恢复存档</button>
             </div>
@@ -1580,7 +1644,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.0.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.1.0<br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
                 快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
@@ -1593,22 +1657,36 @@
                 <a href="https://veryrrdefine.github.io/hyper-volume-incremental-v1/" target="_blank" style="color: #00ff80;">多维体积增量</a>
                 <br /><br />
                 <a href="./changelog.html" target="_blank" style="color: #ffffff;">点击这里查看更新日志</a><br /><br />
-                点击这里前往存档银行（制作中）<br /><br />
+                <a href="./savebank.html" target="_blank" style="color: #ffffff;">点击这里前往存档银行</a><br /><br />
             </div>
         </div>
         <div id="p0_3" style="display: none">
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3tms"></div>
-            <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div>
+            <div id="wscstat">
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="gameseconds"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy"></div>
+            </div>
+            <div id="PL1stat">
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
+            </div>
+            <div id="PL2stat">
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
+            </div>
+            <div id="PL3stat">
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3tms"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div>
+            </div>
+            <div id="PL4stat">
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4sec"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4tms"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div>
+            </div>
         </div>
         <div id="p0_4" style="display: none">
             <table align="center">
@@ -1686,9 +1764,9 @@
                 </tr>
                 <tr>
                     <td class="achno" id="ach40">40<br />向上穿过扬敦的高墙<span class="tooltip-text">扬敦重置1次</span></td>
-                    <td class="achno" id="ach41">41<br />观测自身的观测<span class="tooltip-text">达成前8个扬敦目标</span></td>
-                    <td class="achno" id="ach42">42<br />中点的绿草坪<span class="tooltip-text">将扬敦碎片升级1和2升至满级</span></td>
-                    <td class="achno" id="ach43">43<br />柏拉图！方块<span class="tooltip-text">开启惊奇风盒获得5种柏拉图立体</span></td>
+                    <td class="achno" id="ach41">41<br />观测自身的观测<span class="tooltip-text">达成前5个扬敦目标</span></td>
+                    <td class="achno" id="ach42">42<br />中点的绿草坪<span class="tooltip-text">将扬敦碎片升级1和2升至8级</span></td>
+                    <td class="achno" id="ach43">43<br />运变惊奇<span class="tooltip-text">开启惊奇风盒获得5种柏拉图立体</span></td>
                 </tr>
             </table>
         </div>
@@ -1789,22 +1867,22 @@
             <div class="btnrow2"><button class="singul" onclick="fszqw()"><img src="./finalwsc.png"></button></div><br /><br />
             <div class="ftsz2" style="color: #ffffff; text-align: center">升级风神之奇物以到达游戏结局</div>
             <div class="ftsz2" style="color: #ffffff; text-align: center">升级花费：</div>
-            <div class="ftsz2" style="color: #ffffff; text-align: center">e1.071e301能量</div>
-            <div class="ftsz2" style="color: #aaaaaa; text-align: center">e6.668e240升级能量</div>
-            <div class="ftsz2" style="color: #ff0000; text-align: center">e1.046e298扩散点</div>
-            <div class="ftsz2" style="color: #ff8000; text-align: center">e5.922e225风之微粒</div>
-            <div class="ftsz2" style="color: #ffff00; text-align: center">e1.021e295扪敤点</div>
-            <div class="ftsz2" style="color: #80ff00; text-align: center">e5.260e210风之徯粓</div>
-            <div class="ftsz2" style="color: #00ff00; text-align: center">e9.745e288扫敥点</div>
-            <div class="ftsz2" style="color: #00ff80; text-align: center">e4.562e192风之徰粔</div>
-            <div class="ftsz2" style="color: #00ffff; text-align: center">e9.293e282扬敦点</div>
-            <div class="ftsz2" style="color: #0080ff; text-align: center">e3.957e174风之徱粕</div>
-            <div class="ftsz2" style="color: #0000ff; text-align: center">e8.655e273扭敧点</div>
-            <div class="ftsz2" style="color: #8000ff; text-align: center">e3.351e153风之徲粖</div>
-            <div class="ftsz2" style="color: #ff00ff; text-align: center">e8.061e264扮敨点</div>
-            <div class="ftsz2" style="color: #ff0080; text-align: center">e2.839e132风之徳粗</div>
-            <div class="ftsz2" style="color: #000000; background-color: #555555; text-align: center">e7.331e252扯敩点</div>
-            <div class="ftsz2" style="color: #555555; text-align: center">e2.348e108风之徴粘</div>
+            <div class="ftsz2" style="color: #ffffff; text-align: center">e3.225e300能量</div>
+            <div class="ftsz2" style="color: #aaaaaa; text-align: center">e2.007e240升级能量</div>
+            <div class="ftsz2" style="color: #ff0000; text-align: center">e3.149e297扩散点</div>
+            <div class="ftsz2" style="color: #ff8000; text-align: center">e1.782e225风之微粒</div>
+            <div class="ftsz2" style="color: #ffff00; text-align: center">e3.076e294扪敤点</div>
+            <div class="ftsz2" style="color: #80ff00; text-align: center">e1.583e210风之徯粓</div>
+            <div class="ftsz2" style="color: #00ff00; text-align: center">e2.933e288扫敥点</div>
+            <div class="ftsz2" style="color: #00ff80; text-align: center">e1.373e192风之徰粔</div>
+            <div class="ftsz2" style="color: #00ffff; text-align: center">e2.797e282扬敦点</div>
+            <div class="ftsz2" style="color: #0080ff; text-align: center">e1.191e174风之徱粕</div>
+            <div class="ftsz2" style="color: #0000ff; text-align: center">e2.605e273扭敧点</div>
+            <div class="ftsz2" style="color: #8000ff; text-align: center">e1.009e153风之徲粖</div>
+            <div class="ftsz2" style="color: #ff00ff; text-align: center">e2.426e264扮敨点</div>
+            <div class="ftsz2" style="color: #ff0080; text-align: center">e8.546e131风之徳粗</div>
+            <div class="ftsz2" style="color: #000000; background-color: #555555; text-align: center">e2.207e252扯敩点</div>
+            <div class="ftsz2" style="color: #555555; text-align: center">e7.069e107风之徴粘</div>
         </div>
         <div id="p0_6" style="display: none">
             <div class="ftsz1" style="color: #ffffff; text-align: center">测试用（正式发布时删除）</div>
@@ -1890,7 +1968,7 @@
             <div class="noti" id="notiach40">完成成就：向上穿过扬敦的高墙</div>
             <div class="noti" id="notiach41">完成成就：观测自身的观测</div>
             <div class="noti" id="notiach42">完成成就：中点的绿草坪</div>
-            <div class="noti" id="notiach43">完成成就：柏拉图！方块</div>
+            <div class="noti" id="notiach43">完成成就：运变惊奇</div>
 
 
             <div class="noti" id="autosave">游戏已保存</div>
