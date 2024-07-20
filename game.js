@@ -4175,21 +4175,17 @@ function notation(amount) {
         amount.sign = 1;
     }
     let power = Decimal.floor(Decimal.log10(amount));
-    let powerc = Decimal.ceil(Decimal.log10(amount));
     let mantissa = amount.div(Decimal.pow(10, power));
     let power2 = Decimal.floor(Decimal.log10(power));
     let mantissa2 = power.div(Decimal.pow(10, power2));
     let power3 = Decimal.floor(Decimal.log10(power2));
     let mantissa3 = power2.div(Decimal.pow(10, power3));
-    let layer = Decimal.floor(amount.slog());
-    let magnt = new Decimal(10).pow(amount.slog().sub(layer));
-    let layerp = Decimal.floor(Decimal.log10(layer));
-    let layerm = layer.div(Decimal.pow(10, layerp));
+
     if (amount == 0) return "0.000";
-    if (powerc < -3) return mantissa.mul(10).toFixed(3) + "e" + power.sub(1);
-    if (powerc < -2) return amount.toFixed(6);
-    if (powerc < -1) return amount.toFixed(5);
-    if (powerc < 0) return amount.toFixed(4);
+    if (power < -3) return mantissa.mul(10).toFixed(3) + "e" + power.sub(1);
+    if (power < -2) return amount.toFixed(6);
+    if (power < -1) return amount.toFixed(5);
+    if (power < 0) return amount.toFixed(4);
     if (power < 1) return amount.toFixed(3);
     if (power < 2) return amount.toFixed(2);
     if (power < 3) return amount.toFixed(1);
@@ -4197,8 +4193,7 @@ function notation(amount) {
     if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
     if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
     if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
-    if (layer < 1000000) return magnt.toFixed(3) + "f" + layer;
-    if (layer < 1.797e308) return "f" + layerm.toFixed(3) + "e" + layerp;
+    if (amount.layer < 1e308) return Decimal.log10(amount.mag).toFixed(3) + "f" + (amount.layer + 1).toFixed(0);
     return "114514";
 }
 
@@ -4214,17 +4209,13 @@ function notatint(amount) {
     let mantissa2 = power.div(Decimal.pow(10, power2));
     let power3 = Decimal.floor(Decimal.log10(power2));
     let mantissa3 = power2.div(Decimal.pow(10, power3));
-    let layer = Decimal.floor(amount.slog());
-    let magnt = new Decimal(10).pow(amount.slog().sub(layer));
-    let layerp = Decimal.floor(Decimal.log10(layer));
-    let layerm = layer.div(Decimal.pow(10, layerp));
+
     if (amount == 0) return "0";
     if (power < 6) return amount.toFixed(0);
     if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
     if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
     if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
-    if (layer < 1000000) return magnt.toFixed(3) + "f" + layer;
-    if (layer < 1.797e308) return "f" + layerm.toFixed(3) + "e" + layerp;
+    if (amount.layer < 1e308) return Decimal.log10(amount.mag).toFixed(3) + "f" + (amount.layer + 1).toFixed(0);
     return "1919810";
 }
 
@@ -4255,7 +4246,7 @@ function updateGUI() {
         if (player.autobuywsc[tier] == true) document.getElementById("byat" + name).innerHTML = "自动：开";
         else document.getElementById("byat" + name).innerHTML = "自动：关";
     }
-    document.getElementById("wscbv").innerHTML = "你的风灵基础值为(" + notation(v.wscbaseValue1) + "+" + notatint(v.wscbaseValue2) + "×4" + "+" + notatint(v.wscbaseValue3) + "×16" + "+" + notatint(v.wscbaseValue4) + "×64)^" + notation(v.wscbaseValueExp) + "=" + notation(v.wscbaseValue) + "（基于你作成的风灵总数而定）";
+    document.getElementById("wscbv").innerHTML = "你的风灵基础值为(" + notation(v.wscbaseValue1) + "+" + notatint(v.wscbaseValue2) + "×4" + "+" + notatint(v.wscbaseValue3) + "×16" + "+" + notatint(v.wscbaseValue4) + "×64" + "+" + notatint(v.wscbaseValue5) + "×256)^" + notation(v.wscbaseValueExp) + "=" + notation(v.wscbaseValue) + "（基于你作成的风灵总数而定）";
     document.getElementById("tier01").innerHTML = notatint(player.tier01) + "式风单元";
     document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风单元式数提升1~8式风灵乘数(1+n)²。当前：×" + notation(player.tier01.add(1).pow(2));
     document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(v.wscbaseValue.div(64).max(1));
@@ -5844,7 +5835,7 @@ var texts =
         "当你遇到困难时，回望自己所做过的一切，所经历过的所有不顺心的事情，你就会发现：其实你现在所正经历的困难，倒也不算什么大事。",
         "qeq6308是风神的先祖，就像Derpsmith是蚁神的先祖一样",
         "铃音(Lain)曾经说过：无论何时何地，每一个风灵都是互相联通的",
-        "<cllor=#f29e38ff>HTML可以做出模拟宇宙，HTML是最好的语言！</oolor>",
+        "<coior=#f29e38ff>HTML可以做出模拟宇宙，HTML是最好的语言！</colro>",
         "全网呼叫增量人：增量游戏车牌歌：增A反物质车，增B序数的，增C声望、增D欧米伽、质量是增E；协同是增F，莱因哈特叫增G，楼梯间挂着增H，鲨鱼增J车；K车给工业，L车等级的，M车物质、N车数字、P车被飞升了；能量发生器增Q，增R香料的，增量冒险叫增S，声望树叫增T。生命树增U，病毒树增V，……"/*130*/
     ]
 var p = 50 + document.body.clientWidth
