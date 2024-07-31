@@ -6,7 +6,7 @@
         <link href="style.css" rel="stylesheet" type="text/css" />
         <link href="icon.png" rel="shortcut icon" type="image/x-icon" />
     </head>
-    <body style="background-color: #000000; font-family: MonospaceTypewriter, monospace">
+    <body>
         <div id="news" class="news"><span class="newsContent" id="newsText"></span></div>
         <button class="PL1button" onclick="PL1reset()" id="PL1button">扩散重置：获得<span id="PL1ptspd"></span><span id="PL1ptsnx"></span></button>
         <button class="PL2button" onclick="PL2reset()" id="PL2button">扪敤重置：获得<span id="PL2ptspd"></span><span id="PL2ptsnx"></span></button>
@@ -722,10 +722,10 @@
                     <td><button class="PL1upgno" id="PL1upg04" onclick="buyPL1upg(3)">解锁普通挑战<br />花费：16扩散点</button></td>
                 </tr>
                 <tr>
-                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log2扩散能量^2乘以9~16式风灵乘数<br /><span id="PL1upge05">当前：</span><br />花费：32扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg06" onclick="buyPL1upg(5)">基于总计扩散点乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge06">当前：</span><br />花费：64扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg07" onclick="buyPL1upg(6)">基于扩散次数^4乘以9~16式风灵乘数(软上限×1.844e19)<br /><span id="PL1upge07">当前：</span><br />花费：128扩散点</button></td>
-                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于log2能量^2乘以9~16式风灵乘数<br /><span id="PL1upge08">当前：</span><br />花费：256扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg05" onclick="buyPL1upg(4)">基于log2扩散能量^2乘以9~16式风灵乘数<br />当前：×<span id="PL1upge05"></span><br />花费：32扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg06" onclick="buyPL1upg(5)">基于总计扩散点乘以9~16式风灵乘数(软上限×1.844e19)<br />当前：×<span id="PL1upge06"></span><br />花费：64扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg07" onclick="buyPL1upg(6)">基于扩散次数^4乘以9~16式风灵乘数(软上限×1.844e19)<br />当前：×<span id="PL1upge07"></span><br />花费：128扩散点</button></td>
+                    <td><button class="PL1upgno" id="PL1upg08" onclick="buyPL1upg(7)">基于log2能量^2乘以9~16式风灵乘数<br />当前：×<span id="PL1upge08"></span><br />花费：256扩散点</button></td>
                 </tr>
                 <tr>
                     <td><button class="PL1upgno" id="PL1upg09" onclick="buyPL1upg(8)">扩散能量指数增加0.5<br />花费：1024扩散点</button></td>
@@ -986,7 +986,7 @@
                 <button class="ltbutton" onclick="resetElmt()">回退</button>
             </div>
             <div class="btnrow">
-                <div align="center" class="ftsz2" style="display: inline-block;">基础每秒元素能量：0.25，每次分配乘数：<span id="elmmpd"></span></div>
+                <div align="center" class="ftsz2" style="display: inline-block;">基础每秒元素能量：1，每次分配乘数：<span id="elmmpd"></span></div>
                 <button class="ltbutton" onclick="dtavelmt()">平均分配</button>
             </div>
             <div class="PL2elmt" id="PL2elmt01">
@@ -1630,12 +1630,9 @@
                 <button align="center" class="xxButton" onclick="save()">手动保存</button>
                 <button align="center" class="xxButton" onclick="exportSave()">导出存档</button>
                 <button align="center" class="xxButton" onclick="importSave()">导入存档</button>
-                <!--
-    <button align="center" class="xxButton" onclick="">导出到文件</button>
-    <button align="center" class="xxButton" onclick="">从文件导入</button>
-    -->
+                <button align="center" class="xxButton" onclick="exportSaveFile()">导出到文件</button>
+                <button align="center" class="xxButton" onclick="importSaveFile()">从文件导入</button>
                 <button align="center" class="xxButton" onclick="trueHardReset()">硬重置</button>
-                <button align="center" class="xxButton" onclick="load()">恢复存档</button>
             </div>
             <form align="center">
                 <span class="ftsz1" style="color: #ffffff;">导出或导入存档：</span><br /><textarea style="width: 1024px; height: 1024px;" class='input' type="text" id='importExportText' ;></textarea>
@@ -1644,7 +1641,7 @@
         <div id="p0_2" style="display: none">
             <div align="center" style="color: #ffffff; text-align: center">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.1.1<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.1.2<br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
                 <br />
                 快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
@@ -1654,7 +1651,11 @@
                 <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80;">数据增量重制版</a>、
                 <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank" style="color: #00ff80;">点数增量重制版</a>、
                 <a href="https://aster131072.github.io/incremental_evolution/" target="_blank" style="color: #00ff80;">增量进化</a>、
-                <a href="https://veryrrdefine.github.io/hyper-volume-incremental-v1/" target="_blank" style="color: #00ff80;">多维体积增量</a>
+                <a href="https://veryrrdefine.github.io/hyper-volume-incremental-v1/" target="_blank" style="color: #00ff80;">多维体积增量</a>、
+                <br />
+                <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank" style="color: #00ff80;">音乐游戏树</a>、
+                <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank" style="color: #00ff80;">作业增量</a>、
+                <a href="https://goldenapple125.github.io/RBN/" target="_blank" style="color: #00ff80;">大数之路</a>
                 <br /><br />
                 <a href="./changelog.html" target="_blank" style="color: #ffffff;">点击这里查看更新日志</a><br /><br />
                 <a href="./savebank.html" target="_blank" style="color: #ffffff;">点击这里前往存档银行</a><br /><br />
@@ -1662,30 +1663,35 @@
         </div>
         <div id="p0_3" style="display: none">
             <div id="wscstat">
+                <div class="ftsz3" style="color: #ffffff; text-align: center">风灵</div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="gameseconds"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy"></div><br />
             </div>
-            <div id="PL1stat">
+            <div id="PL1stat" style="display: none">
+                <div class="ftsz3" style="color: #ff0000; text-align: center">扩散</div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div><br />
             </div>
-            <div id="PL2stat">
+            <div id="PL2stat" style="display: none">
+                <div class="ftsz3" style="color: #ffff00; text-align: center">扪敤</div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div><br />
             </div>
-            <div id="PL3stat">
+            <div id="PL3stat" style="display: none">
+                <div class="ftsz3" style="color: #00ff00; text-align: center">扫敥</div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div><br />
             </div>
-            <div id="PL4stat">
+            <div id="PL4stat" style="display: none">
+                <div class="ftsz3" style="color: #00ffff; text-align: center">扬敦</div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4sec"></div>
                 <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div>
+                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div><br />
             </div>
         </div>
         <div id="p0_4" style="display: none">
@@ -1765,7 +1771,7 @@
                 <tr>
                     <td class="achno" id="ach40">40<br />向上穿过扬敦的高墙<span class="tooltip-text">扬敦重置1次</span></td>
                     <td class="achno" id="ach41">41<br />观测自身的观测<span class="tooltip-text">达成前5个扬敦目标</span></td>
-                    <td class="achno" id="ach42">42<br />中点的绿草坪<span class="tooltip-text">将扬敦碎片升级1和2升至8级</span></td>
+                    <td class="achno" id="ach42">42<br />我们能承担起8<span class="tooltip-text">将扬敦碎片升级1和2升至8级</span></td>
                     <td class="achno" id="ach43">43<br />运变惊奇<span class="tooltip-text">开启惊奇风盒获得5种柏拉图立体</span></td>
                 </tr>
             </table>
@@ -1967,13 +1973,15 @@
             <div class="noti" id="notiach3f">完成成就：能掀起巨浪</div>
             <div class="noti" id="notiach40">完成成就：向上穿过扬敦的高墙</div>
             <div class="noti" id="notiach41">完成成就：观测自身的观测</div>
-            <div class="noti" id="notiach42">完成成就：中点的绿草坪</div>
+            <div class="noti" id="notiach42">完成成就：我们能承担起8</div>
             <div class="noti" id="notiach43">完成成就：运变惊奇</div>
 
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>
             <div class="noti" id="import">已导入存档</div>
+            <div class="noti" id="exportfile">已导出到文件</div>
+            <div class="noti" id="importfile">已从文件导入</div>
             <div class="noti" id="hardreset">已全部重置</div>
         </div>
         <div id="offline">

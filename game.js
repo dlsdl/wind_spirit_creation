@@ -500,14 +500,14 @@ function hardReset() {
         wscc30: new Decimal(4294967296),
         wscc31: new Decimal(1.844674407370955e19),
         wscc32: new Decimal(3.402823669209384e38),
-        wscc33: new Decimal(0),
-        wscc34: new Decimal(0),
-        wscc35: new Decimal(0),
-        wscc36: new Decimal(0),
-        wscc37: new Decimal(0),
-        wscc38: new Decimal(0),
-        wscc39: new Decimal(0),
-        wscc40: new Decimal(0),
+        wscc33: new Decimal(2),
+        wscc34: new Decimal(4),
+        wscc35: new Decimal(16),
+        wscc36: new Decimal(256),
+        wscc37: new Decimal(65536),
+        wscc38: new Decimal(4294967296),
+        wscc39: new Decimal(1.844674407370955e19),
+        wscc40: new Decimal(3.402823669209384e38),
 
         wsccor01: new Decimal(1),
         wsccor02: new Decimal(2),
@@ -623,14 +623,14 @@ function hardReset() {
         wscm30: new Decimal(1),
         wscm31: new Decimal(1),
         wscm32: new Decimal(1),
-        wscm33: new Decimal(0),
-        wscm34: new Decimal(0),
-        wscm35: new Decimal(0),
-        wscm36: new Decimal(0),
-        wscm37: new Decimal(0),
-        wscm38: new Decimal(0),
-        wscm39: new Decimal(0),
-        wscm40: new Decimal(0),
+        wscm33: new Decimal(1),
+        wscm34: new Decimal(1),
+        wscm35: new Decimal(1),
+        wscm36: new Decimal(1),
+        wscm37: new Decimal(1),
+        wscm38: new Decimal(1),
+        wscm39: new Decimal(1),
+        wscm40: new Decimal(1),
 
         wscp01: new Decimal(1),
         wscp02: new Decimal(1),
@@ -664,14 +664,14 @@ function hardReset() {
         wscp30: new Decimal(1),
         wscp31: new Decimal(1),
         wscp32: new Decimal(1),
-        wscp33: new Decimal(0),
-        wscp34: new Decimal(0),
-        wscp35: new Decimal(0),
-        wscp36: new Decimal(0),
-        wscp37: new Decimal(0),
-        wscp38: new Decimal(0),
-        wscp39: new Decimal(0),
-        wscp40: new Decimal(0),
+        wscp33: new Decimal(1),
+        wscp34: new Decimal(1),
+        wscp35: new Decimal(1),
+        wscp36: new Decimal(1),
+        wscp37: new Decimal(1),
+        wscp38: new Decimal(1),
+        wscp39: new Decimal(1),
+        wscp40: new Decimal(1),
 
         wsch01: new Decimal(1),
         wsch02: new Decimal(1),
@@ -774,14 +774,14 @@ function hardReset() {
         parupgc03: new Decimal(1000),
         parupgc04: new Decimal(80),
 
-        chagoa01: new Decimal("1e4932"),
-        chagoa02: new Decimal("1e9864"),
-        chagoa03: new Decimal("1e19728"),
-        chagoa04: new Decimal("1e1233"),
-        chagoa05: new Decimal("1e100000"),
-        chagoa06: new Decimal("1e100000"),
-        chagoa07: new Decimal("1e100000"),
-        chagoa08: new Decimal("1e100000"),
+        chagoa01: new Decimal("1e1000"),
+        chagoa02: new Decimal("1e1000"),
+        chagoa03: new Decimal("1e1000"),
+        chagoa04: new Decimal("1e1000"),
+        chagoa05: new Decimal("1e1000000"),
+        chagoa06: new Decimal("1e1000000"),
+        chagoa07: new Decimal("1e1000000"),
+        chagoa08: new Decimal("1e1000000"),
         chagoa09: new Decimal("e1e10"),
         chagoa10: new Decimal("e1e10"),
         chagoa11: new Decimal("e1e10"),
@@ -789,7 +789,7 @@ function hardReset() {
         chascl01: new Decimal("1e4932"),
         chascl02: new Decimal("1e9864"),
         chascl03: new Decimal("1e19728"),
-        chascl04: new Decimal("1e1233"),
+        chascl04: new Decimal("1e39456"),
         chascl05: new Decimal("1e2000000"),
         chascl06: new Decimal("1e8000000"),
         chascl07: new Decimal("1e32000000"),
@@ -995,10 +995,10 @@ function get_offline_time() {
             nt = player.nowtime + 86400000;
         }
         gui_mod = 0;
-        for (let i = 0; i < 10; i++) mainLoop();
+        mainLoop();
         for (let i = 0; i < (nt - player.nowtime) / 10000; i++) {
-            mainLoop();
             produce(200);
+            mainLoop();
         }
         document.getElementById("offline").style.display = "block";
         document.getElementById("offlt").innerHTML = "你离线了" + ((nt - player.nowtime) / 1000) + "秒（最大86400秒）<br><br>在此期间，你的能量变成了" + notation(player.energy);
@@ -1017,10 +1017,16 @@ function save() {
     shownoti("#autosave");
 }
 
-function load() {
-    if (!localStorage.windSpiritCreation) return;
-    player = JSON.parse(atob(localStorage.windSpiritCreation));
-    transformToDecimal(player)
+async function load() {
+    clearInterval(prod);
+    prod = null;
+    if (localStorage.windSpiritCreation) {
+        player = JSON.parse(atob(localStorage.windSpiritCreation));
+        transformToDecimal(player);
+    }
+    mainLoop();
+    await delay(100);
+    prod = setInterval(produce, 50);
 }
 
 function exportSave() {
@@ -1028,14 +1034,22 @@ function exportSave() {
     var output = document.getElementById("importExportText");
     output.value = btoa(JSON.stringify(player));
     shownoti("#export");
+    return navigator.clipboard.writeText(btoa(JSON.stringify(player)));
 }
 
 function exportSaveFile() {
-
+    let str = btoa(JSON.stringify(player));
+    let file = new Blob([str], { type: "text/plain" });
+    window.URL = window.URL || window.webkitURL;
+    let a = document.createElement("a");
+    a.href = window.URL.createObjectURL(file);
+    a.download = "WindSpiritCreationSave-" + Date() + ".txt";
+    a.click();
+    shownoti("#exportfile");
 }
 
 function importSave() {
-    let confirmation = confirm("您确定要导入吗？");
+    let confirmation = confirm("您确定要导入吗？这将会覆盖当前游戏进度");
     if (confirmation) {
         hardReset();
         tempPlayer = player;
@@ -1050,7 +1064,22 @@ function importSave() {
 }
 
 function importSaveFile() {
-
+    let a = document.createElement("input");
+    a.setAttribute("type", "file");
+    a.click();
+    a.onchange = () => {
+        let fr = new FileReader();
+        fr.onload = () => {
+            let save2 = fr.result;
+            input = JSON.parse(atob(save2));
+            player = input;
+            transformToDecimal(player);
+            Object.assign(tempPlayer, player);
+            player = tempPlayer;
+        }
+        fr.readAsText(a.files[0]);
+    }
+    shownoti("#importfile");
 }
 
 async function trueHardReset() {
@@ -1322,8 +1351,8 @@ function getWscMult() {
         wmpb33to40 = v.wscmpb;
     }
     else if (player.tier02.gte(75)) {
-        wmpb01to08 = v.wscmpb.pow(16);
-        wmpb09to16 = v.wscmpb.pow(4);
+        wmpb01to08 = v.wscmpb.pow(4);
+        wmpb09to16 = v.wscmpb.pow(2);
         wmpb17to24 = v.wscmpb;
         wmpb25to32 = v.wscmpb;
         wmpb33to40 = v.wscmpb;
@@ -2191,7 +2220,7 @@ function getChaGoal() {
     v.chagoa01 = new Decimal("1.4154610e9864").mul(v.chascl01.pow(player.chacom01));
     v.chagoa02 = new Decimal("2.0035299e19728").mul(v.chascl02.pow(player.chacom02));
     v.chagoa03 = new Decimal("4.0141321e39456").mul(v.chascl03.pow(player.chacom03));
-    v.chagoa04 = new Decimal("1.1897314e4932").mul(v.chascl04.pow(player.chacom04));
+    v.chagoa04 = new Decimal("1.6e78913").mul(v.chascl04.pow(player.chacom04));
     v.chagoa05 = new Decimal("1e2000000").mul(v.chascl05.pow(player.chacom05));
     v.chagoa06 = new Decimal("1e8000000").mul(v.chascl06.pow(player.chacom06));
     v.chagoa07 = new Decimal("1e32000000").mul(v.chascl07.pow(player.chacom07));
@@ -2351,7 +2380,7 @@ async function PL2reset() {
 
 function getPL2tms() {
     let baset = new Decimal(1);
-    baset = baset.add(new Decimal(2).pow(player.PL2upg02).max(1).mul(v.PL3tef1.max(1)));
+    baset = baset.mul(new Decimal(2).pow(player.PL2upg02).max(1).mul(v.PL3tef1.max(1)));
     if (player.std[15] == true) baset = baset.mul(player.PL1tms.max(1).log(2).max(1));
     if (player.PL4goal[0] == true) baset = baset.mul(2);
     if (player.PL4goal[1] == true) baset = baset.mul(2);
@@ -2995,7 +3024,7 @@ function rptn() {
 function gettth() {
     let speed = new Decimal(1).mul(v.gamespd1).div(20);
     v.tthgspd = new Decimal(2).pow(player.tthu01).mul(player.tthprem.max(1)).mul(player.PL4tms.mul(5).max(1));
-    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(30).sub(v.fraue08).max(0).pow(1.5).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize))).mul(2);
+    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(30).sub(v.fraue08).max(0).pow(1.5).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize)));
     v.tthimpc = new Decimal(5).add(player.tthimpr);
     v.tthseedpd = new Decimal(2).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04.mul(player.tthsize))).max(1);
     v.tthgenepd = new Decimal(5).pow(player.tthsize);
@@ -4088,7 +4117,19 @@ function fixEternity() {
 }
 
 function fszqw() {
-    alert("资源不足，无法升级！");
+    if (player.energy.lt("ee300")) alert("资源不足，无法升级！");
+    else {
+        alert("您愿意放弃目前的一切生物，踏上更强炼金的征途吗？风神将赐予你630875金色风灵。");
+        alert("您到达了游戏终点，也就是第0次扰敪。砂糖和风神都为您感到骄傲。");
+        alert("您可以选择就此封盘，认为您已经通关了，又或者您还愿意做一些更有趣的事情。");
+        alert("这个仙境已经容纳不下您的力量了，风灵作成的多元仙境可谓无穷无尽，比起现在这个仙境，还有更多更难用炼金创造出来的仙境。");
+        alert("让我们重新开始，进入第1次扰敪吧。创造下一个仙境比当前仙境更艰难，但是您可以获得630875金色风灵购买最后的升级。");
+        alert("但是，您之前的一切成果都将离开您而去，所有的风灵、扩散、扪敤、扫敥、扬敦、扭敧、扮敨、扯敩层级的内容，一切的一切，都将成为过去。");
+        alert("所以您意下如何？您真的要进入扰敪吗？");
+        alert("您……真的想要进入扰敪吗？");
+        alert("您是真的真的确认了吗？一旦这么做将再也无法反悔！这是最后一次向您确认！");
+        alert("请等待游戏更新！有朝一日将打通书页的隔阂，用「生物炼金」的技术创造「仙境」。");
+    }
 }
 
 /*数值计算*/
@@ -4133,6 +4174,8 @@ function hyp(a, b) {
     else return new Decimal(2).pow(new Decimal(2).pow(a.max(1).log(2).max(1).log(2).mul(b)));
 }
 
+
+
 /*游戏机制之外……*/
 function transformToDecimal(object) {
     for (i in object) {
@@ -4174,27 +4217,45 @@ function notation(amount) {
         string = string + "-";
         amount.sign = 1;
     }
-    let power = Decimal.floor(Decimal.log10(amount));
-    let mantissa = amount.div(Decimal.pow(10, power));
-    let power2 = Decimal.floor(Decimal.log10(power));
-    let mantissa2 = power.div(Decimal.pow(10, power2));
-    let power3 = Decimal.floor(Decimal.log10(power2));
-    let mantissa3 = power2.div(Decimal.pow(10, power3));
-
-    if (amount == 0) return "0.000";
-    if (power < -3) return mantissa.mul(10).toFixed(3) + "e" + power.sub(1);
-    if (power < -2) return amount.toFixed(6);
-    if (power < -1) return amount.toFixed(5);
-    if (power < 0) return amount.toFixed(4);
-    if (power < 1) return amount.toFixed(3);
-    if (power < 2) return amount.toFixed(2);
-    if (power < 3) return amount.toFixed(1);
-    if (power < 6) return amount.toFixed(0);
-    if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
-    if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
-    if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
-    if (amount.layer < 1e308) return Decimal.log10(amount.mag).toFixed(3) + "f" + (amount.layer + 1).toFixed(0);
-    return "114514";
+    if (amount.lt("ee6")) {
+        let power = Decimal.floor(Decimal.log10(amount));
+        let mantissa = amount.div(Decimal.pow(10, power));
+        if (amount == 0) string = "0.000";
+        else if (power < -3) string = string + mantissa.toFixed(3) + "e" + power;
+        else if (power < -2) string = string + amount.toFixed(6);
+        else if (power < -1) string = string + amount.toFixed(5);
+        else if (power < 0) string = string + amount.toFixed(4);
+        else if (power < 1) string = string + amount.toFixed(3);
+        else if (power < 2) string = string + amount.toFixed(2);
+        else if (power < 3) string = string + amount.toFixed(1);
+        else if (power < 6) string = string + amount.toFixed(0);
+        else string = string + mantissa.toFixed(3) + "e" + power;
+    }
+    else if (amount.lt("eee6")) {
+        let power2 = Decimal.floor(Decimal.log10(Decimal.log10(amount)));
+        let mantissa2 = Decimal.floor(Decimal.log10(amount)).div(Decimal.pow(10, power2));
+        string = string + "e" + mantissa2.toFixed(3) + "e" + power2;
+    }
+    else if (amount.lt("eeee6")) {
+        let power3 = Decimal.floor(Decimal.log10(Decimal.log10(Decimal.log10(amount))));
+        let mantissa3 = Decimal.floor(Decimal.log10(Decimal.log10(amount))).div(Decimal.pow(10, power3));
+        string = string + "ee" + mantissa3.toFixed(3) + "e" + power3;
+    }
+    else if (amount.layer < 1.79e308) {
+        let aF = 1;
+        let Fb = amount.layer;
+        if (amount.mag <  1e10) {
+            aF = Decimal.log10(amount.mag);
+            Fb = Fb + 1;
+        }
+        else {
+            aF = Decimal.log10(Decimal.log10(amount.mag));
+            Fb = Fb + 2;
+        }
+        string = string + aF.toFixed(3) + "f" + Fb;
+    }
+    else string = "114514";
+    return string;
 }
 
 function notatint(amount) {
@@ -4203,20 +4264,38 @@ function notatint(amount) {
         string = string + "-";
         amount.sign = 1;
     }
-    let power = Decimal.floor(Decimal.log10(amount));
-    let mantissa = amount.div(Decimal.pow(10, power));
-    let power2 = Decimal.floor(Decimal.log10(power));
-    let mantissa2 = power.div(Decimal.pow(10, power2));
-    let power3 = Decimal.floor(Decimal.log10(power2));
-    let mantissa3 = power2.div(Decimal.pow(10, power3));
-
-    if (amount == 0) return "0";
-    if (power < 6) return amount.toFixed(0);
-    if (power < 1000000) return mantissa.toFixed(3) + "e" + power;
-    if (power2 < 1000000) return "e" + mantissa2.toFixed(3) + "e" + power2;
-    if (power3 < 1000000) return "ee" + mantissa3.toFixed(3) + "e" + power3;
-    if (amount.layer < 1e308) return Decimal.log10(amount.mag).toFixed(3) + "f" + (amount.layer + 1).toFixed(0);
-    return "1919810";
+    if (amount.lt("ee6")) {
+        let power = Decimal.floor(Decimal.log10(amount));
+        let mantissa = amount.div(Decimal.pow(10, power));
+        if (amount == 0) string = "0";
+        else if (power < 6) string = string + amount.toFixed(0);
+        else string = string + mantissa.toFixed(3) + "e" + power;
+    }
+    else if (amount.lt("eee6")) {
+        let power2 = Decimal.floor(Decimal.log10(Decimal.log10(amount)));
+        let mantissa2 = Decimal.floor(Decimal.log10(amount)).div(Decimal.pow(10, power2));
+        string = string + "e" + mantissa2.toFixed(3) + "e" + power2;
+    }
+    else if (amount.lt("eeee6")) {
+        let power3 = Decimal.floor(Decimal.log10(Decimal.log10(Decimal.log10(amount))));
+        let mantissa3 = Decimal.floor(Decimal.log10(Decimal.log10(amount))).div(Decimal.pow(10, power3));
+        string = string + "ee" + mantissa3.toFixed(3) + "e" + power3;
+    }
+    else if (amount.layer < 1.79e308) {
+        let aF = 1;
+        let Fb = amount.layer;
+        if (amount.mag < 1e10) {
+            aF = Decimal.log10(amount.mag);
+            Fb = Fb + 1;
+        }
+        else{
+            aF = Decimal.log10(Decimal.log10(amount.mag));
+            Fb = Fb + 2;
+        }
+        string = string + aF.toFixed(3) + "f" + Fb;
+    }
+    else string = "1919810";
+    return string;
 }
 
 var gui_mod = 1;
@@ -4265,9 +4344,9 @@ function updateGUI() {
     document.getElementById("tier02rewa03").innerHTML = "5式风模块：基于风单元式数提升风灵每次作成乘数(+0.05×n^0.25)。当前：+" + notation(player.tier01.pow(0.25).mul(0.05));
     document.getElementById("tier02rewa04").innerHTML = "12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×" + notation(new Decimal(1.010889286051700).pow(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)).pow(player.tier02));
     document.getElementById("tier02rewa05").innerHTML = "30式风模块：解锁第四个升级。"
-    document.getElementById("tier02rewa06").innerHTML = "75式风模块：使每次作成乘数的指数乘以：1~8式风灵为16，9~16式风灵为4"
+    document.getElementById("tier02rewa06").innerHTML = "75式风模块：使每次作成乘数的指数乘以：1~8式风灵为4，9~16式风灵为2"
     document.getElementById("tier02rewa07").innerHTML = "237式风模块：使风灵升级1和3的效果指数增加0.5";
-    document.getElementById("tier02rewa08").innerHTML = "750式风模块：分别使1~24和25~32式风灵每次作成乘数的指数乘以16和4";
+    document.getElementById("tier02rewa08").innerHTML = "750式风模块：分别使1~8、9~16、17~24、25~32式风灵每次作成乘数的指数变为256、64、16、4";
 
     document.getElementById("tier03").innerHTML = notatint(player.tier03) + "式风系统";
     document.getElementById("tier03rewa01").innerHTML = "1式风系统：基于升级总和提升17~24式风灵乘数。当前：×" + notation(new Decimal(1.189207115002721).pow(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04)));
@@ -4279,7 +4358,7 @@ function updateGUI() {
 
     document.getElementById("tier04").innerHTML = notatint(player.tier04) + "式风四倍系统";
     document.getElementById("tier04rewa01").innerHTML = "1式风四倍系统：基于风四倍系统提升进阶挑战1~4上限（最多提升12）。当前：+" + notation(player.tier04.min(12));
-    document.getElementById("tier04rewa02").innerHTML = "3式风四倍系统：使3式风系统也对17~24式风灵生效";
+    document.getElementById("tier04rewa02").innerHTML = "3式风四倍系统：使3式风系统也对17~24式风灵生效。";
     document.getElementById("tier04rewa03").innerHTML = "10式风四倍系统：基于风四倍系统提升元素能量产量。当前：×" + notation(new Decimal(2).pow(player.tier04));
     document.getElementById("tier04rewa04").innerHTML = "30式风四倍系统：基于风四倍系统提升一阶游戏速度。当前：×" + notation(player.tier04.sub(24).mul(0.25));
 
@@ -4358,10 +4437,10 @@ function updateGUI() {
     document.getElementById("PL1EngMul").innerHTML = notation(v.PL1engmul);
     document.getElementById("PL1EngPs").innerHTML = notation(player.wsca09.mul(v.wscm09).pow(v.wscp09).mul(new Decimal(0.25)));
 
-    document.getElementById("PL1upge05").innerHTML = "当前：×" + notation(player.PL1energy.add(1).log(2).max(1).pow(player.chacom02.mul(0.5).add(2)));
-    document.getElementById("PL1upge06").innerHTML = "当前：×" + notation(player.PL1ptsttl.min(player.PL1ptsttl.add(1).log(1.189207115002721).pow(4).mul(4294967296)).max(1));
-    document.getElementById("PL1upge07").innerHTML = "当前：×" + notation(player.PL1tms.pow(4).min(player.PL1tms.pow(0.25).mul(1.152921505e18)).max(1));
-    document.getElementById("PL1upge08").innerHTML = "当前：×" + notation(player.energy.add(1).log(2).max(1).pow(player.chacom02.mul(0.5).add(2)));
+    document.getElementById("PL1upge05").innerHTML = notation(player.PL1energy.add(1).log(2).max(1).pow(player.chacom02.mul(0.5).add(2)));
+    document.getElementById("PL1upge06").innerHTML = notation(player.PL1ptsttl.min(player.PL1ptsttl.add(1).log(1.189207115002721).pow(4).mul(4294967296)).max(1));
+    document.getElementById("PL1upge07").innerHTML = notation(player.PL1tms.pow(4).min(player.PL1tms.pow(0.25).mul(1.152921505e18)).max(1));
+    document.getElementById("PL1upge08").innerHTML = notation(player.energy.add(1).log(2).max(1).pow(player.chacom02.mul(0.5).add(2)));
 
     document.getElementById("PL1bab01").innerHTML = player.PL1bab01.toFixed(0);
     document.getElementById("PL1bab02").innerHTML = player.PL1bab02.toFixed(0);
@@ -4909,7 +4988,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(30)) {
         document.getElementById("tier02rewa05").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在75式风模块，将使每次作成乘数的指数乘以：1~8式风灵为16，9~16式风灵为4";
+        document.getElementById("tier02info").innerHTML = "在75式风模块，将使每次作成乘数的指数乘以：1~8式风灵为4，9~16式风灵为2";
         document.getElementById("upg_04").style.display = 'block';
     }
     else {
@@ -4925,7 +5004,7 @@ function styleDisplay() {
     }
     if (player.tier02.gte(237)) {
         document.getElementById("tier02rewa07").style.display = 'block';
-        document.getElementById("tier02info").innerHTML = "在750式风模块，将分别使1~24和25~32式风灵每次作成乘数的指数乘以16和4";
+        document.getElementById("tier02info").innerHTML = "在750式风模块，将分别使1~8、9~16、17~24、25~32式风灵每次作成乘数的指数变为256、64、16、4";
     }
     else {
         document.getElementById("tier02rewa07").style.display = 'none';
@@ -5019,29 +5098,31 @@ function styleDisplay() {
     if (player.hasUnlockedPL1 == true) {
         document.getElementById("wscset2").style.display = 'block';
         document.getElementById("PL1info").style.display = 'block';
+        document.getElementById("PL1stat").style.display = 'block';
         document.getElementById("comp1").style.display = 'block';
         document.getElementById("btrow2").style.display = '';
     }
     if (player.hasUnlockedPL2 == true) {
         document.getElementById("wscset3").style.display = 'block';
         document.getElementById("PL2info").style.display = 'block';
+        document.getElementById("PL2stat").style.display = 'block';
         document.getElementById("comp2").style.display = 'block';
         document.getElementById("btrow3").style.display = '';
     }
     if (player.hasUnlockedPL3 == true) {
         document.getElementById("wscset4").style.display = 'block';
         document.getElementById("PL3info").style.display = 'block';
+        document.getElementById("PL3stat").style.display = 'block';
         document.getElementById("comp3").style.display = 'block';
         document.getElementById("btrow4").style.display = '';
     }
     if (player.hasUnlockedPL4 == true) {
         document.getElementById("wscset5").style.display = 'block';
         document.getElementById("PL4info").style.display = 'block';
+        document.getElementById("PL4stat").style.display = 'block';
         document.getElementById("comp4").style.display = 'block';
         document.getElementById("btrow5").style.display = '';
     }
-
-
 
     for (let i = 0; i < 16; i++) {
         if (player.PL1upg[i] == true) document.getElementById("PL1upg" + tiername[i + 1]).className = "PL1upgyes";
@@ -5071,7 +5152,6 @@ function styleDisplay() {
         }
     }
 
-
     if (player.PL1upg[1] == true) {
         document.getElementById("byattier01").style.display = 'block';
         document.getElementById("byattier02").style.display = 'block';
@@ -5092,14 +5172,10 @@ function styleDisplay() {
         document.getElementById("byatupgd01").style.display = 'none';
         document.getElementById("byatupgd02").style.display = 'none';
     }
-    if (player.PL2tms.gte(7)) {
-        document.getElementById("byatupgd03").style.display = 'block';
-        document.getElementById("byatupgd04").style.display = 'block';
-    }
-    else {
-        document.getElementById("byatupgd03").style.display = 'none';
-        document.getElementById("byatupgd04").style.display = 'none';
-    }
+    if (player.PL2tms.gte(7)) document.getElementById("byatupgd03").style.display = 'block';
+    else document.getElementById("byatupgd03").style.display = 'none';
+    if (player.PL2tms.gte(8)) document.getElementById("byatupgd04").style.display = 'block';
+    else document.getElementById("byatupgd04").style.display = 'none';
 
     if (player.PL1upg[3] == true) document.getElementById("normchal").style.display = 'block';
     else document.getElementById("normchal").style.display = 'none';
@@ -5162,7 +5238,7 @@ function styleDisplay() {
         if (player.PL2tms.gte(i)) document.getElementById("PL2mlst" + tiername[i]).className = "PL2mlstyes";
         else document.getElementById("PL2mlst" + tiername[i]).className = "PL2mlstno";
     }
-    if (player.PL2tms.gte(10)) document.getElementById("PL2tmshop").style.display = 'block';
+    if (player.PL2tms.gte(12)) document.getElementById("PL2tmshop").style.display = 'block';
     else  document.getElementById("PL2tmshop").style.display = 'none';
 
     if (player.energyttl.gte("e1e6")) document.getElementById("stdtree").style.display = 'block';
@@ -5405,7 +5481,7 @@ function comAch() {
     if (player.wscb01.eq(1) & player.wscb02.eq(0) & player.wscb03.eq(1)) getAch(10);
     if (player.wscb01.gte(10) & player.wscb02.eq(0) & player.wscb03.eq(0) & player.wscb04.eq(0) & player.wscb05.eq(0) & player.wscb06.eq(0) & player.wscb07.eq(0) & player.wscb08.eq(0)) getAch(11);
     if (player.energy.gte(1e24) & player.wscb05.eq(0) & player.wscb06.eq(0) & player.wscb07.eq(0) & player.wscb08.eq(0)) getAch(12);
-    if (player.wsca01.mul(v.wscm01).mul(new Decimal(0.025)).gte(player.energy) & player.energy.gte(10)) getAch(13);
+    if (player.wsca01.mul(v.wscm01).mul(new Decimal(0.025)).gte(player.energy) & player.energy.gte(1e10)) getAch(13);
     if (player.wscb01.eq(1) & player.wscb02.eq(1) & player.wscb03.eq(1) & player.wscb04.eq(1) & player.wscb05.eq(1) & player.wscb06.eq(1) & player.wscb07.eq(1) & player.wscb08.eq(1)) getAch(14);
     if (player.wscb04.gte(20) & player.wscb05.eq(0) & player.wscb06.eq(0) & player.wscb07.eq(0) & player.wscb08.eq(0)) getAch(15);
 
@@ -5464,6 +5540,8 @@ function comAch() {
     if (player.PL4goal[4] == true) getAch(65);
     if (player.frau01.gte(8) & player.frau02.gte(8)) getAch(66);
     if (player.hdrn4.gte(1) & player.hdrn6.gte(1) & player.hdrn8.gte(1) & player.hdrn12.gte(1) & player.hdrn20.gte(1)) getAch(67);
+
+
 }
 
 /*弹出提示*/
@@ -5685,15 +5763,15 @@ function autoBuy() {
 
 updateGUI();
 
-var prod=setInterval(produce, 50);
-
 setInterval(mainLoop, 50);
 
 setInterval(styleDisplay, 50);
 
 setInterval(updateGUI, 50);
 
-setInterval(save, 10000);
+var prod = setInterval(produce, 50);
+
+setInterval(save, 60000);
 
 
 /*滚动新闻*/
@@ -5734,7 +5812,7 @@ var texts =
         "砂糖在别人眼中是个性格内向、寡言少语的炼金术士，对他人的世界不感兴趣，但她对一切事物都有着极为强烈的求知欲",
         "宝箱出现的成因到底是什么？结合剧情考虑，每个宝箱的外边都有一圈符文，这些符文出现在坎瑞亚这个古老的文明，因此这些宝箱其实来自遥远的上古时期",
         "绿发兽耳眼镜娘，挥手即可立风场，日日夜夜不能寐，只为献身实验场，紧衣黑丝小裙摆，羞涩面容清纯心，可爱砂糖为吾妻，直戳作者XP上",
-        "伍玖叁式营养餐中「健康」的绿色来源于加入奶油中的天然蔬菜汁…蔬菜汁？",
+        "伍玖叁式营养餐中「健康」的绿色来源于加入奶油中的天然蔬菜汁……蔬菜汁？",
         "其实我创造了一个仙境，名为“random()仙境”，这里面什么都有",
         "是时候面对非常特殊的敌人：incremental·天理-hp:f1.797e308/f1.797e308",/*30*/
         "学习生物炼金就来砂糖的实验室~！不过六倍多种子蒲公英挺合理的",
@@ -5828,15 +5906,25 @@ var texts =
         "<span class='erudition'>智识</span>星神为何沉默不语？或许是因为没装声卡",
         "跳舞，只要音乐在响，就尽管跳下去。明白我的话？跳舞，不停地跳舞。不要考虑为什么跳，不要考虑意义不意义，意义那玩意儿本来就是没有的，要是考虑这个，脚步势必停下来。一旦停下来，我就再也爱莫能助了，并且连接你的线索也将全部消失，永远消失。那一来，你就只能在这里生存，只能不由自主地陷进这边的世界。因此不能停住脚步，不管你如何觉得滑稽好笑，也不能半途而废，务必咬紧牙关踩着舞点跳下去。跳着跳着，原先坚固的东西便会一点点酥软，有的东西还没有完全不可救药。能用的全部用上去，全力以赴，不足为惧的。你的确很疲劳，精疲力竭，惶惶不可终日。谁都有这种时候，觉得一切都错得不可收拾，以致停下脚步。但只有跳下去，而且要跳得出类拔萃，跳得大家心悦诚服。这样，我才有可能助你一臂之力。总之一定要跳要舞，只要音乐没停，要跳要舞，只要音乐没停",/*120*/
         "俸俸伲 购美病",
-        "如果在《硬广》中开启无广告挑战，它将变成一个没有bug的游戏",
+        "为什么点数×点数不等于点数²？因为点数×点数=点点数数，点数²=点数数",
         "预言石上血痕现，星河倒悬月无光，莫问何处寻生路，轮回尽头万物殇",
         "仿生人偶是会梦见电子羊的",
         "有两颗中子星，它们的风元素力分别是1000<span style='color:#ff8000'>风之微粒</span>和1<span style='color:#80ff00'>风之徯粓</span>，它们的风元素力之和是多少？",
         "当你遇到困难时，回望自己所做过的一切，所经历过的所有不顺心的事情，你就会发现：其实你现在所正经历的困难，倒也不算什么大事。",
         "qeq6308是风神的先祖，就像Derpsmith是蚁神的先祖一样",
         "铃音(Lain)曾经说过：无论何时何地，每一个风灵都是互相联通的",
-        "<coior=#f29e38ff>HTML可以做出模拟宇宙，HTML是最好的语言！</colro>",
-        "全网呼叫增量人：增量游戏车牌歌：增A反物质车，增B序数的，增C声望、增D欧米伽、质量是增E；协同是增F，莱因哈特叫增G，楼梯间挂着增H，鲨鱼增J车；K车给工业，L车等级的，M车物质、N车数字、P车被飞升了；能量发生器增Q，增R香料的，增量冒险叫增S，声望树叫增T。生命树增U，病毒树增V，……"/*130*/
+        "<coior=#f29e38ff>HTML可以做出模拟宇宙，HTML是最好的语言！</oolor>",
+        "斯帕克模型猜想指的是在人类大脑神经元之间存在着一种以“斯帕克”（Sparks）为单位的信息传递模式。这一模型猜想源自于对大脑神经元活动的深入观察和研究，它挑战了传统上认为神经元之间信息传递是连续的观点，而提出了一种全新的、基于离散脉冲的信息传递机制。斯帕克模型猜想认为，神经元之间的信息传递不是连续的，而是以离散的“斯帕克”为单位进行。这种离散的信息传递方式，与连续的电信号传递相比，更能体现大脑信息处理的高效性和快速性。该猜想进一步假设，这些离散的“斯帕克”实际上是以脉冲的形式在神经元之间传递。这种脉冲式传递方式不仅符合大脑神经元活动的实际观测结果，而且为理解大脑复杂的信息处理机制提供了新的视角。研究人员利用脑电图（EEG）等技术手段，观察到大脑神经元之间的电活动确实呈现出离散的脉冲形式，这与斯帕克模型猜想的假设相一致。此外，还发现神经元之间的脉冲传递具有一定的时间间隔，进一步支持了离散信息传递的观点",/*130*/
+        "就算我们不抬头仰望，星空也永远注视着我们",
+        "风带来了故事的种子，时间墙使之发芽；风带来了新的故事，时间墙使之成为神话",
+        "事物的规律总是外表庞杂动人，内在却简单质朴，万物归因，一行公式可解众生迷茫",
+        "哪怕蝴蝶的翅膀足以撼动飓风，它的美丽也需<del>草木</del>style.css点缀",
+        "根据加速回报定律，从1998年7月6日《铃音的系列实验》出版到现在的过程中人类所取得的进步比从500万年前人类诞生到1998年7月6日取得的总进步更多。",
+        "秘境的尽头到底是什么？从遇到的怪物来看，探寻答案之路肯定不轻松，不过，只要最终能得到答案，一切都是值得的",
+        "哪个反物质维度的mod能有ee308膨胀时间(DT)？IDR(infinity dimention rewritten)mod！",
+        "第九代互联网协议(IPv9)，有2^2^10=1.8e308个IP地址，IPvn有2^2^(n+1)个",
+        "全网呼叫增量人！增量游戏车牌歌：增A反物质车，增B序数的，增C声望、增D欧米伽、质量是增E；协同是增F，莱因哈特叫增G，楼梯间挂着增H，鲨鱼增J车！……",
+        "生命的本质是什么？生命的终点在哪里？生命的定义从未有过「完美作品」，没有标准答案的问题被设立，本就是为了令人寻找得不到的答案。渴望一些「纯粹」的事物，「依恋」……关乎掌控焦虑和疼痛的岛叶皮质，还有制造渴望的伏隔核，情感的规律可被轻易拆解，孩子们得到随机的奖励，就会变得更加……乖巧。倘若将生命「培育」、「重组」、「再现」，便能解剖「记忆」、调控「均衡」、解构「纯美」、再现「不朽」、理解「生命」、触控「概念」、成为「<span class='redacted'>生物炼金之星神</span>」",/*140*/
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
