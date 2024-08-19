@@ -152,6 +152,7 @@ function hardReset() {
         PL1ptsttl: new Decimal(0),
         PL1tms: new Decimal(0),
         PL1sec: new Decimal(0),
+        PL1secrl: new Decimal(0),
         PL1conf: true,
 
         PL1upg: [false, false, false, false,
@@ -207,6 +208,7 @@ function hardReset() {
         PL2ptsttl: new Decimal(0),
         PL2tms: new Decimal(0),
         PL2sec: new Decimal(0),
+        PL2secrl: new Decimal(0),
         PL2conf: true,
 
         PL2tmsc: new Decimal(0),
@@ -282,6 +284,7 @@ function hardReset() {
         PL3ptsttl: new Decimal(0),
         PL3tms: new Decimal(0),
         PL3sec: new Decimal(0),
+        PL3secrl: new Decimal(0),
         PL3conf: true,
 
         res: [false, false, false, false, false, false, false, false,
@@ -390,6 +393,7 @@ function hardReset() {
         PL4ptsttl: new Decimal(0),
         PL4tms: new Decimal(0),
         PL4sec: new Decimal(0),
+        PL4secrl: new Decimal(0),
         PL4conf: true,
 
         PL4goal: [false, false, false, false, false, false, false, false,
@@ -834,6 +838,7 @@ function hardReset() {
         PL1chacap: new Decimal(4),
         PL2chacap: new Decimal(4),
         PL3chacap: new Decimal(4),
+        PL4chacap: new Decimal(4),
 
         PL2engmul: new Decimal(1),
         PL2engpow: new Decimal(1),
@@ -862,12 +867,12 @@ function hardReset() {
         alcuc04: new Decimal(2),
         alcuc05: new Decimal(2),
         alcuc06: new Decimal(2),
-        alcuc07: new Decimal(48),
-        alcuc08: new Decimal(64),
-        alcuc09: new Decimal(96),
-        alcuc10: new Decimal(128),
-        alcuc11: new Decimal(192),
-        alcuc12: new Decimal(256),
+        alcuc07: new Decimal(128),
+        alcuc08: new Decimal(256),
+        alcuc09: new Decimal(512),
+        alcuc10: new Decimal(1024),
+        alcuc11: new Decimal(2048),
+        alcuc12: new Decimal(4096),
 
         anm2ps: new Decimal(0),
         anm2c01: new Decimal(10),
@@ -1369,7 +1374,7 @@ function getWscMult() {
     if (player.orbupg[7] == true) mult09to16 = mult09to16.mul(hyp(player.energy, 0.625));
     
     if (player.tier03.gte(1)) mult17to24 = mult17to24.mul(new Decimal(1.044273782427413).pow(player.upgd01.add(player.upgd02).add(player.upgd03).add(player.upgd04)));
-    mult17to24 = mult17to24.mul(player.PL2tms.pow(player.PL2upg04.mul(2)).max(1)).mul(player.anm2.pow(player.anm2u02.mul(4)).max(1));
+    mult17to24 = mult17to24.mul(player.PL2tms.pow(player.PL2upg04.mul(4)).max(1)).mul(player.anm2.pow(player.anm2u02.mul(4)).max(1));
     
     if (player.std[4] == true) mult09to16 = mult09to16.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(8).pow(player.tier01).pow(player.tier03.sub(44).mul(0.2).max(1)));
     if (player.std[5] == true) mult17to24 = mult17to24.mul(new Decimal(2).mul(new Decimal(2).pow(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03))).root(64).pow(player.tier01).pow(player.tier03.sub(44).mul(0.2).max(1)));
@@ -3113,7 +3118,7 @@ function ptnchs(tier) {
 
 function buyptnupg(tier) {
     let name = tiername[tier];
-    let cap = [8, 16, 4, 4];
+    let cap = [8, 16, 4, 8];
     if (player.PL3pts.gte(v["ptnuc" + name]) & player["ptnu" + name].lt(new Decimal(cap[tier-1]))) {
         player["ptnu" + name] = player["ptnu" + name].add(1);
         player.PL3pts = player.PL3pts.sub(v["ptnuc" + name]);
@@ -4118,17 +4123,17 @@ function getbatow() {
     let df = player.stage.sub(1).div(1000).min(10).floor();
     let hpstg = df.pwb(2).mul(player.stage.add(24)).sub(df.pwb(2).mul(df).sub(df.pwb(2).sub(1)).mul(1024));
     v.mhp = hpstg.div(16).pwb(2);
-    v.pcps = player.stgcl.add(1).add(df.add(1).mul(24)).div(16).pwb(2).div(16);
+    v.pcps = player.stgcl.add(1).add(df.add(1).mul(24)).div(16).pwb(2).div(4);
     player.coin = player.coin.add(v.cps.div(20));
-    v.bpmpb = player.coin.add(1).log(2).div(16777216);
-    v.atke = player.atk.add(1).mul(v.btke).div(16);
+    v.bpmpb = player.coin.add(1).log(2).div(16777216).min(0.000244140625);
+    v.atke = player.atk.add(1).mul(v.btke).div(4);
     v.btke = player.btk.add(2).pow(v.ctke);
     v.ctke = player.ctk.div(4).add(2).hyp(v.dtke);
     v.dtke = player.dtk.div(16).add(1)
-    v.atkc = player.atk.add(1).pwb(2);
-    v.btkc = player.btk.add(1).pwb(4);
-    v.ctkc = player.ctk.add(1).pwb(16);
-    v.dtkc = player.dtk.add(1).pwb(256);
+    v.atkc = player.atk.add(1).pwb(1.189207115002721);
+    v.btkc = player.btk.add(1).pwb(2);
+    v.ctkc = player.ctk.add(2).pwb(1.414213562373095).pwb(2);
+    v.dtkc = player.dtk.add(4).pwb(1.189207115002721).pwb(2).pwb(2);
     if (player.rhp.lte(v.atke.div(20))) stageclear();
     else player.rhp = player.rhp.sub(v.atke.div(20));
 }
@@ -4138,7 +4143,7 @@ function stageclear() {
     player.stage = player.stage.add(1);
     player.rhp = v.mhp;
     let df = player.stage.sub(1).div(1000).min(10).floor();
-    v.cps = player.stgcl.add(df.add(1).mul(24)).div(16).pwb(2).div(16);
+    v.cps = player.stgcl.add(df.add(1).mul(24)).div(16).pwb(2).div(4);
 }
 
 function chgstg(tier) {
@@ -4440,6 +4445,10 @@ function time(diff) {
     if (player.milliseconds.gte(1000)) {
         player.seconds = player.seconds.plus(1);
         player.totalSeconds = player.totalSeconds.plus(1);
+        player.PL1secrl = player.PL1secrl.plus(1);
+        player.PL2secrl = player.PL2secrl.plus(1);
+        player.PL3secrl = player.PL3secrl.plus(1);
+        player.PL4secrl = player.PL4secrl.plus(1);
         player.milliseconds = player.milliseconds.minus(1000);
     }
     if (player.seconds == 60) {
@@ -5156,21 +5165,26 @@ function updateGUI() {
     else if (player.incha == 12) document.getElementById("chalstat").innerHTML = "你当前在进阶挑战12中";
     else document.getElementById("chalstat").innerHTML = "你当前不在任何挑战中";
 
-    document.getElementById("playtime").innerHTML = "游戏时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
-    document.getElementById("totalseconds").innerHTML = "游戏秒数：" + player.totalSeconds.toFixed(0);
+    document.getElementById("playtime").innerHTML = "游玩现实时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
+    document.getElementById("totalseconds").innerHTML = "总计秒数（现实时间）：" + notatint(player.totalSeconds);
+    document.getElementById("gameseconds").innerHTML = "总计秒数（现实时间）：" + notatint(player.gameseconds);
     document.getElementById("totalenergy").innerHTML = "总计能量：" + notation(player.energyttl);
     document.getElementById("PL1tms").innerHTML = "您扩散了" + notatint(player.PL1tms) + "次";
-    document.getElementById("PL1sec").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒";
     document.getElementById("PL1pts").innerHTML = "总计扩散点：" + notatint(player.PL1ptsttl);
+    document.getElementById("PL1sec").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(游戏时间)";
+    document.getElementById("PL1secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(现实时间)";
     document.getElementById("PL2tms").innerHTML = "您扪敤了" + notatint(player.PL2tms) + "次";
-    document.getElementById("PL2sec").innerHTML = "上次扪敤到现在过了" + notatint(player.PL2sec) + "秒";
     document.getElementById("PL2pts").innerHTML = "总计扪敤点：" + notatint(player.PL2ptsttl);
+    document.getElementById("PL2sec").innerHTML = "上次扪敤到现在过了" + notatint(player.PL2sec) + "秒(游戏时间)";
+    document.getElementById("PL2secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(现实时间)";
     document.getElementById("PL3tms").innerHTML = "您扫敥了" + notatint(player.PL3tms) + "次";
-    document.getElementById("PL3sec").innerHTML = "上次扫敥到现在过了" + notatint(player.PL3sec) + "秒";
     document.getElementById("PL3pts").innerHTML = "总计扫敥点：" + notatint(player.PL3ptsttl);
+    document.getElementById("PL3sec").innerHTML = "上次扫敥到现在过了" + notatint(player.PL3sec) + "秒(游戏时间)";
+    document.getElementById("PL3secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(现实时间)";
     document.getElementById("PL4tms").innerHTML = "您扬敦了" + notatint(player.PL4tms) + "次";
-    document.getElementById("PL4sec").innerHTML = "上次扬敦到现在过了" + notatint(player.PL4sec) + "秒";
     document.getElementById("PL4pts").innerHTML = "总计扬敦点：" + notatint(player.PL4ptsttl);
+    document.getElementById("PL4sec").innerHTML = "上次扬敦到现在过了" + notatint(player.PL4sec) + "秒(游戏时间)";
+    document.getElementById("PL4secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(现实时间)";
 
     if (gui_mod == 1) player.nowtime = Date.now();
 }
@@ -6255,4 +6269,50 @@ function animationBigCrunch() {
     setTimeout(function () {
         document.querySelectorAll("body")[0].style.animation = ""
     }, 2000)
+}
+
+function randomSymbol() {
+    return String.fromCharCode(Math.floor(Math.random() * 50) + 192);
+}
+
+function wordCycle(list, noBuffer = false) {
+    const len = list.length;
+    const tick = Math.floor(Date.now() / 250) % (len * 5);
+    const mod5 = ((Date.now() / 250) % (len * 5)) % 5;
+    const largeTick = Math.floor(tick / 5);
+    let v = list[largeTick];
+
+    // Blend with adjacent words, in such a way that mod5 being 0 or 5 corresponds with a 0.5 blend parameter
+    if (mod5 < 0.6) {
+        v = this.blendWords(list[(largeTick + list.length - 1) % list.length], list[largeTick], (mod5 + 0.6) / 1.2);
+    } else if (mod5 > 4.4) {
+        v = this.blendWords(list[largeTick], list[(largeTick + 1) % list.length], (mod5 - 4.4) / 1.2);
+    }
+
+    v = this.randomCrossWords(v, 0.1 * Math.pow(mod5 - 2.5, 4) - 0.6);
+    if (noBuffer) return v;
+
+    const maxWordLen = Math.max(...list.map(x => x.length));
+    const bufferSpace = (maxWordLen - v.length) / 2;
+
+    // Buffer the result with ALT+255 on either side to prevent the ui from twitching.
+    // Spaces do not work due to being automatically collapsed, and css fixing this causes other issues.
+    return " ".repeat(Math.ceil(bufferSpace)) + v + " ".repeat(Math.floor(bufferSpace));
+}
+
+function randomCrossWords(str, frac = 0.7) {
+    if (frac <= 0) return str;
+    const x = str.split("");
+    for (let i = 0; i < x.length * frac; i++) {
+        const randomIndex = Math.floor(predictableRandom(Math.floor(Date.now() / 500) % 964372 + 1.618 * i) * x.length);
+        x[randomIndex] = randomSymbol();
+    }
+    return x.join("");
+}
+
+function blendWords(first, second, param) {
+    if (param <= 0) return first;
+    if (param >= 1) return second;
+    return first.substring(0, first.length * (1 - param)) +
+        second.substring(second.length * (1 - param), second.length);
 }

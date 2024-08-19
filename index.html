@@ -138,7 +138,7 @@
             <button align="center" class="button" id="btp0_3" onclick="changePg('p0_3')">统计</button>
             <button align="center" class="button" id="btp0_4" onclick="changePg('p0_4')">成就</button>
             <button align="center" class="button" id="btp0_5" onclick="changePg('p0_5')">概要</button>
-            <button align="center" class="button" id="btp0_6" onclick="changePg('p0_6')" style="display: none">调试</button>
+            <button align="center" class="button" id="btp0_630875" onclick="changePg('p0_630875')" style="display: none">调试</button>
         </div>
         <div id="p1_1">
             <div class="btnrow">
@@ -684,6 +684,18 @@
             <div align="center" class="ftsz2" id="tier04rewa08" style="display: none">3000式风四倍系统：</div>
             <div align="center" class="ftsz2" id="tier04rewa09" style="display: none">9486式风四倍系统：</div>
             <div align="center" class="ftsz2" id="tier04rewa10" style="display: none">30000式风四倍系统：</div>
+            <br />
+            <div align="center" class="ftsz2" id="tier04rewa01" style="display: none">1式风五倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa02" style="display: none">4式风五倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa03" style="display: none">13式风五倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa04" style="display: none">47式风五倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa05" style="display: none">167式风五倍系统：</div>
+            <br />
+            <div align="center" class="ftsz2" id="tier04rewa01" style="display: none">1式风六倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa02" style="display: none">4式风六倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa03" style="display: none">18式风六倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa04" style="display: none">78式风六倍系统：</div>
+            <div align="center" class="ftsz2" id="tier04rewa05" style="display: none">335式风六倍系统：</div>
         </div>
         <div id="p1_3" style="display: none">
             <br />
@@ -710,6 +722,18 @@
                 <button class="wscbt2" id="byatupgd04" onclick="abUpgd04Switch()" style="color: #ffffff;">自动：</button>
                 <button class="wscbt1" style="color: #ffffff;" id="upgc04" onclick="buyUpgd(4)">花费：能量</button>
                 <span id="upge04">当前：</span><span id="upgd04sc"></span>
+            </div>
+            <div class="upg" id="upg_05" style="display: none">
+                <span>风灵升级五·等级<span id="upgd05"></span> (+<span id="geou"></span>) 每级使风灵升级3基础倍率增加0.0625</span>
+                <button class="wscbt2" id="byatupgd05" onclick="abUpgd05Switch()" style="color: #ffffff;">自动：</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc05" onclick="buyUpgd(5)">花费：能量</button>
+                <span id="upge05">当前：</span><span id="upgd05sc"></span>
+            </div>
+            <div class="upg" id="upg_06" style="display: none">
+                <span>风灵升级六·等级<span id="upgd06"></span> (+<span id="dendrou"></span>) 每级使风灵升级4基础倍率增加0.0625</span>
+                <button class="wscbt2" id="byatupgd06" onclick="abUpgd06Switch()" style="color: #ffffff;">自动：</button>
+                <button class="wscbt1" style="color: #ffffff;" id="upgc06" onclick="buyUpgd(6)">花费：能量</button>
+                <span id="upge06">当前：</span><span id="upgd06sc"></span>
             </div>
         </div>
         <div id="p2_1" style="display: none">
@@ -975,7 +999,7 @@
                         <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(1)">解锁9~16风灵的自动购买(<span id="PL2tm01b"></span>/8)<br />需要：<span id="PL2tm01c"></span>可用扪敤次数</button></td>
                         <td><button id="PL2tmug01" class="PL2upgno" onclick="buyPL2upg(2)">双倍扪敤次数获取(<span id="PL2tm02b"></span>/8)<br />需要：<span id="PL2tm02c"></span>可用扪敤次数</button></td>
                         <td><button id="PL2tmug03" class="PL2upgno" onclick="buyPL2upg(3)">解锁风之微粒升级的自动购买(<span id="PL2tm03b"></span>/4)<br />需要：<span id="PL2tm03c"></span>可用扪敤次数</button></td>
-                        <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^2n乘以17~24式风灵(<span id="PL2tm04b"></span>/4)<br />需要：<span id="PL2tm04c"></span>可用扪敤次数</button></td>
+                        <td><button id="PL2tmug04" class="PL2upgno" onclick="buyPL2upg(4)">扪敤次数^4n乘以17~24式风灵(<span id="PL2tm04b"></span>/4)<br />需要：<span id="PL2tm04c"></span>可用扪敤次数</button></td>
                     </tr>
                 </table>
             </div>
@@ -1277,7 +1301,7 @@
                     <td><button class="PL3upgno" onclick="buyptnupg(1)">增加最多效果数+1<br />(<span id="ptnu01"></span>/8)<br />花费：<span id="ptnuc01"></span>扫敥点</button></td>
                     <td><button class="PL3upgno" onclick="buyptnupg(2)">增加效果值倍数×2<br />(<span id="ptnu02"></span>/16)<br />花费：<span id="ptnuc02"></span>扫敥点</button></td>
                     <td><button class="PL3upgno" onclick="buyptnupg(3)" id="ptnu3">进阶挑战1~4上限增加5，5~8上限增加3<br />(<span id="ptnu03"></span>/4)<br />花费：<span id="ptnuc03"></span>扫敥点</button></td>
-                    <td><button class="PL3upgno" onclick="buyptnupg(4)" id="ptnu4">一阶游戏速度×2<br />(<span id="ptnu04"></span>/4)<br />花费：<span id="ptnuc04"></span>扫敥点</button></td>
+                    <td><button class="PL3upgno" onclick="buyptnupg(4)" id="ptnu4">一阶游戏速度×2<br />(<span id="ptnu04"></span>/8)<br />花费：<span id="ptnuc04"></span>扫敥点</button></td>
                 </tr>
             </table>
         </div>
@@ -1670,20 +1694,20 @@
                 </div>
             </div>
             <div id="p5_5" style="display: none">
-                <div></div>
+                <div>完成第16个扬敦目标解锁协同</div>
             </div>
             <div id="p5_6" style="display: none">
                 <div id="ulanm4">
                     <div class="btnrow">
-                        <button align="center" class="xxButton" onclick="ulAnm4()" style="background-color:#0080ff">解锁刺影征标<br />花费：e1.000e6扬敦点</button>
+                        <button align="center" class="xxButton" onclick="ulAnm4()" style="background-color:#0080ff">解锁刺影征标<br />花费：6e666666扬敦点</button>
                     </div>
                 </div>
-                <div>
+                <div id="anm4">
 
                 </div>
             </div>
             <div id="p5_7" style="display: none">
-                <div></div>
+                <div>当前您有1式营养餐，当前您有1式便携营养袋</div>
             </div>
             <div id="p6_1" style="display: none">
                 <div></div>
@@ -1728,23 +1752,22 @@
             <div id="p0_2" style="display: none">
                 <div align="center" style="color: #ffffff; text-align: center">
                     <br />
-                    风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.2.0<br />
-                    本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》等，使用break_eternity来处理大数字<br />
+                    风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v4.2.1<br />
+                    本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》、《质量增量》、《香料放置》等，使用break_eternity来处理大数字<br />
                     <br />
-                    快捷键：空格：全部最大。1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
-                    a：购买风灵升级1，s：购买风灵升级2，以此类推。z：扩散，x：扪敤，以此类推。<br />
+                    快捷键：1：最大作成1~8风灵，2：最大作成9~16风灵，以此类推。q：获得风单元，w：获得风模块，以此类推。<br />
+                    a：购买风灵升级1，s：购买风灵升级2，以此类推。z：扩散，x：扪敤，以此类推。空格：全部最大。<br />
                     <br />
                     支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：<br />
                     <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80;">数据增量重制版</a>、
                     <a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank" style="color: #00ff80;">点数增量重制版</a>、
                     <a href="https://aster131072.github.io/incremental_evolution/" target="_blank" style="color: #00ff80;">增量进化</a>、
                     <a href="https://veryrrdefine.github.io/hyper-volume-incremental-v1/" target="_blank" style="color: #00ff80;">多维体积增量</a>、
-                    <br />
                     <a href="https://qqqe308.github.io/The-Rhythm-Game-Tree/" target="_blank" style="color: #00ff80;">音乐游戏树</a>、
+                    <br />
                     <a href="https://qqqe308.github.io/Anti-Anti-Softcap-Tree/111" target="_blank" style="color: #00ff80;">反反软上限树</a>、
                     <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank" style="color: #00ff80;">作业增量</a>、
                     <a href="https://goldenapple125.github.io/RBN/" target="_blank" style="color: #00ff80;">大数之路</a>、
-                    <br />
                     <a href="https://veryrrdefine.github.io/The-BYD-Tree/" target="_blank" style="color: #00ff80;">BYD树</a>、
                     <a href="https://a262537412640768744.github.io/EnergyReset/" target="_blank" style="color: #00ff80;">能源重置</a>
                     <br /><br />
@@ -1763,27 +1786,31 @@
                 </div>
                 <div id="PL1stat" style="display: none">
                     <div class="ftsz3" style="color: #ff0000; text-align: center">扩散</div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
                     <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div><br />
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1secrl"></div><br />
                 </div>
                 <div id="PL2stat" style="display: none">
                     <div class="ftsz3" style="color: #ffff00; text-align: center">扪敤</div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
                     <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div><br />
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2secrl"></div><br />
                 </div>
                 <div id="PL3stat" style="display: none">
                     <div class="ftsz3" style="color: #00ff00; text-align: center">扫敥</div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
                     <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3tms"></div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div><br />
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3secrl"></div><br />
                 </div>
                 <div id="PL4stat" style="display: none">
                     <div class="ftsz3" style="color: #00ffff; text-align: center">扬敦</div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4sec"></div>
                     <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4tms"></div>
-                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div><br />
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4sec"></div>
+                    <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4secrl"></div><br />
                 </div>
             </div>
             <div id="p0_4" style="display: none">
@@ -1798,7 +1825,7 @@
                         <td class="achno" id="ach06">06<br />下一次<span class="tooltip-text">作成1次柒式风灵</span></td>
                         <td class="achno" id="ach07">07<br />转90°是X<span class="tooltip-text">作成1次捌式风灵</span></td>
                         <td class="achno" id="ach08">08<br />“四风守护”单元<span class="tooltip-text">获得4式风单元</span></td>
-                        <td class="achno" id="ach09">09<br />宀-客-额外时间！<span class="tooltip-text">获得2式风模块</span></td>
+                        <td class="achno" id="ach09">09<br />犾<span class="tooltip-text">获得2式风模块</span></td>
                         <td class="achno" id="ach0a">0a<br />二↑段↑跳<span class="tooltip-text">前3式风灵作成次数的排布为1,0,1</span></td>
                         <td class="achno" id="ach0b">0b<br />我应该告诉他们购买吗…<span class="tooltip-text">作成10次壹式风灵但是2~8式风灵作成次数都为0</span></td>
                         <td class="achno" id="ach0c">0c<br />醒醒！我们不再需要维度提升了！<span class="tooltip-text">没有5~8式风灵作成但是达到1e24能量</span></td>
@@ -1868,7 +1895,7 @@
                         <td class="achno" id="ach44">44<br />第十个仍然是免费的<span class="tooltip-text">在试炼场通过第10阶段</span></td>
                         <td class="achno" id="ach45">45<br />系统提升！<span class="tooltip-text">获得1式风五倍系统</span></td>
                         <td class="achno" id="ach46">46<br />巧施协同<span class="tooltip-text">组合出4个类型的协同</span></td>
-                        <td class="achno" id="ach47">47<br />谜影自定目标法<span class="tooltip-text">解锁刺影征标</span></td>
+                        <td class="achno" id="ach47">47<br />谜影<span class="tooltip-text">解锁刺影征标</span></td>
                     </tr>
                 </table>
             </div>
@@ -1986,25 +2013,40 @@
                 <div class="ftsz2" style="color: #000000; background-color: #555555; text-align: center">e2.207e252扯敩点</div>
                 <div class="ftsz2" style="color: #555555; text-align: center">e7.069e107风之徴粘</div>
             </div>
-            <div id="p0_6" style="display: none">
-                <div class="ftsz1" style="color: #ffffff; text-align: center">测试用（正式发布时删除）</div>
+            <div id="p0_630875" style="display: none" dxfl>
+                <div class="ftsz1" style="color:#ffffff; text-align: center">background-image搞得我大风灵效应犯了</div>
                 <div class="btnrow">
                     <div class="ftsz2">金色能量：</div>
-                    <textarea style="width: 256px; height: 16px;" class='input' type="text" id='goldenEnergy' ;></textarea>
+                    <textarea style="width: 256px; height: 16px;" class='input' type="text" id='goldenEnergy'></textarea>
                     <button class="ltbutton" onclick="goldenEnergy()">确认</button>
                 </div>
-                <br />
                 <div class="btnrow">
-                    <button align="center" class="xxButton" onclick="speedrun(1)">1倍速度</button>
-                    <button align="center" class="xxButton" onclick="speedrun(10)">10倍速度</button>
-                    <button align="center" class="xxButton" onclick="speedrun(100)">100倍速度</button>
-                    <button align="center" class="xxButton" onclick="speedrun(1000)">1000倍速度</button>
+                    <button align="center" class="csButton" onclick="speedrun(1)">1倍速度</button>
+                    <button align="center" class="csButton" onclick="speedrun(10)">10倍速度</button>
+                    <button align="center" class="csButton" onclick="speedrun(100)">100倍速度</button>
+                    <button align="center" class="csButton" onclick="speedrun(1000)">1000倍速度</button>
                 </div>
-                <br />
+                <div class="btnrow">
+                    <button align="center" class="csButton" onclick="">重置能量</button>
+                    <button align="center" class="csButton" onclick="">重置风灵加数</button>
+                    <button align="center" class="csButton" onclick="">显示全部声望层按钮</button>
+                    <button align="center" class="csButton" onclick="">隐藏全部声望层按钮</button>
+                </div><br />
+                <div class="btnrow">
+                    <span style="color: rgb(255, 0, 0)">unlock Menshish, the celestial of 原神，启动！you have encountered 7/7 Menshish strikes and rifts</span><br />
+                    <span style="color: rgb(255, 0, 0)">wordCycle(["acedia", "sloth", "indolence"]) :怪物无法被牵引或打断:填充风元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["gula", "gluttony", "surfeit"])}}:角色无法抗打断:填充岩元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["avaritia", "greed", "cupidity"])}}:所有料理均失去效果:填充雷元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["invidia", "envy", "begrudge"])}}:大幅削减元素反应效果:填充草元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["ira", "wrath", "tantrum"])}}:神明的力量被禁用:填充水元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["luxuria", "lust", "sexularity"])}}:记忆的力量被禁用:填充火元素0.000%</span><br />
+                    <span style="color: rgb(255, 0, 0)">{{wordCycle(["superbia", "pride", "arrogance"])}}:无法触发暴击:填充冰元素0.000%</span><br />
+                                    <button align="center" class="xxButton" onclick="">解锁白屏生成器：汇聚七色光为白色</button>
+                </div><br />
                 <div class="btnrow">
                     <span style="animation: a-game-header__antimatter--glow 0.3s infinite" onclick="animationBigCrunch()">
                         这是由至纯的风元素组成的文字，触摸将导致仙境坍塌
-                    </span><br>
+                    </span><br />
                     <span id="softcap1" style="color: rgb(255, 0, 0)">
                         超过 1.797e308 点数后，点数获取速度将被软上限限制!
                     </span><br />
@@ -2122,7 +2164,7 @@
                 <div class="noti" id="notiach06">完成成就：下一次</div>
                 <div class="noti" id="notiach07">完成成就：转90°是X</div>
                 <div class="noti" id="notiach08">完成成就：“四风守护”单元</div>
-                <div class="noti" id="notiach09">完成成就：宀-客-额外时间！</div>
+                <div class="noti" id="notiach09">完成成就：犾</div>
                 <div class="noti" id="notiach0a">完成成就：二↑段↑跳</div>
                 <div class="noti" id="notiach0b">完成成就：我应该告诉他们购买吗…</div>
                 <div class="noti" id="notiach0c">完成成就：醒醒！我们不再需要维度提升了！</div>

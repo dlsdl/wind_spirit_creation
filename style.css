@@ -4,9 +4,17 @@
 }
 
 button {
-    font-family: MonospaceTypewriter, monospace;
     text-align: center;
-    line-height: initial;
+    font-family: MonospaceTypewriter, monospace;
+}
+
+div {
+    background-color: rgba(0,0,0,0.25);
+    font-family: MonospaceTypewriter, monospace;
+}
+
+[dxfl] {
+    background-image: url("dxfl.png");
 }
 
 @font-face {
@@ -29,6 +37,18 @@ button {
 
     100% {
         color: #21f396;
+    }
+}
+
+@keyframes bigcrunch {
+    0%, 100% {
+        transform: scale(1);
+        filter: blur(0);
+    }
+
+    50% {
+        transform: scale(0);
+        filter: blur(5px);
     }
 }
 
@@ -190,6 +210,20 @@ button {
     height: 80px;
     padding: 4px;
     margin: auto;
+    border: hidden;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.csButton {
+    background-color: #00ff80;
+    color: #000000;
+    width: 120px;
+    height: 40px;
+    padding: 4px;
+    margin: 4px;
     border: hidden;
     font-size: 16px;
     text-decoration: none;
