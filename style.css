@@ -26,15 +26,15 @@ div {
     0% {
         color: #21f396;
     }
-
-    33% {
+    25% {
         color: #3ab767;
     }
-
-    66% {
+    50% {
         color: #00d4bc;
     }
-
+    75% {
+        color: #39c5bb;
+    }
     100% {
         color: #21f396;
     }
@@ -45,7 +45,6 @@ div {
         transform: scale(1);
         filter: blur(0);
     }
-
     50% {
         transform: scale(0);
         filter: blur(5px);
@@ -62,27 +61,22 @@ div {
         text-shadow: 0px -4px 4px #ff0000, 0px 4px 4px #00ffff;
         color: white;
     }
-
     17% {
         text-shadow: 4px -2px 4px #ffff00, -4px 2px 4px #00ffff;
         color: #cccccc;
     }
-
     33% {
         text-shadow: 4px 2px 4px #00ff00, -4px -2px 4px #ff00ff;
         color: #999999;
     }
-
     50% {
         text-shadow: 0px 4px 4px #00ffff, 0px -4px 4px #ff0000;
         color: #666666;
     }
-
     67% {
         text-shadow: -4px 2px 4px #0000ff, 4px -2px 4px #ffff00;
         color: #333333;
     }
-
     83% {
         text-shadow: -4px -2px 4px #ff00ff, 4px 2px 4px #00ff00;
         color: black;
@@ -113,7 +107,6 @@ div {
     0% {
         background-position: 0 0;
     }
-
     00% {
         background-position: -8000px -3000px;
     }
@@ -168,10 +161,10 @@ div {
 }
 
 .button {
-    width: 80px;
-    padding: 2px 2px;
-    margin: 4px 0px;
-    border: 1px solid #333333;
+    width: 77px;
+    padding: 1.5px 0px;
+    margin: 4.5px 0px;
+    border: 2px solid #333333;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -179,9 +172,9 @@ div {
 }
 
 .slbutton {
-    width: 80px;
-    padding: 2px 2px;
-    margin: 4px 0px;
+    width: 77px;
+    padding: 1.5px 0px;
+    margin: 4.5px 0px;
     border: 2px solid #00ff80;
     font-size: 16px;
     text-decoration: none;
@@ -192,7 +185,7 @@ div {
 .ltbutton {
     background-color: #cccccc;
     color: #000000;
-    width: 80px;
+    width: 96px;
     height: 24px;
     padding: 0px;
     margin: auto;
@@ -209,7 +202,7 @@ div {
     width: 160px;
     height: 80px;
     padding: 4px;
-    margin: auto;
+    margin: 8px 0px;
     border: hidden;
     font-size: 16px;
     text-decoration: none;
@@ -785,6 +778,40 @@ div {
     border: 2px solid #00ffff;
     font-size: 16px;
     cursor: pointer;
+}
+
+.batu3 {
+    width: 508px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.coou {
+    border: 4px solid #00ffff;
+    background-color: #000000;
+    color: #ffffff;
+    height: 150px;
+    width: 150px;
+    padding: 8px 8px;
+    margin: 0px auto;
+    font-size: 16px;
+    text-align: center;
+}
+
+.coouyes {
+    border: 4px solid #00ffff;
+    background-color: #00ff80;
+    color: #000000;
+    height: 150px;
+    width: 150px;
+    padding: 8px 8px;
+    margin: 0px auto;
+    font-size: 16px;
+    text-align: center;
 }
 
 .PL5button {
