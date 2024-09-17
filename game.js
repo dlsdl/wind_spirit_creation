@@ -6384,6 +6384,15 @@ function styleDisplay() {
         else document.getElementById("fcs" + name).className = "synu";
     }
 
+    if (player.hasunlockedanm4 == true) {
+        document.getElementById("anm4").style.display = 'block';
+        document.getElementById("ulanm4").style.display = 'none';
+    }
+    else {
+        document.getElementById("anm4").style.display = 'none';
+        document.getElementById("ulanm4").style.display = 'block';
+    }
+
 
     for (let i = 0; i < 72; i++) {
         if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
