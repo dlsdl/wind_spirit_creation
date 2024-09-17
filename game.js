@@ -452,22 +452,51 @@ function hardReset() {
         sklv02: new Decimal(0),
         sklv03: new Decimal(0),
         sklv04: new Decimal(0),
-        cooa01: new Decimal(0),
-        cooa02: new Decimal(0),
-        cooa03: new Decimal(0),
-        cooa04: new Decimal(0),
-        cooa05: new Decimal(0),
-        coofcs: 0,
-        coou01: new Decimal(0),
-        coou02: new Decimal(0),
-        coou03: new Decimal(0),
-        coou04: new Decimal(0),
-        coou05: new Decimal(0),
-        coou06: new Decimal(0),
-        coou07: new Decimal(0),
-        coou08: new Decimal(0),
-        coou09: new Decimal(0),
-        coou10: new Decimal(0),
+        syna01: new Decimal(0),
+        syna02: new Decimal(0),
+        syna03: new Decimal(0),
+        syna04: new Decimal(0),
+        syna05: new Decimal(0),
+        synfcs: 0,
+        synu01: new Decimal(0),
+        synu02: new Decimal(0),
+        synu03: new Decimal(0),
+        synu04: new Decimal(0),
+        synu05: new Decimal(0),
+        synu06: new Decimal(0),
+        synu07: new Decimal(0),
+        synu08: new Decimal(0),
+        synu09: new Decimal(0),
+        synu10: new Decimal(0),
+        synu11: new Decimal(0),
+        synu12: new Decimal(0),
+        hasunlockedanm4: false,
+        incyzb: false,
+        shdwsl: [false,
+            false, false,
+            false, false, false,
+            false, false, false, false,
+            false, false, false,
+            false, false,
+            false,],
+        shdwlv01: new Decimal(0),
+        shdwlv02: new Decimal(0),
+        shdwlv03: new Decimal(0),
+        shdwlv04: new Decimal(0),
+        shdwrc: new Decimal(0),
+        anm4: new Decimal(0),
+        anm4u01: new Decimal(0),
+        anm4u02: new Decimal(0),
+        anm4u03: new Decimal(0),
+        anm4u04: new Decimal(0),
+        ntmv: new Decimal(0),
+        nrev: new Decimal(0),
+        car: new Decimal(0),
+        pro: new Decimal(0),
+        fat: new Decimal(0),
+        fib: new Decimal(0),
+        vit: new Decimal(0),
+        min: new Decimal(0),
 
         autobuywsc: [null,
             false, false, false, false, false, false, false, false,
@@ -498,12 +527,16 @@ function hardReset() {
 
     /*其他数值*/
     v = {
-        glblspd: new Decimal(1),
+        energyps: new Decimal(0),
         baseprd: new Decimal(0.25),
         gamespd1: new Decimal(1),
         gamespd2: new Decimal(1),
-        softcap: new Decimal("e3.470639555327098e17"),
-        softcap2: new Decimal("e5.403e307"),
+        gamespd3: new Decimal(1),
+        gamespd4: new Decimal(1),
+        softcap: new Decimal("ee18"),
+        softcap2: new Decimal("ee75"),
+        softcap3: new Decimal("ee300"),
+        softcap4: new Decimal("ee19727"),
         wscmpb: new Decimal(1.6),
         wscppb: new Decimal(1.001),
 
@@ -880,6 +913,10 @@ function hardReset() {
         chagoa10: new Decimal("e1e10"),
         chagoa11: new Decimal("e1e10"),
         chagoa12: new Decimal("e1e10"),
+        chagoa13: new Decimal("e1e15"),
+        chagoa14: new Decimal("e1e15"),
+        chagoa15: new Decimal("e1e15"),
+        chagoa16: new Decimal("e1e15"),
         chascl01: new Decimal("1e4932"),
         chascl02: new Decimal("1e9864"),
         chascl03: new Decimal("1e19728"),
@@ -892,6 +929,10 @@ function hardReset() {
         chascl10: new Decimal("e1e14"),
         chascl11: new Decimal("e1e12"),
         chascl12: new Decimal("e1e10"),
+        chascl13: new Decimal("e1e10"),
+        chascl14: new Decimal("e2e13"),
+        chascl15: new Decimal("e3e20"),
+        chascl16: new Decimal("e1e22"),
         PL1chacap: new Decimal(4),
         PL2chacap: new Decimal(4),
         PL3chacap: new Decimal(4),
@@ -1046,14 +1087,18 @@ function hardReset() {
         frauc06: new Decimal(1),
         frauc07: new Decimal(1),
         frauc08: new Decimal(1),
-        fraue01: new Decimal(1),
-        fraue02: new Decimal(1),
-        fraue03: new Decimal(1),
-        fraue04: new Decimal(1),
-        fraue05: new Decimal(1),
-        fraue06: new Decimal(1),
-        fraue07: new Decimal(1),
-        fraue08: new Decimal(1),
+        frauc09: new Decimal(1),
+        frauc10: new Decimal(1),
+        fraue01: new Decimal(0),
+        fraue02: new Decimal(0),
+        fraue03: new Decimal(0),
+        fraue04: new Decimal(0),
+        fraue05: new Decimal(0),
+        fraue06: new Decimal(0),
+        fraue07: new Decimal(0),
+        fraue08: new Decimal(0),
+        fraue09: new Decimal(0),
+        fraue10: new Decimal(0),
 
         boxc1: new Decimal(65536),
         boxc2: new Decimal(256),
@@ -1095,16 +1140,39 @@ function hardReset() {
         skef03: new Decimal(0),
         skef04: new Decimal(0),
 
-        coom01: new Decimal(0),
-        coom02: new Decimal(0),
-        coom03: new Decimal(0),
-        coom04: new Decimal(0),
-        coom05: new Decimal(0),
-        coops01: new Decimal(0),
-        coops02: new Decimal(0),
-        coops03: new Decimal(0),
-        coops04: new Decimal(0),
-        coops05: new Decimal(0),
+        synum01: new Decimal(0),
+        synum02: new Decimal(0),
+        synum03: new Decimal(0),
+        synum04: new Decimal(0),
+        synum05: new Decimal(0),
+        synum06: new Decimal(0),
+        synum07: new Decimal(0),
+        synum08: new Decimal(0),
+        synum09: new Decimal(0),
+        synum10: new Decimal(0),
+        synuc01: new Decimal(0),
+        synuc02: new Decimal(0),
+        synuc03: new Decimal(0),
+        synuc04: new Decimal(0),
+        synuc05: new Decimal(0),
+        synuc06: new Decimal(0),
+        synuc07: new Decimal(0),
+        synuc08: new Decimal(0),
+        synuc09: new Decimal(0),
+        synuc10: new Decimal(0),
+        synps01: new Decimal(0),
+        synps02: new Decimal(0),
+        synps03: new Decimal(0),
+        synps04: new Decimal(0),
+        synps05: new Decimal(0),
+
+        shdwvl: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.025, 0.012, 0.006, 0.003, 0.001],
+        shdwpd: new Decimal(1),
+        anm4ps: new Decimal(0),
+        anm4c01: new Decimal(10),
+        anm4c02: new Decimal(100),
+        anm4c03: new Decimal(1000),
+        anm4c04: new Decimal(10000),
     }
 }
 hardReset();
@@ -1124,13 +1192,15 @@ function get_offline_time() {
         if (nt - player.nowtime >= 86400000) {
             nt = player.nowtime + 86400000;
         }
+        document.getElementById("offline").style.display = "block";
         gui_mod = 0;
         mainLoop();
         for (let i = 0; i < (nt - player.nowtime) / 60000; i++) {
             produce(1200);
             mainLoop();
+            document.getElementById("offlt").innerHTML = "离线进度计算中：" + i + "/" + ((nt - player.nowtime) / 60000);
+            console.log(i);
         }
-        document.getElementById("offline").style.display = "block";
         document.getElementById("offlt").innerHTML = "你离线了" + ((nt - player.nowtime) / 1000) + "秒（最大86400秒）<br><br>在此期间，你的能量变成了" + notation(player.energy);
     }
     gui_mod = 1;
@@ -1654,6 +1724,13 @@ function getWscPow() {
             powe17to24 = new Decimal(0.5).pow(player.PL2sec.div(v.gamespd1));
             powe25to32 = new Decimal(0.5).pow(player.PL3sec.div(v.gamespd1));
         }
+        if (player.incha == 14) {
+            powe01to08 = powe01to08.div(4);
+            powe09to16 = powe09to16.div(4);
+            powe17to24 = powe17to24.div(4);
+            powe25to32 = powe25to32.div(4);
+            powe33to40 = powe33to40.div(4);
+        }
 
         for (let tier = 1; tier <= 8; tier++) {
             let name = tiername[tier];
@@ -1767,6 +1844,8 @@ function getWscBaseValue() {
     if (player.std[1] == true) v.wscbaseValueExp = v.wscbaseValueExp.add(0.05);
     v.wscbaseValueExp = v.wscbaseValueExp.add(player.alcu06.mul(0.005));
     if (player.resa15.gte(1)) v.wscbaseValueExp = v.wscbaseValueExp.add(0.1);
+    v.wscbaseValueExp = v.wscbaseValueExp.add(v.fraue10);
+    if (player.incha == 14) v.wscbaseValueExp = v.wscbaseValueExp.div(2);
     v.wscbaseValue = v.wscbaseValue1.add(v.wscbaseValue2.mul(4)).add(v.wscbaseValue3.mul(16)).add(v.wscbaseValue4.mul(64)).add(v.wscbaseValue5.mul(256)).mul(v.fraue06).pow(v.wscbaseValueExp);
     if (player.innormcha == 6 & v.wscbaseValue1.gt(60)) quitCha();
 }
@@ -2232,6 +2311,7 @@ function getPL1engPow() {
     if (player.anm2sc.gte("1e1233")) v.PL1engpow = v.PL1engpow.add(1);
     v.PL1engpow = v.PL1engpow.add(player.ptnu04.div(4));
     if (player.PL4goal[8] == true) v.PL1engpow = v.PL1engpow.add(1);
+    v.PL1engpow = v.PL1engpow.add(v.fraue09);
 }
 
 function buyPL1upg(tier) {
@@ -2388,6 +2468,14 @@ function entCha(tier) {
         player.enengy = new Decimal(2);
         player.incha = tier;
     }
+    else if (tier <= 16) {
+        PL4reset();
+        PL3reset();
+        PL2reset();
+        PL1reset();
+        player.enengy = new Decimal(2);
+        player.incha = tier;
+    }
     else return
 }
 
@@ -2404,12 +2492,20 @@ function getChaGoal() {
     v.chagoa10 = new Decimal("e1e14").mul(v.chascl10.pow(player.chacom10.pow(2)));
     v.chagoa11 = new Decimal("e1e12").mul(v.chascl11.pow(player.chacom11.pow(2).mul(2)));
     v.chagoa12 = new Decimal("e1e10").mul(v.chascl12.pow(player.chacom12.pow(2).mul(3)));
+    v.chagoa13 = new Decimal("e1e10").mul(v.chascl13.pow(player.chacom13.pow(2)));
+    v.chagoa14 = new Decimal("e2e13").mul(v.chascl14.pow(player.chacom14.pow(2).mul(2)));
+    v.chagoa15 = new Decimal("e3e20").mul(v.chascl15.pow(player.chacom15.pow(2).mul(3)));
+    v.chagoa16 = new Decimal("e1e22").mul(v.chascl16.pow(player.chacom16.pow(2).mul(4)));
 
     v.PL1chacap = new Decimal(4);
     if (player.tier04.gte(1)) v.PL1chacap = v.PL1chacap.add(player.tier04.min(12))
     v.PL1chacap = v.PL1chacap.add(player.ptnu03.mul(5));
+    if (player.synu12.gte(1)) v.PL1chacap = v.PL1chacap.add(28);
     v.PL2chacap = new Decimal(4).add(player.ptnu03.mul(3));
+    if (player.synu12.gte(1)) v.PL2chacap = v.PL2chacap.add(20);
     v.PL3chacap = new Decimal(4);
+    if (player.synu12.gte(1)) v.PL3chacap = v.PL3chacap.add(12);
+    v.PL4chacap = new Decimal(4);
 
     v.baseprd = new Decimal(0.25);
     for (let i = 0; i < 12; i++) {
@@ -2429,6 +2525,10 @@ function comCha() {
     else if (player.incha > 8 & player.incha <= 12) {
         let name = tiername[player.incha];
         if (player.energy.gte(v["chagoa" + name]) & player["chacom" + name].lt(v.PL3chacap)) player["chacom" + name] = player["chacom" + name].add(1);
+    }
+    else if (player.incha > 12 & player.incha <= 16) {
+        let name = tiername[player.incha];
+        if (player.energy.gte(v["chagoa" + name]) & player["chacom" + name].lt(v.PL4chacap)) player["chacom" + name] = player["chacom" + name].add(1);
     }
 }
 
@@ -2526,10 +2626,10 @@ async function PL2reset() {
             player.PL1bab10 = new Decimal(0);
             player.PL1bab11 = new Decimal(0);
             player.PL1bab12 = new Decimal(0);
-            alef = new Decimal(0);
-            beth = new Decimal(0);
-            giml = new Decimal(0);
         }
+        alef = new Decimal(0);
+        beth = new Decimal(0);
+        giml = new Decimal(0);
         if (player.PL2tms.lte(4)) player.hasunlockedanmorb = false;
         if (player.PL2tms.lte(5)) player.orbupg = [false, false, false, false, false, false, false, false,];
         player.anmpar= new Decimal(0);
@@ -2577,6 +2677,7 @@ function getPL2engPow() {
     v.PL2engpow = v.PL2engpow.add(player.ptnu04.div(6));
     if (player.xyzbo.gte(1)) v.PL2engpow = v.PL2engpow.add(1);
     if (player.PL4goal[8] == true) v.PL2engpow = v.PL2engpow.add(1);
+    v.PL2engpow = v.PL2engpow.add(v.fraue09);
 }
 
 function getPL2upgCost() {
@@ -3021,10 +3122,10 @@ async function PL3reset() {
             player.PL1bab10 = new Decimal(0);
             player.PL1bab11 = new Decimal(0);
             player.PL1bab12 = new Decimal(0);
-            alef = new Decimal(0);
-            beth = new Decimal(0);
-            giml = new Decimal(0);
         }
+        alef = new Decimal(0);
+        beth = new Decimal(0);
+        giml = new Decimal(0);
         if (player.PL2tms.lte(5)) {
             player.hasunlockedanmorb = false;
             player.orbupg = [false, false, false, false, false, false, false, false,];
@@ -3155,6 +3256,7 @@ function getPL3engPow() {
     v.PL3engpow = v.PL3engpow.add(player.chacom09.min(player.chacom09.pow(0.5).mul(2)).mul(0.25));
     v.PL3engpow = v.PL3engpow.add(player.ptnu04.div(12));
     if (player.PL4goal[8] == true) v.PL3engpow = v.PL3engpow.add(1);
+    v.PL3engpow = v.PL3engpow.add(v.fraue09);
 }
 
 function research(tier) {
@@ -3253,7 +3355,8 @@ function rptn() {
 function gettth() {
     let speed = new Decimal(1).mul(v.gamespd1).div(20);
     v.tthgspd = new Decimal(2).pow(player.tthu01).mul(player.PL3energy.max(1).log(2).div(1e8).max(1)).mul(player.tthprem.max(1)).mul(player.PL4tms.mul(5).max(1));
-    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(30).sub(v.fraue08).max(0).pow(1.5).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize)));
+    if (player.incha == 15) v.tthgspd = new Decimal(1);
+    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(32).sub(v.fraue08).max(0).pow(1.5).div(6)).add(player.tthsize.sub(160).max(0).pow(2).div(3))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize)));
     v.tthimpc = player.tthimpr.add(4);
     v.tthseedpd = new Decimal(2).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04.mul(player.tthsize))).max(1);
     v.tthgenepd = new Decimal(5).pow(player.tthsize);
@@ -3281,7 +3384,7 @@ function gettth() {
         player.tthgrow = new Decimal(0);
         player.tthamnt = player.tthamnt.add(1);
     }
-    if (player.tthatact[2] == true & player.PL4goal[2] == true) {
+    if (player.tthatact[2] == true & player.PL4goal[2] == true & player.incha != 15) {
         player.tthu01 = player.tthgene.max(1).log(3).floor().max(0);
         player.tthu02 = player.tthgene.max(1).log(3).floor().max(0);
         player.tthu03 = player.tthsucr.max(1).log(4).floor().max(0);
@@ -3305,7 +3408,8 @@ function gettth() {
     v.tthpuc2 = new Decimal(4).pow(player.tthpu2.add(2));
     v.tthpuc3 = new Decimal(8).pow(player.tthpu3.add(3));
     v.tthpuc4 = new Decimal(16).pow(player.tthpu4.add(4));
-    v.cpper = player.tthpu4.mul(0.1);
+    if (player.incha != 15) v.cpper = player.tthpu4.mul(0.1);
+    else v.cpper = new Decimal(0);
 }
 
 function ulatplt() {
@@ -3384,6 +3488,7 @@ function imp() {
 }
 
 function buytthupg(tier) {
+    if (player.incha == 15) return;
     let name = tiername[tier];
     if (tier == 1 | tier == 2) {
         if (player.tthgene.gte(v["tthuc" + name])) {
@@ -3798,10 +3903,10 @@ async function PL4reset() {
             player.PL1bab10 = new Decimal(0);
             player.PL1bab11 = new Decimal(0);
             player.PL1bab12 = new Decimal(0);
-            alef = new Decimal(0);
-            beth = new Decimal(0);
-            giml = new Decimal(0);
         }
+        alef = new Decimal(0);
+        beth = new Decimal(0);
+        giml = new Decimal(0);
         if (player.PL2tms.lte(5)) {
             player.hasunlockedanmorb = false;
             player.orbupg = [false, false, false, false, false, false, false, false,];
@@ -4051,6 +4156,8 @@ function getPL4engMul() {
 
 function getPL4engPow() {
     v.PL4engpow = new Decimal(1);
+    v.PL4engpow = v.PL4engpow.add(v.fraue09);
+    v.PL4engpow = v.PL4engpow.add(player.chacom13.min(player.chacom13.pow(0.5).mul(2)).mul(0.25));
 }
 
 function getPL4goal() {
@@ -4090,7 +4197,7 @@ function getfrau() {
     v.fraft1 = player.energy.max(1).log(2).root(2).div(536870912).max(2);
     v.fraft2 = player.PL4energy.max(1).log(2).root(2).div(128).max(2);
     v.fraft3 = player.PL4tms.div(4).add(1).pow(1.25).max(1);
-    v.fraft4 = player.frau01.mul(0.25).pwb(2).mul(v.ltwum2).max(1);
+    v.fraft4 = player.frau01.mul(0.25).pwb(2).mul(v.ltwum2.max(1)).mul(player.chacom14.pwb(4).max(1));
     if (player.tier05.gte(1)) v.fraft4 = v.fraft4.mul(player.tier05.add(1));
     v.frauc01 = player.frau01.add(1).pwb(2);
     v.frauc02 = player.frau02.add(1).pwb(2);
@@ -4098,6 +4205,8 @@ function getfrau() {
         let name = tiername[i];
         v["frauc" + name] = new Decimal(2).pow(player["frau" + name].add(1).pow(2));
     }
+    v.frauc09 = player.frau09.add(544).pwb(1.044273782427413);
+    v.frauc10 = player.frau10.add(544).pwb(1.044273782427413);
     v.fraue01 = new Decimal(2).pow(player.frau01.mul(0.25)).max(1);
     v.fraue02 = player.frau02.mul(0.02);
     v.fraue03 = new Decimal(2).pow(player.frau03).max(1);
@@ -4106,11 +4215,13 @@ function getfrau() {
     v.fraue06 = new Decimal(2).pow(player.frau06.mul(0.5)).max(1);
     v.fraue07 = new Decimal(2).pow(player.frau07.mul(0.25)).max(1);
     v.fraue08 = player.frau08.mul(2);
+    v.fraue09 = player.frau09.min(player.frau09.mul(0.002).add(0.04)).max(0);
+    v.fraue10 = player.frau10.div(2400).max(0);
 }
 
 function buyfrau(tier) {
     let name = tiername[tier];
-    let cap = [20, 20, 4, 4, 4, 4, 4, 4];
+    let cap = [20, 20, 4, 4, 4, 4, 4, 4, 480, 480, ];
     if (player.PL4fra.gte(v["frauc" + name]) & player["frau" + name].lt(new Decimal(cap[tier-1]))) {
         player["frau" + name] = player["frau" + name].add(1);
         player.PL4fra = player.PL4fra.sub(v["frauc" + name]);
@@ -4121,11 +4232,20 @@ function getboggle() {
     v.boxc1 = scale(player.boxa1.add(4).pow(2.5)).root(2.5).pwb(4);
     v.boxc2 = scale(player.boxa2.add(4).pow(2.5)).root(2.5).pow(4);
     player.bogglettl = player.boxa1.add(player.boxa2);
-    v.hdrn4wps = player.hdrn4.pwb(2).mul(player.hdrn4).mul(v.coom01);
-    v.hdrn6wps = player.hdrn6.pwb(2).mul(player.hdrn6).mul(v.coom02);
-    v.hdrn8wps = player.hdrn8.pwb(2).mul(player.hdrn8).mul(v.coom03);
-    v.hdrn12wps = player.hdrn12.pwb(2).mul(player.hdrn12).mul(v.coom04);
-    v.hdrn20wps = player.hdrn20.pwb(2).mul(player.hdrn20).mul(v.coom05);
+    if (player.synu11.gte(1)) {
+        v.hdrn4wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm01);
+        v.hdrn6wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm02);
+        v.hdrn8wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm03);
+        v.hdrn12wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm04);
+        v.hdrn20wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm05);
+    }
+    else {
+        v.hdrn4wps = player.hdrn4.min(player.hdrn4.mul(1e6).root(4)).pwb(2).mul(player.hdrn4).mul(v.synm01);
+        v.hdrn6wps = player.hdrn6.min(player.hdrn6.mul(1e6).root(4)).pwb(2).mul(player.hdrn6).mul(v.synm02);
+        v.hdrn8wps = player.hdrn8.min(player.hdrn8.mul(1e6).root(4)).pwb(2).mul(player.hdrn8).mul(v.synm03);
+        v.hdrn12wps = player.hdrn12.min(player.hdrn12.mul(1e6).root(4)).pwb(2).mul(player.hdrn12).mul(v.synm04);
+        v.hdrn20wps = player.hdrn20.min(player.hdrn20.mul(1e6).root(4)).pwb(2).mul(player.hdrn20).mul(v.synm05);
+    }
     v.hdrn4e = player.hdrn4w.div(1024).add(1).log(2).pow(0.25).div(1024).min(0.05);
     v.hdrn6e = player.hdrn6w.div(256).add(1).log(2).pow(0.25).div(1024).min(0.05);
     v.hdrn8e = player.hdrn8w.div(64).add(1).log(2).pow(0.25).div(1024).min(0.05);
@@ -4271,7 +4391,7 @@ function getbatow() {
     v.mhp = hpstg.div(16).pwb(2);
     v.pcps = player.stgcl.add(1).add(df.add(1).mul(24)).div(16).pwb(2).div(16);
     v.bpmpb = player.coin.add(1).log(2).div(16777216).min(0.000244140625);
-    v.atke = player.atk.add(1).mul(v.btke).div(16).mul(v.skef01).mul(v.skef03);
+    v.atke = player.atk.add(1).mul(v.btke).div(16).mul(v.skef01).mul(v.skef03).mul(player.chacom15.pwb(4));
     v.btke = player.btk.add(2).pow(v.ctke);
     v.ctke = player.ctk.div(4).add(2).hyp(v.dtke);
     v.dtke = player.dtk.div(16).add(1)
@@ -4285,9 +4405,8 @@ function getbatow() {
     v.skef02 = player.PL4energy.max(2).log(2).pow(player.sklv02.mul(0.2));
     v.skef03 = player.hdrn4w.max(2).log(2).pow(player.sklv03);
     v.skef04 = player.hdrn4w.max(2).log(2).pow(player.sklv04);
-    if (player.tier05.gte(5)) v.atke = v.atke.mul(player.tier05.pwb(1.189));
     if (player.zzltu[4] == true) {
-        player.coin = player.coin.add(v.cps.mul(v.skef02).mul(v.skef04).div(20));
+        player.coin = player.coin.add(v.cps.mul(v.skef02).mul(v.skef04).mul(player.chacom15.pwb(4)).div(20));
         if (player.rhp.lte(v.atke.div(20))) stageclear();
         else player.rhp = player.rhp.sub(v.atke.div(20));
     }
@@ -4441,27 +4560,77 @@ function reskl() {
     player.skpthv = player.skptcp;
 }
 
-function getcoo(){
-    v.coops01 = new Decimal(1);
-    v.coops02 = new Decimal(1);
-    v.coops03 = new Decimal(1);
-    v.coops04 = new Decimal(1);
-    v.coops05 = new Decimal(1);
+function getsyn() {
+    v.synps01 = new Decimal(1);
+    v.synps02 = new Decimal(1);
+    v.synps03 = new Decimal(1);
+    v.synps04 = new Decimal(1);
+    v.synps05 = new Decimal(1);
+    v.synum01 = player.syna01.pow(player.synu01.div(16)).max(1);
+    v.synum02 = player.syna02.pow(player.synu02.div(16)).max(1);
+    v.synum03 = player.syna03.pow(player.synu03.div(16)).max(1);
+    v.synum04 = player.syna04.pow(player.synu04.div(16)).max(1);
+    v.synum05 = player.syna05.pow(player.synu05.div(16)).max(1);
+    v.synum06 = player.syna02.mul(player.syna03).mul(player.syna04).mul(player.syna05).pow(player.synu06.div(16)).max(1);
+    v.synum07 = player.syna01.mul(player.syna03).mul(player.syna04).mul(player.syna05).pow(player.synu07.div(16)).max(1);
+    v.synum08 = player.syna01.mul(player.syna02).mul(player.syna04).mul(player.syna05).pow(player.synu08.div(16)).max(1);
+    v.synum09 = player.syna01.mul(player.syna02).mul(player.syna03).mul(player.syna05).pow(player.synu09.div(16)).max(1);
+    v.synum10 = player.syna01.mul(player.syna02).mul(player.syna03).mul(player.syna04).pow(player.synu10.div(16)).max(1);
+    v.synps01 = v.synps01.mul(v.synum06).mul(v.synum02).mul(v.synum03).mul(v.synum04).mul(v.synum05);
+    v.synps02 = v.synps02.mul(v.synum07).mul(v.synum01).mul(v.synum03).mul(v.synum04).mul(v.synum05);
+    v.synps03 = v.synps03.mul(v.synum08).mul(v.synum01).mul(v.synum02).mul(v.synum04).mul(v.synum05);
+    v.synps04 = v.synps04.mul(v.synum09).mul(v.synum01).mul(v.synum02).mul(v.synum03).mul(v.synum05);
+    v.synps05 = v.synps05.mul(v.synum10).mul(v.synum01).mul(v.synum02).mul(v.synum03).mul(v.synum04);
     for (i = 1; i <= 5; i++) {
-        if (player.coofcs == 0) break;
+        if (player.synfcs == 0) break;
         let name = tiername[i];
-        if (player.coofcs == i) v["coops" + name] = v["coops" + name].mul(4);
-        else v["coops" + name] = v["coops" + name].div(4);
+        if (player.synfcs == i) v["synps" + name] = v["synps" + name].pow(1.05).mul(4);
+        else v["synps" + name] = v["synps" + name].root(1.05).div(4);
     }
-    v.coom01 = player.cooa01.max(1).root(2);
-    v.coom02 = player.cooa02.max(1).root(2);
-    v.coom03 = player.cooa03.max(1).root(2);
-    v.coom04 = player.cooa04.max(1).root(2);
-    v.coom05 = player.cooa05.max(1).root(2);
+    for (i = 1; i <= 10; i++) {
+        let name = tiername[i];
+        v["synuc" + name] = player["synu" + name].add(1).pow(10).pwb(100);
+    }
+    v.synm01 = player.syna01.max(1).root(4);
+    v.synm02 = player.syna02.max(1).root(4);
+    v.synm03 = player.syna03.max(1).root(4);
+    v.synm04 = player.syna04.max(1).root(4);
+    v.synm05 = player.syna05.max(1).root(4);
 }
 
-function fcsc(tier) {
-    player.coofcs = tier;
+function fcssyn(tier) {
+    player.synfcs = tier;
+}
+
+function buysynu(tier) {
+    let name = tiername[tier];
+    if (tier >= 1 & tier <= 5) {
+        if (player["syna" + name].gte(v["synuc" + name])) {
+            player["synu" + name] = player["synu" + name].add(1);
+            player["syna" + name] = player["syna" + name].sub(v["synuc" + name]);
+        }
+    }
+    else if (tier >= 6 & tier <= 10) {
+        let name2 = tiername[tier - 5]
+        if (player["syna" + name2].gte(v["synuc" + name])) {
+            player["synu" + name] = player["synu" + name].add(1);
+            player["syna" + name2] = player["syna" + name2].sub(v["synuc" + name]);
+        }
+    }
+    else if (tier == 11) {
+        if (player.syna01.gte(1e3)) player.synu11 = new Decimal(1);
+    }
+    else if (tier == 12) {
+        if (player.syna01.gte(1e6)) player.synu12 = new Decimal(1);
+    }
+}
+
+function ulAnm4() {
+    if (player.PL4pts.gte("6e666666") & player.hasunlockedanm4 == false) player.hasunlockedanm4 = true;
+}
+
+function encyzb() {
+    alert("请等待游戏更新");
 }
 
 function getspd() {
@@ -4469,15 +4638,17 @@ function getspd() {
     if (player.tier04.gte(30)) v.gamespd1 = v.gamespd1.mul(player.tier04.sub(24).mul(0.25));
     if (player.PL4goal[0] == true) v.gamespd1 = v.gamespd1.mul(4);
     if (player.incha == 10) v.gamespd1 = new Decimal(1e-308);
+    v.gamespd2 = new Decimal(1);
 }
 
 function getsoftcap() {
+    if (player.incha == 13) return new Decimal(2);
     return new Decimal("e3.470639555327098e17").pow(v.fraue03);
 }
 
 function produce(spd = 1) {
     let speed = new Decimal(spd).mul(v.gamespd1).div(20);
-    let speed2 = new Decimal(spd).div(20);
+    let speed2 = new Decimal(spd).mul(v.gamespd2).div(20);
 
     player.gameseconds = player.gameseconds.plus(speed);
     player.PL1sec = player.PL1sec.plus(speed);
@@ -4485,8 +4656,14 @@ function produce(spd = 1) {
     player.PL3sec = player.PL3sec.plus(speed);
     player.PL4sec = player.PL4sec.plus(speed2);
 
-    player.energy = player.energy.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(player.energy.max(2).log(2).div(getsoftcap().log(2)).max(1)).mul(speed).mul(v.baseprd));
-    player.energyttl = player.energyttl.add(player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(player.energy.max(2).log(2).div(getsoftcap().log(2)).max(1)).mul(speed).mul(v.baseprd));
+    if (player.energy.log(2).lte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).mul(speed).mul(v.baseprd);
+    else v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).mul(speed).mul(v.baseprd);
+    if (v.energyps.log(2).gte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).mul(speed).mul(v.baseprd);
+    if (player.energy.add(v.energyps.div(20)).lte(player.energy.mul(1.05)) | player.energy.lt(16)) document.getElementById("energyPs").innerHTML = notation(v.energyps);
+    else if (player.energy.add(v.energyps.div(20)).lte(player.energy.pow(1.05)) | player.energy.lt(65536)) document.getElementById("energyPs").innerHTML = notation(player.energy.add(v.energyps.div(20)).log(2).sub(player.energy.log(2)).mul(20)) + " BDs";
+    else document.getElementById("energyPs").innerHTML = notation(player.energy.add(v.energyps.div(20)).log(2).log(2).sub(player.energy.log(2).log(2)).mul(20)) + " BDs²";
+    player.energy = player.energy.add(v.energyps);
+    player.energyttl = player.energyttl.add(v.energyps);
 
     if(player.incha != 12) for (let tier = 2; tier <= 8; tier++) {
         let name = tiername[tier];
@@ -4506,7 +4683,7 @@ function produce(spd = 1) {
         let prev = tiername[tier - 1];
         player["wsca" + prev] = player["wsca" + prev].add(hyp(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]), v["wsch" + name]).mul(speed).mul(v.baseprd));
     }
-    if (player.std[7] == true & player.sta8n1 == true & player.incha != 8 & player.incha != 9) player.wsca16 = player.wsca16.add(hyp(player.wsca17.mul(v.wscm17).pow(v.wscp17), v.wsch17).pow(v.PL2engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
+    if (player.std[7] == true & player.sta8n1 == true) player.wsca16 = player.wsca16.add(hyp(player.wsca17.mul(v.wscm17).pow(v.wscp17), v.wsch17).pow(v.PL2engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.tthpu[1] == true & player.PL2pts.lte(player.PL1pts.root(1024).floor())) {
         player.PL2pts = player.PL2pts.add(player.PL1pts.root(1024).floor().mul(speed));
         player.PL2ptsttl = player.PL2ptsttl.add(player.PL1pts.root(1024).floor().mul(speed));
@@ -4609,16 +4786,23 @@ function produce(spd = 1) {
     else player.zzltw = player.zzltw.div(1.035265);
 
     if (player.stgmx.gte(2000)) {
-        player.cooa01 = player.cooa01.add(v.coops01.mul(speed2));
-        player.cooa02 = player.cooa02.add(v.coops02.mul(speed2));
-        player.cooa03 = player.cooa03.add(v.coops03.mul(speed2));
-        player.cooa04 = player.cooa04.add(v.coops04.mul(speed2));
-        player.cooa05 = player.cooa05.add(v.coops05.mul(speed2));
+        player.syna01 = player.syna01.add(v.synps01.mul(speed2));
+        player.syna02 = player.syna02.add(v.synps02.mul(speed2));
+        player.syna03 = player.syna03.add(v.synps03.mul(speed2));
+        player.syna04 = player.syna04.add(v.synps04.mul(speed2));
+        player.syna05 = player.syna05.add(v.synps05.mul(speed2));
     }
 
     if (player.incha == 5 | player.incha == 9) {
         player.PL1energy = new Decimal(1);
         player.PL2energy = new Decimal(1);
+    }
+    if (player.incha == 8 | player.incha == 9) {
+        player.wsca16 = new Decimal(0);
+    }
+    if (player.incha == 16) {
+        player.PL3pts = new Decimal(0);
+        player.PL3tms = new Decimal(0);
     }
 }
 
@@ -4859,11 +5043,7 @@ function energyshow() {
 
 var gui_mod = 1;
 function updateGUI() {
-    let eps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(player.energy.max(2).log(2).div(getsoftcap().log(2)).max(1)).mul(v.gamespd1).mul(v.baseprd);
     document.getElementById("energy").innerHTML = notation(player.energy);
-    if (player.energy.add(eps.div(20)).lte(player.energy.mul(1.05)) | player.energy.lt(16)) document.getElementById("energyPs").innerHTML = notation(eps);
-    else if (player.energy.add(eps.div(20)).lte(player.energy.pow(1.05)) | player.energy.lt(65536)) document.getElementById("energyPs").innerHTML = notation(player.energy.add(eps.div(20)).log(2).sub(player.energy.log(2)).mul(20)) + " BDs";
-    else document.getElementById("energyPs").innerHTML = notation(player.energy.add(eps.div(20)).log(2).log(2).sub(player.energy.log(2).log(2)).mul(20)) + " BDs²";
     document.getElementById("softcapt").innerHTML = notation(getsoftcap());
     document.getElementById("softcapx").innerHTML = notation(player.energy.max(2).log(2).div(getsoftcap().log(2)));
     document.getElementById("speed1").innerHTML = notation(v.gamespd1);
@@ -4887,11 +5067,11 @@ function updateGUI() {
         if (player.autobuywsc[tier] == true) document.getElementById("byat" + name).innerHTML = "自动：开";
         else document.getElementById("byat" + name).innerHTML = "自动：关";
     }
-    document.getElementById("wscbv1").innerHTML = notatint(v.wscbaseValue1) + "×" + notation(v.fraue06) + "+";
-    document.getElementById("wscbv2").innerHTML = notatint(v.wscbaseValue2) + "×" + notation(v.fraue06.mul(4)) + "+";
-    document.getElementById("wscbv3").innerHTML = notatint(v.wscbaseValue3) + "×" + notation(v.fraue06.mul(16)) + "+";
-    document.getElementById("wscbv4").innerHTML = notatint(v.wscbaseValue4) + "×" + notation(v.fraue06.mul(64)) + "+";
-    document.getElementById("wscbv5").innerHTML = notatint(v.wscbaseValue5) + "×" + notation(v.fraue06.mul(256));
+    document.getElementById("wscbv1").innerHTML = notatint(v.wscbaseValue1) + "×" + notation(v.fraue06);
+    document.getElementById("wscbv2").innerHTML = "+" + notatint(v.wscbaseValue2) + "×" + notation(v.fraue06.mul(4));
+    document.getElementById("wscbv3").innerHTML = "+" + notatint(v.wscbaseValue3) + "×" + notation(v.fraue06.mul(16));
+    document.getElementById("wscbv4").innerHTML = "+" + notatint(v.wscbaseValue4) + "×" + notation(v.fraue06.mul(64));
+    document.getElementById("wscbv5").innerHTML = "+" + notatint(v.wscbaseValue5) + "×" + notation(v.fraue06.mul(256));
     document.getElementById("wscbvp").innerHTML = notation(v.wscbaseValueExp);
     document.getElementById("wscbvr").innerHTML = notatint(v.wscbaseValue);
     document.getElementById("tier01").innerHTML = notatint(player.tier01) + "式风单元";
@@ -5019,14 +5199,24 @@ function updateGUI() {
     if (player.upgd04.add(v.upgf04).gte(16)) document.getElementById("upgd04sc").innerHTML = "(受软上限限制)";
     else document.getElementById("upgd04sc").innerHTML = "";
 
-    document.getElementById("PL1ptspd").innerHTML = notation(player.energy.root(1024).floor()) + "扩散点";
-    document.getElementById("PL1ptsnx").innerHTML = "，下一扩散点在" + notation(player.energy.root(1024).floor().add(1).pow(1024)) + "能量";
-    document.getElementById("PL2ptspd").innerHTML = notation(player.PL1pts.root(1024).floor()) + "扪敤点";
-    document.getElementById("PL2ptsnx").innerHTML = "，下一扪敤点在" + notation(player.PL1pts.root(1024).floor().add(1).pow(1024)) + "扩散点";
-    document.getElementById("PL3ptspd").innerHTML = notation(player.PL2pts.root(1048576).floor()) + "扫敥点";
-    document.getElementById("PL3ptsnx").innerHTML = "，下一扫敥点在" + notation(player.PL2pts.root(1048576).floor().add(1).pow(1048576)) + "扪敤点";
-    document.getElementById("PL4ptspd").innerHTML = notation(player.PL3pts.root(1048576).floor()) + "扬敦点";
-    document.getElementById("PL4ptsnx").innerHTML = "，下一扬敦点在" + notation(player.PL3pts.root(1048576).floor().add(1).pow(1048576)) + "扫敥点";
+    if (player.energy.gte(1.797e308)) document.getElementById("PL1ptspd").innerHTML = "扩散重置：获得" + notation(player.energy.root(1024).floor()) + "扩散点";
+    else document.getElementById("PL1ptspd").innerHTML = "需要1.797e308能量"
+    if (player.energy.gte(1.797e308) & player.energy.lte("1e6144")) document.getElementById("PL1ptsnx").innerHTML = "，下一扩散点在" + notation(player.energy.root(1024).floor().add(1).pow(1024)) + "能量";
+    else document.getElementById("PL1ptsnx").innerHTML = "";
+    if (player.PL1pts.gte(1.797e308)) document.getElementById("PL2ptspd").innerHTML = "扪敤重置：获得" + notation(player.PL1pts.root(1024).floor()) + "扪敤点";
+    else document.getElementById("PL2ptspd").innerHTML = "需要1.797e308扩散点(~6.741e315652能量)"
+    if (player.PL1pts.gte(1.797e308) & player.PL1pts.lte("1e6144")) document.getElementById("PL2ptsnx").innerHTML = "，下一扪敤点在" + notation(player.PL1pts.root(1024).floor().add(1).pow(1024)) + "扩散点";
+    else document.getElementById("PL2ptsnx").innerHTML = "";
+    if (player.PL2pts.gte("6.741e315652")) document.getElementById("PL3ptspd").innerHTML = "扫敥重置：获得" + notation(player.PL2pts.root(1048576).floor()) + "扫敥点";
+    else document.getElementById("PL3ptspd").innerHTML = "需要6.741e315652扪敤点(~e3.309e11能量)"
+    if (player.PL2pts.gte("6.741e315652") & player.energy.lte("e6.291e6")) document.getElementById("PL3ptsnx").innerHTML = "，下一扫敥点在" + notation(player.PL2pts.root(1048576).floor().add(1).pow(1048576)) + "扪敤点";
+    else document.getElementById("PL3ptsnx").innerHTML = "";
+    if (player.PL3pts.gte("6.741e315652")) document.getElementById("PL4ptspd").innerHTML = "扬敦重置：获得" + notation(player.PL3pts.root(1048576).floor()) + "扬敦点";
+    else document.getElementById("PL4ptspd").innerHTML = "需要6.741e315652扫敥点(~e3.470e17能量)"
+    if (player.PL3pts.gte("6.741e315652") & player.energy.lte("e6.291e6")) document.getElementById("PL4ptsnx").innerHTML = "，下一扬敦点在" + notation(player.PL3pts.root(1048576).floor().add(1).pow(1048576)) + "扫敥点";
+    else document.getElementById("PL4ptsnx").innerHTML = "";
+    if (player.PL4pts.gte("e3.232e8")) document.getElementById("PL5ptspd").innerHTML = "扭敧重置：获得" + notation(player.PL4pts.root(1073741824).floor()) + "扭敧点";
+    else document.getElementById("PL5ptspd").innerHTML = "需要e3.232e8扬敦点(~e3.726e26能量)"
 
     document.getElementById("PL1Pts").innerHTML = notatint(player.PL1pts);
     document.getElementById("PL1Eng").innerHTML = notation(player.PL1energy);
@@ -5110,13 +5300,14 @@ function updateGUI() {
 
     document.getElementById("ncc").innerHTML = notatint(v.baseprd.sub(0.25).div(0.0625));
     document.getElementById("bpa").innerHTML = notation(v.baseprd.sub(0.25));
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 16; i++) {
         let name = tiername[i];
         document.getElementById("chal" + name + "goal").innerHTML = notation(v["chagoa" + name]);
         document.getElementById("chal" + name + "comp").innerHTML = notatint(player["chacom" + name]);
         if (i <= 4) document.getElementById("chal" + name + "cap").innerHTML = notatint(v.PL1chacap);
         else if (i <= 8) document.getElementById("chal" + name + "cap").innerHTML = notatint(v.PL2chacap);
         else if (i <= 12) document.getElementById("chal" + name + "cap").innerHTML = notatint(v.PL3chacap);
+        else if (i <= 16) document.getElementById("chal" + name + "cap").innerHTML = notatint(v.PL4chacap);
     }
     document.getElementById("chal01effe").innerHTML = notation(player.chacom01.min(player.chacom01.pow(0.5).mul(2)).mul(0.25));
     document.getElementById("chal02effe").innerHTML = notation(player.chacom02.pwb(2));
@@ -5130,6 +5321,10 @@ function updateGUI() {
     document.getElementById("chal10effe").innerHTML = notation(player.chacom10.pwb(2));
     document.getElementById("chal11effe").innerHTML = notation(player.chacom11.pwb(4));
     document.getElementById("chal12effe").innerHTML = notation(player.chacom12.pwb(8));
+    document.getElementById("chal13effe").innerHTML = notation(player.chacom13.min(player.chacom13.pow(0.5).mul(2)).mul(0.25));
+    document.getElementById("chal14effe").innerHTML = notation(player.chacom14.pwb(4));
+    document.getElementById("chal15effe").innerHTML = notation(player.chacom15.pwb(4));
+    document.getElementById("chal16effe").innerHTML = notation(player.chacom16.pwb(16));
 
     document.getElementById("PL2Pts").innerHTML = notatint(player.PL2pts);
     document.getElementById("PL2Eng").innerHTML = notation(player.PL2energy);
@@ -5394,7 +5589,7 @@ function updateGUI() {
     document.getElementById("fraft3").innerHTML = notation(v.fraft3);
     document.getElementById("fraft4").innerHTML = notation(v.fraft4);
     document.getElementById("fragain").innerHTML = notation(v.fraft1.mul(v.fraft2).mul(v.fraft3).mul(v.fraft4));
-    for (i = 1; i <= 8; i++) {
+    for (i = 1; i <= 10; i++) {
         let name = tiername[i];
         document.getElementById("frau" + name).innerHTML = notation(player["frau" + name]);
         document.getElementById("frauc" + name).innerHTML = notation(v["frauc" + name]);
@@ -5408,6 +5603,8 @@ function updateGUI() {
     document.getElementById("fraue66").innerHTML = notation(v.fraue06.mul(1.414));
     document.getElementById("fraue67").innerHTML = notation(v.fraue07.mul(1.189));
     document.getElementById("fraue68").innerHTML = notation(v.fraue08.add(2));
+    document.getElementById("fraue69").innerHTML = notation(v.fraue09.add(0.002));
+    document.getElementById("fraue70").innerHTML = notation(v.fraue10.add(4.166667e-4));
 
     document.getElementById("bglboxa").innerHTML = notatint(player.bogglebox);
     document.getElementById("boxc1").innerHTML = notation(v.boxc1);
@@ -5451,7 +5648,7 @@ function updateGUI() {
     document.getElementById("stage").innerHTML = notatint(player.stage.sub(player.stage.sub(1).div(1000).min(10).floor().mul(1000)));
     document.getElementById("stgcl").innerHTML = notatint(player.stgcl);
     document.getElementById("coin").innerHTML = notation(player.coin);
-    document.getElementById("cps").innerHTML = notation(v.cps.mul(v.skef02).mul(v.skef04).mul(player.tier05.pwb(1.189)));
+    document.getElementById("cps").innerHTML = notation(v.cps.mul(v.skef02).mul(v.skef04).mul(player.chacom15.pwb(4)));
     document.getElementById("bpmpb").innerHTML = notation(v.bpmpb);
     document.getElementById("atk").innerHTML = notatint(player.atk);
     document.getElementById("btk").innerHTML = notatint(player.btk);
@@ -5481,21 +5678,28 @@ function updateGUI() {
     document.getElementById("skef03").innerHTML = notation(v.skef03);
     document.getElementById("skef04").innerHTML = notation(v.skef04);
 
-    document.getElementById("cooa01").innerHTML = notation(player.cooa01);
-    document.getElementById("cooa02").innerHTML = notation(player.cooa02);
-    document.getElementById("cooa03").innerHTML = notation(player.cooa03);
-    document.getElementById("cooa04").innerHTML = notation(player.cooa04);
-    document.getElementById("cooa05").innerHTML = notation(player.cooa05);
-    document.getElementById("coops01").innerHTML = notation(v.coops01);
-    document.getElementById("coops02").innerHTML = notation(v.coops02);
-    document.getElementById("coops03").innerHTML = notation(v.coops03);
-    document.getElementById("coops04").innerHTML = notation(v.coops04);
-    document.getElementById("coops05").innerHTML = notation(v.coops05);
-    document.getElementById("coom01").innerHTML = notation(v.coom01);
-    document.getElementById("coom02").innerHTML = notation(v.coom02);
-    document.getElementById("coom03").innerHTML = notation(v.coom03);
-    document.getElementById("coom04").innerHTML = notation(v.coom04);
-    document.getElementById("coom05").innerHTML = notation(v.coom05);
+    document.getElementById("syna01").innerHTML = notation(player.syna01);
+    document.getElementById("syna02").innerHTML = notation(player.syna02);
+    document.getElementById("syna03").innerHTML = notation(player.syna03);
+    document.getElementById("syna04").innerHTML = notation(player.syna04);
+    document.getElementById("syna05").innerHTML = notation(player.syna05);
+    document.getElementById("synps01").innerHTML = notation(v.synps01);
+    document.getElementById("synps02").innerHTML = notation(v.synps02);
+    document.getElementById("synps03").innerHTML = notation(v.synps03);
+    document.getElementById("synps04").innerHTML = notation(v.synps04);
+    document.getElementById("synps05").innerHTML = notation(v.synps05);
+    document.getElementById("synm01").innerHTML = notation(v.synm01);
+    document.getElementById("synm02").innerHTML = notation(v.synm02);
+    document.getElementById("synm03").innerHTML = notation(v.synm03);
+    document.getElementById("synm04").innerHTML = notation(v.synm04);
+    document.getElementById("synm05").innerHTML = notation(v.synm05);
+    for (i = 1; i <= 10; i++) {
+        let name = tiername[i];
+        document.getElementById("synum" + name).innerHTML = notation(v["synum" + name]);
+        document.getElementById("synuc" + name).innerHTML = notation(v["synuc" + name]);
+    }
+    if (player.synu11.gte(1)) document.getElementById("synb11").innerHTML = "已购买"
+    if (player.synu12.gte(1)) document.getElementById("synb12").innerHTML = "已购买"
 
     if (player.innormcha == 1) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
     else if (player.innormcha == 2) document.getElementById("chalstat").innerHTML = "你当前在普通挑战2中";
@@ -5775,26 +5979,18 @@ function styleDisplay() {
     if (player.PL4goal[15] == true) document.getElementById("upg_06").style.display = 'block';
     else document.getElementById("upg_06").style.display = 'none';
 
-    if (player.energy.gte(1.79769313486231e308)) document.getElementById("PL1button").style.display = 'block';
-    else document.getElementById("PL1button").style.display = 'none';
-    if (player.PL1pts.gte(1.79769313486231e308)) document.getElementById("PL2button").style.display = 'block';
+    if (player.hasUnlockedPL1 == true) document.getElementById("PL2button").style.display = 'block';
     else document.getElementById("PL2button").style.display = 'none';
-    if (player.PL2pts.gte("6.74114012549e315652")) document.getElementById("PL3button").style.display = 'block';
+    if (player.hasUnlockedPL2 == true) document.getElementById("PL3button").style.display = 'block';
     else document.getElementById("PL3button").style.display = 'none';
-    if (player.PL3pts.gte("6.74114012549e315652")) document.getElementById("PL4button").style.display = 'block';
+    if (player.hasUnlockedPL3 == true) document.getElementById("PL4button").style.display = 'block';
     else document.getElementById("PL4button").style.display = 'none';
-
-    if (player.energy.lt("1e6144")) document.getElementById("PL1ptsnx").style.display = 'block';
-    else document.getElementById("PL1ptsnx").style.display = 'none';
-    if (player.PL1pts.lt("1e6144")) document.getElementById("PL2ptsnx").style.display = 'block';
-    else document.getElementById("PL2ptsnx").style.display = 'none';
-    if (player.PL2pts.lt("1e6291456")) document.getElementById("PL3ptsnx").style.display = 'block';
-    else document.getElementById("PL3ptsnx").style.display = 'none';
-    if (player.PL3pts.lt("1e6291456")) document.getElementById("PL4ptsnx").style.display = 'block';
-    else document.getElementById("PL4ptsnx").style.display = 'none';
+    if (player.hasUnlockedPL4 == true) document.getElementById("PL5button").style.display = 'block';
+    else document.getElementById("PL5button").style.display = 'none';
 
     if (player.hasUnlockedPL1 == true) {
         document.getElementById("wscset2").style.display = 'block';
+        document.getElementById("wscbv2").style.display = '';
         document.getElementById("PL1info").style.display = 'block';
         document.getElementById("PL1stat").style.display = 'block';
         document.getElementById("comp1").style.display = 'block';
@@ -5802,6 +5998,7 @@ function styleDisplay() {
     }
     if (player.hasUnlockedPL2 == true) {
         document.getElementById("wscset3").style.display = 'block';
+        document.getElementById("wscbv3").style.display = '';
         document.getElementById("PL2info").style.display = 'block';
         document.getElementById("PL2stat").style.display = 'block';
         document.getElementById("comp2").style.display = 'block';
@@ -5809,6 +6006,7 @@ function styleDisplay() {
     }
     if (player.hasUnlockedPL3 == true) {
         document.getElementById("wscset4").style.display = 'block';
+        document.getElementById("wscbv4").style.display = '';
         document.getElementById("PL3info").style.display = 'block';
         document.getElementById("PL3stat").style.display = 'block';
         document.getElementById("comp3").style.display = 'block';
@@ -5816,6 +6014,7 @@ function styleDisplay() {
     }
     if (player.hasUnlockedPL4 == true) {
         document.getElementById("wscset5").style.display = 'block';
+        document.getElementById("wscbv5").style.display = '';
         document.getElementById("PL4info").style.display = 'block';
         document.getElementById("PL4stat").style.display = 'block';
         document.getElementById("comp4").style.display = 'block';
@@ -5908,6 +6107,12 @@ function styleDisplay() {
     for (let i = 8; i < 12; i++) {
         let name = tiername[i + 1];
         if (player["chacom" + name].eq(v.PL3chacap)) document.getElementById("chal" + tiername[i + 1]).className = "chalyes";
+        else if (player.incha == i + 1) document.getElementById("chal" + tiername[i + 1]).className = "chalin"
+        else document.getElementById("chal" + tiername[i + 1]).className = "chalno";
+    }
+    for (let i = 12; i < 16; i++) {
+        let name = tiername[i + 1];
+        if (player["chacom" + name].eq(v.PL4chacap)) document.getElementById("chal" + tiername[i + 1]).className = "chalyes";
         else if (player.incha == i + 1) document.getElementById("chal" + tiername[i + 1]).className = "chalin"
         else document.getElementById("chal" + tiername[i + 1]).className = "chalno";
     }
@@ -6140,27 +6345,43 @@ function styleDisplay() {
     if (player.zzltu[4] == true) document.getElementById("batow").style.display = 'block';
     else document.getElementById("batow").style.display = 'none';
 
-    if (player.stgmx.gte(1000)) {
-        document.getElementById("batp").style.display = 'block';
+    if (player.stgmx.gte(500)) {
+        document.getElementById("chal4").style.display = 'block';
         document.getElementById("batg01").className = "PL4goalyes";
     }
     else {
-        document.getElementById("batp").style.display = 'none';
+        document.getElementById("chal4").style.display = 'none';
         document.getElementById("batg01").className = "PL4goalno";
     }
-    if (player.stgmx.gte(2000)) {
-        document.getElementById("coop").style.display = 'block';
+    if (player.stgmx.gte(1000)) {
+        document.getElementById("batp").style.display = 'block';
         document.getElementById("batg02").className = "PL4goalyes";
     }
     else {
-        document.getElementById("coop").style.display = 'none';
+        document.getElementById("batp").style.display = 'none';
         document.getElementById("batg02").className = "PL4goalno";
+    }
+    if (player.stgmx.gte(1500)) {
+        document.getElementById("frarow5").style.display = '';
+        document.getElementById("batg03").className = "PL4goalyes";
+    }
+    else {
+        document.getElementById("frarow5").style.display = 'none';
+        document.getElementById("batg03").className = "PL4goalno";
+    }
+    if (player.stgmx.gte(2000)) {
+        document.getElementById("coop").style.display = 'block';
+        document.getElementById("batg04").className = "PL4goalyes";
+    }
+    else {
+        document.getElementById("coop").style.display = 'none';
+        document.getElementById("batg04").className = "PL4goalno";
     }
 
     for (i = 1; i <= 5; i++) {
         let name = tiername[i];
-        if (player.coofcs == i) document.getElementById("fcs" + name).className = "coouyes";
-        else document.getElementById("fcs" + name).className = "coou";
+        if (player.synfcs == i) document.getElementById("fcs" + name).className = "synuyes";
+        else document.getElementById("fcs" + name).className = "synu";
     }
 
 
@@ -6420,7 +6641,7 @@ function mainLoop() {
     getfrau();
     getboggle();
     getbatow();
-    getcoo();
+    getsyn();
     getspd();
     autoBuy();
     comAch();
@@ -6671,7 +6892,7 @@ var texts =
         "仿生人偶是会梦见电子羊的",
         "有两颗中子星，它们的风元素力分别是1000<span style='color:#ff8000'>风之微粒</span>和1<span style='color:#80ff00'>风之徯粓</span>，它们的风元素力之和是多少？",
         "当你遇到困难时，回望自己所做过的一切，所经历过的所有不顺心的事情，你就会发现：其实你现在所正经历的困难，倒也不算什么大事。",
-        "qeq6308是风神的先祖，就像Derpsmith是蚁神的先祖一样",
+        "Tryptophe是风神的先祖，就像Derpsmith是蚁神的先祖一样",
         "铃音(Lain)曾经说过：无论何时何地，每一个风灵都是互相联通的",
         "<coior=#f29e38ff>HTML可以做出模拟宇宙，HTML是最好的语言！</oolor>",
         "斯帕克模型猜想指的是在人类大脑神经元之间存在着一种以“斯帕克”（Sparks）为单位的信息传递模式。这一模型猜想源自于对大脑神经元活动的深入观察和研究，它挑战了传统上认为神经元之间信息传递是连续的观点，而提出了一种全新的、基于离散脉冲的信息传递机制。斯帕克模型猜想认为，神经元之间的信息传递不是连续的，而是以离散的“斯帕克”为单位进行。这种离散的信息传递方式，与连续的电信号传递相比，更能体现大脑信息处理的高效性和快速性。该猜想进一步假设，这些离散的“斯帕克”实际上是以脉冲的形式在神经元之间传递。这种脉冲式传递方式不仅符合大脑神经元活动的实际观测结果，而且为理解大脑复杂的信息处理机制提供了新的视角。研究人员利用脑电图（EEG）等技术手段，观察到大脑神经元之间的电活动确实呈现出离散的脉冲形式，这与斯帕克模型猜想的假设相一致。此外，还发现神经元之间的脉冲传递具有一定的时间间隔，进一步支持了离散信息传递的观点",/*130*/
@@ -6700,6 +6921,11 @@ var texts =
         "有人声称证明了奇完全数的数量不超过10^-540个",
         "(✨🌞🏘✨️🌙🌳✨)💥🧗‍░▒▓█",
         "柏拉图在《蒂迈欧篇》中将正多面体与宇宙意义联系起来，正四面体-火，正六面体-土，正八面体-气，正二十面体-水，而正十二面体则是以太，构成星群和天空的物质",
+        "总是会放弃你,总是会令你沮丧,总是会抛弃你,总是会让你哭,总是会同你道别,总是会谎言伤害你——反物质瑞克·艾斯利",
+        "学习eferygrt的自己写出bug后找原作者的精神",
+        "idleballs是我（曾经）最喜欢的放置游戏（之一），之前叫做球球作战大冒险",
+        "Ω阶折算和Ω阶软上限",
+        "9月15日是增量游戏节（e9e15），在JavaScript中，最大的安全整数是Number.MAX_SAFE_INTEGER，其值为9,007,199,254,740,991，这是在不失去精度的情况下JavaScript中可以处理的最大整数，在break_infinity.js中当指数为最大安全整数时，表示的数值为e9e15",/*160*/
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
