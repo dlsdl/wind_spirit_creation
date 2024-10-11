@@ -1922,13 +1922,13 @@
                     <div align="center" class="ftsz2">(5小时后更新)</div>
                     <div align="center" class="ftsz2">你有<span id="ntmv">0</span>式营养餐(+0/s)，<span id="nrev">0</span>式便携营养袋</div>
                     <div align="center" class="ftsz2">每当冷却时间结束时触发随机一种效果，重复触发刷新持续时间，多个效果可以同时存在</div>
-                    <div align="center" class="ftsz2">效果冷却时间：<span id="ntmecd">30</span>s 效果持续时间：<span id="ntmels">30</span>s</div>
-                    <div align="center" class="ftsz2">效果1：1~8式风灵超指数+<span id="ntme01"></span>(剩余<span id="ntmr01"></span>s)</div>
-                    <div align="center" class="ftsz2">效果2：9~16式风灵超指数+<span id="ntme02"></span>(剩余<span id="ntmr02"></span>s)</div>
-                    <div align="center" class="ftsz2">效果3：17~24式风灵超指数+<span id="ntme03"></span>(剩余<span id="ntmr03"></span>s)</div>
-                    <div align="center" class="ftsz2">效果4：25~32式风灵超指数+<span id="ntme04"></span>(剩余<span id="ntmr04"></span>s)</div>
-                    <div align="center" class="ftsz2">效果5：33~40式风灵超指数+<span id="ntme05"></span>(剩余<span id="ntmr05"></span>s)</div>
-                    <div align="center" class="ftsz2">效果6：战斗塔cps指数+<span id="ntme06"></span>(剩余<span id="ntmr06"></span>s)</div>
+                    <div align="center" class="ftsz2">效果冷却时间：<span id="ntmecd">30</span>s 效果持续时间：<span id="ntmels">30</span>s 在30.00秒后触发下一效果</div>
+                    <div align="center" class="ftsz2">效果1：战斗塔cps指数+<span id="ntme01"></span>(剩余<span id="ntmr01"></span>s)</div>
+                    <div align="center" class="ftsz2">效果2：1~8式风灵超指数+<span id="ntme02"></span>(剩余<span id="ntmr02"></span>s)</div>
+                    <div align="center" class="ftsz2">效果3：9~16式风灵超指数+<span id="ntme03"></span>(剩余<span id="ntmr03"></span>s)</div>
+                    <!--<div align="center" class="ftsz2">效果4：17~24式风灵超指数+<span id="ntme04"></span>(剩余<span id="ntmr04"></span>s)</div>
+                    <div align="center" class="ftsz2">效果5：25~32式风灵超指数+<span id="ntme05"></span>(剩余<span id="ntmr05"></span>s)</div>
+                    <div align="center" class="ftsz2">效果6：33~40式风灵超指数+<span id="ntme06"></span>(剩余<span id="ntmr06"></span>s)</div>-->
                 </div>
                 <table align="center">
                     <tr>
@@ -1937,7 +1937,7 @@
                     </tr>
                     <tr>
                         <td><button class="PL4upgno" id="ntmu03" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要<span id="ntmc03">3</span>式营养袋</button></td>
-                        <td><button class="PL4upgno" id="ntmu04" onclick="buyntmu(4)">增加营养餐的新效果，但重置冷却时间和持续时间，需要冷却时间小于0.4s(<span id="ntmc04">0</span>/3)</button></td>
+                        <td><button class="PL4upgno" id="ntmu04" onclick="buyntmu(4)">使营养餐的效果1变为永久，且增加新的效果，但重置营养餐、计时器和前3个升级的数量，需要冷却时间小于0.4s(<span id="ntmc04">0</span>/3)</button></td>
                     </tr>
                 </table>
             </div>
@@ -2177,7 +2177,9 @@
                 <a href="https://veryrrdefine.github.io/The-BYD-Tree/" target="_blank" style="color: #00ff80;">BYD树</a>、
                 <a href="https://a262537412640768744.github.io/EnergyReset/" target="_blank" style="color: #00ff80;">能源重置</a>、
                 <a href="https://rg3072.github.io/anti-softcap-tree/111/" target="_blank" style="color: #00ff80;">反软上限树</a>、
-                <a href="https://hypcos.github.io/too-many-layers/" target="_blank" style="color: #00ff80;">太多层级</a>
+                <a href="https://hypcos.github.io/too-many-layers/" target="_blank" style="color: #00ff80;">太多层级</a>、
+                <br />
+                <a href="https://hydrogenated233.github.io/TI/" target="_blank" style="color: #00ff80;">植树增量</a>
                 <br /><br />
                 <a href="./changelog.html" target="_blank" style="color: #ffffff;">点击这里查看更新日志</a><br /><br />
                 <a href="./savebank.html" target="_blank" style="color: #ffffff;">点击这里前往存档银行</a><br /><br />
@@ -2269,12 +2271,12 @@
                     <td class="achno" id="ach47">47<br />谜影<span class="tooltip-text">解锁刺影征标</span></td>
                     <td class="achno" id="ach48">48<br />已经走过1/6了？<span class="tooltip-text">达到1024征标值记录</span></td>
                     <td class="achno" id="ach49">49<br />某种奇妙的炼金产物<span class="tooltip-text">用营养餐制作一次营养袋</span></td>
-                    <!--<td class="achno" id="ach4a">4a<br />隐藏的目标<span class="tooltip-text">前三种声望能量为0时到达e1e18能量</span></td>
+                    <td class="achno" id="ach4a">4a<br />隐藏的目标<span class="tooltip-text"></span></td>
                     <td class="achno" id="ach4b">4b<br />隐藏的目标之二<span class="tooltip-text"></span></td>
                     <td class="achno" id="ach4c">4c<br />这玩意有上限吗<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4d">4d<br />协同不放置<span class="tooltip-text"></span></td>
+                    <td class="achno" id="ach4d">4d<br />但事实上多面体组合来源于角色技能的召唤物<span class="tooltip-text"></span></td>
                     <td class="achno" id="ach4e">4e<br />祭礼残章<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4f">4f<br />流浪乐章<span class="tooltip-text"></span></td>-->
+                    <td class="achno" id="ach4f">4f<br />流浪乐章<span class="tooltip-text"></span></td>
                 </tr>
 
 

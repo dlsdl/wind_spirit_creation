@@ -4793,6 +4793,14 @@ function buyanm4u(tier) {
     }
 }
 
+function getntm() {
+
+}
+
+function buyntmu(tier) {
+
+}
+
 function getspd() {
     v.gamespd1 = player.chacom10.pwb(2).mul(player.ptnu04.div(3).pwb(2)).mul(player.anm3u04.pwb(1.189207115002721)).mul(v.fraue05).max(1);
     if (player.tier04.gte(30)) v.gamespd1 = v.gamespd1.mul(player.tier04.sub(24).mul(0.25));
