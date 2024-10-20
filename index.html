@@ -1919,29 +1919,32 @@
         <div id="p5_7" style="display: none">
             <div id="ntm" style="display: none">
                 <div class="btnrow">
-                    <div align="center" class="ftsz2">(5小时后更新)</div>
-                    <div align="center" class="ftsz2">你有<span id="ntmv">0</span>式营养餐(+0/s)，<span id="nrev">0</span>式便携营养袋</div>
+                    <div align="center" class="ftsz2">你有<span id="ntmv">0</span>(×<span id="ntmm">1</span>=<span id="ntma">0</span>)式营养餐，<span id="nrev">0</span>式便携营养袋</div>
                     <div align="center" class="ftsz2">每当冷却时间结束时触发随机一种效果，重复触发刷新持续时间，多个效果可以同时存在</div>
-                    <div align="center" class="ftsz2">效果冷却时间：<span id="ntmecd">30</span>s 效果持续时间：<span id="ntmels">30</span>s 在30.00秒后触发下一效果</div>
+                    <div align="center" class="ftsz2">效果冷却时间：<span id="ntmecd">30</span>s 效果持续时间：<span id="ntmels">30</span>s 在<span id="ntmtmr">30</span>秒后触发下一效果</div>
                     <div align="center" class="ftsz2">效果1：战斗塔cps指数+<span id="ntme01"></span>(剩余<span id="ntmr01"></span>s)</div>
                     <div align="center" class="ftsz2">效果2：1~8式风灵超指数+<span id="ntme02"></span>(剩余<span id="ntmr02"></span>s)</div>
                     <div align="center" class="ftsz2">效果3：9~16式风灵超指数+<span id="ntme03"></span>(剩余<span id="ntmr03"></span>s)</div>
-                    <!--<div align="center" class="ftsz2">效果4：17~24式风灵超指数+<span id="ntme04"></span>(剩余<span id="ntmr04"></span>s)</div>
-                    <div align="center" class="ftsz2">效果5：25~32式风灵超指数+<span id="ntme05"></span>(剩余<span id="ntmr05"></span>s)</div>
-                    <div align="center" class="ftsz2">效果6：33~40式风灵超指数+<span id="ntme06"></span>(剩余<span id="ntmr06"></span>s)</div>-->
-                </div>
+                    <div align="center" class="ftsz2" id="ntmlk1">效果4：17~24式风灵超指数+<span id="ntme04"></span>(剩余<span id="ntmr04"></span>s)</div>
+                    <div align="center" class="ftsz2" id="ntmlk2">效果5：25~32式风灵超指数+<span id="ntme05"></span>(剩余<span id="ntmr05"></span>s)</div>
+                    <div align="center" class="ftsz2" id="ntmlk3">效果6：33~40式风灵超指数+<span id="ntme06"></span>(剩余<span id="ntmr06"></span>s)</div>
+                </div><span id="ntmv">0</span>
                 <table align="center">
                     <tr>
-                        <td><button class="PL4upgno" id="ntmu01" onclick="buyntmu(1)">将营养餐式数增加1，需要<span id="ntmc01">e1.000e6</span>扬敦点</button></td>
-                        <td><button class="PL4upgno" id="ntmu02" onclick="buyntmu(2)">将营养袋式数增加1，需要<span id="ntmc02">3</span>式营养餐</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(1)">将营养餐式数增加1，需要<span id="ntmc01">e1.000e6</span>扬敦点</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(2)">将营养袋式数增加1，需要<span id="ntmc02">10</span>式营养餐</button></td>
                     </tr>
                     <tr>
-                        <td><button class="PL4upgno" id="ntmu03" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要<span id="ntmc03">3</span>式营养袋</button></td>
-                        <td><button class="PL4upgno" id="ntmu04" onclick="buyntmu(4)">使营养餐的效果1变为永久，且增加新的效果，但重置营养餐、计时器和前3个升级的数量，需要冷却时间小于0.4s(<span id="ntmc04">0</span>/3)</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要<span id="ntmc03">3</span>式营养袋(<span id="ntmu03">0</span>/9)</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(4)">使营养餐的第一个非永久效果变为永久，且增加新的效果，但重置计时器和前3个升级的数量，需要<span id="ntmc04">9</span>级冷却时间升级(<span id="ntmu04">0</span>/3)</button></td>
                     </tr>
                 </table>
+                <div align="center" class="ftsz2">到达一定式数的营养餐以获得奖励</div>
+                <div id="ntmg01" class="PL4goalno">到达50式营养餐<br />基于营养餐提高扩散、扪敤、扫敥、扬敦能量的指数（+0.002×营养餐，最高为1）</div>
+                <!--<div id="ntmg02" class="PL4goalno">到达114式营养餐<br />自动升级试炼场的atk/btk/ctk/dtk等级且不消耗金币</div>
+                <div id="ntmg03" class="PL4goalno">到达260式营养餐<br />风之徱粕的第4个升级效果可以加成1~5式粒子获取数量</div>
+                <div id="ntmg04" class="PL4goalno">到达593式营养餐<br />解锁贰式风压坍陷，在其中获得的能量加成分数倍率</div>-->
             </div>
-
         </div>
         <div id="p6_1" style="display: none">
             <div>量子之海升级 选择层数[0|-1|-2|-3]</div>

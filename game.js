@@ -489,10 +489,9 @@ function hardReset() {
         anm4u02: new Decimal(0),
         anm4u03: new Decimal(0),
         anm4u04: new Decimal(0),
+        ntmtmr: new Decimal(30),
         ntmv: new Decimal(0),
         nrev: new Decimal(0),
-        ntmu01: new Decimal(0),
-        ntmu02: new Decimal(0),
         ntmu03: new Decimal(0),
         ntmu04: new Decimal(0),
         ntmr01: new Decimal(0),
@@ -1187,7 +1186,20 @@ function hardReset() {
         anm4c03: new Decimal(1000),
         anm4c04: new Decimal(10000),
 
-
+        ntmm: new Decimal(1),
+        ntma: new Decimal(1),
+        ntmecd: new Decimal(30),
+        ntmels: new Decimal(30),
+        ntmc01: new Decimal("ee6"),
+        ntmc02: new Decimal(10),
+        ntmc03: new Decimal(1),
+        ntmc04: new Decimal(9),
+        ntme01: new Decimal(0),
+        ntme02: new Decimal(0),
+        ntme03: new Decimal(0),
+        ntme04: new Decimal(0),
+        ntme05: new Decimal(0),
+        ntme06: new Decimal(0),
     }
 }
 hardReset();
@@ -1805,13 +1817,57 @@ function getWscPow() {
 }
 
 function getWscHyp() {
-    let hyp=new Decimal(1)
-    if (player.PL4goal[9] == true) hyp = hyp.add(0.001);
-    if (player.tier05.gte(5)) hyp = hyp.add(player.tier05.div(10000));
-    if (player.incyzb == true & player.shdwsl[0] == true) hyp = hyp.sub(0.1);
-    for (let tier = 1; tier <= 40; tier++) {
+    let hypw01to08 = new Decimal(1);
+    let hypw09to16 = new Decimal(1);
+    let hypw17to24 = new Decimal(1);
+    let hypw25to32 = new Decimal(1);
+    let hypw33to40 = new Decimal(1);
+    let hyp = new Decimal(1);
+    if (player.ntmr02.gte(0.05)) hypw01to08 = hypw01to08.add(v.ntme02);
+    if (player.ntmr03.gte(0.05)) hypw09to16 = hypw09to16.add(v.ntme03);
+    if (player.ntmr04.gte(0.05)) hypw17to24 = hypw17to24.add(v.ntme04);
+    if (player.ntmr05.gte(0.05)) hypw25to32 = hypw25to32.add(v.ntme05);
+    if (player.ntmr06.gte(0.05)) hypw33to40 = hypw33to40.add(v.ntme06);
+    if (player.PL4goal[9] == true) {
+        hypw01to08 = hypw01to08.add(0.001);
+        hypw09to16 = hypw09to16.add(0.001);
+        hypw17to24 = hypw17to24.add(0.001);
+        hypw25to32 = hypw25to32.add(0.001);
+        hypw33to40 = hypw33to40.add(0.001);
+    }
+    if (player.tier05.gte(5)) {
+        hypw01to08 = hypw01to08.add(player.tier05.div(10000));
+        hypw09to16 = hypw09to16.add(player.tier05.div(10000));
+        hypw17to24 = hypw17to24.add(player.tier05.div(10000));
+        hypw25to32 = hypw25to32.add(player.tier05.div(10000));
+        hypw33to40 = hypw33to40.add(player.tier05.div(10000));
+    }
+    if (player.incyzb == true & player.shdwsl[0] == true) {
+        hypw01to08 = hypw01to08.sub(0.1);
+        hypw09to16 = hypw09to16.sub(0.1);
+        hypw17to24 = hypw17to24.sub(0.1);
+        hypw25to32 = hypw25to32.sub(0.1);
+        hypw33to40 = hypw33to40.sub(0.1);
+    }
+    for (let tier = 1; tier <= 8; tier++) {
         let name = tiername[tier];
-        v["wsch" + name] = hyp;
+        v["wsch" + name] = hypw01to08;
+    }
+    for (let tier = 9; tier <= 16; tier++) {
+        let name = tiername[tier];
+        v["wsch" + name] = hypw09to16;
+    }
+    for (let tier = 17; tier <= 24; tier++) {
+        let name = tiername[tier];
+        v["wsch" + name] = hypw17to24;
+    }
+    for (let tier = 25; tier <= 32; tier++) {
+        let name = tiername[tier];
+        v["wsch" + name] = hypw25to32;
+    }
+    for (let tier = 33; tier <= 40; tier++) {
+        let name = tiername[tier];
+        v["wsch" + name] = hypw33to40;
     }
     
 }
@@ -2347,6 +2403,7 @@ function getPL1engPow() {
     v.PL1engpow = v.PL1engpow.add(player.ptnu04.div(4));
     if (player.PL4goal[8] == true) v.PL1engpow = v.PL1engpow.add(1);
     v.PL1engpow = v.PL1engpow.add(v.fraue09);
+    if (v.ntma.gte(50)) v.PL1engpow = v.PL1engpow.add(v.ntma.div(500).min(1));
     if (player.incyzb == true & player.shdwsl[6] == true) v.PL1engpow = v.PL1engpow.mul(v.shdb01);
 }
 
@@ -2714,6 +2771,7 @@ function getPL2engPow() {
     if (player.xyzbo.gte(1)) v.PL2engpow = v.PL2engpow.add(1);
     if (player.PL4goal[8] == true) v.PL2engpow = v.PL2engpow.add(1);
     v.PL2engpow = v.PL2engpow.add(v.fraue09);
+    if (v.ntma.gte(50)) v.PL2engpow = v.PL2engpow.add(v.ntma.div(500).min(1));
     if (player.incyzb == true & player.shdwsl[6] == true) v.PL2engpow = v.PL2engpow.mul(v.shdb01);
 }
 
@@ -3294,6 +3352,7 @@ function getPL3engPow() {
     v.PL3engpow = v.PL3engpow.add(player.ptnu04.div(12));
     if (player.PL4goal[8] == true) v.PL3engpow = v.PL3engpow.add(1);
     v.PL3engpow = v.PL3engpow.add(v.fraue09);
+    if (v.ntma.gte(50)) v.PL3engpow = v.PL3engpow.add(v.ntma.div(500).min(1));
     if (player.incyzb == true & player.shdwsl[6] == true) v.PL3engpow = v.PL3engpow.mul(v.shdb01);
 }
 
@@ -4204,6 +4263,7 @@ function getPL4engPow() {
     v.PL4engpow = new Decimal(1);
     v.PL4engpow = v.PL4engpow.add(v.fraue09);
     v.PL4engpow = v.PL4engpow.add(player.chacom13.min(player.chacom13.pow(0.5).mul(2)).mul(0.25));
+    if (v.ntma.gte(50)) v.PL4engpow = v.PL4engpow.add(v.ntma.div(500).min(1));
     if (player.incyzb == true & player.shdwsl[6] == true) v.PL4engpow = v.PL4engpow.mul(v.shdb01);
 }
 
@@ -4439,6 +4499,7 @@ function getbatow() {
     v.pcps = player.stgcl.add(1).add(df.add(1).mul(24)).div(16).pwb(2).div(16);
     v.bpmpb = player.coin.add(1).log(2).div(16777216).min(0.000244140625);
     v.atke = player.atk.add(1).mul(v.btke).div(16).mul(v.skef01).mul(v.skef03).mul(player.chacom15.pwb(4));
+    if (player.ntmr01.gte(0.05)) v.atke = v.atke.pow(v.ntme01.add(1));
     v.btke = player.btk.add(2).pow(v.ctke);
     v.ctke = player.ctk.div(4).add(2).hyp(v.dtke);
     v.dtke = player.dtk.div(16).add(1)
@@ -4640,7 +4701,7 @@ function getsyn() {
     }
     for (i = 1; i <= 10; i++) {
         let name = tiername[i];
-        v["synuc" + name] = player["synu" + name].add(1).pow(1.1).pwb(5);
+        v["synuc" + name] = player["synu" + name].add(1).pow(1.2).pwb(4);
     }
     v.synm01 = player.syna01.div(16).add(1).pow(4);
     v.synm02 = player.syna02.div(16).add(1).pow(4);
@@ -4794,11 +4855,59 @@ function buyanm4u(tier) {
 }
 
 function getntm() {
+    if (player.shdwrc.lt(1024)) return;
+    v.ntmc01 = player.ntmv.add(1).pwb("ee6");
+    v.ntmc02 = player.nrev.add(1).mul(10);
+    v.ntmc03 = player.ntmu03.add(1).add(player.ntmu04.mul(6));
+    v.ntmc04 = new Decimal(9);
+    v.ntmm = player.nrev.mul(0.025).add(1);
+    v.ntma = player.ntmv.mul(v.ntmm);
+    v.ntmecd = new Decimal(30).mul(player.ntmu03.pwb(0.6));
+    v.ntmels = new Decimal(30).mul(player.ntmu03.pwb(0.8));
+    for (i = 1; i <= 6; i++) {
+        let name = tiername[i];
+        if (player["ntmr" + name].gt(0)) player["ntmr" + name] = player["ntmr" + name].sub(0.05);
+        else player["ntmr" + name] = new Decimal(0);
+        if (i == 1) v["ntme" + name] = v.ntma.pow(0.5).mul(0.01);
+        else v["ntme" + name] = v.ntma.pow(0.35).mul(0.0001);
+    }
+    player.ntmtmr = player.ntmtmr.sub(0.05);
+    if (player.ntmtmr.lte(0)) ntmact();
+    if (player.ntmu04.gte(1)) player.ntmr01 = new Decimal(1e308);
+    if (player.ntmu04.gte(2)) player.ntmr02 = new Decimal(1e308);
+    if (player.ntmu04.gte(3)) player.ntmr03 = new Decimal(1e308);
+}
 
+function ntmact() {
+    player.ntmtmr = v.ntmecd;
+    let i = (Math.floor(Math.random() * 3)) + player.ntmu04.toNumber();
+    if (i == 0) player.ntmr01 = v.ntmels;
+    else if (i == 1) player.ntmr02 = v.ntmels;
+    else if (i == 2) player.ntmr03 = v.ntmels;
+    else if (i == 3) player.ntmr04 = v.ntmels;
+    else if (i == 4) player.ntmr05 = v.ntmels;
+    else if (i == 5) player.ntmr06 = v.ntmels;
+    else return;
 }
 
 function buyntmu(tier) {
+    if (tier == 1 & player.PL4pts.gte(v.ntmc01)) player.ntmv = player.ntmv.add(1);
+    if (tier == 2 & player.ntmv.gte(v.ntmc02)) player.nrev = player.nrev.add(1);
+    if (tier == 3 & player.nrev.gte(v.ntmc03) & player.ntmu03.lt(9)) player.ntmu03 = player.ntmu03.add(1);
+    if (tier == 4 & player.ntmu03.gte(v.ntmc04) & player.ntmu04.lt(3)) {
+        player.ntmu04 = player.ntmu04.add(1);
+        player.ntmu03 = new Decimal(0);
+        player.ntmtmr = new Decimal(30);
+        for (i = 1; i <= 6; i++) {
+            let name = tiername[i];
+            player["ntmr" + name] = new Decimal(0);
+        }
+    }
+}
 
+function PL5reset() {
+    if (player.PL4pts.lt("e3.23229e8")) return;
+    else alert("{5,5((((1)1)1)1)2}小时以内更新")
 }
 
 function getspd() {
@@ -5444,9 +5553,9 @@ function updateGUI() {
     else document.getElementById("PL4ptspd").innerHTML = "需要6.741e315652扫敥点(~e3.470e17能量)"
     if (player.PL3pts.gte("6.741e315652") & player.PL3pts.lte("e6.291e6")) document.getElementById("PL4ptsnx").innerHTML = "，下一扬敦点在" + notation(player.PL3pts.root(1048576).floor().add(1).pow(1048576)) + "扫敥点";
     else document.getElementById("PL4ptsnx").innerHTML = "";
-    if (player.PL4pts.gte("e3.232e8")) document.getElementById("PL5ptspd").innerHTML = "扭敧重置：获得" + notation(player.PL4pts.root(1073741824).floor()) + "扭敧点";
+    if (player.PL4pts.gte("e3.23229e8")) document.getElementById("PL5ptspd").innerHTML = "扭敧重置：获得" + notation(player.PL4pts.root(1073741824).floor()) + "扭敧点";
     else document.getElementById("PL5ptspd").innerHTML = "需要e3.232e8扬敦点(~e3.726e26能量)"
-    if (player.PL4pts.gte("e3.232e8") & player.PL4pts.lte("e6.442e9")) document.getElementById("PL4ptsnx").innerHTML = "，下一扬敦点在" + notation(player.PL4pts.root(1073741824).floor().add(1).pow(1073741824)) + "扫敥点";
+    if (player.PL4pts.gte("e3.23229e8") & player.PL4pts.lte("e6.442e9")) document.getElementById("PL5ptsnx").innerHTML = "，下一扭敧点在" + notation(player.PL4pts.root(1073741824).floor().add(1).pow(1073741824)) + "扬敦点";
     else document.getElementById("PL4ptsnx").innerHTML = "";
 
     document.getElementById("PL1Pts").innerHTML = notatint(player.PL1pts);
@@ -5960,6 +6069,25 @@ function updateGUI() {
     document.getElementById("shdb02").innerHTML = notation(v.shdb02);
     document.getElementById("shdb03").innerHTML = notation(v.shdb03);
     document.getElementById("shdb04").innerHTML = notation(v.shdb04);
+
+    document.getElementById("ntmv").innerHTML = notatint(player.ntmv);
+    document.getElementById("nrev").innerHTML = notatint(player.nrev);
+    document.getElementById("ntmu03").innerHTML = notatint(player.ntmu03);
+    document.getElementById("ntmu04").innerHTML = notatint(player.ntmu04);
+    document.getElementById("ntmc01").innerHTML = notatint(v.ntmc01);
+    document.getElementById("ntmc02").innerHTML = notatint(v.ntmc02);
+    document.getElementById("ntmc03").innerHTML = notatint(v.ntmc03);
+    document.getElementById("ntmc04").innerHTML = notatint(v.ntmc04);
+    document.getElementById("ntmm").innerHTML = notation(v.ntmm);
+    document.getElementById("ntma").innerHTML = notation(v.ntma);
+    document.getElementById("ntmecd").innerHTML = notation(v.ntmecd);
+    document.getElementById("ntmels").innerHTML = notation(v.ntmels);
+    document.getElementById("ntmtmr").innerHTML = notation(player.ntmtmr);
+    for (i = 1; i <= 6; i++) {
+        let name = tiername[i];
+        document.getElementById("ntme" + name).innerHTML = notation(v["ntme" + name]);
+        document.getElementById("ntmr" + name).innerHTML = notation(player["ntmr" + name]);
+    }
 
 
     if (player.innormcha == 1) document.getElementById("chalstat").innerHTML = "你当前在普通挑战1中";
@@ -6679,10 +6807,15 @@ function styleDisplay() {
         if (player.shdwsl[i] == true) document.getElementById("shdw" + name).className = "PL4upgyes";
         else document.getElementById("shdw" + name).className = "PL4upgno";
     }
+
     if (player.shdwrc.gte(1000)) document.getElementById("ntm").style.display = 'block';
     else document.getElementById("ntm").style.display = 'none';
-
-
+    if (player.ntmu04.gte(1)) document.getElementById("ntmlk1").style.display = 'block';
+    else document.getElementById("ntmlk1").style.display = 'none';
+    if (player.ntmu04.gte(2)) document.getElementById("ntmlk2").style.display = 'block';
+    else document.getElementById("ntmlk2").style.display = 'none';
+    if (player.ntmu04.gte(3)) document.getElementById("ntmlk3").style.display = 'block';
+    else document.getElementById("ntmlk3").style.display = 'none';
 
 
     for (let i = 0; i < 74; i++) {
@@ -6947,6 +7080,7 @@ function mainLoop() {
     getbatow();
     getsyn();
     getanm4();
+    getntm();
 
     getspd();
     autoBuy();
@@ -7233,10 +7367,19 @@ var texts =
         "柏拉图在《蒂迈欧篇》中将正多面体与宇宙意义联系起来，正四面体-火，正六面体-土，正八面体-气，正二十面体-水，而正十二面体则是以太，构成星群和天空的物质",
         "总是会放弃你,总是会令你沮丧,总是会抛弃你,总是会让你哭,总是会同你道别,总是会谎言伤害你——反物质瑞克·艾斯利",
         "学习eferygrt的自己写出bug后找原作者的精神",
-        "idleballs是我（曾经）最喜欢的放置游戏（之一），之前叫做球球作战大冒险",
-        "Ω阶折算和Ω阶软上限",
+        "idleballs是我（曾经）最喜欢的放置游戏（之一），之前叫做球球作战大冒险，最后一关是500关，数字为4.93e88",
+        "红鲨在坐车回家的路上，因为Ω阶折算|路程，速度(受Ω阶软上限限制)，迟迟到不了家",
         "9月15日是增量游戏节（e9e15），在JavaScript中，最大的安全整数是Number.MAX_SAFE_INTEGER，其值为9,007,199,254,740,991，这是在不失去精度的情况下JavaScript中可以处理的最大整数，在break_infinity.js中当指数为最大安全整数时，表示的数值为e9e15",/*160*/
-
+        "刚刚复习完的你正在玩游戏休息，突然你脑中出现一道信息： 遗忘度 超过 记忆度 ，进行一次无奖励的 知识重置",
+        "粒子物理学家Pollux用加速器证明了相对论是错误的，因为光速并不是一个硬上限，而是一个很硬的软上限",
+        "你在突发兴致一下子喝了十杯水后，胃里突然出现了一个 杯水 生成器",
+        "科技已经这么发达了吗，都有K65路公交车了，比葛立恒数还大！",
+        "Incremental mass rewritten <span class='redacted'>REDACTED</span> edition: 致敬传奇重写王veryrrdefine",
+        "过早地放盐和酱油的时候，都可以让氯化钠中的氯就挥发出去了，就剩下钠了，这样的话，你吃的时候还是不咸",
+        "AI取代了人，所以AI工智能取代了人工智能，AI工智能工智能取代了AI工智能，AI工智能工智能工智能取代了AI工智能工智能……",
+        "樵夫误入了青霞洞天仙境后，青霞洞天仙境由于能量过多坍塌了",
+        "无相之风晶核、赫耀多方面体、星形十二面体，在原神中是存在的",
+        "在法眼层次的人们，同时具有天眼和慧眼的功能，不仅仅能够看见事实，也能看清其来龙去脉，同时本身的能量够大，还能够介入事物的根本结构里面，去造成事实的改变",
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
