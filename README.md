@@ -10,9 +10,9 @@ layer 2: Txosm: full completion
 
 layer 3: Vyutn: full completion
 
-layer 4: Wzavp: developing
+layer 4: Wzavp: full completion
 
-layer 5: Xbewq: coming s1.797e308n
+layer 5: Xbewq: developing
 
 layer 6: Ycixr: coming s1.797e308n
 

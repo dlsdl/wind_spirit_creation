@@ -56,7 +56,6 @@ div {
 }
 
 @keyframes nihility_text {
-
     0%, 100% {
         text-shadow: 0px -4px 4px #ff0000, 0px 4px 4px #00ffff;
         color: white;
@@ -160,6 +159,13 @@ div {
     color: #ffffff;
 }
 
+.textct {
+    margin: auto;
+    font-size: 16px;
+    color: #ffffff;
+    width: 64%
+}
+
 .button {
     width: 77px;
     padding: 1.5px 0px;
@@ -249,7 +255,6 @@ div {
     background-color: #00000000;
     color: #000000;
     border: 2px solid #00ff80;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
     width: 192px;
@@ -262,7 +267,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 2px solid #000000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
     width: 192px;
@@ -275,7 +279,6 @@ div {
     background-color: #00000000;
     color: #000000;
     border: 2px solid #00ff80;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
     width: 96px;
@@ -288,27 +291,12 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 2px solid #000000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     height: 48px;
     width: 96px;
     text-decoration: none;
     cursor: pointer;
     float: right;
-}
-
-.wscbt3 {
-    background-color: #00000000;
-    color: #000000;
-    border: 2px solid #00ff80;
-    font-family: MonospaceTypewriter, monospace;
-    font-size: 16px;
-    height: 48px;
-    width: 96px;
-    text-decoration: none;
-    cursor: pointer;
-    float: right;
-    display: none;
 }
 
 .upg {
@@ -329,7 +317,6 @@ div {
     background-color: #ff0000;
     color: #ffffff;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height:20px;
     text-decoration: none;
@@ -342,7 +329,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -354,7 +340,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: default;
@@ -366,7 +351,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -381,7 +365,6 @@ div {
     background-color: #ffff00;
     color: #000000;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 18px;
     text-decoration: none;
@@ -416,7 +399,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -429,7 +411,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: default;
@@ -441,7 +422,6 @@ div {
     height: 100px;
     background-color: #000000;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     padding: 8px 8px;
     margin: 0px auto;
     text-align: center;
@@ -473,36 +453,33 @@ div {
 }
 
 .stdno {
-    width: 184px;
-    height: 136px;
+    width: 180px;
+    height: 135px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
 }
 
 .stdyes {
-    width: 184px;
-    height: 136px;
+    width: 180px;
+    height: 135px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
 }
 
-.alc {
+.alcno {
     width: 152px;
     height: 152px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -514,7 +491,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -525,7 +501,6 @@ div {
     height: 144px;
     background-color: #000000;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     padding: 8px 8px;
     margin: 0px auto;
     text-align: center;
@@ -539,7 +514,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -554,7 +528,6 @@ div {
     background-color: #00ff00;
     color: #000000;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
@@ -567,7 +540,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -579,7 +551,17 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resin {
+    width: 184px;
+    height: 184px;
+    background-color: #008080;
+    color: #ffffff;
+    border: 4px solid #00ff00;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -610,7 +592,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -623,7 +604,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: default;
@@ -636,7 +616,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -648,7 +627,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -660,23 +638,11 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
 }
 
-.PL3bab {
-    width: 184px;
-    height: 152px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 4px solid #00ff00;
-    font-family: MonospaceTypewriter, monospace;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 .PL4button {
     width: 16%;
@@ -687,7 +653,6 @@ div {
     background-color: #00ffff;
     color: #000000;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
@@ -844,7 +809,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -859,9 +823,95 @@ div {
     background-color: #0000ff;
     color: #ffffff;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.selector {
+    width: 180px;
+    height: 40px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #0000ff;
+    margin: auto;
+    display: inline-block;
+}
+
+.slctyes {
+    width: 40px;
+    height: 40px;
+    background-color: #00ff80;
+    margin: 0;
+    color: #000000;
+    cursor: pointer;
+}
+
+.slctno {
+    width: 40px;
+    height: 40px;
+    background-color: #000080;
+    margin: 0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.PL5upgem {
+    width: 166px;
+    height: 166px;
+    background-image: radial-gradient(#000080,#000000);
+    color: #ffffff;
+    border: 4px solid #000000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL5upgno {
+    width: 166px;
+    height: 166px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL5upgyes {
+    width: 166px;
+    height: 166px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    margin: 0px auto;
+}
+
+.xbmch {
+    width: 300px;
+    height: 300px;
+    font-size: 24px;
+    line-height: 48px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.xbupg {
+    width: 200px;
+    height: 150px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -875,7 +925,6 @@ div {
     background-color: #ff00ff;
     color: #ffffff;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
@@ -891,7 +940,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
@@ -907,7 +955,6 @@ div {
     background-color: #ffffff;
     color: #000000;
     border: 1px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     line-height: 20px;
     text-decoration: none;
@@ -921,7 +968,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -933,7 +979,6 @@ div {
     background-color: #008080;
     color: #ffffff;
     border: 4px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -945,7 +990,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffffff;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -957,7 +1001,6 @@ div {
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -969,7 +1012,6 @@ div {
     background-color: #008080;
     color: #ffffff;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -981,7 +1023,6 @@ div {
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
@@ -990,10 +1031,9 @@ div {
 .achno {
     width: 60px;
     height: 60px;
-    background-image: radial-gradient(#ff0000,#000000);
+    background-image: radial-gradient(#990033,#000000);
     color: #ffffff;
     border: 2px solid #00ff80;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 12px;
     line-height: 15px;
     text-align: center;
@@ -1004,10 +1044,9 @@ div {
 .achyes {
     width: 60px;
     height: 60px;
-    background-image: radial-gradient(#00ff00,#000000);
+    background-image: radial-gradient(#66ffcc,#000000);
     color: #ffffff;
     border: 2px solid #00ff80;
-    font-family: MonospaceTypewriter, monospace;
     font-size: 12px;
     line-height: 15px;
     text-align: center;
