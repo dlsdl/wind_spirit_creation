@@ -4989,8 +4989,8 @@ async function PL5reset() {
     var confirmation = true;
     if (player.PL5conf == true) confirmation = confirm("您确定要扬敦吗？这将重置之前的一切进度，但是可以获得扬敦点！第一次扬敦解锁33~40式风灵和其他内容");
     if (confirmation | !player.PL5conf) {
-        player.PL5pts = player.PL5pts.add(player.PL5pts.root(1073741824).floor());
-        player.PL5ptsttl = player.PL5ptsttl.add(player.PL5pts.root(1073741824).floor());
+        player.PL5pts = player.PL5pts.add(player.PL4pts.root(1073741824).floor());
+        player.PL5ptsttl = player.PL5ptsttl.add(player.PL4pts.root(1073741824).floor());
         player.PL5tms = player.PL5tms.add(1);
         player.PL5sec = new Decimal(0);
 
@@ -6649,6 +6649,7 @@ function resete() {
     player.PL2energy = new Decimal(1);
     player.PL3energy = new Decimal(1);
     player.PL4energy = new Decimal(1);
+    player.PL5energy = new Decimal(1);
 }
 
 function reseta() {
