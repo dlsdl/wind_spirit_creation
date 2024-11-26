@@ -15,8 +15,8 @@
         <button class="PL4button" onclick="PL4reset()" v-if="player.hasUnlockedPL3">扬敦重置：<span v-if="player.PL3pts.gte('6.741e315652')">获得{{notation(player.PL3pts.root(1048576).floor())}}扬敦点</span><span v-if="player.PL3pts.gte('6.741e315652')&player.PL3pts.lt('e6291456')">，下一扬敦点在{{notation(player.PL3pts.root(1048576).floor().add(1).pow(1048576))}}扫敥点</span><span v-if="player.PL3pts.lt('6.741e315652')">需要6.741e315652扫敥点</span></button>
         <button class="PL5button" onclick="PL5reset()" v-if="player.hasUnlockedPL4">扭敧重置：<span v-if="player.PL4pts.gte('e323228496')">获得{{notation(player.PL4pts.root(1073741824).floor())}}扭敧点</span><span v-if="player.PL4pts.gte('e323228496')&player.PL4pts.lt('e6442450944')">，下一扭敧点在{{notation(player.PL4pts.root(1073741824).floor().add(1).pow(1073741824))}}扬敦点</span><span v-if="player.PL4pts.lt('e323228496')">需要e3.232e8扬敦点</span></button>
         <button class="PL6button" onclick="PL6reset()" v-if="player.hasUnlockedPL5">扮敨重置：需要e3.232e8扭敧点</button>
-        <button class="PL7button" onclick="PL7reset()" style="display: none">扯敩重置：需要e3.309e11扮敨点</button>
-        <button class="PLwbutton" onclick="PLwreset()" style="display: none">第1次风灵坍缩需要e3.309e11扯敩点 扰敪重置：需要购买风神之奇物 进入第1次扰敪：风神将赐予您1024金色风灵</button>
+        <button class="PL7button" onclick="PL7reset()" v-if="player.hasUnlockedPL6">扯敩重置：需要e3.309e11扮敨点</button>
+        <button class="PLwbutton" onclick="PLwreset()" v-if="player.hasUnlockedPL7">第1次风灵坍缩需要e3.309e11扯敩点 扰敪重置：需要购买风神之奇物 进入第1次扰敪，风神将赐予您1024金色风灵</button>
         <br />
         <p align="center" class="ftsz2">
             你当前{{player.innormcha==0 & player.incha==0 & !player.infytx & !player.incyzb? "不在任何挑战":"在"}}<span v-if="player.innormcha!=0">普通挑战{{player.innormcha}} </span><span v-if="player.incha!=0">进阶挑战{{player.incha}} </span><span v-if="player.infytx">风压坍陷 </span><span v-if="player.incyzb">刺影征标 </span>中
@@ -93,8 +93,8 @@
             <button align="center" class="button" style="background-color: #00ff00; color: #000000" id="btrow4" v-if="player.hasUnlockedPL3" onclick="changeBt('row4')">扫敥</button>
             <button align="center" class="button" style="background-color: #00ffff; color: #000000" id="btrow5" v-if="player.hasUnlockedPL4" onclick="changeBt('row5')">扬敦</button>
             <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btrow6" v-if="player.hasUnlockedPL5" onclick="changeBt('row6')">扭敧</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff; display: none" id="btrow7" onclick="changeBt('row7')">扮敨</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff; display: none" id="btrow8" onclick="changeBt('row8')">扯敩</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btrow7" v-if="player.hasUnlockedPL6" onclick="changeBt('row7')">扮敨</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btrow8" v-if="player.hasUnlockedPL7" onclick="changeBt('row8')">扯敩</button>
             <button align="center" class="button" style="background-image: linear-gradient(to right,#808080,#ffffff,#808080); color: #000000" id="btrow9" onclick="changeBt('row9')">统计</button>
             <button align="center" class="button" style="background-image: linear-gradient(to right,#7f7f7f,#000000,#7f7f7f); color: #ffffff" id="btrow0" onclick="changeBt('row0')">杂项</button>
         </div>
@@ -178,7 +178,7 @@
             <button align="center" class="button" id="btp9_2" onclick="changePg('p9_2')">元素生命</button>
             <button align="center" class="button" id="btp9_3" onclick="changePg('p9_3')">软上限</button>
             <button align="center" class="button" id="btp9_4" onclick="changePg('p9_4')">折算</button>
-            <button align="center" class="button" id="btp9_59330" onclick="changePg('p9_59330')" style="display: none"> </button>
+            <button align="center" class="button" id="btp9_59330" onclick="changePg('p9_59330')" style="display: none">砂糖</button>
         </div>
         <div class="btnrow" id="row0" style="display: none">
             <button align="center" class="slbutton" id="btp0_1" onclick="changePg('p0_1')">存档</button>
@@ -221,468 +221,16 @@
                 <div align="center" class="ftsz2" style="display: inline-block">基础风灵产量：{{notation(v.baseprd)}} 每次作成乘数：{{notation(v.wscmpb)}}</div>
                 <button class="ltbutton" onclick="maxAll()">全部最大</button>
             </div>
-            <div id="wscset1">
-                <div class="wsc" style="background-color: #ffffff" id="wsc_01">
-                    <span id="wscs01"></span><span>壹式风灵作成·{{notatcom(player.wscb01)}}</span>
-                    <button class="wscbt2" id="byat01" onclick="abwSwitch(1)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx01" onclick="buyMaxWsc(1)">最大作成</button>
-                    <button class="wscbt1" id="byon01" onclick="buyWsc(1)">作成1次花费:<br>{{notation(v.wscc01)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca01).padEnd(15,' ')+"×"+notation(v.wscm01).padEnd(15,' ')+"^"+notation(v.wscp01).padEnd(15,' ')+"¶"+notation(v.wsch01).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffaaaa" id="wsc_02">
-                    <span id="wscs02"></span><span>贰式风灵作成·{{notatcom(player.wscb02)}}</span>
-                    <button class="wscbt2" id="byat02" onclick="abwSwitch(2)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[2]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx02" onclick="buyMaxWsc(2)">最大作成</button>
-                    <button class="wscbt1" id="byon02" onclick="buyWsc(2)">作成1次花费:<br>{{notation(v.wscc02)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca02).padEnd(15,' ')+"×"+notation(v.wscm02).padEnd(15,' ')+"^"+notation(v.wscp02).padEnd(15,' ')+"¶"+notation(v.wsch02).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffffaa" id="wsc_03">
-                    <span id="wscs03"></span><span>叁式风灵作成·{{notatcom(player.wscb03)}}</span>
-                    <button class="wscbt2" id="byat03" onclick="abwSwitch(3)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[3]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx03" onclick="buyMaxWsc(3)">最大作成</button>
-                    <button class="wscbt1" id="byon03" onclick="buyWsc(3)">作成1次花费:<br>{{notation(v.wscc03)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca03).padEnd(15,' ')+"×"+notation(v.wscm03).padEnd(15,' ')+"^"+notation(v.wscp03).padEnd(15,' ')+"¶"+notation(v.wsch03).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaffaa" id="wsc_04">
-                    <span id="wscs04"></span><span>肆式风灵作成·{{notatcom(player.wscb04)}}</span>
-                    <button class="wscbt2" id="byat04" onclick="abwSwitch(4)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[4]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx04" onclick="buyMaxWsc(4)">最大作成</button>
-                    <button class="wscbt1" id="byon04" onclick="buyWsc(4)">作成1次花费:<br>{{notation(v.wscc04)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca04).padEnd(15,' ')+"×"+notation(v.wscm04).padEnd(15,' ')+"^"+notation(v.wscp04).padEnd(15,' ')+"¶"+notation(v.wsch04).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaffff" id="wsc_05">
-                    <span id="wscs05"></span><span>伍式风灵作成·{{notatcom(player.wscb05)}}</span>
-                    <button class="wscbt2" id="byat05" onclick="abwSwitch(5)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[5]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx05" onclick="buyMaxWsc(5)">最大作成</button>
-                    <button class="wscbt1" id="byon05" onclick="buyWsc(5)">作成1次花费:<br>{{notation(v.wscc05)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca05).padEnd(15,' ')+"×"+notation(v.wscm05).padEnd(15,' ')+"^"+notation(v.wscp05).padEnd(15,' ')+"¶"+notation(v.wsch05).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaaaff" id="wsc_06">
-                    <span id="wscs06"></span><span>陆式风灵作成·{{notatcom(player.wscb06)}}</span>
-                    <button class="wscbt2" id="byat06" onclick="abwSwitch(6)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[6]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx06" onclick="buyMaxWsc(6)">最大作成</button>
-                    <button class="wscbt1" id="byon06" onclick="buyWsc(6)">作成1次花费:<br>{{notation(v.wscc06)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca06).padEnd(15,' ')+"×"+notation(v.wscm06).padEnd(15,' ')+"^"+notation(v.wscp06).padEnd(15,' ')+"¶"+notation(v.wsch06).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffaaff" id="wsc_07">
-                    <span id="wscs07"></span><span>柒式风灵作成·{{notatcom(player.wscb07)}}</span>
-                    <button class="wscbt2" id="byat07" onclick="abwSwitch(7)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[7]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx07" onclick="buyMaxWsc(7)">最大作成</button>
-                    <button class="wscbt1" id="byon07" onclick="buyWsc(7)">作成1次花费:<br>{{notation(v.wscc07)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca07).padEnd(15,' ')+"×"+notation(v.wscm07).padEnd(15,' ')+"^"+notation(v.wscp07).padEnd(15,' ')+"¶"+notation(v.wsch07).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaaaaa" id="wsc_08">
-                    <span id="wscs08"></span><span>捌式风灵作成·{{notatcom(player.wscb08)}}</span>
-                    <button class="wscbt2" id="byat08" onclick="abwSwitch(8)" v-if="player.PL1upg[0]">自动：{{player.autobuywsc[8]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx08" onclick="buyMaxWsc(8)">最大作成</button>
-                    <button class="wscbt1" id="byon08" onclick="buyWsc(8)">作成1次花费:<br>{{notation(v.wscc08)}}能量</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca08).padEnd(15,' ')+"×"+notation(v.wscm08).padEnd(15,' ')+"^"+notation(v.wscp08).padEnd(15,' ')+"¶"+notation(v.wsch08).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset2" v-if="player.hasUnlockedPL1">
-                <div class="wsc" style="background-color: #ff5555" id="wsc_09">
-                    <span id="wscs09"></span><span>玖式风灵作成·{{notatcom(player.wscb09)}}</span>
-                    <button class="wscbt2" id="byat09" onclick="abwSwitch(9)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[9]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx09" onclick="buyMaxWsc(9)">最大作成</button>
-                    <button class="wscbt1" id="byon09" onclick="buyWsc(9)">作成1次花费:<br>{{notation(v.wscc09)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca09).padEnd(15,' ')+"×"+notation(v.wscm09).padEnd(15,' ')+"^"+notation(v.wscp09).padEnd(15,' ')+"¶"+notation(v.wsch09).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ff0000" id="wsc_10">
-                    <span id="wscs10"></span><span>壹零式风灵作成·{{notatcom(player.wscb10)}}</span>
-                    <button class="wscbt2" id="byat10" onclick="abwSwitch(10)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[10]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx10" onclick="buyMaxWsc(10)">最大作成</button>
-                    <button class="wscbt1" id="byon10" onclick="buyWsc(10)">作成1次花费:<br>{{notation(v.wscc10)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca10).padEnd(15,' ')+"×"+notation(v.wscm10).padEnd(15,' ')+"^"+notation(v.wscp10).padEnd(15,' ')+"¶"+notation(v.wsch10).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ff5500" id="wsc_11">
-                    <span id="wscs11"></span><span>壹壹式风灵作成·{{notatcom(player.wscb11)}}</span>
-                    <button class="wscbt2" id="byat11" onclick="abwSwitch(11)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[11]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx11" onclick="buyMaxWsc(11)">最大作成</button>
-                    <button class="wscbt1" id="byon11" onclick="buyWsc(11)">作成1次花费:<br>{{notation(v.wscc11)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca11).padEnd(15,' ')+"×"+notation(v.wscm11).padEnd(15,' ')+"^"+notation(v.wscp11).padEnd(15,' ')+"¶"+notation(v.wsch11).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aa5500" id="wsc_12">
-                    <span id="wscs12"></span><span>壹贰式风灵作成·{{notatcom(player.wscb12)}}</span>
-                    <button class="wscbt2" id="byat12" onclick="abwSwitch(12)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[12]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx12" onclick="buyMaxWsc(12)">最大作成</button>
-                    <button class="wscbt1" id="byon12" onclick="buyWsc(12)">作成1次花费:<br>{{notation(v.wscc12)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca12).padEnd(15,' ')+"×"+notation(v.wscm12).padEnd(15,' ')+"^"+notation(v.wscp12).padEnd(15,' ')+"¶"+notation(v.wsch12).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aa5555" id="wsc_13">
-                    <span id="wscs13"></span><span>壹叁式风灵作成·{{notatcom(player.wscb13)}}</span>
-                    <button class="wscbt2" id="byat13" onclick="abwSwitch(13)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[13]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx13" onclick="buyMaxWsc(13)">最大作成</button>
-                    <button class="wscbt1" id="byon13" onclick="buyWsc(13)">作成1次花费:<br>{{notation(v.wscc13)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca13).padEnd(15,' ')+"×"+notation(v.wscm13).padEnd(15,' ')+"^"+notation(v.wscp13).padEnd(15,' ')+"¶"+notation(v.wsch13).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aa0055" id="wsc_14">
-                    <span id="wscs14"></span><span>壹肆式风灵作成·{{notatcom(player.wscb14)}}</span>
-                    <button class="wscbt2" id="byat14" onclick="abwSwitch(14)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[14]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx14" onclick="buyMaxWsc(14)">最大作成</button>
-                    <button class="wscbt1" id="byon14" onclick="buyWsc(14)">作成1次花费:<br>{{notation(v.wscc14)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca14).padEnd(15,' ')+"×"+notation(v.wscm14).padEnd(15,' ')+"^"+notation(v.wscp14).padEnd(15,' ')+"¶"+notation(v.wsch14).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ff0055" id="wsc_15">
-                    <span id="wscs15"></span><span>壹伍式风灵作成·{{notatcom(player.wscb15)}}</span>
-                    <button class="wscbt2" id="byat15" onclick="abwSwitch(15)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[15]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx15" onclick="buyMaxWsc(15)">最大作成</button>
-                    <button class="wscbt1" id="byon15" onclick="buyWsc(15)">作成1次花费:<br>{{notation(v.wscc15)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca15).padEnd(15,' ')+"×"+notation(v.wscm15).padEnd(15,' ')+"^"+notation(v.wscp15).padEnd(15,' ')+"¶"+notation(v.wsch15).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aa0000" id="wsc_16">
-                    <span id="wscs16"></span><span>壹陆式风灵作成·{{notatcom(player.wscb16)}}</span>
-                    <button class="wscbt2" id="byat16" onclick="abwSwitch(16)" v-if="player.PL2tms.gte(4)">自动：{{player.autobuywsc[16]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx16" onclick="buyMaxWsc(16)">最大作成</button>
-                    <button class="wscbt1" id="byon16" onclick="buyWsc(16)">作成1次花费:<br>{{notation(v.wscc16)}}扩散点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca16).padEnd(15,' ')+"×"+notation(v.wscm16).padEnd(15,' ')+"^"+notation(v.wscp16).padEnd(15,' ')+"¶"+notation(v.wsch16).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset3" v-if="player.hasUnlockedPL2">
-                <div class="wsc" style="background-color: #ffff55" id="wsc_17">
-                    <span id="wscs17"></span><span>壹柒式风灵作成·{{notatcom(player.wscb17)}}</span>
-                    <button class="wscbt2" id="byat17" onclick="abwSwitch(17)">自动：{{player.autobuywsc[17]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx17" onclick="buyMaxWsc(17)">最大作成</button>
-                    <button class="wscbt1" id="byon17" onclick="buyWsc(17)">作成1次花费:<br>{{notation(v.wscc17)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca17).padEnd(15,' ')+"×"+notation(v.wscm17).padEnd(15,' ')+"^"+notation(v.wscp17).padEnd(15,' ')+"¶"+notation(v.wsch17).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffaa00" id="wsc_18">
-                    <span id="wscs18"></span><span>壹捌式风灵作成·{{notatcom(player.wscb18)}}</span>
-                    <button class="wscbt2" id="byat18" onclick="abwSwitch(18)">自动：{{player.autobuywsc[18]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx18" onclick="buyMaxWsc(18)">最大作成</button>
-                    <button class="wscbt1" id="byon18" onclick="buyWsc(18)">作成1次花费:<br>{{notation(v.wscc18)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca18).padEnd(15,' ')+"×"+notation(v.wscm18).padEnd(15,' ')+"^"+notation(v.wscp18).padEnd(15,' ')+"¶"+notation(v.wsch18).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffff00" id="wsc_19">
-                    <span id="wscs19"></span><span>壹玖式风灵作成·{{notatcom(player.wscb19)}}</span>
-                    <button class="wscbt2" id="byat19" onclick="abwSwitch(19)">自动：{{player.autobuywsc[19]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx19" onclick="buyMaxWsc(19)">最大作成</button>
-                    <button class="wscbt1" id="byon19" onclick="buyWsc(19)">作成1次花费:<br>{{notation(v.wscc19)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca19).padEnd(15,' ')+"×"+notation(v.wscm19).padEnd(15,' ')+"^"+notation(v.wscp19).padEnd(15,' ')+"¶"+notation(v.wsch19).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaff00" id="wsc_20">
-                    <span id="wscs20"></span><span>贰零式风灵作成·{{notatcom(player.wscb20)}}</span>
-                    <button class="wscbt2" id="byat20" onclick="abwSwitch(20)">自动：{{player.autobuywsc[20]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx20" onclick="buyMaxWsc(20)">最大作成</button>
-                    <button class="wscbt1" id="byon20" onclick="buyWsc(20)">作成1次花费:<br>{{notation(v.wscc20)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca20).padEnd(15,' ')+"×"+notation(v.wscm20).padEnd(15,' ')+"^"+notation(v.wscp20).padEnd(15,' ')+"¶"+notation(v.wsch20).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaff55" id="wsc_21">
-                    <span id="wscs21"></span><span>贰壹式风灵作成·{{notatcom(player.wscb21)}}</span>
-                    <button class="wscbt2" id="byat21" onclick="abwSwitch(21)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx21" onclick="buyMaxWsc(21)">最大作成</button>
-                    <button class="wscbt1" id="byon21" onclick="buyWsc(21)">作成1次花费:<br>{{notation(v.wscc21)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca21).padEnd(15,' ')+"×"+notation(v.wscm21).padEnd(15,' ')+"^"+notation(v.wscp21).padEnd(15,' ')+"¶"+notation(v.wsch21).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaaa55" id="wsc_22">
-                    <span id="wscs22"></span><span>贰贰式风灵作成·{{notatcom(player.wscb22)}}</span>
-                    <button class="wscbt2" id="byat22" onclick="abwSwitch(22)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx22" onclick="buyMaxWsc(22)">最大作成</button>
-                    <button class="wscbt1" id="byon22" onclick="buyWsc(22)">作成1次花费:<br>{{notation(v.wscc22)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca22).padEnd(15,' ')+"×"+notation(v.wscm22).padEnd(15,' ')+"^"+notation(v.wscp22).padEnd(15,' ')+"¶"+notation(v.wsch22).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #ffaa55" id="wsc_23">
-                    <span id="wscs23"></span><span>贰叁式风灵作成·{{notatcom(player.wscb23)}}</span>
-                    <button class="wscbt2" id="byat23" onclick="abwSwitch(23)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx23" onclick="buyMaxWsc(23)">最大作成</button>
-                    <button class="wscbt1" id="byon23" onclick="buyWsc(23)">作成1次花费:<br>{{notation(v.wscc23)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca23).padEnd(15,' ')+"×"+notation(v.wscm23).padEnd(15,' ')+"^"+notation(v.wscp23).padEnd(15,' ')+"¶"+notation(v.wsch23).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #aaaa00" id="wsc_24">
-                    <span id="wscs24"></span><span>贰肆式风灵作成·{{notatcom(player.wscb24)}}</span>
-                    <button class="wscbt2" id="byat24" onclick="abwSwitch(24)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx24" onclick="buyMaxWsc(24)">最大作成</button>
-                    <button class="wscbt1" id="byon24" onclick="buyWsc(24)">作成1次花费:<br>{{notation(v.wscc24)}}扪敤点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca24).padEnd(15,' ')+"×"+notation(v.wscm24).padEnd(15,' ')+"^"+notation(v.wscp24).padEnd(15,' ')+"¶"+notation(v.wsch24).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset4" v-if="player.hasUnlockedPL3">
-                <div class="wsc" style="background-color: #55ff55" id="wsc_25">
-                    <span id="wscs25"></span><span>贰伍式风灵作成·{{notatcom(player.wscb25)}}</span>
-                    <button class="wscbt2" id="byat25" onclick="abwSwitch(25)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx25" onclick="buyMaxWsc(25)">最大作成</button>
-                    <button class="wscbt1" id="byon25" onclick="buyWsc(25)">作成1次花费:<br>{{notation(v.wscc25)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca25).padEnd(15,' ')+"×"+notation(v.wscm25).padEnd(15,' ')+"^"+notation(v.wscp25).padEnd(15,' ')+"¶"+notation(v.wsch25).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55aa00" id="wsc_26">
-                    <span id="wscs26"></span><span>贰陆式风灵作成·{{notatcom(player.wscb26)}}</span>
-                    <button class="wscbt2" id="byat26" onclick="abwSwitch(26)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx26" onclick="buyMaxWsc(26)">最大作成</button>
-                    <button class="wscbt1" id="byon26" onclick="buyWsc(26)">作成1次花费:<br>{{notation(v.wscc26)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca26).padEnd(15,' ')+"×"+notation(v.wscm26).padEnd(15,' ')+"^"+notation(v.wscp26).padEnd(15,' ')+"¶"+notation(v.wsch26).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55ff00" id="wsc_27">
-                    <span id="wscs27"></span><span>贰柒式风灵作成·{{notatcom(player.wscb27)}}</span>
-                    <button class="wscbt2" id="byat27" onclick="abwSwitch(27)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx27" onclick="buyMaxWsc(27)">最大作成</button>
-                    <button class="wscbt1" id="byon27" onclick="buyWsc(27)">作成1次花费:<br>{{notation(v.wscc27)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca27).padEnd(15,' ')+"×"+notation(v.wscm27).padEnd(15,' ')+"^"+notation(v.wscp27).padEnd(15,' ')+"¶"+notation(v.wsch27).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00ff00" id="wsc_28">
-                    <span id="wscs28"></span><span>贰捌式风灵作成·{{notatcom(player.wscb28)}}</span>
-                    <button class="wscbt2" id="byat28" onclick="abwSwitch(28)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx28" onclick="buyMaxWsc(28)">最大作成</button>
-                    <button class="wscbt1" id="byon28" onclick="buyWsc(28)">作成1次花费:<br>{{notation(v.wscc28)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca28).padEnd(15,' ')+"×"+notation(v.wscm28).padEnd(15,' ')+"^"+notation(v.wscp28).padEnd(15,' ')+"¶"+notation(v.wsch28).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00ff55" id="wsc_29">
-                    <span id="wscs29"></span><span>贰玖式风灵作成·{{notatcom(player.wscb29)}}</span>
-                    <button class="wscbt2" id="byat29" onclick="abwSwitch(29)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx29" onclick="buyMaxWsc(29)">最大作成</button>
-                    <button class="wscbt1" id="byon29" onclick="buyWsc(29)">作成1次花费:<br>{{notation(v.wscc29)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca29).padEnd(15,' ')+"×"+notation(v.wscm29).padEnd(15,' ')+"^"+notation(v.wscp29).padEnd(15,' ')+"¶"+notation(v.wsch29).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00aa55" id="wsc_30">
-                    <span id="wscs30"></span><span>叁零式风灵作成·{{notatcom(player.wscb30)}}</span>
-                    <button class="wscbt2" id="byat30" onclick="abwSwitch(30)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx30" onclick="buyMaxWsc(30)">最大作成</button>
-                    <button class="wscbt1" id="byon30" onclick="buyWsc(30)">作成1次花费:<br>{{notation(v.wscc30)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca30).padEnd(15,' ')+"×"+notation(v.wscm30).padEnd(15,' ')+"^"+notation(v.wscp30).padEnd(15,' ')+"¶"+notation(v.wsch30).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55aa55" id="wsc_31">
-                    <span id="wscs31"></span><span>叁壹式风灵作成·{{notatcom(player.wscb31)}}</span>
-                    <button class="wscbt2" id="byat31" onclick="abwSwitch(31)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx31" onclick="buyMaxWsc(31)">最大作成</button>
-                    <button class="wscbt1" id="byon31" onclick="buyWsc(31)">作成1次花费:<br>{{notation(v.wscc31)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca31).padEnd(15,' ')+"×"+notation(v.wscm31).padEnd(15,' ')+"^"+notation(v.wscp31).padEnd(15,' ')+"¶"+notation(v.wsch31).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00aa00" id="wsc_32">
-                    <span id="wscs32"></span><span>叁贰式风灵作成·{{notatcom(player.wscb32)}}</span>
-                    <button class="wscbt2" id="byat32" onclick="abwSwitch(32)">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx32" onclick="buyMaxWsc(32)">最大作成</button>
-                    <button class="wscbt1" id="byon32" onclick="buyWsc(32)">作成1次花费:<br>{{notation(v.wscc32)}}扫敥点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca32).padEnd(15,' ')+"×"+notation(v.wscm32).padEnd(15,' ')+"^"+notation(v.wscp32).padEnd(15,' ')+"¶"+notation(v.wsch32).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset5" v-if="player.hasUnlockedPL4">
-                <div class="wsc" style="background-color: #55ffff" id="wsc_33">
-                    <span id="wscs33"></span><span>叁叁式风灵作成·{{notatcom(player.wscb33)}}</span>
-                    <button class="wscbt2" id="byat33" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx33" onclick="buyMaxWsc(33)">最大作成</button>
-                    <button class="wscbt1" id="byon33" onclick="buyWsc(33)">作成1次花费:<br>{{notation(v.wscc33)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca33).padEnd(15,' ')+"×"+notation(v.wscm33).padEnd(15,' ')+"^"+notation(v.wscp33).padEnd(15,' ')+"¶"+notation(v.wsch33).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55aaaa" id="wsc_34">
-                    <span id="wscs34"></span><span>叁肆式风灵作成·{{notatcom(player.wscb34)}}</span>
-                    <button class="wscbt2" id="byat34" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx34" onclick="buyMaxWsc(34)">最大作成</button>
-                    <button class="wscbt1" id="byon34" onclick="buyWsc(34)">作成1次花费:<br>{{notation(v.wscc34)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca34).padEnd(15,' ')+"×"+notation(v.wscm34).padEnd(15,' ')+"^"+notation(v.wscp34).padEnd(15,' ')+"¶"+notation(v.wsch34).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55ffaa" id="wsc_35">
-                    <span id="wscs35"></span><span>叁伍式风灵作成·{{notatcom(player.wscb35)}}</span>
-                    <button class="wscbt2" id="byat35" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx35" onclick="buyMaxWsc(35)">最大作成</button>
-                    <button class="wscbt1" id="byon35" onclick="buyWsc(35)">作成1次花费:<br>{{notation(v.wscc35)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca35).padEnd(15,' ')+"×"+notation(v.wscm35).padEnd(15,' ')+"^"+notation(v.wscp35).padEnd(15,' ')+"¶"+notation(v.wsch35).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00ffaa" id="wsc_36">
-                    <span id="wscs36"></span><span>叁陆式风灵作成·{{notatcom(player.wscb36)}}</span>
-                    <button class="wscbt2" id="byat36" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx36" onclick="buyMaxWsc(36)">最大作成</button>
-                    <button class="wscbt1" id="byon36" onclick="buyWsc(36)">作成1次花费:<br>{{notation(v.wscc36)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca36).padEnd(15,' ')+"×"+notation(v.wscm36).padEnd(15,' ')+"^"+notation(v.wscp36).padEnd(15,' ')+"¶"+notation(v.wsch36).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00ffff" id="wsc_37">
-                    <span id="wscs37"></span><span>叁柒式风灵作成·{{notatcom(player.wscb37)}}</span>
-                    <button class="wscbt2" id="byat37" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx37" onclick="buyMaxWsc(37)">最大作成</button>
-                    <button class="wscbt1" id="byon37" onclick="buyWsc(37)">作成1次花费:<br>{{notation(v.wscc37)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca37).padEnd(15,' ')+"×"+notation(v.wscm37).padEnd(15,' ')+"^"+notation(v.wscp37).padEnd(15,' ')+"¶"+notation(v.wsch37).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00aaff" id="wsc_38">
-                    <span id="wscs38"></span><span>叁捌式风灵作成·{{notatcom(player.wscb38)}}</span>
-                    <button class="wscbt2" id="byat38" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx38" onclick="buyMaxWsc(38)">最大作成</button>
-                    <button class="wscbt1" id="byon38" onclick="buyWsc(38)">作成1次花费:<br>{{notation(v.wscc38)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca38).padEnd(15,' ')+"×"+notation(v.wscm38).padEnd(15,' ')+"^"+notation(v.wscp38).padEnd(15,' ')+"¶"+notation(v.wsch38).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #55aaff" id="wsc_39">
-                    <span id="wscs39"></span><span>叁玖式风灵作成·{{notatcom(player.wscb39)}}</span>
-                    <button class="wscbt2" id="byat39" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx39" onclick="buyMaxWsc(39)">最大作成</button>
-                    <button class="wscbt1" id="byon39" onclick="buyWsc(39)">作成1次花费:<br>{{notation(v.wscc39)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca39).padEnd(15,' ')+"×"+notation(v.wscm39).padEnd(15,' ')+"^"+notation(v.wscp39).padEnd(15,' ')+"¶"+notation(v.wsch39).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #00aaaa" id="wsc_40">
-                    <span id="wscs40"></span><span>肆零式风灵作成·{{notatcom(player.wscb40)}}</span>
-                    <button class="wscbt2" id="byat40" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx40" onclick="buyMaxWsc(40)">最大作成</button>
-                    <button class="wscbt1" id="byon40" onclick="buyWsc(40)">作成1次花费:<br>{{notation(v.wscc40)}}扬敦点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca40).padEnd(15,' ')+"×"+notation(v.wscm40).padEnd(15,' ')+"^"+notation(v.wscp40).padEnd(15,' ')+"¶"+notation(v.wsch40).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset6" v-if="player.hasUnlockedPL5">
-                <div class="wsc" style="background-color: #5555ff" id="wsc_41">
-                    <span id="wscs41"></span><span>肆壹式风灵作成·{{notatcom(player.wscb41)}}</span>
-                    <button class="wscbt2" id="byat41" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx41" onclick="buyMaxWsc(41)">最大作成</button>
-                    <button class="wscbt1" id="byon41" onclick="buyWsc(41)">作成1次花费:<br>{{notation(v.wscc41)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca41).padEnd(15,' ')+"×"+notation(v.wscm41).padEnd(15,' ')+"^"+notation(v.wscp41).padEnd(15,' ')+"¶"+notation(v.wsch41).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #5500aa" id="wsc_42">
-                    <span id="wscs42"></span><span>肆贰式风灵作成·{{notatcom(player.wscb42)}}</span>
-                    <button class="wscbt2" id="byat42" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx42" onclick="buyMaxWsc(42)">最大作成</button>
-                    <button class="wscbt1" id="byon42" onclick="buyWsc(42)">作成1次花费:<br>{{notation(v.wscc42)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca42).padEnd(15,' ')+"×"+notation(v.wscm42).padEnd(15,' ')+"^"+notation(v.wscp42).padEnd(15,' ')+"¶"+notation(v.wsch42).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #5555aa" id="wsc_43">
-                    <span id="wscs43"></span><span>肆叁式风灵作成·{{notatcom(player.wscb43)}}</span>
-                    <button class="wscbt2" id="byat43" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx43" onclick="buyMaxWsc(43)">最大作成</button>
-                    <button class="wscbt1" id="byon43" onclick="buyWsc(43)">作成1次花费:<br>{{notation(v.wscc43)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca43).padEnd(15,' ')+"×"+notation(v.wscm43).padEnd(15,' ')+"^"+notation(v.wscp43).padEnd(15,' ')+"¶"+notation(v.wsch43).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #0055aa" id="wsc_44">
-                    <span id="wscs44"></span><span>肆肆式风灵作成·{{notatcom(player.wscb44)}}</span>
-                    <button class="wscbt2" id="byat44" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx44" onclick="buyMaxWsc(44)">最大作成</button>
-                    <button class="wscbt1" id="byon44" onclick="buyWsc(44)">作成1次花费:<br>{{notation(v.wscc44)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca44).padEnd(15,' ')+"×"+notation(v.wscm44).padEnd(15,' ')+"^"+notation(v.wscp44).padEnd(15,' ')+"¶"+notation(v.wsch44).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #0055ff" id="wsc_45">
-                    <span id="wscs45"></span><span>肆伍式风灵作成·{{notatcom(player.wscb45)}}</span>
-                    <button class="wscbt2" id="byat45" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx45" onclick="buyMaxWsc(45)">最大作成</button>
-                    <button class="wscbt1" id="byon45" onclick="buyWsc(45)">作成1次花费:<br>{{notation(v.wscc45)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca45).padEnd(15,' ')+"×"+notation(v.wscm45).padEnd(15,' ')+"^"+notation(v.wscp45).padEnd(15,' ')+"¶"+notation(v.wsch45).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #0000ff" id="wsc_46">
-                    <span id="wscs46"></span><span>肆陆式风灵作成·{{notatcom(player.wscb46)}}</span>
-                    <button class="wscbt2" id="byat46" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx46" onclick="buyMaxWsc(46)">最大作成</button>
-                    <button class="wscbt1" id="byon46" onclick="buyWsc(46)">作成1次花费:<br>{{notation(v.wscc46)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca46).padEnd(15,' ')+"×"+notation(v.wscm46).padEnd(15,' ')+"^"+notation(v.wscp46).padEnd(15,' ')+"¶"+notation(v.wsch46).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #5500ff" id="wsc_47">
-                    <span id="wscs47"></span><span>肆柒式风灵作成·{{notatcom(player.wscb47)}}</span>
-                    <button class="wscbt2" id="byat47" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx47" onclick="buyMaxWsc(47)">最大作成</button>
-                    <button class="wscbt1" id="byon47" onclick="buyWsc(47)">作成1次花费:<br>{{notation(v.wscc47)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca47).padEnd(15,' ')+"×"+notation(v.wscm47).padEnd(15,' ')+"^"+notation(v.wscp47).padEnd(15,' ')+"¶"+notation(v.wsch47).padEnd(15,' ')}}</span>
-                </div>
-                <div class="wsc" style="background-color: #0000aa" id="wsc_48">
-                    <span id="wscs48"></span><span>肆捌式风灵作成·{{notatcom(player.wscb48)}}</span>
-                    <button class="wscbt2" id="byat48" onclick="">自动：{{player.autobuywsc[1]?"开":"关"}}</button>
-                    <button class="wscbt2" id="bymx48" onclick="buyMaxWsc(48)">最大作成</button>
-                    <button class="wscbt1" id="byon48" onclick="buyWsc(48)">作成1次花费:<br>{{notation(v.wscc48)}}扭敧点</button><br />
-                    <span class="wscdat">{{"+"+notation(player.wsca48).padEnd(15,' ')+"×"+notation(v.wscm48).padEnd(15,' ')+"^"+notation(v.wscp48).padEnd(15,' ')+"¶"+notation(v.wsch48).padEnd(15,' ')}}</span>
-                </div>
-            </div>
-            <div id="wscset7" style="display: none">
-                <div class="wsc" style="background-color: #ff55ff" id="wsc_25">
-                    <span id="wscs25"></span><span>肆玖式风灵作成·</span><span id="wscb25">0</span>
-                    <button class="wscbt2" id="byat25" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx25" onclick="buyMaxWsc(25)">最大作成</button>
-                    <button class="wscbt1" id="byon25" onclick="buyWsc(25)">作成1次花费:<br><span id="wscc25"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd25">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #ff00aa" id="wsc_26">
-                    <span id="wscs26"></span><span>伍零式风灵作成·</span><span id="wscb26">0</span>
-                    <button class="wscbt2" id="byat26" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx26" onclick="buyMaxWsc(26)">最大作成</button>
-                    <button class="wscbt1" id="byon26" onclick="buyWsc(26)">作成1次花费:<br><span id="wscc26"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd26">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #ff55aa" id="wsc_27">
-                    <span id="wscs27"></span><span>伍壹式风灵作成·</span><span id="wscb27">0</span>
-                    <button class="wscbt2" id="byat27" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx27" onclick="buyMaxWsc(27)">最大作成</button>
-                    <button class="wscbt1" id="byon27" onclick="buyWsc(27)">作成1次花费:<br><span id="wscc27"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd27">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #aa55aa" id="wsc_28">
-                    <span id="wscs28"></span><span>伍贰式风灵作成·</span><span id="wscb28">0</span>
-                    <button class="wscbt2" id="byat28" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx28" onclick="buyMaxWsc(28)">最大作成</button>
-                    <button class="wscbt1" id="byon28" onclick="buyWsc(28)">作成1次花费:<br><span id="wscc28"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd28">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #aa55ff" id="wsc_29">
-                    <span id="wscs29"></span><span>伍叁式风灵作成·</span><span id="wscb29">0</span>
-                    <button class="wscbt2" id="byat29" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx29" onclick="buyMaxWsc(29)">最大作成</button>
-                    <button class="wscbt1" id="byon29" onclick="buyWsc(29)">作成1次花费:<br><span id="wscc29"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd29">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #aa00ff" id="wsc_30">
-                    <span id="wscs30"></span><span>伍肆式风灵作成·</span><span id="wscb30">0</span>
-                    <button class="wscbt2" id="byat30" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx30" onclick="buyMaxWsc(30)">最大作成</button>
-                    <button class="wscbt1" id="byon30" onclick="buyWsc(30)">作成1次花费:<br><span id="wscc30"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd30">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #ff00ff" id="wsc_31">
-                    <span id="wscs31"></span><span>伍伍式风灵作成·</span><span id="wscb31">0</span>
-                    <button class="wscbt2" id="byat31" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx31" onclick="buyMaxWsc(31)">最大作成</button>
-                    <button class="wscbt1" id="byon31" onclick="buyWsc(31)">作成1次花费:<br><span id="wscc31"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd31">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #aa00aa" id="wsc_32">
-                    <span id="wscs32"></span><span>伍陆式风灵作成·</span><span id="wscb32">0</span>
-                    <button class="wscbt2" id="byat32" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx32" onclick="buyMaxWsc(32)">最大作成</button>
-                    <button class="wscbt1" id="byon32" onclick="buyWsc(32)">作成1次花费:<br><span id="wscc32"></span>扮敨点</button><br />
-                    <span class="wscdat"><span id="wscd32">0.000</span></span>
-                </div>
-            </div>
-            <div id="wscset8" style="display: none">
-                <div class="wsc" style="background-color: #555555; color: #ffffff" id="wsc_25">
-                    <span id="wscs25"></span><span>伍柒式风灵作成·</span><span id="wscb25">0</span>
-                    <button class="wscbt2" id="byat25" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx25" style="color: #ffffff" onclick="buyMaxWsc(25)">最大作成</button>
-                    <button class="wscbt1" id="byon25" style="color: #ffffff" onclick="buyWsc(25)">作成1次花费:<br><span id="wscc25"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd25">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #550000; color: #ffffff" id="wsc_26">
-                    <span id="wscs26"></span><span>伍捌式风灵作成·</span><span id="wscb26">0</span>
-                    <button class="wscbt2" id="byat26" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx26" style="color: #ffffff" onclick="buyMaxWsc(26)">最大作成</button>
-                    <button class="wscbt1" id="byon26" style="color: #ffffff" onclick="buyWsc(26)">作成1次花费:<br><span id="wscc26"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd26">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #555500; color: #ffffff" id="wsc_27">
-                    <span id="wscs27"></span><span>伍玖式风灵作成·</span><span id="wscb27">0</span>
-                    <button class="wscbt2" id="byat27" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx27" style="color: #ffffff" onclick="buyMaxWsc(27)">最大作成</button>
-                    <button class="wscbt1" id="byon27" style="color: #ffffff" onclick="buyWsc(27)">作成1次花费:<br><span id="wscc27"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd27">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #005500; color: #ffffff" id="wsc_28">
-                    <span id="wscs28"></span><span>陆零式风灵作成·</span><span id="wscb28">0</span>
-                    <button class="wscbt2" id="byat28" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx28" style="color: #ffffff" onclick="buyMaxWsc(28)">最大作成</button>
-                    <button class="wscbt1" id="byon28" style="color: #ffffff" onclick="buyWsc(28)">作成1次花费:<br><span id="wscc28"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd28">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #005555; color: #ffffff" id="wsc_29">
-                    <span id="wscs29"></span><span>陆壹式风灵作成·</span><span id="wscb29">0</span>
-                    <button class="wscbt2" id="byat29" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx29" style="color: #ffffff" onclick="buyMaxWsc(29)">最大作成</button>
-                    <button class="wscbt1" id="byon29" style="color: #ffffff" onclick="buyWsc(29)">作成1次花费:<br><span id="wscc29"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd29">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #000055; color: #ffffff" id="wsc_30">
-                    <span id="wscs30"></span><span>陆贰式风灵作成·</span><span id="wscb30">0</span>
-                    <button class="wscbt2" id="byat30" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx30" style="color: #ffffff" onclick="buyMaxWsc(30)">最大作成</button>
-                    <button class="wscbt1" id="byon30" style="color: #ffffff" onclick="buyWsc(30)">作成1次花费:<br><span id="wscc30"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd30">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #550055; color: #ffffff" id="wsc_31">
-                    <span id="wscs31"></span><span>陆叁式风灵作成·</span><span id="wscb31">0</span>
-                    <button class="wscbt2" id="byat31" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx31" style="color: #ffffff" onclick="buyMaxWsc(31)">最大作成</button>
-                    <button class="wscbt1" id="byon31" style="color: #ffffff" onclick="buyWsc(31)">作成1次花费:<br><span id="wscc31"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd31">0.000</span></span>
-                </div>
-                <div class="wsc" style="background-color: #000000; color: #ffffff" id="wsc_32">
-                    <span id="wscs32"></span><span>陆肆式风灵作成·</span><span id="wscb32">0</span>
-                    <button class="wscbt2" id="byat32" onclick="">自动：</button>
-                    <button class="wscbt2" id="bymx32" style="color: #ffffff" onclick="buyMaxWsc(32)">最大作成</button>
-                    <button class="wscbt1" id="byon32" style="color: #ffffff" onclick="buyWsc(32)">作成1次花费:<br><span id="wscc32"></span>扯敩点</button><br />
-                    <span class="wscdat"><span id="wscd32">0.000</span></span>
+            <div v-for="wsc in zerotosixtyfour">
+                <div class="wsc" :style="{background: getWsColor(+wsc.id), color: +wsc.id>56 ? '#fff' : '#000'}"
+                     v-if="wsc.id<=wscUnlocked()">
+                    {{wscale(wsc.id)}}<span>{{toChineseOrdinal(wsc.id)}}式风灵作成·</span>{{notatcom(player["wscb"+tiername[wsc.id]])}}
+                    <button class="wscbt2" v-if="wscAutobuyable(wsc.id)" @click="abwSwitch(wsc.id)" :style="{color: wsc.id>56 ? '#fff' : '#000'}">自动：{{player.autobuywsc[wsc.id] ? "开" : "关"}}</button>
+                    <button class="wscbt2" @click="buyMaxWsc(wsc.id)" :style="{color: wsc.id>56 ? '#fff' : '#000'}">最大作成</button>
+                    <button class="wscbt1" @click="buyWsc(wsc.id)" :style="{color: wsc.id>56 ? '#fff' : '#000'}">
+                        作成1次花费:<br>{{notation(v["wscc" + tiername[wsc.id]])}}{{getWSCresourcename(Math.floor(wsc.id/8-0.125))}}
+                    </button><br />
+                    <span class="wscdat">{{displayWSdata(wsc.id)}}</span>
                 </div>
             </div>
         </div>
@@ -691,7 +239,7 @@
                 你的风灵基础值为({{notation(v.wscbaseValue1)}}×{{notation(v.fraue06)}}<span v-if="player.hasUnlockedPL1">+{{notation(v.wscbaseValue2)}}×{{notation(v.fraue06.mul(4))}}</span><span v-if="player.hasUnlockedPL2">+{{notation(v.wscbaseValue3)}}×{{notation(v.fraue06.mul(16))}}</span><span v-if="player.hasUnlockedPL3">+{{notation(v.wscbaseValue4)}}×{{notation(v.fraue06.mul(64))}}</span><span v-if="player.hasUnlockedPL4">+{{notation(v.wscbaseValue5)}}×{{notation(v.fraue06.mul(256))}}</span><span v-if="player.hasUnlockedPL5">+{{notation(v.wscbaseValue6)}}×{{notation(v.fraue06.mul(1024))}}</span>)^{{notation(v.wscbaseValueExp)}}={{notation(v.wscbaseValue)}}(基于你作成的风灵总数而定)
             </div>
             <div class="upg" id="tier_01">
-                <span id="tiers01"></span>{{notatint(player.tier01)}}式风单元
+                {{tscale(1)}}{{notatint(player.tier01)}}式风单元
                 <button class="wscbt2bl" onclick="abTier01Switch()">自动：{{player.autobuytier01?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier1()">需要：{{notation(v.tierc01)}}风灵基础值</button>
                 重置能量和1~8式风灵，但提升风单元。
@@ -707,7 +255,7 @@
                 <span v-if="player.tier01.gte(1995)&player.tier01.lt(6308)">在6308式风单元，将基于甜甜花倍数提高25式风单元效果。</span>
             </div>
             <div class="upg" id="tier_02">
-                <span id="tiers02"></span>{{notatint(player.tier02)}}式风模块
+                {{tscale(2)}}{{notatint(player.tier02)}}式风模块
                 <button class="wscbt2bl" onclick="abTier02Switch()">自动：{{player.autobuytier02?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier2()">需要：{{notation(v.tierc02)}}式风单元</button>
                 重置能量、1~8式风灵和风单元，但提升风模块。
@@ -721,7 +269,7 @@
                 <span v-if="player.tier02.gte(237)&player.tier02.lt(750)">在750式风模块，将分别使1~8、9~16、17~24、25~32式风灵每次作成乘数的指数变为256、64、16、4。</span>
             </div>
             <div class="upg" id="tier_03" v-if="player.PL2pts.gte(1)">
-                <span id="tiers03"></span>{{notatint(player.tier03)}}式风系统
+                {{tscale(3)}}{{notatint(player.tier03)}}式风系统
                 <button class="wscbt2bl" onclick="abTier03Switch()">自动：{{player.autobuytier03?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier3()">需要：{{notation(v.tierc03)}}式风模块</button>
                 重置能量、1~8式风灵、风单元和风模块，但提升风系统。
@@ -733,7 +281,7 @@
                 <span v-if="player.tier03.gte(42)&player.tier03.lt(106)">在106式风系统，将使3式风系统也对25~32式风灵生效，但效果倍率降低。</span>
             </div>
             <div class="upg" id="tier_04" v-if="player.std[6]">
-                <span id="tiers04"></span>{{notatint(player.tier04)}}式风四倍系统
+                {{tscale(4)}}{{notatint(player.tier04)}}式风四倍系统
                 <button class="wscbt2bl" onclick="abTier04Switch()">自动：{{player.autobuytier04?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier4()">需要：{{notation(v.tierc04)}}式风系统</button>
                 重置能量、1~8式风灵、风单元、风模块和风系统，但提升风四倍系统。
@@ -743,7 +291,7 @@
                 <span v-if="player.tier04.gte(11)&player.tier04.lt(28)">在28式风四倍系统，将基于风四倍系统提高一阶游戏速度</span>
             </div>
             <div class="upg" id="tier_05" v-if="player.PL4goal[12]">
-                {{notatint(player.tier05)}}式风五倍系统
+                {{tscale(5)}}{{notatint(player.tier05)}}式风五倍系统
                 <button class="wscbt2bl" onclick="abTier05Switch()" style="display:none">自动：{{player.autobuytier05?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier5()">需要：{{notation(v.tierc05)}}式风四倍系统</button>
                 重置能量、1~8式风灵和之前元素生命，但提升风五倍系统。
@@ -751,7 +299,7 @@
                 <span v-if="player.tier05.gte(1)&player.tier05.lt(5)">在5式风五倍系统，将基于风五倍系统增加所有风灵的超指数。</span>
             </div>
             <div class="upg" id="tier_06" v-if="player.PL4goal[13]">
-                {{notatint(player.tier06)}}式风六倍系统
+                {{tscale(6)}}{{notatint(player.tier06)}}式风六倍系统
                 <button class="wscbt2bl" onclick="abTier06witch()" style="display:none">自动：{{player.autobuytier06?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier6()">需要：{{notation(v.tierc06)}}式风五倍系统</button>
                 重置能量、1~8式风灵和之前元素生命，但提升风六倍系统。
@@ -761,25 +309,25 @@
         <div id="p1_3" v-if="v.currentPage=='p1_3'">
             <br />
             <div class="upg" v-if="player.tier02.gte(1)">
-                风灵升级一·等级{{notatint(player.upgd01)}} (+{{notatint(v.upgf01)}}) 每级使风灵每次作成乘数增加{{notation(v.upgd01mult)}}
+                {{uscale(1)}}风灵升级一·等级{{notatint(player.upgd01)}} (+{{notatint(v.upgf01)}}) 每级使风灵每次作成乘数增加{{notation(v.upgd01mult)}}
                 <button class="wscbt2" onclick="abUpgd01Switch()" style="color: #ffffff">自动：{{player.autobuyupgd01?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(1)">花费：{{notation(v.upgc01)}}能量</button>
                 当前：+{{notation(v.upge01)}}
             </div>
             <div class="upg" v-if="player.tier02.gte(2)">
-                风灵升级二·等级{{notatint(player.upgd02)}} (+{{notatint(v.upgf02)}}) 每级使风灵每次作成乘数乘以{{notation(v.upgd02mult)}}
+                {{uscale(2)}}风灵升级二·等级{{notatint(player.upgd02)}} (+{{notatint(v.upgf02)}}) 每级使风灵每次作成乘数乘以{{notation(v.upgd02mult)}}
                 <button class="wscbt2" onclick="abUpgd02Switch()" style="color: #ffffff">自动：{{player.autobuyupgd02?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(2)">花费：{{notation(v.upgc02)}}能量</button>
                 当前：×{{notation(v.upge02)}}
             </div>
             <div class="upg" v-if="player.tier02.gte(12)">
-                风灵升级三·等级{{notatint(player.upgd03)}} (+{{notatint(v.upgf03)}}) 每级使风灵升级1倍率增加0.25倍
+                {{uscale(3)}}风灵升级三·等级{{notatint(player.upgd03)}} (+{{notatint(v.upgf03)}}) 每级使风灵升级1倍率增加{{notation(v.upge05.mul(0.25))}}倍
                 <button class="wscbt2" onclick="abUpgd03Switch()" style="color: #ffffff">自动：{{player.autobuyupgd03?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(3)">花费：{{notation(v.upgc03)}}能量</button>
                 当前：+{{notation(v.upge03)}}
             </div>
             <div class="upg" v-if="player.tier02.gte(30)">
-                风灵升级四·等级{{notatint(player.upgd04)}} (+{{notatint(v.upgf04)}}) 每级使风灵升级2倍率增加0.25次方
+                {{uscale(4)}}风灵升级四·等级{{notatint(player.upgd04)}} (+{{notatint(v.upgf04)}}) 每级使风灵升级2倍率增加{{notation(v.upge06.mul(0.25))}}次方
                 <button class="wscbt2" onclick="abUpgd04Switch()" style="color: #ffffff">自动：{{player.autobuyupgd04?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(4)">花费：{{notation(v.upgc04)}}能量</button>
                 当前：×{{notation(v.upge04)}}
@@ -1025,7 +573,7 @@
                     <tr>
                         <td><button class="PL1bab" onclick="buyparupg(1)">双倍风之微粒获取<br />等级{{notatint(player.parupg01)}}<br />当前：×{{notation(player.parupg01.pwb(2))}}<br />花费：{{notation(v.parupgc01)}}风之微粒</button></td>
                         <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒提升9~16式风灵<br />等级{{notatint(player.parupg02)}}<br />当前：×{{notation(player.anmpar.pow(player.parupg02.mul(0.25)).max(1))}}<br />花费：{{notation(v.parupgc02)}}风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.01875<br />等级{{notatint(player.parupg03)}}<br />当前：+{{notation(player.parupg03.div(64).add(0.0625).min(player.parupg03.div(64).add(0.0625).root(4)).sub(0.0625))}}<br />花费：{{notation(v.parupgc03)}}风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.01875<br />等级{{notatint(player.parupg03)}}<br />当前：+{{notation(player.parupg03.div(64).min(player.parupg03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.parupg03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.parupgc03)}}风之微粒</button></td>
                         <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />等级{{notatint(player.parupg04)}}<br />当前：+{{notatint(player.parupg04)}}<br />花费：{{notation(v.parupgc04)}}风之微粒</button></td>
                     </tr>
                 </table>
@@ -1318,7 +866,7 @@
                     <tr>
                         <td><button class="PL2bab" onclick="buyanm2u(1)">双倍风之徯粓产量<br />等级{{notatint(player.anm2u01)}}<br />当前：×{{notation(player.anm2u01.pwb(2))}}<br />花费：{{notation(v.anm2c01)}}风之徯粓</button></td>
                         <td><button class="PL2bab" onclick="buyanm2u(2)">风之徯粓提升17~24式风灵乘数<br />等级{{notatint(player.anm2u02)}}<br />当前：×{{notation(player.anm2.pow(player.anm2u02.mul(4)).max(1))}}<br />花费：{{notation(v.anm2c02)}}风之徯粓</button></td>
-                        <td><button class="PL2bab" onclick="buyanm2u(3)">增加风之徯粓效果指数<br />等级{{notatint(player.anm2u03)}}<br />当前：+{{notation(player.anm2u03.div(64).add(0.0625).min(player.anm2u03.div(64).add(0.0625).root(4)).sub(0.0625))}}<br />花费：{{notation(v.anm2c03)}}风之徯粓</button></td>
+                        <td><button class="PL2bab" onclick="buyanm2u(3)">增加风之徯粓效果指数<br />等级{{notatint(player.anm2u03)}}<br />当前：+{{notation(player.anm2u03.div(64).min(player.anm2u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm2u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm2c03)}}风之徯粓</button></td>
                         <td><button class="PL2bab" onclick="buyanm2u(4)">增加1~24式风灵指数<br />等级{{notatint(player.anm2u04)}}<br />当前：+{{notation(player.anm2u04.pow(0.6667).min(player.anm2u04.pow(0.3333).mul(2)).mul(0.01))}}<br />花费：{{notation(v.anm2c04)}}风之徯粓</button></td>
                     </tr>
                 </table><br />
@@ -1557,7 +1105,7 @@
                     <tr>
                         <td><button class="PL3upgno" onclick="buyanm3u(1)">双倍风之徰粔产量<br />等级{{notatint(player.anm3u01)}}<br />当前：×{{notation(player.anm3u01.pwb(2))}}<br />花费：{{notation(v.anm3c01)}}风之徰粔</button></td>
                         <td><button class="PL3upgno" onclick="buyanm3u(2)">风之徰粔提升25~32式风灵乘数<br />等级{{notatint(player.anm3u02)}}<br />当前：×{{notation(player.anm3.pow(player.anm3u02.mul(1024)).max(1))}}<br />花费：{{notation(v.anm3c02)}}风之徰粔</button></td>
-                        <td><button class="PL3upgno" onclick="buyanm3u(3)">增加风之徰粔效果指数<br />等级{{notatint(player.anm3u04)}}<br />当前：+{{notation(player.anm3u03.div(64))}}<br />花费：{{notation(v.anm3c03)}}风之徰粔</button></td>
+                        <td><button class="PL3upgno" onclick="buyanm3u(3)">增加风之徰粔效果指数<br />等级{{notatint(player.anm3u03)}}<br />当前：+{{notation(player.anm3u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm3u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm3c03)}}风之徰粔</button></td>
                         <td><button class="PL3upgno" onclick="buyanm3u(4)">增加一阶游戏速度<br />等级{{notatint(player.anm3u04)}}<br />当前：×{{notation(player.anm3u04.pwb(1.189207115002721))}}<br />花费：{{notation(v.anm3c04)}}风之徰粔</button></td>
                     </tr>
                     <tr>
@@ -1876,13 +1424,13 @@
             <div v-if="player.hasunlockedanm4">
                 <div align="center" class="ftsz2" style="color:#0080ff">
                     选择谜影才可进入刺影征标，除第一行外，上一行的谜影被选择，才能选择下一行的谜影，进入刺影征标将进行扬敦重置。<br />
-                    在刺影征标中无法更改谜影，到达e3.4e17能量以获得征标值，谜影越多，获得的征标值越多，基于征标值生成风之徱粕。<br />
+                    在刺影征标中无法更改谜影，到达e2e16能量以获得征标值，谜影越多，获得的征标值越多，基于征标值生成风之徱粕。<br />
                     征标值纪录：{{notatint(player.shdwrc)}}，完成此次刺影征标的征标值：{{notatint(v.shdwpd)}} {{player.incyzb?"(当前你在刺影征标中)":""}}
                 </div>
                 <table align="center">
                     <tr>
                         <td><button class="batu2" onclick="reshsl()">重置谜影选择</button></td>
-                        <td><button class="batu2" onclick="encyzb()">进入刺影征标</button></td>
+                        <td><button class="batu2" onclick="encyzb()">进入/退出刺影征标</button></td>
                     </tr>
                 </table>
                 <table align="center">
@@ -1899,7 +1447,7 @@
                 <table align="center">
                     <tr>
                         <td><button :class="player.shdwsl[3]?'PL4upgyes':'PL4upgno'" onclick="shsl(4)">多面体波效果除以4<br />(征标值×16)</button></td>
-                        <td><button :class="player.shdwsl[4]?'PL4upgyes':'PL4upgno'" onclick="shsl(5)">能量软上限提前64倍<br />(征标值×16)</button></td>
+                        <td><button :class="player.shdwsl[4]?'PL4upgyes':'PL4upgno'" onclick="shsl(5)">能量软上限提前256倍<br />(征标值×16)</button></td>
                         <td><button :class="player.shdwsl[5]?'PL4upgyes':'PL4upgno'" onclick="shsl(6)">金币效果除以1.4<br />(征标值×16)</button></td>
                     </tr>
                 </table>
@@ -1930,7 +1478,7 @@
                     <tr>
                         <td><button class="PL4bab" id="anm4u1" onclick="buyanm4u(1)">双倍风之徱粕产量<br />等级{{notatint(player.anm4u01)}}<br />当前：×{{notation(player.anm4u01.pwb(2))}}<br />花费：{{notation(v.anm4c01)}}风之徱粕</button></td>
                         <td><button class="PL4bab" id="anm4u2" onclick="buyanm4u(2)">风之徱粕提升33~40式风灵乘数<br />等级{{notatint(player.anm4u02)}}<br />当前：×{{notation(player.anm4.pow(player.anm4u02.mul(16777216)).max(1))}}<br />花费：{{notation(v.anm4c02)}}风之徱粕</button></td>
-                        <td><button class="PL4bab" id="anm4u3" onclick="buyanm4u(3)">增加风之徱粕效果指数<br />等级{{notatint(player.anm4u03)}}<br />当前：+{{notation(player.anm4u03.div(64))}}<br />花费：{{notation(v.anm4c03)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u3" onclick="buyanm4u(3)">增加风之徱粕效果指数<br />等级{{notatint(player.anm4u03)}}<br />当前：+{{notation(player.anm4u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm4u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm4c03)}}风之徱粕</button></td>
                         <td><button class="PL4bab" id="anm4u4" onclick="buyanm4u(4)">增加扬敦碎片获取<br />等级{{notatint(player.anm4u04)}}<br />当前：×{{notation(player.anm4u04.pwb(4))}}<br />花费：{{notation(v.anm4c04)}}风之徱粕</button></td>
                     </tr>
                 </table>
@@ -1948,9 +1496,9 @@
                     <div align="center" class="ftsz2">效果1：试炼场cps指数+{{notation(v.ntme01)}}(剩余{{notation(player.ntmr01)}}s)</div>
                     <div align="center" class="ftsz2">效果2：1~8式风灵超指数+{{notation(v.ntme02)}}(剩余{{notation(player.ntmr02)}}s)</div>
                     <div align="center" class="ftsz2">效果3：9~16式风灵超指数+{{notation(v.ntme03)}}(剩余{{notation(player.ntmr03)}}s)</div>
-                    <div align="center" class="ftsz2" id="ntmlk1">效果4：17~24式风灵超指数+{{notation(v.ntme04)}}(剩余{{notation(player.ntmr04)}}s)</div>
-                    <div align="center" class="ftsz2" id="ntmlk2">效果5：25~32式风灵超指数+{{notation(v.ntme05)}}(剩余{{notation(player.ntmr05)}}s)</div>
-                    <div align="center" class="ftsz2" id="ntmlk3">效果6：33~40式风灵超指数+{{notation(v.ntme06)}}(剩余{{notation(player.ntmr06)}}s)</div>
+                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(1)">效果4：17~24式风灵超指数+{{notation(v.ntme04)}}(剩余{{notation(player.ntmr04)}}s)</div>
+                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(2)">效果5：25~32式风灵超指数+{{notation(v.ntme05)}}(剩余{{notation(player.ntmr05)}}s)</div>
+                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(3)">效果6：33~40式风灵超指数+{{notation(v.ntme06)}}(剩余{{notation(player.ntmr06)}}s)</div>
                 </div>
                 <table align="center">
                     <tr>
@@ -1958,12 +1506,12 @@
                         <td><button class="PL4upgno" onclick="buyntmu(2)">将营养袋式数增加1，需要{{notatint(v.ntmc02)}}式营养餐</button></td>
                     </tr>
                     <tr>
-                        <td><button class="PL4upgno" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要{{notatint(v.ntmc03)}}式营养袋({{notatint(v.ntmc03)}}/9)</button></td>
-                        <td><button class="PL4upgno" onclick="buyntmu(4)">使营养餐的第一个非永久效果变为永久，且增加新的效果，但重置计时器和前3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(v.ntmc03)}}/3)</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要{{notatint(v.ntmc03)}}式营养袋({{notatint(player.ntmu03)}}/9)</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(4)">使营养餐的第一个非永久效果变为永久，且增加新的效果，但重置计时器和前3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(player.ntmu04)}}/3)</button></td>
                     </tr>
                 </table>
                 <div align="center" class="ftsz2">到达一定式数的营养餐以获得奖励</div>
-                <div id="ntmg01" class="PL4goalno">到达50式营养餐<br />基于营养餐提高扩散、扪敤、扫敥、扬敦能量的指数（+0.002×营养餐，最高为1）</div>
+                <div :class="player.ntmv.gte(50)?'PL4goalyes':'PL4gaolno'">到达50式营养餐<br />基于营养餐提高扩散、扪敤、扫敥、扬敦能量的指数（+0.002×营养餐，最高为1）</div>
                 <!--<div id="ntmg02" class="PL4goalno">到达114式营养餐<br />自动升级试炼场的atk/btk/ctk/dtk等级且不消耗金币</div>
             <div id="ntmg03" class="PL4goalno">到达260式营养餐<br />风之徱粕的第4个升级效果可以加成1~5式粒子获取数量</div>
             <div id="ntmg04" class="PL4goalno">到达593式营养餐<br />解锁贰式风压坍陷，在其中获得的能量加成分数倍率</div>-->
@@ -2187,15 +1735,17 @@
                 <tr>
                     <td>
                         <div align="center" class="xbmch">
+                            <br />
                             壹式时空扭敧机器<br />
-                            一阶游戏速度×1<br />
+                            一阶游戏速度×{{notation(player.PL5secrl.pow(player.xbmu01.add(1)))}}<br />
                             速度函数：x^{{notation(player.xbmu01.add(2))}}<br />
                         </div>
                     </td>
                     <td>
                         <div align="center" class="xbmch">
+                            <br />
                             贰式时空扭敧机器<br />
-                            二阶游戏速度×1<br />
+                            二阶游戏速度×{{notation(player.PL5secrl.pow(player.xbmu02.add(1).mul(0.25)))}}<br />
                             速度函数：x^{{notation(player.xbmu02.div(4).add(1.25))}}
                         </div>
                     </td>
@@ -2203,8 +1753,8 @@
             </table>
             <table align="center">
                 <tr>
-                    <td><button class="xbupg" onclick="">壹式时空扭敧机器的指数增加1<br />当前：+{{notation(player.xbmu01)}}<br />花费：{{notation(v.xbmc01)}}扭敧点</button></td>
-                    <td><button class="xbupg" onclick="">贰式时空扭敧机器的指数增加0.25<br />当前：+{{notation(player.xbmu02.div(4))}}<br />花费：{{notation(v.xbmc02)}}扭敧点</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(1)">壹式时空扭敧机器的指数增加1<br />当前：+{{notation(player.xbmu01)}}<br />花费：{{notation(v.xbmc01)}}扭敧点</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(2)">贰式时空扭敧机器的指数增加0.25<br />当前：+{{notation(player.xbmu02.div(4))}}<br />花费：{{notation(v.xbmc02)}}扭敧点</button></td>
 
                 </tr>
             </table>
@@ -2237,47 +1787,58 @@
         <div id="p9_1" v-if="v.currentPage=='p9_1'">
             <div id="wscstat">
                 <div class="ftsz3" style="color: #ffffff; text-align: center">风灵</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="playtime">{{"游玩时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms"}}</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalseconds">{{"总计秒数（现实时间）：" + notatint(player.totalSeconds)}}</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="gameseconds">{{"总计秒数（游戏时间）：" + notatint(player.gameseconds)}}</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="totalenergy">{{"总计能量：" + notation(player.energyttl)}}</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="energyshow">{{energyshow()}}</div>
-                <br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                {{"游玩时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms"}}<br />
+                {{"总计秒数（现实时间）：" + notatint(player.totalSeconds)}}<br />
+                {{"总计秒数（游戏时间）：" + notatint(player.gameseconds)}}<br />
+                {{"总计能量：" + notation(player.energyttl)}}<br />
+                {{energyshow()}}<br />
+                </div>
             </div>
             <div id="PL1stat" v-if="player.hasUnlockedPL1">
                 <div class="ftsz3" style="color: #ff0000; text-align: center">扩散</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1pts"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1sec"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL1secrl"></div><br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                    {{"您扩散了" + notatint(player.PL1tms) + "次"}}<br />
+                    {{"总计扩散点：" + notatint(player.PL1ptsttl)}}<br />
+                    {{"上次扩散到现在过了" + notatint(player.PL1sec) + "秒(游戏时间)"}}<br />
+                    {{"上次扩散到现在过了" + notatint(player.PL1secrl) + "秒(现实时间)"}}<br />
+                </div>
             </div>
             <div id="PL2stat" v-if="player.hasUnlockedPL2">
                 <div class="ftsz3" style="color: #ffff00; text-align: center">扪敤</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2pts"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2sec"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL2secrl"></div><br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                    {{"您扪敤了" + notatint(player.PL2tms) + "次"}}<br />
+                    {{"总计扪敤点：" + notatint(player.PL2ptsttl)}}<br />
+                    {{"上次扪敤到现在过了" + notatint(player.PL2sec) + "秒(游戏时间)"}}<br />
+                    {{"上次扪敤到现在过了" + notatint(player.PL2secrl) + "秒(现实时间)"}}<br />
+                </div>
             </div>
             <div id="PL3stat" v-if="player.hasUnlockedPL3">
                 <div class="ftsz3" style="color: #00ff00; text-align: center">扫敥</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3pts"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3sec"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL3secrl"></div><br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                    {{"您扫敥了" + notatint(player.PL3tms) + "次"}}<br />
+                    {{"总计扫敥点：" + notatint(player.PL3ptsttl)}}<br />
+                    {{"上次扫敥到现在过了" + notatint(player.PL3sec) + "秒(游戏时间)"}}<br />
+                    {{"上次扫敥到现在过了" + notatint(player.PL3secrl) + "秒(现实时间)"}}<br />
+                </div>
             </div>
             <div id="PL4stat" v-if="player.hasUnlockedPL4">
                 <div class="ftsz3" style="color: #00ffff; text-align: center">扬敦</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4pts"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4sec"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL4secrl"></div><br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                    {{"您扬敦了" + notatint(player.PL4tms) + "次"}}<br />
+                    {{"总计扬敦点：" + notatint(player.PL4ptsttl)}}<br />
+                    {{"上次扬敦到现在过了" + notatint(player.PL4sec) + "秒(游戏时间)"}}<br />
+                    {{"上次扬敦到现在过了" + notatint(player.PL4secrl) + "秒(现实时间)"}}<br />
+                </div>
             </div>
             <div id="PL5stat" v-if="player.hasUnlockedPL5">
                 <div class="ftsz3" style="color: #0000ff; text-align: center">扭敧</div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL5tms"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL5pts"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL5sec"></div>
-                <div class="ftsz1" style="color: #ffffff; text-align: center" id="PL5secrl"></div><br />
+                <div class="ftsz1" style="color: #ffffff; text-align: center">
+                    {{"您扭敧了" + notatint(player.PL5tms) + "次"}}<br />
+                    {{"总计扭敧点：" + notatint(player.PL5ptsttl)}}<br />
+                    {{"上次扭敧到现在过了" + notatint(player.PL5sec) + "秒(游戏时间)"}}<br />
+                    {{"上次扭敧到现在过了" + notatint(player.PL5secrl) + "秒(现实时间)"}}<br />
+                </div>
             </div>
         </div>
         <div id="p9_2" v-if="v.currentPage=='p9_2'">
@@ -2484,7 +2045,7 @@
         <div id="p0_3" v-if="v.currentPage=='p0_3'">
             <div align="center" style="color: #ffffff">
                 <br />
-                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v5.0.0<br />
+                风灵作成(wind-spirit-creation)  作者：6左爷6  当前版本：v5.0.1<br />
                 本增量游戏参考了《反物质维度》、《FE000000》、《能量发生器》、《质量增量重制版》、《香料放置》、《协同放置》等<br />
                 使用break_eternity.js来处理大数字<br />
                 <br />
@@ -2501,7 +2062,7 @@
                 <br />
                 <a href="https://a262537412640768744.github.io/homework-incremental/main.html" target="_blank" style="color: #00ff80">作业增量</a>、
                 <a href="https://goldenapple125.github.io/RBN/" target="_blank" style="color: #00ff80">大数之路</a>、
-                <a href="https://veryrrdefine.github.io/The-BYD-Tree/" target="_blank" style="color: #00ff80">BYD树</a>、
+                <a href="https://veryrrdefine.github.io/Xiaopengyou-Tree/" target="_blank" style="color: #00ff80">小朋友树</a>、
                 <a href="https://a262537412640768744.github.io/EnergyReset/" target="_blank" style="color: #00ff80">能源重置</a>、
                 <a href="https://rg3072.github.io/anti-softcap-tree/111/" target="_blank" style="color: #00ff80">反软上限树</a>、
                 <a href="https://hypcos.github.io/too-many-layers/" target="_blank" style="color: #00ff80">太多层级</a>、
@@ -2516,96 +2077,101 @@
         <div id="p0_4" v-if="v.currentPage=='p0_4'">
             <table align="center">
                 <tr>
-                    <td class="achno" id="ach00">00<br />违反热力学第一定律<span class="tooltip-text">作成1次壹式风灵</span></td>
-                    <td class="achno" id="ach01">01<br />100能量不是很多<span class="tooltip-text">作成1次贰式风灵</span></td>
-                    <td class="achno" id="ach02">02<br />AD现实版发售了<span class="tooltip-text">作成1次叁式风灵</span></td>
-                    <td class="achno" id="ach03">03<br />击掌只要四根手指<span class="tooltip-text">作成1次肆式风灵</span></td>
-                    <td class="achno" id="ach04">04<br />五小时能做任何事，除了更新<span class="tooltip-text">作成1次伍式风灵</span></td>
-                    <td class="achno" id="ach05">05<br />我们暂时承担不起9<span class="tooltip-text">作成1次陆式风灵</span></td>
-                    <td class="achno" id="ach06">06<br />下一次<span class="tooltip-text">作成1次柒式风灵</span></td>
-                    <td class="achno" id="ach07">07<br />转90°是X<span class="tooltip-text">作成1次捌式风灵</span></td>
-                    <td class="achno" id="ach08">08<br />“四风守护”单元<span class="tooltip-text">获得4式风单元</span></td>
-                    <td class="achno" id="ach09">09<br />犾<span class="tooltip-text">获得2式风模块</span></td>
-                    <td class="achno" id="ach0a">0a<br />二↑段↑跳<span class="tooltip-text">前3式风灵作成次数的排布为1,0,1</span></td>
-                    <td class="achno" id="ach0b">0b<br />我应该告诉他们购买吗…<span class="tooltip-text">作成10次壹式风灵但是2~8式风灵作成次数都为0</span></td>
-                    <td class="achno" id="ach0c">0c<br />醒醒！我们不再需要维度提升了！<span class="tooltip-text">没有5~8式风灵作成但是达到1e24能量</span></td>
-                    <td class="achno" id="ach0d">0d<br />我不到那玩意为啥这么难<span class="tooltip-text">至少有1e10能量，且生产的能量/秒至少是拥有的1e10倍</span></td>
-                    <td class="achno" id="ach0e">0e<br />只有8个<span class="tooltip-text">1~8式风灵作成都有且只有1个</span></td>
-                    <td class="achno" id="ach0f">0f<br />你维度提升了！<span class="tooltip-text">作成20次肆式风灵但是没有作成5~8式风灵</span></td>
+                    <td :class="player.ach[0]?'achyes':'achno'">00<br />违反热力学第一定律<span class="tooltip-text">作成1次壹式风灵</span></td>
+                    <td :class="player.ach[1]?'achyes':'achno'">01<br />100能量不是很多<span class="tooltip-text">作成1次贰式风灵</span></td>
+                    <td :class="player.ach[2]?'achyes':'achno'">02<br />AD现实版发售了<span class="tooltip-text">作成1次叁式风灵</span></td>
+                    <td :class="player.ach[3]?'achyes':'achno'">03<br />击掌只要四根手指<span class="tooltip-text">作成1次肆式风灵</span></td>
+                    <td :class="player.ach[4]?'achyes':'achno'">04<br />五小时能做任何事，除了更新<span class="tooltip-text">作成1次伍式风灵</span></td>
+                    <td :class="player.ach[5]?'achyes':'achno'">05<br />我们暂时承担不起9<span class="tooltip-text">作成1次陆式风灵</span></td>
+                    <td :class="player.ach[6]?'achyes':'achno'">06<br />下一次<span class="tooltip-text">作成1次柒式风灵</span></td>
+                    <td :class="player.ach[7]?'achyes':'achno'">07<br />转90°是X<span class="tooltip-text">作成1次捌式风灵</span></td>
+                    <td :class="player.ach[8]?'achyes':'achno'">08<br />“四风守护”单元<span class="tooltip-text">获得4式风单元</span></td>
+                    <td :class="player.ach[9]?'achyes':'achno'">09<br />犾<span class="tooltip-text">获得2式风模块</span></td>
+                    <td :class="player.ach[10]?'achyes':'achno'">0a<br />二↑段↑跳<span class="tooltip-text">前3式风灵作成次数的排布为1,0,1</span></td>
+                    <td :class="player.ach[11]?'achyes':'achno'">0b<br />我应该告诉他们购买吗…<span class="tooltip-text">作成10次壹式风灵但是2~8式风灵作成次数都为0</span></td>
+                    <td :class="player.ach[12]?'achyes':'achno'">0c<br />醒醒！我们不再需要维度提升了！<span class="tooltip-text">没有5~8式风灵作成但是达到1e24能量</span></td>
+                    <td :class="player.ach[13]?'achyes':'achno'">0d<br />我不到那玩意为啥这么难<span class="tooltip-text">至少有1e10能量，且生产的能量/秒至少是拥有的1e10倍</span></td>
+                    <td :class="player.ach[14]?'achyes':'achno'">0e<br />只有8个<span class="tooltip-text">1~8式风灵作成都有且只有1个</span></td>
+                    <td :class="player.ach[15]?'achyes':'achno'">0f<br />你维度提升了！<span class="tooltip-text">作成20次肆式风灵但是没有作成5~8式风灵</span></td>
                 </tr>
                 <tr>
-                    <td class="achno" id="ach10">10<br />扩散和扩散<span class="tooltip-text">扩散重置1次</span></td>
-                    <td class="achno" id="ach11">11<br />100万能量很多<span class="tooltip-text">获得1e6扩散能量</span></td>
-                    <td class="achno" id="ach12">12<br />百岁珊（？<span class="tooltip-text">一次扩散获得100扩散点</span></td>
-                    <td class="achno" id="ach13">13<br />挑战完成废我一辈子<span class="tooltip-text">完成所有普通挑战</span></td>
-                    <td class="achno" id="ach14">14<br />找到风灵超过了9个<span class="tooltip-text">作成16式风灵至少一次</span></td>
-                    <td class="achno" id="ach15">15<br />更好更需要DLC<span class="tooltip-text">购买所有扩散升级</span></td>
-                    <td class="achno" id="ach16">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的前三行购买项</span></td>
-                    <td class="achno" id="ach17">17<br />浓缩风元素能量安全吗？<span class="tooltip-text">解锁风之晶球</span></td>
-                    <td class="achno" id="ach18">18<br />无相之风拟造<span class="tooltip-text">获得10个风之晶球</span></td>
-                    <td class="achno" id="ach19">19<br />把它粉~~~~~~~~碎<span class="tooltip-text">进阶挑战完成次数达到16</span></td>
-                    <td class="achno" id="ach1a">1a<br />出序输倒<span class="tooltip-text">8>7式风灵作成倍率</span></td>
-                    <td class="achno" id="ach1b">1b<br />我忘啦……<span class="tooltip-text">没有任何风单元和风模块达到1.8e308能量</span></td>
-                    <td class="achno" id="ach1c">1c<br />只有一个……<span class="tooltip-text">1~8式风灵中只作成一次壹式风灵达到1.8e308能量</span></td>
-                    <td class="achno" id="ach1d">1d<br />回退按钮是做什么的<span class="tooltip-text">没有第二行购买项达到100每次购买乘数</span></td>
-                    <td class="achno" id="ach1e">1e<br />扩散点挑战？<span class="tooltip-text">在进阶挑战1中至少到达1e30扩散点</span></td>
-                    <td class="achno" id="ach1f">1f<br />这就要用到回退按钮<span class="tooltip-text">不用风之晶球升级到达1e200000能量</span></td>
+                    <td :class="player.ach[16]?'achyes':'achno'">10<br />扩散和扩散<span class="tooltip-text">扩散重置1次</span></td>
+                    <td :class="player.ach[17]?'achyes':'achno'">11<br />100万能量很多<span class="tooltip-text">获得1e6扩散能量</span></td>
+                    <td :class="player.ach[18]?'achyes':'achno'">12<br />百岁珊（？<span class="tooltip-text">一次扩散获得100扩散点</span></td>
+                    <td :class="player.ach[19]?'achyes':'achno'">13<br />挑战完成废我一辈子<span class="tooltip-text">完成所有普通挑战</span></td>
+                    <td :class="player.ach[20]?'achyes':'achno'">14<br />找到风灵超过了9个<span class="tooltip-text">作成16式风灵至少一次</span></td>
+                    <td :class="player.ach[21]?'achyes':'achno'">15<br />更好更需要DLC<span class="tooltip-text">购买所有扩散升级</span></td>
+                    <td :class="player.ach[22]?'achyes':'achno'">16<br />阿莱夫贝特基未尔<span class="tooltip-text">购买所有的前三行购买项</span></td>
+                    <td :class="player.ach[23]?'achyes':'achno'">17<br />浓缩风元素能量安全吗？<span class="tooltip-text">解锁风之晶球</span></td>
+                    <td :class="player.ach[24]?'achyes':'achno'">18<br />无相之风拟造<span class="tooltip-text">获得4个风之晶球</span></td>
+                    <td :class="player.ach[25]?'achyes':'achno'">19<br />把它粉~~~~~~~~碎<span class="tooltip-text">进阶挑战完成次数达到12</span></td>
+                    <td :class="player.ach[26]?'achyes':'achno'">1a<br />出序输倒<span class="tooltip-text">8>7式风灵作成倍率</span></td>
+                    <td :class="player.ach[27]?'achyes':'achno'">1b<br />我忘啦……<span class="tooltip-text">没有任何风单元和风模块达到1.8e308能量</span></td>
+                    <td :class="player.ach[28]?'achyes':'achno'">1c<br />只有一个……<span class="tooltip-text">1~8式风灵中只作成一次壹式风灵达到1.8e308能量</span></td>
+                    <td :class="player.ach[29]?'achyes':'achno'">1d<br />回退按钮是做什么的<span class="tooltip-text">没有第二行购买项达到100每次购买乘数</span></td>
+                    <td :class="player.ach[30]?'achyes':'achno'">1e<br />扩散点挑战？<span class="tooltip-text">在进阶挑战1中至少到达1e30扩散点</span></td>
+                    <td :class="player.ach[31]?'achyes':'achno'">1f<br />这就要用到回退按钮<span class="tooltip-text">不用风之晶球升级到达1e200000能量</span></td>
                 </tr>
                 <tr>
-                    <td class="achno" id="ach20">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
-                    <td class="achno" id="ach21">21<br />灌木丛中<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
-                    <td class="achno" id="ach22">22<br />里程碑上的一切都有点紧张<span class="tooltip-text">扪敤次数达到1000</span></td>
-                    <td class="achno" id="ach23">23<br />研究的本质是……<span class="tooltip-text">解锁风四倍系统</span></td>
-                    <td class="achno" id="ach24">24<br />风灵增强<span class="tooltip-text">作成24式风灵至少一次</span></td>
-                    <td class="achno" id="ach25">25<br />下一级重置的1/2进度<span class="tooltip-text">获得1.797e308扪敤点</span></td>
-                    <td class="achno" id="ach26">26<br />新型蝴蝶效应<span class="tooltip-text">炼金升级1达到10级</span></td>
-                    <td class="achno" id="ach27">27<br />抟风秘道<span class="tooltip-text">解锁风压坍陷</span></td>
-                    <td class="achno" id="ach28">28<br />诡秘之风的虚无<span class="tooltip-text">在风压坍陷中获得e1000能量</span></td>
-                    <td class="achno" id="ach29">29<br />虔诚之风的赐福<span class="tooltip-text">获得1e30风之徯粓</span></td>
-                    <td class="achno" id="ach2a">2a<br />前面忘了，中间忘了<span class="tooltip-text">没有风单元获得1.797e308扩散点</span></td>
-                    <td class="achno" id="ach2b">2b<br />后面也忘了<span class="tooltip-text">没有购买升级获得1e1233扩散点</span></td>
-                    <td class="achno" id="ach2c">2c<br />没有实验不值得过<span class="tooltip-text">在不购买研究时获得1e4932扩散点</span></td>
-                    <td class="achno" id="ach2d">2d<br />元素周期表<span class="tooltip-text">转化为火、水、雷、冰的元素数量分别为2,8,18,32</span></td>
-                    <td class="achno" id="ach2e">2e<br />套娃多方面体<span class="tooltip-text">在风压坍陷中进入进阶挑战</span></td>
-                    <td class="achno" id="ach2f">2f<br />炼金的狂怒<span class="tooltip-text">获得1000烧瓶和15实验装置</span></td>
+                    <td :class="player.ach[32]?'achyes':'achno'">20<br />扩散的后继叫扪敤<span class="tooltip-text">扪敤重置1次</span></td>
+                    <td :class="player.ach[33]?'achyes':'achno'">21<br />灌木丛中<span class="tooltip-text">将风元素分别转化为火、水、雷、冰元素一次</span></td>
+                    <td :class="player.ach[34]?'achyes':'achno'">22<br />里程碑上的一切都有点紧张<span class="tooltip-text">扪敤次数达到1000</span></td>
+                    <td :class="player.ach[35]?'achyes':'achno'">23<br />研究的本质是……<span class="tooltip-text">解锁风四倍系统</span></td>
+                    <td :class="player.ach[36]?'achyes':'achno'">24<br />风灵增强<span class="tooltip-text">作成24式风灵至少一次</span></td>
+                    <td :class="player.ach[37]?'achyes':'achno'">25<br />下一级重置的1/2进度<span class="tooltip-text">获得1.797e308扪敤点</span></td>
+                    <td :class="player.ach[38]?'achyes':'achno'">26<br />新型蝴蝶效应<span class="tooltip-text">炼金升级1达到10级</span></td>
+                    <td :class="player.ach[39]?'achyes':'achno'">27<br />抟风秘道<span class="tooltip-text">解锁风压坍陷</span></td>
+                    <td :class="player.ach[40]?'achyes':'achno'">28<br />诡秘之风的虚无<span class="tooltip-text">在风压坍陷中获得e1000能量</span></td>
+                    <td :class="player.ach[41]?'achyes':'achno'">29<br />虔诚之风的赐福<span class="tooltip-text">获得1e30风之徯粓</span></td>
+                    <td :class="player.ach[42]?'achyes':'achno'">2a<br />前面忘了，中间忘了<span class="tooltip-text">没有风单元获得1.797e308扩散点</span></td>
+                    <td :class="player.ach[43]?'achyes':'achno'">2b<br />后面也忘了<span class="tooltip-text">没有购买升级获得1e1233扩散点</span></td>
+                    <td :class="player.ach[44]?'achyes':'achno'">2c<br />没有实验不值得过<span class="tooltip-text">在不购买研究时获得1e4932扩散点</span></td>
+                    <td :class="player.ach[45]?'achyes':'achno'">2d<br />元素周期表<span class="tooltip-text">转化为火、水、雷、冰的元素数量分别为2,8,18,32</span></td>
+                    <td :class="player.ach[46]?'achyes':'achno'">2e<br />套娃多方面体<span class="tooltip-text">在风压坍陷中进入进阶挑战</span></td>
+                    <td :class="player.ach[47]?'achyes':'achno'">2f<br />炼金的狂怒<span class="tooltip-text">获得1000烧瓶和15实验装置</span></td>
                 </tr>
                 <tr>
-                    <td class="achno" id="ach30">30<br />欢迎来到扫敥的领域<span class="tooltip-text">扫敥重置1次</span></td>
-                    <td class="achno" id="ach31">31<br />增量进度条<span class="tooltip-text">第一个进度研究到达6级</span></td>
-                    <td class="achno" id="ach32">32<br />是魔法，我加了魔法<span class="tooltip-text">使药剂的最大生效数量达到3</span></td>
-                    <td class="achno" id="ach33">33<br />比一个甜甜花更快<span class="tooltip-text">将你的甜甜花转化为种子</span></td>
-                    <td class="achno" id="ach34">34<br />甜甜花生命：进化<span class="tooltip-text">拥有一个四倍大种子甜甜花</span></td>
-                    <td class="achno" id="ach35">35<br />上面不是有个一样的吗<span class="tooltip-text">获得1.797e308扫敥点</span></td>
-                    <td class="achno" id="ach36">36<br />无相之风重制版<span class="tooltip-text">解锁8个吸引子</span></td>
-                    <td class="achno" id="ach37">37<br />催化反应进程<span class="tooltip-text">解锁催化剂</span></td>
-                    <td class="achno" id="ach38">38<br />分子碰撞增量<span class="tooltip-text">使一阶全局速度达到256</span></td>
-                    <td class="achno" id="ach39">39<br />庙算无遗策<span class="tooltip-text">升级4种转化升级</span></td>
-                    <td class="achno" id="ach3a">3a<br />毫无进展<span class="tooltip-text">在一阶全局速度小于1时进行研究</span></td>
-                    <td class="achno" id="ach3b">3b<br />无正面效果<span class="tooltip-text">没有药剂效果到达e1e16能量</span></td>
-                    <td class="achno" id="ach3c">3c<br />量好试剂<span class="tooltip-text">拥有2000个同一倍数的甜甜花</span></td>
-                    <td class="achno" id="ach3d">3d<br />搅拌置放<span class="tooltip-text">拥有1.000f5个x吸引子</span></td>
-                    <td class="achno" id="ach3e">3e<br />风絮搭配得当<span class="tooltip-text">当反应物在0和1之间时停止反应</span></td>
-                    <td class="achno" id="ach3f">3f<br />能掀起巨浪<span class="tooltip-text">没有转化升级到达e1.5e17能量</span></td>
+                    <td :class="player.ach[48]?'achyes':'achno'">30<br />欢迎来到扫敥的领域<span class="tooltip-text">扫敥重置1次</span></td>
+                    <td :class="player.ach[49]?'achyes':'achno'">31<br />增量进度条<span class="tooltip-text">第一个进度研究到达6级</span></td>
+                    <td :class="player.ach[50]?'achyes':'achno'">32<br />是魔法，我加了魔法<span class="tooltip-text">使药剂的最大生效数量达到3</span></td>
+                    <td :class="player.ach[51]?'achyes':'achno'">33<br />比一个甜甜花更快<span class="tooltip-text">将你的甜甜花转化为种子</span></td>
+                    <td :class="player.ach[52]?'achyes':'achno'">34<br />甜甜花生命：进化<span class="tooltip-text">拥有一个四倍大种子甜甜花</span></td>
+                    <td :class="player.ach[53]?'achyes':'achno'">35<br />上面不是有个一样的吗<span class="tooltip-text">获得1.797e308扫敥点</span></td>
+                    <td :class="player.ach[54]?'achyes':'achno'">36<br />无相之风重制版<span class="tooltip-text">解锁8个吸引子</span></td>
+                    <td :class="player.ach[55]?'achyes':'achno'">37<br />催化反应进程<span class="tooltip-text">解锁催化剂</span></td>
+                    <td :class="player.ach[56]?'achyes':'achno'">38<br />分子碰撞增量<span class="tooltip-text">使一阶全局速度达到256</span></td>
+                    <td :class="player.ach[57]?'achyes':'achno'">39<br />庙算无遗策<span class="tooltip-text">升级4种转化升级</span></td>
+                    <td :class="player.ach[58]?'achyes':'achno'">3a<br />毫无进展<span class="tooltip-text">在一阶全局速度小于1时进行研究</span></td>
+                    <td :class="player.ach[59]?'achyes':'achno'">3b<br />无正面效果<span class="tooltip-text">没有药剂效果到达e1e16能量</span></td>
+                    <td :class="player.ach[60]?'achyes':'achno'">3c<br />量好试剂<span class="tooltip-text">拥有2000个同一倍数的甜甜花</span></td>
+                    <td :class="player.ach[61]?'achyes':'achno'">3d<br />搅拌置放<span class="tooltip-text">拥有1.000f5个x吸引子</span></td>
+                    <td :class="player.ach[62]?'achyes':'achno'">3e<br />风絮搭配得当<span class="tooltip-text">当反应物在0和1之间时停止反应</span></td>
+                    <td :class="player.ach[63]?'achyes':'achno'">3f<br />能掀起巨浪<span class="tooltip-text">没有转化升级到达e1.5e17能量</span></td>
                 </tr>
                 <tr>
-                    <td class="achno" id="ach40">40<br />向上穿过扬敦的高墙<span class="tooltip-text">扬敦重置1次</span></td>
-                    <td class="achno" id="ach41">41<br />观测自身的观测<span class="tooltip-text">达成前5个扬敦目标</span></td>
-                    <td class="achno" id="ach42">42<br />我们能承担起8<span class="tooltip-text">将扬敦碎片升级1和2升至8级</span></td>
-                    <td class="achno" id="ach43">43<br />运变惊奇<span class="tooltip-text">开启惊奇风盒获得5种柏拉图立体</span></td>
-                    <td class="achno" id="ach44">44<br />第十个仍然免费<span class="tooltip-text">在试炼场通过第10阶段</span></td>
-                    <td class="achno" id="ach45">45<br />系统提升！<span class="tooltip-text">获得1式风五倍系统</span></td>
-                    <td class="achno" id="ach46">46<br />巧施协同<span class="tooltip-text">获得1e6每种粒子</span></td>
-                    <td class="achno" id="ach47">47<br />谜影<span class="tooltip-text">解锁刺影征标</span></td>
-                    <td class="achno" id="ach48">48<br />已经走过1/6了？<span class="tooltip-text">达到1024征标值记录</span></td>
-                    <td class="achno" id="ach49">49<br />某种奇妙的炼金产物<span class="tooltip-text">用营养餐制作一次营养袋</span></td>
-                    <td class="achno" id="ach4a">4a<br />隐藏的目标<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4b">4b<br />隐藏的目标之二<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4c">4c<br />这玩意有上限吗<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4d">4d<br />多面体组合来源于角色技能召唤物<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4e">4e<br />祭礼残章<span class="tooltip-text"></span></td>
-                    <td class="achno" id="ach4f">4f<br />流浪乐章<span class="tooltip-text"></span></td>
+                    <td :class="player.ach[64]?'achyes':'achno'">40<br />向上穿过扬敦的高墙<span class="tooltip-text">扬敦重置1次</span></td>
+                    <td :class="player.ach[65]?'achyes':'achno'">41<br />观测自身的观测<span class="tooltip-text">达成前5个扬敦目标</span></td>
+                    <td :class="player.ach[66]?'achyes':'achno'">42<br />我们能承担起8<span class="tooltip-text">将扬敦碎片升级1和2升至8级</span></td>
+                    <td :class="player.ach[67]?'achyes':'achno'">43<br />运变惊奇<span class="tooltip-text">开启惊奇风盒获得5种柏拉图立体</span></td>
+                    <td :class="player.ach[68]?'achyes':'achno'">44<br />第十个仍然免费<span class="tooltip-text">在试炼场通过第10阶段</span></td>
+                    <td :class="player.ach[69]?'achyes':'achno'">45<br />系统提升！<span class="tooltip-text">获得1式风五倍系统</span></td>
+                    <td :class="player.ach[70]?'achyes':'achno'">46<br />巧施协同<span class="tooltip-text">获得1e6每种粒子</span></td>
+                    <td :class="player.ach[71]?'achyes':'achno'">47<br />谜影<span class="tooltip-text">解锁刺影征标</span></td>
+                    <td :class="player.ach[72]?'achyes':'achno'">48<br />已经走过1/6了？<span class="tooltip-text">达到1024征标值记录</span></td>
+                    <td :class="player.ach[73]?'achyes':'achno'">49<br />某种奇妙的炼金产物<span class="tooltip-text">用营养餐制作一次营养袋</span></td>
+                    <td :class="player.ach[74]?'achyes':'achno'">4a<br />隐藏的目标<span class="tooltip-text">没有扩散、扪敤、扫敥能量时获得e1e16能量</span></td>
+                    <td :class="player.ach[75]?'achyes':'achno'">4b<br />隐藏的目标之二<span class="tooltip-text">没有扩散、扪敤、扫敥能量且在风压坍陷中时获得1e12000能量</span></td>
+                    <td :class="player.ach[76]?'achyes':'achno'">4c<br />这玩意有上限吗<span class="tooltip-text">进入征标值超过1e18的刺影征标（不需要完成）</span></td>
+                    <td :class="player.ach[77]?'achyes':'achno'">4d<br />多面体组合来源于角色技能召唤物<span class="tooltip-text">使锻造的立体数量分别为10/20/30/40</span></td>
+                    <td :class="player.ach[78]?'achyes':'achno'">4e<br />祭礼残章<span class="tooltip-text"></span></td>
+                    <td :class="player.ach[79]?'achyes':'achno'">4f<br />流浪乐章<span class="tooltip-text"></span></td>
                 </tr>
-
+                <tr>
+                    <td :class="player.ach[80]?'achyes':'achno'">50<br />进进入入扭扭敧敧……<span class="tooltip-text">扭敧重置1次</span></td>
+                    <td :class="player.ach[81]?'achyes':'achno'">51<br />波粒二象性<span class="tooltip-text">购买过所有深度为1的升级海升级</span></td>
+                    <td :class="player.ach[82]?'achyes':'achno'">52<br />AD已经提到，时间是相对的<span class="tooltip-text">二阶游戏速度到达100</span></td>
+                    <td :class="player.ach[83]?'achyes':'achno'">53<br />实验体玖零伍式<span class="tooltip-text">解锁光合作用</span></td>
+                </tr>
 
             </table>
         </div>

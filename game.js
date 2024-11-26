@@ -544,6 +544,10 @@ function hardReset() {
         xbmu03: new Decimal(0),
         xbmu04: new Decimal(0),
 
+        hasUnlockedPL6: false,
+
+        hasUnlockedPL7: false,
+
         autobuywsc: [null,
             false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
@@ -1340,7 +1344,9 @@ function get_offline_time() {
 }
 get_offline_time();
 
+//#region 存档
 /*存档*/
+
 function save() {
     localStorage.windSpiritCreation = btoa(JSON.stringify(player));
     shownoti("#autosave");
@@ -1423,7 +1429,9 @@ async function trueHardReset() {
         shownoti("#hardreset");
     }
 }
+//#endregion
 
+//#region 游戏
 /*游戏*/
 function buyWsc(tier) {
     getWscCost();
@@ -2445,10 +2453,10 @@ function getUpgdMult() {
     else v.upgd02mult = new Decimal(1.021897148654116).pow(v.upge04);
     v.upge01 = v.upgd01mult.mul(player.upgd01.add(v.upgf01));
     v.upge02 = softcap(v.upgd02mult.pow(player.upgd02.add(v.upgf02)));
-    v.upge03 = player.upgd03.add(v.upgf03).mul(0.25).mul(v.upge05).add(1);
-    v.upge04 = softcap(player.upgd04.add(v.upgf04).pow(v.upge06).pow(2)).root(2).mul(0.25).add(1);
+    v.upge03 = player.upgd03.add(v.upgf03).mul(v.upge05.mul(0.25)).add(1);
+    v.upge04 = softcap(player.upgd04.add(v.upgf04).mul(v.upge06.mul(0.25)).pow(2)).root(2).mul(0.25).add(1);
     v.upge05 = player.upgd05.pwb(1.090507732665257);
-    v.upge06 = player.upgd06.pwb(1.0108892860517004600204097905619);
+    v.upge06 = player.upgd06.pwb(1.010889286051700);
     if (player.anm2sc.gte("1e616")) upgepw = upgepw.add(0.5);
     if (player.tier02.gte(237)) upgepw = upgepw.add(0.5);
     upgepw = upgepw.mul(v.wxzfe);
@@ -3554,7 +3562,7 @@ function rptn() {
 function gettth() {
     v.tthgspd = new Decimal(2).pow(player.tthu01).mul(player.PL3energy.max(1).log(2).div(1e8).max(1)).mul(player.tthprem.max(1)).mul(player.PL4tms.mul(5).max(1));
     if (player.incha == 15) v.tthgspd = new Decimal(1);
-    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(32).sub(v.fraue08).max(0).pow(1.5).div(6)).add(player.tthsize.sub(160).max(0).pow(2).div(3))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize)));
+    v.tthgreq = new Decimal(5).pow(player.tthsize.add(player.tthsize.sub(32).sub(v.fraue08).max(0).pow(1.5).div(6)).add(player.tthsize.sub(160).max(0).pow(2).div(6))).div(new Decimal(1.01).pow(player.tthu03.mul(player.tthsize)));
     v.tthimpc = player.tthimpr.add(4);
     v.tthseedpd = new Decimal(2).pow(player.tthu02).mul(new Decimal(4).pow(player.tthsize)).mul(new Decimal(1.01).pow(player.tthu04.mul(player.tthsize))).max(1);
     v.tthgenepd = new Decimal(5).pow(player.tthsize);
@@ -4390,8 +4398,8 @@ function getfrau() {
         let name = tiername[i];
         v["frauc" + name] = new Decimal(2).pow(player["frau" + name].add(1).pow(2));
     }
-    v.frauc09 = player.frau09.add(544).pwb(1.044273782427413);
-    v.frauc10 = player.frau10.add(544).pwb(1.044273782427413);
+    v.frauc09 = player.frau09.add(360).pwb(1.059463094359295);
+    v.frauc10 = player.frau10.add(360).pwb(1.059463094359295);
     v.fraue01 = new Decimal(2).pow(player.frau01.mul(0.25)).max(1);
     v.fraue02 = player.frau02.mul(0.02);
     v.fraue03 = new Decimal(2).pow(player.frau03).max(1);
@@ -4406,16 +4414,21 @@ function getfrau() {
 
 function buyfrau(tier) {
     let name = tiername[tier];
-    let cap = [20, 20, 4, 4, 4, 4, 4, 4, 480, 480, ];
-    if (player.PL4fra.gte(v["frauc" + name]) & player["frau" + name].lt(new Decimal(cap[tier-1]))) {
-        player["frau" + name] = player["frau" + name].add(1);
-        player.PL4fra = player.PL4fra.sub(v["frauc" + name]);
+    let cap = [20, 20, 4, 4, 4, 4, 4, 4, 480, 480,];
+    if (tier <= 8) {
+        if (player.PL4fra.gte(v["frauc" + name]) & player["frau" + name].lt(new Decimal(cap[tier - 1]))) {
+            player["frau" + name] = player["frau" + name].add(1);
+            player.PL4fra = player.PL4fra.sub(v["frauc" + name]);
+        }
     }
+    let max = player.PL4fra.log(1.059463094359295).sub(360).floor().max(0).min(480);
+    if (tier == 9 & player.frau09.lt(max)) player.frau09 = max;
+    if (tier == 10 & player.frau10.lt(max)) player.frau10 = max;
 }
 
 function getboggle() {
-    v.boxc1 = scale(player.boxa1.add(4).pow(2.5)).root(2.5).pwb(4);
-    v.boxc2 = scale(player.boxa2.add(4).pow(2.5)).root(2.5).pow(4);
+    v.boxc1 = player.boxa1.add(4).pwb(4).max(player.boxa1.pwb(1.04).pwb(2));
+    v.boxc2 = player.boxa2.add(4).pow(4).max(player.boxa2.pwb(1.1));
     player.bogglettl = player.boxa1.add(player.boxa2);
     if (player.synu11.gte(1)) {
         v.hdrn4wps = player.bogglettl.min(player.bogglettl.mul(1e6).root(4)).pwb(2).mul(player.bogglettl).mul(v.synm01);
@@ -4436,8 +4449,8 @@ function getboggle() {
     v.hdrn8e = player.hdrn8w.div(64).add(1).log(2).pow(0.4).div(1024).min(0.05);
     v.hdrn12e = player.hdrn12w.div(16).add(1).log(2).pow(0.4).div(1024).min(0.05);
     v.hdrn20e = player.hdrn20w.div(4).add(1).log(2).pow(0.4).div(1024).min(0.05);
-    v.wxzfe = player.wxzf.add(1).log(2).div(4).add(1).pow(2).min(16);
-    v.hydfe = player.hydf.add(1).log(2).div(4).add(1).min(4);
+    v.wxzfe = player.wxzf.add(1).root(2).min(16);
+    v.hydfe = player.hydf.add(1).root(4).min(4);
     v.xkwze = player.xkwz.root(2).mul(10).min(160);
     v.zzltwps = player.zzlt.pwb(2).mul(player.zzlt);
     v.ltwum1 = player.zzltw.max(1).root(16);
@@ -4456,17 +4469,13 @@ function getboggle() {
 
 function getbox1() {
     if (player.PL4pts.gte(v.boxc1)) {
-        player.boxa1 = player.boxa1.add(1);
-        player.bogglebox = player.bogglebox.add(1);
-        player.PL4pts = player.PL4pts.sub(v.boxc1);
+        player.boxa1 = player.PL4pts.log(4).sub(4).min(player.PL4pts.log(2).log(1.04)).floor();
     }
 }
 
 function getbox2() {
     if (player.PL4fra.gte(v.boxc2)) {
-        player.boxa2 = player.boxa2.add(1);
-        player.bogglebox = player.bogglebox.add(1);
-        player.PL4fra = player.PL4fra.sub(v.boxc2);
+        player.boxa2 = player.PL4fra.root(4).sub(4).min(player.PL4fra.log(1.1)).floor();
     }
 }
 
@@ -4780,7 +4789,7 @@ function getsyn() {
     }
     for (i = 1; i <= 10; i++) {
         let name = tiername[i];
-        v["synuc" + name] = player["synu" + name].add(1).pow(1.2).pwb(4);
+        v["synuc" + name] = player["synu" + name].add(1).pow(1.15).pwb(4).mul(10);
     }
     v.synm01 = player.syna01.div(16).add(1).pow(4);
     v.synm02 = player.syna02.div(16).add(1).pow(4);
@@ -4916,7 +4925,7 @@ function getanm4() {
     if (player.shdwsl[7] == true) v.shdwpd = v.shdwpd.mul(player.shdwlv02.pwb(4));
     if (player.shdwsl[8] == true) v.shdwpd = v.shdwpd.mul(player.shdwlv03.pwb(4));
     if (player.shdwsl[9] == true) v.shdwpd = v.shdwpd.mul(player.shdwlv04.pwb(4));
-    if (player.incyzb == true & player.energy.gte("e3.470639555327098e17")) {
+    if (player.incyzb == true & player.energy.gte("e2e16")) {
         if (player.shdwrc.lt(v.shdwpd)) player.shdwrc = v.shdwpd;
     }
     v.anm4c01 = scaleUpgd(player.anm4u01.add(1).mul(1)).pwb(10);
@@ -4933,9 +4942,27 @@ function buyanm4u(tier) {
     }
 }
 
+function autobuyanm4upg() {
+    if (player.quau[2] == true) {
+        let max1 = invscaleUpgd(player.anm4.log(10)).floor().sub(player.anm4u01).max(0);
+        let max2 = invscaleUpgd(player.anm4.log(10)).div(2).floor().sub(player.anm4u02).max(0);
+        let max3 = invscaleUpgd(player.anm4.log(10)).div(3).floor().sub(player.anm4u03).max(0);
+        let max4 = invscaleUpgd(player.anm4.log(10)).div(4).floor().sub(player.anm4u04).max(0);
+        if (player.anm4.gte(v.anm4c01)) player.anm4u01 = player.anm4u01.add(max1);
+        if (player.anm4.gte(v.anm4c02)) player.anm4u02 = player.anm4u02.add(max2);
+        if (player.anm4.gte(v.anm4c03)) player.anm4u03 = player.anm4u03.add(max3);
+        if (player.anm4.gte(v.anm4c04)) player.anm4u04 = player.anm4u04.add(max4);
+        getanm4();
+        if (player.anm4.gte(v.anm4c01)) player.anm4u01 = player.anm4u01.add(1);
+        if (player.anm4.gte(v.anm4c02)) player.anm4u02 = player.anm4u02.add(1);
+        if (player.anm4.gte(v.anm4c03)) player.anm4u03 = player.anm4u03.add(1);
+        if (player.anm4.gte(v.anm4c04)) player.anm4u04 = player.anm4u04.add(1);
+    }
+}
+
 function getntm() {
     if (player.shdwrc.lt(1024)) return;
-    v.ntmc01 = player.ntmv.add(1).max(player.ntmv.pow(2).div(300)).pwb("ee6");
+    v.ntmc01 = player.ntmv.add(1).max(player.ntmv.add(1).pow(2).div(330)).pwb("ee6");
     v.ntmc02 = player.nrev.add(1).mul(10);
     v.ntmc03 = player.ntmu03.add(1).add(player.ntmu04.mul(6));
     v.ntmc04 = new Decimal(9);
@@ -4947,8 +4974,8 @@ function getntm() {
         let name = tiername[i];
         if (player["ntmr" + name].gt(0)) player["ntmr" + name] = player["ntmr" + name].sub(0.05);
         else player["ntmr" + name] = new Decimal(0);
-        if (i == 1) v["ntme" + name] = v.ntma.pow(0.5).mul(0.01);
-        else v["ntme" + name] = v.ntma.pow(0.35).mul(0.0001);
+        if (i == 1) v["ntme" + name] = v.ntma.pow(0.4).mul(0.01);
+        else v["ntme" + name] = v.ntma.pow(0.4).mul(0.0001);
     }
     player.ntmtmr = player.ntmtmr.sub(0.05);
     if (player.ntmtmr.lte(0)) ntmact();
@@ -5503,7 +5530,20 @@ function fillqua(tier) {
 }
 
 function getxbe() {
+    v.xbmc01 = player.xbmu01.add(1).pwb(2).pwb(2);
+    v.xbmc02 = player.xbmu02.add(1).pwb(2).pwb(2);
+}
 
+function buyxbmu(tier) {
+    getxbe();
+    if (tier == 1 & player.PL5pts.gte(v.xbmc01)) {
+        player.xbmu01 = player.xbmu01.add(1);
+        player.PL5pts = player.PL5pts.sub(v.xbmc01);
+    }
+    if (tier == 2 & player.PL5pts.gte(v.xbmc02)) {
+        player.xbmu02 = player.xbmu02.add(1);
+        player.PL5pts = player.PL5pts.sub(v.xbmc02);
+    }
 }
 
 function getspd() {
@@ -5511,8 +5551,10 @@ function getspd() {
     if (player.tier04.gte(30)) v.gamespd1 = v.gamespd1.mul(player.tier04.sub(24).mul(0.25));
     if (player.PL4goal[0] == true) v.gamespd1 = v.gamespd1.mul(4);
     if (player.incyzb == true & player.shdwsl[8] == true) v.gamespd1 = v.gamespd1.mul(v.shdb03);
+    if (player.hasUnlockedPL5) v.gamespd1 = v.gamespd1.mul(player.PL5secrl.pow(player.xbmu01.add(1)));
     if (player.incha == 10) v.gamespd1 = new Decimal(1e-308);
     v.gamespd2 = new Decimal(1);
+    if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.PL5secrl.pow(player.xbmu02.add(1).mul(0.25)));
     if (player.gmrn != true) v.glbspd = 0;
     else if (player.fyjj != true | player.oflntm <= 0) v.glbspd = 1;
     else v.glbspd = Math.pow(2, player.oflnpw / 10);
@@ -5523,13 +5565,20 @@ function getsoftcap() {
     if (player.incha == 13) return new Decimal(2);
     let sc = new Decimal("e3.470639555327098e17")
     sc = sc.pow(v.fraue03);
-    if (player.incyzb == true & player.shdwsl[4] == true) sc = sc.root(64);
+    if (player.incyzb == true & player.shdwsl[4] == true) sc = sc.root(256);
     return sc
 }
 
 function produce(spd = 1) {
     let speed = new Decimal(spd).mul(v.gamespd1).mul(v.glbspd).div(20);
     let speed2 = new Decimal(spd).mul(v.gamespd2).mul(v.glbspd).div(20);
+
+    player.totalSeconds = player.totalSeconds.plus(new Decimal(v.glbspd).div(20));
+    player.PL1secrl = player.PL1secrl.plus(new Decimal(v.glbspd).div(20));
+    player.PL2secrl = player.PL2secrl.plus(new Decimal(v.glbspd).div(20));
+    player.PL3secrl = player.PL3secrl.plus(new Decimal(v.glbspd).div(20));
+    player.PL4secrl = player.PL4secrl.plus(new Decimal(v.glbspd).div(20));
+    player.PL5secrl = player.PL5secrl.plus(new Decimal(v.glbspd).div(20));
 
     player.gameseconds = player.gameseconds.plus(speed);
     player.PL1sec = player.PL1sec.plus(speed);
@@ -5830,7 +5879,9 @@ function fszqw() {
         alert("请等待游戏更新！有朝一日将打通书页的隔阂，用「生物炼金」的技术创造「仙境」。");
     }
 }
+//#endregion
 
+//#region 数值计算
 /*数值计算*/
 function scale(x) {
     return x.max(x.pow(2).div(v.scal01)).max(x.pow(4).div(v.scal02)).max(x.pow(8).div(v.scal03)).max(x.pow(16).div(v.scal04)).max(x.pow(32).div(v.scal05)).max(x.pow(64).div(v.scal06)).max(x.pow(128).div(v.scal07)).max(x.pow(256).div(v.scal08));
@@ -5872,7 +5923,9 @@ function hyp(a, b) {
     if (a.lte(2)) return a;
     else return a.max(1).log(2).max(1).log(2).mul(b).pow_base(2).pow_base(2);
 }
+//#endregion
 
+//#region 游戏机制之外……
 /*游戏机制之外……*/
 function transformToDecimal(object) {
     for (i in object) {
@@ -5887,11 +5940,6 @@ function time(diff) {
     player.milliseconds = player.milliseconds.plus(diff2.times(1000));
     if (player.milliseconds.gte(1000)) {
         player.seconds = player.seconds.plus(1);
-        player.totalSeconds = player.totalSeconds.plus(1);
-        player.PL1secrl = player.PL1secrl.plus(1);
-        player.PL2secrl = player.PL2secrl.plus(1);
-        player.PL3secrl = player.PL3secrl.plus(1);
-        player.PL4secrl = player.PL4secrl.plus(1);
         player.milliseconds = player.milliseconds.minus(1000);
     }
     if (player.seconds == 60) {
@@ -6045,6 +6093,38 @@ function energyshow() {
     else return '如果每1能量等于1电子伏特，你的能量相当于' + notation(player.energy.div(2.2)) + '个电中微子。';
 }
 
+function wscale(tier) {
+    let name = tiername[tier];
+    if (player["wscb" + name].gte(new Decimal(1125899906842624).div(v["wsccsl" + name]))) return "九阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(35184372088832).div(v["wsccsl" + name]))) return "八阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(1099511627776).div(v["wsccsl" + name]))) return "七阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(34359738368).div(v["wsccsl" + name]))) return "六阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(1073741824).div(v["wsccsl" + name]))) return "五阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(33554432).div(v["wsccsl" + name]))) return "四阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(1048576).div(v["wsccsl" + name]))) return "三阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(32768).div(v["wsccsl" + name]))) return "二阶折算|";
+    else if (player["wscb" + name].gte(new Decimal(1024).div(v["wsccsl" + name]))) return "一阶折算|";
+    else return "";
+}
+
+function tscale(tier) {
+    let name = tiername[tier];
+    if (player["tier"+name].gte(1e16)) return "四阶折算|";
+    else if (player["tier" + name].gte(1e8)) return "三阶折算|";
+    else if (player["tier" + name].gte(10000)) return "二阶折算|";
+    else if (player["tier" + name].gte(100)) return "一阶折算|";
+    else return "";
+}
+
+function uscale(tier) {
+    let name = tiername[tier];
+    if (player["upgd" + name].gte(new Decimal(33554432).div(v["upgscl" + name]))) return "四阶折算|";
+    else if (player["upgd" + name].gte(new Decimal(1048576).div(v["upgscl" + name]))) return "三阶折算|";
+    else if (player["upgd" + name].gte(new Decimal(32768).div(v["upgscl" + name]))) return "二阶折算|";
+    else if (player["upgd" + name].gte(new Decimal(1024).div(v["upgscl" + name]))) return "一阶折算|";
+    else return "";
+}
+
 function swfyjj() {
     if (player.fyjj != true) player.fyjj = true;
     else player.fyjj = false;
@@ -6076,21 +6156,7 @@ function useoflntm() {
     }
 }
 
-var gui_mod = 1;
 function updateGUI() {
-    for (let tier = 1; tier <= 48; tier++) { 
-        var name = tiername[tier];
-        if (player["wscb" + name].gte(new Decimal(1125899906842624).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "九阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(35184372088832).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "八阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(1099511627776).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "七阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(34359738368).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "六阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(1073741824).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "五阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(33554432).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "四阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(1048576).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "三阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(32768).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "二阶折算|";
-        else if (player["wscb" + name].gte(new Decimal(1024).div(v["wsccsl" + name]))) document.getElementById("wscs" + name).innerHTML = "一阶折算|";
-        else document.getElementById("wscs" + name).innerHTML = "";
-    }
     /*document.getElementById("tier01rewa01").innerHTML = "1式风单元：基于风单元式数提升1~8式风灵乘数(1+n)²。当前：×" + notation(player.tier01.add(1).pow(2));
     document.getElementById("tier01rewa02").innerHTML = "2式风单元：基于风灵基础值提升1~8式风灵乘数max(1,n/64)。当前：×" + notation(v.wscbaseValue.div(64).max(1));
     document.getElementById("tier01rewa03").innerHTML = "5式风单元：基于风模块式数提升1~8式风灵乘数(1+n)³。当前：×" + notation(player.tier02.add(1).pow(3));
@@ -6128,192 +6194,10 @@ function updateGUI() {
 
     document.getElementById("tier06rewa01").innerHTML = "1式风六倍系统：基于风六倍系统提升立体波获取。当前：×" + notation(player.tier06.pwb(4));
     */
-    if (player.tier01.gte(1e16)) document.getElementById("tiers01").innerHTML = "四阶折算|";
-    else if (player.tier01.gte(1e8)) document.getElementById("tiers01").innerHTML = "三阶折算|";
-    else if (player.tier01.gte(10000)) document.getElementById("tiers01").innerHTML = "二阶折算|";
-    else if (player.tier01.gte(100)) document.getElementById("tiers01").innerHTML = "一阶折算|";
-    else document.getElementById("tiers01").innerHTML = "";
-    if (player.tier02.gte(1e16)) document.getElementById("tiers02").innerHTML = "四阶折算|";
-    else if (player.tier02.gte(1e8)) document.getElementById("tiers02").innerHTML = "三阶折算|";
-    else if (player.tier02.gte(10000)) document.getElementById("tiers02").innerHTML = "二阶折算|";
-    else if (player.tier02.gte(100)) document.getElementById("tiers02").innerHTML = "一阶折算|";
-    else document.getElementById("tiers02").innerHTML = "";
-    if (player.tier03.gte(1e16)) document.getElementById("tiers03").innerHTML = "四阶折算|";
-    else if (player.tier03.gte(1e8)) document.getElementById("tiers03").innerHTML = "三阶折算|";
-    else if (player.tier03.gte(10000)) document.getElementById("tiers03").innerHTML = "二阶折算|";
-    else if (player.tier03.gte(100)) document.getElementById("tiers03").innerHTML = "一阶折算|";
-    else document.getElementById("tiers03").innerHTML = "";
-    if (player.tier04.gte(1e16)) document.getElementById("tiers04").innerHTML = "四阶折算|";
-    else if (player.tier04.gte(1e8)) document.getElementById("tiers04").innerHTML = "三阶折算|";
-    else if (player.tier04.gte(10000)) document.getElementById("tiers04").innerHTML = "二阶折算|";
-    else if (player.tier04.gte(100)) document.getElementById("tiers04").innerHTML = "一阶折算|";
-    else document.getElementById("tiers04").innerHTML = "";
-    if (player.tier05.gte(1e16)) document.getElementById("tiers05").innerHTML = "四阶折算|";
-    else if (player.tier05.gte(1e8)) document.getElementById("tiers05").innerHTML = "三阶折算|";
-    else if (player.tier05.gte(10000)) document.getElementById("tiers05").innerHTML = "二阶折算|";
-    else if (player.tier05.gte(100)) document.getElementById("tiers05").innerHTML = "一阶折算|";
-    else document.getElementById("tiers05").innerHTML = "";
-    if (player.tier06.gte(1e16)) document.getElementById("tiers06").innerHTML = "四阶折算|";
-    else if (player.tier06.gte(1e8)) document.getElementById("tiers06").innerHTML = "三阶折算|";
-    else if (player.tier06.gte(10000)) document.getElementById("tiers06").innerHTML = "二阶折算|";
-    else if (player.tier06.gte(100)) document.getElementById("tiers06").innerHTML = "一阶折算|";
-    else document.getElementById("tiers06").innerHTML = "";
-
-    if (v.upge02.gte(256)) document.getElementById("upgd02sc").innerHTML = "(受软上限限制)";
-    else document.getElementById("upgd02sc").innerHTML = "";
-    if (player.upgd04.add(v.upgf04).gte(16)) document.getElementById("upgd04sc").innerHTML = "(受软上限限制)";
-    else document.getElementById("upgd04sc").innerHTML = "";
-
-    document.getElementById("playtime").innerHTML = "游玩时间：" + player.days.toFixed(0) + "d " + player.hours.toFixed(0) + "h " + player.minuts.toFixed(0) + "m " + player.seconds.toFixed(0) + "s " + player.milliseconds.toFixed(0) + "ms";
-    document.getElementById("totalseconds").innerHTML = "总计秒数（现实时间）：" + notatint(player.totalSeconds);
-    document.getElementById("gameseconds").innerHTML = "总计秒数（游戏时间）：" + notatint(player.gameseconds);
-    document.getElementById("totalenergy").innerHTML = "总计能量：" + notation(player.energyttl);
-    document.getElementById("energyshow").innerHTML = energyshow();
-    document.getElementById("PL1tms").innerHTML = "您扩散了" + notatint(player.PL1tms) + "次";
-    document.getElementById("PL1pts").innerHTML = "总计扩散点：" + notatint(player.PL1ptsttl);
-    document.getElementById("PL1sec").innerHTML = "上次扩散到现在过了" + notatint(player.PL1sec) + "秒(游戏时间)";
-    document.getElementById("PL1secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1secrl) + "秒(现实时间)";
-    document.getElementById("PL2tms").innerHTML = "您扪敤了" + notatint(player.PL2tms) + "次";
-    document.getElementById("PL2pts").innerHTML = "总计扪敤点：" + notatint(player.PL2ptsttl);
-    document.getElementById("PL2sec").innerHTML = "上次扪敤到现在过了" + notatint(player.PL2sec) + "秒(游戏时间)";
-    document.getElementById("PL2secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1secrl) + "秒(现实时间)";
-    document.getElementById("PL3tms").innerHTML = "您扫敥了" + notatint(player.PL3tms) + "次";
-    document.getElementById("PL3pts").innerHTML = "总计扫敥点：" + notatint(player.PL3ptsttl);
-    document.getElementById("PL3sec").innerHTML = "上次扫敥到现在过了" + notatint(player.PL3sec) + "秒(游戏时间)";
-    document.getElementById("PL3secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1secrl) + "秒(现实时间)";
-    document.getElementById("PL4tms").innerHTML = "您扬敦了" + notatint(player.PL4tms) + "次";
-    document.getElementById("PL4pts").innerHTML = "总计扬敦点：" + notatint(player.PL4ptsttl);
-    document.getElementById("PL4sec").innerHTML = "上次扬敦到现在过了" + notatint(player.PL4sec) + "秒(游戏时间)";
-    document.getElementById("PL4secrl").innerHTML = "上次扩散到现在过了" + notatint(player.PL1secrl) + "秒(现实时间)";
-
-    document.getElementById("oflntm").innerHTML = player.oflntm.toFixed(3);
-    document.getElementById("oflnpw").innerHTML = (Math.pow(2, player.oflnpw)).toFixed(3);
-    document.getElementById("oflnps").innerHTML = (Math.pow(2, player.oflnpw) - 1).toFixed(3);
-    if (player.fyjj == true) {
-        document.getElementById("fyjj").innerHTML = "激活";
-        document.getElementById("glbspd").innerHTML = notation(new Decimal(v.glbspd));
-    }
-    else {
-        document.getElementById("fyjj").innerHTML = "未激活";
-        document.getElementById("glbspd").innerHTML = "1.000";
-    }
-    if (player.gmrn == true) {
-        document.getElementById("gmrn").innerHTML = "运行";
-        document.getElementById("pause").innerHTML = "";
-    }
-    else {
-        document.getElementById("gmrn").innerHTML = "暂停";
-        document.getElementById("pause").innerHTML = "(游戏已暂停)";
-        document.getElementById("glbspd").innerHTML = "0.000";
-    }
-    if (gui_mod == 1) player.nowtime = Date.now();
 }
+//#endregion
 
-function styleDisplay() {
-    for (let i = 1; i <= 16; i++) {
-        if (player.PL4goal[i-1] == true) document.getElementById("PL4goal" + tiername[i]).className = "PL4goalyes";
-        else document.getElementById("PL4goal" + tiername[i]).className = "PL4goalno";
-    }
-
-    if (player.PL4goal[7] == true) document.getElementById("bogglebox").style.display = 'block';
-    else document.getElementById("bogglebox").style.display = 'none';
-
-    for (i = 1; i <= 5; i++) {
-        let name = tiername[i];
-        if (player.zzltu[i - 1] == true) document.getElementById("ltwu" + name).className = "boggleyes";
-        else document.getElementById("ltwu" + name).className = "boggle";
-    }
-
-    if (player.zzltu[4] == true) document.getElementById("batow").style.display = 'block';
-    else document.getElementById("batow").style.display = 'none';
-
-    if (player.stgmx.gte(500)) {
-        document.getElementById("chal4").style.display = 'block';
-        document.getElementById("batg01").className = "PL4goalyes";
-    }
-    else {
-        document.getElementById("chal4").style.display = 'none';
-        document.getElementById("batg01").className = "PL4goalno";
-    }
-    if (player.stgmx.gte(1000)) {
-        document.getElementById("batp").style.display = 'block';
-        document.getElementById("batg02").className = "PL4goalyes";
-    }
-    else {
-        document.getElementById("batp").style.display = 'none';
-        document.getElementById("batg02").className = "PL4goalno";
-    }
-    if (player.stgmx.gte(1500)) {
-        document.getElementById("frarow5").style.display = '';
-        document.getElementById("batg03").className = "PL4goalyes";
-    }
-    else {
-        document.getElementById("frarow5").style.display = 'none';
-        document.getElementById("batg03").className = "PL4goalno";
-    }
-    if (player.stgmx.gte(2000)) {
-        document.getElementById("coop").style.display = 'block';
-        document.getElementById("batg04").className = "PL4goalyes";
-    }
-    else {
-        document.getElementById("coop").style.display = 'none';
-        document.getElementById("batg04").className = "PL4goalno";
-    }
-
-    for (i = 1; i <= 5; i++) {
-        let name = tiername[i];
-        if (player.synfcs == i) document.getElementById("fcs" + name).className = "synuyes";
-        else document.getElementById("fcs" + name).className = "synu";
-    }
-
-    if (player.hasunlockedanm4 == true) {
-        document.getElementById("anm4").style.display = 'block';
-        document.getElementById("ulanm4").style.display = 'none';
-    }
-    else {
-        document.getElementById("anm4").style.display = 'none';
-        document.getElementById("ulanm4").style.display = 'block';
-    }
-    for (let i = 0; i < 10; i++) {
-        let name = tiername[i+1];
-        if (player.shdwsl[i] == true) document.getElementById("shdw" + name).className = "PL4upgyes";
-        else document.getElementById("shdw" + name).className = "PL4upgno";
-    }
-
-    if (player.shdwrc.gte(1000)) document.getElementById("ntm").style.display = 'block';
-    else document.getElementById("ntm").style.display = 'none';
-    if (player.ntmu04.gte(1)) document.getElementById("ntmlk1").style.display = 'block';
-    else document.getElementById("ntmlk1").style.display = 'none';
-    if (player.ntmu04.gte(2)) document.getElementById("ntmlk2").style.display = 'block';
-    else document.getElementById("ntmlk2").style.display = 'none';
-    if (player.ntmu04.gte(3)) document.getElementById("ntmlk3").style.display = 'block';
-    else document.getElementById("ntmlk3").style.display = 'none';
-
-    for (let i = 0; i < 80; i++) {
-        if (player.ach[i] == true) document.getElementById("ach" + hexdigit[i]).className = "achyes";
-        else document.getElementById("ach" + hexdigit[i]).className = "achno";
-    }
-
-    if (player.tier01conf == true) document.getElementById("tier01confirm").checked = 'checked';
-    else document.getElementById("tier01confirm").checked = '';
-    if (player.tier02conf == true) document.getElementById("tier02confirm").checked = 'checked';
-    else document.getElementById("tier02confirm").checked = '';
-    if (player.PL1conf == true) document.getElementById("PL1confirm").checked = 'checked';
-    else document.getElementById("PL1confirm").checked = '';
-    if (player.PL2conf == true) document.getElementById("PL2confirm").checked = 'checked';
-    else document.getElementById("PL2confirm").checked = '';
-    if (player.PL3conf == true) document.getElementById("PL3confirm").checked = 'checked';
-    else document.getElementById("PL3confirm").checked = '';
-    if (player.PL4conf == true) document.getElementById("PL4confirm").checked = 'checked';
-    else document.getElementById("PL4confirm").checked = '';
-    if (player.news == true) document.getElementById("swnews").checked = 'checked';
-    else document.getElementById("swnews").checked = '';
-    if (player.hotk == true) document.getElementById("swhotk").checked = 'checked';
-    else document.getElementById("swhotk").checked = '';
-    if (player.news == true) document.getElementById("news").style.display = 'block';
-    else document.getElementById("news").style.display = 'none';
-}
-
+//#region 成就
 /*成就*/
 function getAch(i) {
     if (player.ach[i] != true) {
@@ -6348,8 +6232,8 @@ function comAch() {
     if (player.PL1upg[15] == true) getAch(21);
     if (player.PL1bab01.eq(5) & player.PL1bab02.eq(5) & player.PL1bab03.eq(5) & player.PL1bab04.eq(5) & player.PL1bab05.eq(5) & player.PL1bab06.eq(5) & player.PL1bab07.eq(5) & player.PL1bab08.eq(5) & player.PL1bab09.eq(5)) getAch(22);
     if (player.hasunlockedanmorb == true) getAch(23);
-    if (player.parupg04.gte(10)) getAch(24);
-    if (player.chacom01.add(player.chacom02).add(player.chacom03).add(player.chacom04).gte(16)) getAch(25);
+    if (player.parupg04.gte(4)) getAch(24);
+    if (player.chacom01.add(player.chacom02).add(player.chacom03).add(player.chacom04).gte(12)) getAch(25);
     if (v.wscm08.gt(v.wscm07)) getAch(26);
     if (player.tier01.eq(0) & player.tier02.eq(0) & player.energy.gte(1e308)) getAch(27);
     if (player.wscb01.eq(1) & player.energy.gte(1e308)) getAch(28);
@@ -6404,6 +6288,87 @@ function comAch() {
 
 
 }
+//#endregion
+
+//#region 风灵v-for显示 by veryrrdefine--https://github.com/VeryrrDefine/WSC
+var layername = ["扩散","扪敤","扫敥","扬敦","扭敧","扮敨","扯敩"];
+
+//显示风灵数据
+function displayWSdata(id){
+    if (id>8+8*5){ return "+0.000\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0×1.000\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0^1.000\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0¶1.000"}
+    let name = tiername[id];
+    return "+" + notation(player["wsca" + name]).padEnd(15, '\u00a0') 
+    + "×" + notation(v["wscm" + name]).padEnd(15, '\u00a0') 
+    + "^" + notation(v["wscp" + name]).padEnd(15, '\u00a0')
+    + "\u00b6" + notation(v["wsch" + name]).padEnd(15, '\u00a0')
+    /*
+    + (v["wscp" + name].eq(1) ? "" : ("^" + notation(v["wscp" + name]).padEnd(15, '\u00a0') ))
+    + (v["wsch" + name].eq(1) ? "" : ("\u00b6" + notation(v["wsch" + name]).padEnd(15, '\u00a0')))
+    */
+}
+
+//显示作成风灵所需资源
+function getWSCresourcename(layerID){
+    return (layerID==0 ? "能量" : (layername[layerID-1]+"点"))
+}
+
+//中文汉字显示
+var chineseordinal = "零壹贰叁肆伍陆柒捌玖";
+function toChineseOrdinal(id){
+    if (id < 0){
+        return "负"+toChineseOrdinal(-id);
+    }
+    let iddigit = Math.floor(Math.log10(id));
+    if (iddigit>=1){
+        return toChineseOrdinal(Math.floor(id/10))+chineseordinal[id%10]
+    }else{
+        return chineseordinal[id%10];
+    }
+}
+
+var zerotosixtyfour = []; // 0到64(方便显示？)
+for (let i = 1; i<=64; i++){
+    zerotosixtyfour.push({'id': i});
+}
+var wsColor = `333322332232233223323222 
+               311300310210211201301200
+               331320330230231221321220
+               131120130030031021121020
+               133122132032033023123022
+               113102112012013003103002
+               313302312212213203303202
+               111100110010011001101000`.replaceAll(/\s/g, "")
+
+function wscUnlocked() {
+    if (player.hasUnlockedPL7) return 64
+    if (player.hasUnlockedPL6) return 56
+    if (player.hasUnlockedPL5) return 48
+    if (player.hasUnlockedPL4) return 40
+    if (player.hasUnlockedPL3) return 32
+    if (player.hasUnlockedPL2) return 24
+    if (player.hasUnlockedPL1) return 16
+    return 8
+}
+
+/**
+ * @param {Number} id 风灵序号1-64
+ * @returns {String} 返回RGB 
+ */
+ function getWsColor(id){
+    color = wsColor.slice(id*3-3,id*3)
+    return "#"+color.replaceAll("3", "ff").replaceAll("2","aa").replaceAll("1", "55").replaceAll("0", "00")
+}
+
+function wscAutobuyable(id){
+    const between = (x,y,z) => (y >= x) && (y <= z);
+    if (between(1, id, 8)) return player.PL1upg[0]
+    if (between(9, id, 16)) return player.PL2tms.gte(4)
+    if (between(17, id, 24)) return player.resa05.gte(1)
+    if (between(25, id, 32)) return player.PL4goal[1]
+    if (between(33, id, 40)) return player.quau[1]
+    if (between(41, id, Infinity)) return false
+}
+//#endregion
 
 /*弹出提示*/
 function shownoti(notiname) {
@@ -6436,6 +6401,9 @@ function hotkeys(event) {
         case 53:
             maxAll40();
             break;
+        case 54:
+            maxAll48();
+            break;
 
         case 81:
             incTier1();
@@ -6448,6 +6416,12 @@ function hotkeys(event) {
             break;
         case 82:
             incTier4();
+            break;
+        case 84:
+            incTier5();
+            break;
+        case 89:
+            incTier6();
             break;
 
         case 65:
@@ -6462,6 +6436,12 @@ function hotkeys(event) {
         case 70:
             buyUpgd(4);
             break;
+        case 71:
+            buyUpgd(5);
+            break;
+        case 72:
+            buyUpgd(6);
+            break;
 
         case 90:
             PL1reset();
@@ -6475,7 +6455,9 @@ function hotkeys(event) {
         case 86:
             PL4reset();
             break;
-
+        case 66:
+            PL5reset();
+            break;
     }
 }
 
@@ -6546,6 +6528,7 @@ function mainLoop() {
     getPL5engMul();
     getPL5engPow();
     getqua();
+    getxbe();
 
     getspd();
     autoBuy();
@@ -6615,6 +6598,16 @@ function autoBuy() {
         autoBuyWsc(31);
         autoBuyWsc(32);
     }
+    if (player.quau[1] == true) {
+        autoBuyWsc(33);
+        autoBuyWsc(34);
+        autoBuyWsc(35);
+        autoBuyWsc(36);
+        autoBuyWsc(37);
+        autoBuyWsc(38);
+        autoBuyWsc(39);
+        autoBuyWsc(40);
+    }
 
     if (player.PL1upg[1] == true) {
         autoBuyTier01();
@@ -6633,6 +6626,7 @@ function autoBuy() {
     autobuyparupg();
     autobuyanm2upg();
     autobuyanm3upg();
+    autobuyanm4upg();
 }
 
 

@@ -1031,7 +1031,7 @@ div {
 .achno {
     width: 60px;
     height: 60px;
-    background-image: radial-gradient(#990033,#000000);
+    background-image: radial-gradient(#ff0080,#000000);
     color: #ffffff;
     border: 2px solid #00ff80;
     font-size: 12px;
@@ -1044,7 +1044,7 @@ div {
 .achyes {
     width: 60px;
     height: 60px;
-    background-image: radial-gradient(#66ffcc,#000000);
+    background-image: radial-gradient(#00ff80,#000000);
     color: #ffffff;
     border: 2px solid #00ff80;
     font-size: 12px;
