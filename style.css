@@ -452,6 +452,30 @@ div {
     color: transparent;
 }
 
+.quanto {
+    background: linear-gradient(45deg, #9966ff, #000099, #9966ff, #000099, #9966ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.imago {
+    background: linear-gradient(45deg, #cc9966, #ffff33, #cc9966, #ffff33, #cc9966);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.staro {
+    background: linear-gradient(45deg, #cc9999, #cc0066, #cc9999, #cc0066, #cc9999);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.etho {
+    background: linear-gradient(45deg, #0000ff, #ff0000, #0000ff, #ff0000, #0000ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 .stdno {
     width: 180px;
     height: 135px;
@@ -510,7 +534,7 @@ div {
 
 .PL2bab {
     width: 184px;
-    height: 152px;
+    height: 184px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffff00;
@@ -914,6 +938,29 @@ div {
     font-size: 16px;
     text-decoration: none;
     cursor: pointer;
+}
+
+@keyframes solarwind {
+    0% {
+        box-shadow: 1.25rem 1.25rem 1rem #ff800080, 1.25rem -1.25rem 1rem #ffff8080, -1.25rem -1.25rem 1rem #ff800080, -1.25rem 1.25rem 1rem #ffff8080;
+    }
+    50% {
+        box-shadow: 1.25rem 1.25rem 1rem #ffff8080, 1.25rem -1.25rem 1rem #ff800080, -1.25rem -1.25rem 1rem #ffff8080, -1.25rem 1.25rem 1rem #ff800080;
+    }
+    100% {
+        box-shadow: 1.25rem 1.25rem 1rem #ff800080, 1.25rem -1.25rem 1rem #ffff8080, -1.25rem -1.25rem 1rem #ff800080, -1.25rem 1.25rem 1rem #ffff8080;
+    }
+}
+
+.solarwsc {
+    border: none;
+    animation: solarwind 4s infinite;
+    backdrop-filter: blur(5px);
+    color: #000000;
+    height: 48px;
+    width: 1008px;
+    padding: 8px 8px;
+    margin: 0px auto;
 }
 
 .PL6button {
