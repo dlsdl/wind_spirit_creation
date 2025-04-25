@@ -558,6 +558,36 @@ function hardReset() {
         xbmu02: new Decimal(0),
         xbmu03: new Decimal(0),
         xbmu04: new Decimal(0),
+        xbmu05: new Decimal(0),
+        xbmu06: new Decimal(0),
+        xbmu07: new Decimal(0),
+        xbmu08: new Decimal(0),
+        Rliteng: new Decimal(0),
+        Bliteng: new Decimal(0),
+        Rlitengp: new Decimal(1),
+        Blitengp: new Decimal(1),
+        carbu: [false, false, false, false],
+        carba1: new Decimal(0),
+        carba2: new Decimal(0),
+        carba3: new Decimal(0),
+        carba4: new Decimal(0),
+        EMenergy: new Decimal(0),
+        slwa01: new Decimal(1),
+        slwa02: new Decimal(1),
+        slwa03: new Decimal(1),
+        slwa04: new Decimal(1),
+        slwa05: new Decimal(1),
+        slwa06: new Decimal(1),
+        slwa07: new Decimal(1),
+        slwa08: new Decimal(1),
+        slwb01: new Decimal(1),
+        slwb02: new Decimal(1),
+        slwb03: new Decimal(1),
+        slwb04: new Decimal(1),
+        slwb05: new Decimal(1),
+        slwb06: new Decimal(1),
+        slwb07: new Decimal(1),
+        slwb08: new Decimal(1),
 
         hasUnlockedPL6: false,
 
@@ -1332,10 +1362,34 @@ function hardReset() {
         quaef1: new Decimal(0),
         quaef2: new Decimal(0),
         quaef3: new Decimal(0),
-        xbmc01: new Decimal(4),
-        xbmc02: new Decimal(4),
-        xbmc03: new Decimal(4),
-        xbmc04: new Decimal(4),
+        xbmc01: new Decimal(0),
+        xbmc02: new Decimal(0),
+        xbmc03: new Decimal(0),
+        xbmc04: new Decimal(0),
+        xbmc05: new Decimal(0),
+        xbmc06: new Decimal(0),
+        xbmc07: new Decimal(0),
+        xbmc08: new Decimal(0),
+        xbme05: new Decimal(0),
+        xbme06: new Decimal(0),
+        xbme07: new Decimal(0),
+        xbme08: new Decimal(0),
+        slwc01: new Decimal(1),
+        slwc02: new Decimal(1),
+        slwc03: new Decimal(1),
+        slwc04: new Decimal(1),
+        slwc05: new Decimal(1),
+        slwc06: new Decimal(1),
+        slwc07: new Decimal(1),
+        slwc08: new Decimal(1),
+        slwp01: new Decimal(1),
+        slwp02: new Decimal(1),
+        slwp03: new Decimal(1),
+        slwp04: new Decimal(1),
+        slwp05: new Decimal(1),
+        slwp06: new Decimal(1),
+        slwp07: new Decimal(1),
+        slwp08: new Decimal(1),
 
         currentTab: "row1",
         currentPage: "p1_1",
@@ -1384,7 +1438,7 @@ async function load() {
         player = JSON.parse(atob(localStorage.windSpiritCreation));
         transformToDecimal(player);
     }
-    mainLoop();
+    //mainLoop();
     await delay(100);
     prod = setInterval(produce, 50);
 }
@@ -1786,11 +1840,11 @@ function getWscMult() {
         wmpb41to48 = v.wscmpb;
     }
     if (player.zzltu[4] == true) {
-        wmpb01to08 = v.PL1engmul.pow(v.bpmpb);
-        wmpb09to16 = v.PL2engmul.pow(v.bpmpb);
-        wmpb17to24 = v.PL3engmul.pow(v.bpmpb);
-        wmpb25to32 = v.PL4engmul.pow(v.bpmpb);
-        wmpb33to40 = v.PL5engmul.pow(v.bpmpb);
+        wmpb01to08 = wmpb01to08.mul(v.PL1engmul.pow(v.bpmpb));
+        wmpb09to16 = wmpb09to16.mul(v.PL2engmul.pow(v.bpmpb));
+        wmpb17to24 = wmpb17to24.mul(v.PL3engmul.pow(v.bpmpb));
+        wmpb25to32 = wmpb25to32.mul(v.PL4engmul.pow(v.bpmpb));
+        wmpb33to40 = wmpb33to40.mul(v.PL5engmul.pow(v.bpmpb));
     }
     if (player.incyzb == true & player.shdwsl[5] == true) {
         wmpb01to08 = v.PL1engmul.pow(v.bpmpb.div(1.4));
@@ -2059,11 +2113,11 @@ function getWscHyp() {
         hypw33to40 = hypw33to40.add(0.001);
     }
     if (player.tier05.gte(5)) {
-        hypw01to08 = hypw01to08.add(player.tier05.div(10000));
-        hypw09to16 = hypw09to16.add(player.tier05.div(10000));
-        hypw17to24 = hypw17to24.add(player.tier05.div(10000));
-        hypw25to32 = hypw25to32.add(player.tier05.div(10000));
-        hypw33to40 = hypw33to40.add(player.tier05.div(10000));
+        hypw01to08 = hypw01to08.add(player.tier05.div(5000));
+        hypw09to16 = hypw09to16.add(player.tier05.div(5000));
+        hypw17to24 = hypw17to24.add(player.tier05.div(5000));
+        hypw25to32 = hypw25to32.add(player.tier05.div(5000));
+        hypw33to40 = hypw33to40.add(player.tier05.div(5000));
     }
     if (player.anm4u04.gte(1)) {
         hypw01to08 = hypw01to08.add(player.anm4u04.pow(0.5).div(2500));
@@ -5843,7 +5897,7 @@ function getqua() {
 }
 
 function buyquau(tier) {
-    if (tier == 0 & player.quant.gte(1)) {
+    if (tier == 0 & player.quant.gte(100)) {
         player.quau[0] = true;
     }
     if (tier == 1 & player.quant.gte(10000)) {
@@ -5853,31 +5907,73 @@ function buyquau(tier) {
         player.PL2tms = N(4);
         player.PL2upg01 = N(8);
         player.resa05 = N(1);
+        player.PL4goal[0] = true;
         player.PL4goal[1] = true;
     }
-    if (tier == 2 & player.quant.gte(1e8)) player.quau[2] = true;
+    if (tier == 2 & player.quant.gte(1e6)) {
+        player.quau[2] = true;
+        player.PL2upg03 = N(8);
+        player.resa11 = N(1);
+        for (let i = 0; i < 5; i++)player.PL4goal[i] = true;
+        player.hasunlockedanmorb = true;
+        player.hasunlockedanm2 = true;
+        player.hasunlockedanm3 = true;
+        player.hasunlockedanm4 = true;
+    }
+    if (tier == 3 & player.quant.gte(1e8)) {
+        player.quau[3] = true;
+        for (let i = 0; i < 16; i++)player.PL4goal[i] = true;
+    }
+    if (tier == 4 & player.quant.gte(1e10)) {
+        player.quau[4] = true;
+        player.alcu[1] = true;
+        player.xyzbo = N(2);
+        player.zzltu[0] = true;
+    }
 }
 
 function fillqua(tier) {
     let name = tiername[tier];
-    player["quafil" + name] = player["quafil" + name].add(player.quant.div(200));
-    player.quant = player.quant.mul(0.995);
+    player["quafil" + name] = player["quafil" + name].add(player.quant.div(100));
+    player.quant = player.quant.mul(0.99);
 }
 
 function getxbe() {
     v.xbmc01 = player.xbmu01.add(1).pwb(2).pwb(2);
-    v.xbmc02 = player.xbmu02.add(1).pwb(2).pwb(2);
+    v.xbmc02 = player.xbmu02.add(1).pow(2).pwb(2).mul(1e4);
+    v.xbmc03 = player.xbmu03.add(1).pwb(2).pwb(2);
+    v.xbmc04 = player.xbmu04.add(1).pow(2).pwb(2).mul(1e4);
+    v.xbmc05 = player.xbmu05.add(1).pwb(2).pwb(65536);
+    v.xbmc06 = player.xbmu06.add(1).pwb(2).pwb(65536);
+    v.xbmc07 = player.xbmu07.add(1).pwb(2).pwb(65536);
+    v.xbmc08 = player.xbmu08.add(1).pwb(2).pwb(65536);
+
+    v.xbme05 = player.PL1tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu05).add(1);
+    v.xbme06 = player.PL1tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu06).add(1);
+    v.xbme07 = player.PL5tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu07).add(1);
+    v.xbme08 = player.PL5tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu08).add(1);
 }
 
 function buyxbmu(tier) {
     getxbe();
-    if (tier == 1 & player.PL5pts.gte(v.xbmc01)) {
-        player.xbmu01 = player.xbmu01.add(1);
-        player.PL5pts = player.PL5pts.sub(v.xbmc01);
+    let name = tiername[tier];
+    if (tier == 1 | tier == 3) {
+        if (player.PL5pts.gte(v["xbmc" + name])) {
+            player["xbmu" + name] = player["xbmu" + name].add(1);
+            player.PL5pts = player.PL5pts.sub(v["xbmc" + name]);
+        }
     }
-    if (tier == 2 & player.PL5pts.gte(v.xbmc02)) {
-        player.xbmu02 = player.xbmu02.add(1);
-        player.PL5pts = player.PL5pts.sub(v.xbmc02);
+    else if (tier == 2 | tier == 5 | tier == 6) {
+        if (player.PL1sec.gte(v["xbmc" + name])) {
+            player["xbmu" + name] = player["xbmu" + name].add(1);
+            player.PL1sec = player.PL1sec.sub(v["xbmc" + name]);
+        }
+    }
+    else if (tier == 4 | tier == 7 | tier == 8) {
+        if (player.PL5sec.gte(v["xbmc" + name])) {
+            player["xbmu" + name] = player["xbmu" + name].add(1);
+            player.PL5sec = player.PL5sec.sub(v["xbmc" + name]);
+        }
     }
 }
 
@@ -5891,13 +5987,15 @@ function getspd() {
     v.gamespd1 = player.chacom10.pwb(2).mul(player.ptnu04.div(3).pwb(2)).mul(player.anm3u04.pwb(1.189207115002721)).mul(v.fraue05).max(1);
     if (player.tier04.gte(10)) v.gamespd1 = v.gamespd1.mul(player.tier04.mul(0.25).max(1));
     if (player.PL4goal[0] == true) v.gamespd1 = v.gamespd1.mul(4);
+    if (player.zzltu[2] == true) v.gamespd1 = v.gamespd1.mul(v.ltwum3);
     if (player.incyzb == true & player.shdwsl[8] == true) v.gamespd1 = v.gamespd1.mul(v.shdb03);
     if (player.hasUnlockedPL5) v.gamespd1 = v.gamespd1.mul(player.PL5secrl.pow(player.xbmu01.add(1)));
-    if (player.zzltu[2] == true) v.gamespd1 = v.gamespd1.mul(v.ltwum3);
-    if (player.incha == 10) v.gamespd1 = new Decimal(1e-308);
+    if (player.hasUnlockedPL5) v.gamespd1 = v.gamespd1.mul(player.xbmu02.pwb(2));
+    if (player.incha == 10) v.gamespd1 = N(1e-308);
 
-    v.gamespd2 = new Decimal(1);
-    if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.PL5secrl.pow(player.xbmu02.add(1).mul(0.25)));
+    v.gamespd2 = N(1);
+    if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.PL5secrl.pow(player.xbmu03.add(1).mul(0.25)));
+    if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.xbmu04.pwb(2));
 
     if (player.gmrn != true) v.glbspd = 0;
     else if (player.fyjj != true | player.oflntm <= 0) v.glbspd = 1;
@@ -5942,7 +6040,7 @@ function produce(spd = 1) {
     player.PL2sec = player.PL2sec.plus(speed);
     player.PL3sec = player.PL3sec.plus(speed);
     player.PL4sec = player.PL4sec.plus(speed2);
-    player.PL5sec = player.PL4sec.plus(speed2);
+    player.PL5sec = player.PL5sec.plus(speed2);
 
     if (player.energy.log(2).lte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).mul(speed).mul(v.baseprd);
     else v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).mul(speed).mul(v.baseprd);
@@ -5996,6 +6094,11 @@ function produce(spd = 1) {
         player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed).mul(v.baseprd));
     }
     if (player.PL4goal[10] == true & player.sta8n1 == true) player.wsca32 = player.wsca32.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).hyp(v.wsch33).pow(v.PL4engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
+    if (player.quau[12] == true & player.PL4pts.lte(player.PL3pts.root(1048576).floor())) {
+        player.PL4pts = player.PL4pts.add(player.PL3pts.root(1048576).floor().mul(speed));
+        player.PL4ptsttl = player.PL4ptsttl.add(player.PL3pts.root(1048576).floor().mul(speed));
+    }
+    if (player.quau[4] == true) player.PL4tms = player.PL4tms.add(getPL4tms().mul(speed2));
 
     player.PL4energy = player.PL4energy.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).hyp(v.wsch33).mul(speed2).mul(v.baseprd));
     for (let tier = 34; tier <= 40; tier++) {
@@ -6003,6 +6106,7 @@ function produce(spd = 1) {
         let prev = tiername[tier - 1];
         player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed2).mul(v.baseprd));
     }
+    if (player.quau[11] == true & player.sta8n1 == true) player.wsca40 = player.wsca40.add(player.wsca41.mul(v.wscm41).pow(v.wscp41).hyp(v.wsch41).pow(v.PL5engpow.pow(v.cpper).max(1)).mul(speed2).mul(v.baseprd));
 
     player.PL5energy = player.PL5energy.add(player.wsca41.mul(v.wscm41).pow(v.wscp41).hyp(v.wsch41).mul(speed2).mul(v.baseprd));
     for (let tier = 42; tier <= 48; tier++) {
@@ -6208,20 +6312,6 @@ function epsdisp() {
     if (player.energy.div(v.preps.max(1)).pow(20).lte(2)) return (notation(player.energy.sub(v.preps).mul(20)));
     else if (player.energy.log(v.preps.max(2)).pow(20).lte(2)) return (notation(player.energy.div(v.preps).log(2).mul(20)) + " 二进制位");
     else return (notation(player.energy.log(v.preps).log(2).mul(20)) + " 二进制位^2");
-}
-
-function fixInfinity() {
-    if (player.energy.gte(1.797693134862315e308)) {
-        document.getElementById("fixinf").style.display = 'block';
-    }
-    else document.getElementById("fixinf").style.display = 'none';
-}
-
-function fixEternity() {
-    if (player.energy.gte("e5.411595565927717e307")) {
-        document.getElementById("fixete").style.display = 'block';
-    }
-    else document.getElementById("fixete").style.display = 'none';
 }
 
 function fszqw() {
@@ -6636,6 +6726,7 @@ function comAch() {
     if (player.hasunlockedanm4 == true) getAch(71);
     if (player.shdwrc.gte(1024)) getAch(72);
     if (player.nrev.gte(1)) getAch(73);
+
 
 
 }

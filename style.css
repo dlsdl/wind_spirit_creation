@@ -671,6 +671,16 @@ div {
     cursor: pointer;
 }
 
+.PL3bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .PL4button {
     width: 16%;
@@ -834,7 +844,7 @@ div {
 
 .PL4bab {
     width: 184px;
-    height: 152px;
+    height: 184px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #00ffff;
@@ -946,6 +956,28 @@ div {
     cursor: pointer;
 }
 
+.phsupg {
+    width: 240px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.phsupg2 {
+    width: 160px;
+    height: 160px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @keyframes solarwind {
     0% {
         box-shadow: 1.25rem 1.25rem 1rem #ff800080, 1.25rem -1.25rem 1rem #ffff8080, -1.25rem -1.25rem 1rem #ff800080, -1.25rem 1.25rem 1rem #ffff8080;
@@ -962,7 +994,7 @@ div {
     border: none;
     animation: solarwind 4s infinite;
     backdrop-filter: blur(5px);
-    color: #000000;
+    color: #ffffff;
     height: 48px;
     width: 1008px;
     padding: 8px 8px;

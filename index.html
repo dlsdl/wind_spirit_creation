@@ -48,7 +48,7 @@
         <p align="center" class="textct" v-if="player.hasUnlockedPL4">
             二阶游戏速度(影响扯敩及之前内容)：×{{notation(v.gamespd2)}}
         </p>
-        <p align="center" class="textct" v-if="player.energy.gte('e5.411596e307')">
+        <p align="center" class="textct" v-if="player.hasUnlockedPLw">
             三阶游戏速度(影响扳敭及之前内容)：×{{notation(v.gamespd3)}}
         </p>
         <p align="center" class="textct" v-if="player.energy.gte('e6.0313e19727')">
@@ -190,7 +190,7 @@
         </div>
         <div id="pb_1" v-if="v.currentPage=='pb_1'">
             需要到达2^2^2^2^2^2^2^2^2^2^2^2^2^2^2^2能量解锁
-            扸敲1次：解锁增强能量，它提升1~4阶游戏速度，可以用它购买以太升级
+            扸敲1次：解锁增强能量，它提升1~4阶游戏速度，可以用它购买升级
             扸敲2次：扱敫能量效果^2
             扸敲3次：扲敬能量效果^2
             扸敲4次：扳敭能量效果^2
@@ -574,9 +574,9 @@
                 <table align="center">
                     <tr>
                         <td><button class="PL1bab" onclick="buyparupg(1)">双倍风之微粒获取<br />{{ascale(player.parupg01,1)}}等级{{notatint(player.parupg01)}}<br />当前：×{{notation(player.parupg01.pwb(2))}}<br />花费：{{notation(v.parupgc01)}}风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒提升9~16式风灵<br />{{ascale(player.parupg01,2)}}等级{{notatint(player.parupg02)}}<br />当前：×{{notation(player.anmpar.pow(player.parupg02.mul(0.25)).max(1))}}<br />花费：{{notation(v.parupgc02)}}风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.015625<br />{{ascale(player.parupg01,3)}}等级{{notatint(player.parupg03)}}<br />当前：+{{notation(player.parupg03.div(64).min(player.parupg03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.parupg03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.parupgc03)}}风之微粒</button></td>
-                        <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />{{ascale(player.parupg01,4)}}等级{{notatint(player.parupg04)}}<br />当前：+{{notatint(player.parupg04)}}<br />花费：{{notation(v.parupgc04)}}风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(2)">风之微粒提升9~16式风灵<br />{{ascale(player.parupg02,2)}}等级{{notatint(player.parupg02)}}<br />当前：×{{notation(player.anmpar.pow(player.parupg02.mul(0.25)).max(1))}}<br />花费：{{notation(v.parupgc02)}}风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(3)">风之微粒效果指数增加0.015625<br />{{ascale(player.parupg03,3)}}等级{{notatint(player.parupg03)}}<br />当前：+{{notation(player.parupg03.div(64).min(player.parupg03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.parupg03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.parupgc03)}}风之微粒</button></td>
+                        <td><button class="PL1bab" onclick="buyparupg(4)">重置风之微粒，获得1风之晶球<br />{{ascale(player.parupg04,4)}}等级{{notatint(player.parupg04)}}<br />当前：+{{notatint(player.parupg04)}}<br />花费：{{notation(v.parupgc04)}}风之微粒</button></td>
                     </tr>
                 </table>
                 <div class="btnrow">
@@ -864,9 +864,9 @@
                 <table align="center">
                     <tr>
                         <td><button class="PL2bab" onclick="buyanm2u(1)">双倍风之徯粓产量<br />{{ascale(player.anm2u01,1)}}等级{{notatint(player.anm2u01)}}<br />当前：×{{notation(player.anm2u01.pwb(2))}}<br />花费：{{notation(v.anm2c01)}}风之徯粓</button></td>
-                        <td><button class="PL2bab" onclick="buyanm2u(2)">风之徯粓提升17~24式风灵乘数<br />{{ascale(player.anm2u01,2)}}等级{{notatint(player.anm2u02)}}<br />当前：×{{notation(player.anm2.pow(player.anm2u02.mul(4)).max(1))}}<br />花费：{{notation(v.anm2c02)}}风之徯粓</button></td>
-                        <td><button class="PL2bab" onclick="buyanm2u(3)">风之徯粓效果指数增加0.015625<br />{{ascale(player.anm2u01,3)}}等级{{notatint(player.anm2u03)}}<br />当前：+{{notation(player.anm2u03.div(64).min(player.anm2u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm2u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm2c03)}}风之徯粓</button></td>
-                        <td><button class="PL2bab" onclick="buyanm2u(4)">增加1~24式风灵指数<br />{{ascale(player.anm2u01,4)}}等级{{notatint(player.anm2u04)}}<br />当前：+{{notation(player.anm2u04.pow(0.5).min(player.anm2u04.pow(0.25).mul(2)).mul(0.01))}}<br />花费：{{notation(v.anm2c04)}}风之徯粓</button></td>
+                        <td><button class="PL2bab" onclick="buyanm2u(2)">风之徯粓提升17~24式风灵乘数<br />{{ascale(player.anm2u02,2)}}等级{{notatint(player.anm2u02)}}<br />当前：×{{notation(player.anm2.pow(player.anm2u02.mul(4)).max(1))}}<br />花费：{{notation(v.anm2c02)}}风之徯粓</button></td>
+                        <td><button class="PL2bab" onclick="buyanm2u(3)">风之徯粓效果指数增加0.015625<br />{{ascale(player.anm2u03,3)}}等级{{notatint(player.anm2u03)}}<br />当前：+{{notation(player.anm2u03.div(64).min(player.anm2u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm2u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm2c03)}}风之徯粓</button></td>
+                        <td><button class="PL2bab" onclick="buyanm2u(4)">增加1~24式风灵指数<br />{{ascale(player.anm2u04,4)}}等级{{notatint(player.anm2u04)}}<br />当前：+{{notation(player.anm2u04.pow(0.5).min(player.anm2u04.pow(0.25).mul(2)).mul(0.01))}}<br />花费：{{notation(v.anm2c04)}}风之徯粓</button></td>
                     </tr>
                 </table><br />
                 <div class="btnrow">
@@ -1112,10 +1112,10 @@
                 </div>
                 <table align="center">
                     <tr>
-                        <td><button class="PL3upgno" onclick="buyanm3u(1)">双倍风之徰粔产量<br />等级{{notatint(player.anm3u01)}}<br />当前：×{{notation(player.anm3u01.pwb(2))}}<br />花费：{{notation(v.anm3c01)}}风之徰粔</button></td>
-                        <td><button class="PL3upgno" onclick="buyanm3u(2)">风之徰粔提升25~32式风灵乘数<br />等级{{notatint(player.anm3u02)}}<br />当前：×{{notation(player.anm3.pow(player.anm3u02.mul(1024)).max(1))}}<br />花费：{{notation(v.anm3c02)}}风之徰粔</button></td>
-                        <td><button class="PL3upgno" onclick="buyanm3u(3)">增加风之徰粔效果指数<br />等级{{notatint(player.anm3u03)}}<br />当前：+{{notation(player.anm3u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm3u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm3c03)}}风之徰粔</button></td>
-                        <td><button class="PL3upgno" onclick="buyanm3u(4)">增加一阶游戏速度<br />等级{{notatint(player.anm3u04)}}<br />当前：×{{notation(player.anm3u04.pwb(1.189207115002721))}}<br />花费：{{notation(v.anm3c04)}}风之徰粔</button></td>
+                        <td><button class="PL3bab" onclick="buyanm3u(1)">双倍风之徰粔产量<br />{{ascale(player.anm3u01,1)}}等级{{notatint(player.anm3u01)}}<br />当前：×{{notation(player.anm3u01.pwb(2))}}<br />花费：{{notation(v.anm3c01)}}风之徰粔</button></td>
+                        <td><button class="PL3bab" onclick="buyanm3u(2)">风之徰粔提升25~32式风灵乘数<br />{{ascale(player.anm3u02,2)}}等级{{notatint(player.anm3u02)}}<br />当前：×{{notation(player.anm3.pow(player.anm3u02.mul(1024)).max(1))}}<br />花费：{{notation(v.anm3c02)}}风之徰粔</button></td>
+                        <td><button class="PL3bab" onclick="buyanm3u(3)">增加风之徰粔效果指数<br />{{ascale(player.anm3u03,3)}}等级{{notatint(player.anm3u03)}}<br />当前：+{{notation(player.anm3u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm3u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm3c03)}}风之徰粔</button></td>
+                        <td><button class="PL3bab" onclick="buyanm3u(4)">增加一阶游戏速度<br />{{ascale(player.anm3u04,4)}}等级{{notatint(player.anm3u04)}}<br />当前：×{{notation(player.anm3u04.pwb(1.189207115002721))}}<br />花费：{{notation(v.anm3c04)}}风之徰粔</button></td>
                     </tr>
                     <tr>
                         <td><button :class="player.anm3u[0]?'PL3upgyes':'PL3upgno'" onclick="buyanm3u2(0)">解锁药剂第二行第四个效果<br />花费：1e8风之徰粔</button></td>
@@ -1486,10 +1486,10 @@
                 </div>
                 <table align="center">
                     <tr>
-                        <td><button class="PL4bab" id="anm4u1" onclick="buyanm4u(1)">双倍风之徱粕产量<br />等级{{notatint(player.anm4u01)}}<br />当前：×{{notation(player.anm4u01.pwb(2))}}<br />花费：{{notation(v.anm4c01)}}风之徱粕</button></td>
-                        <td><button class="PL4bab" id="anm4u2" onclick="buyanm4u(2)">风之徱粕提升33~40式风灵乘数<br />等级{{notatint(player.anm4u02)}}<br />当前：×{{notation(player.anm4.pow(player.anm4u02.mul(16777216)).max(1))}}<br />花费：{{notation(v.anm4c02)}}风之徱粕</button></td>
-                        <td><button class="PL4bab" id="anm4u3" onclick="buyanm4u(3)">增加风之徱粕效果指数<br />等级{{notatint(player.anm4u03)}}<br />当前：+{{notation(player.anm4u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm4u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm4c03)}}风之徱粕</button></td>
-                        <td><button class="PL4bab" id="anm4u4" onclick="buyanm4u(4)">增加1~40式风灵的超指数<br />等级{{notatint(player.anm4u04)}}<br />当前：+{{notation(player.anm4u04.pow(0.5).div(2500))}}<br />花费：{{notation(v.anm4c04)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u1" onclick="buyanm4u(1)">双倍风之徱粕产量<br />{{ascale(player.anm4u01,1)}}等级{{notatint(player.anm4u01)}}<br />当前：×{{notation(player.anm4u01.pwb(2))}}<br />花费：{{notation(v.anm4c01)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u2" onclick="buyanm4u(2)">风之徱粕提升33~40式风灵乘数<br />{{ascale(player.anm4u02,2)}}等级{{notatint(player.anm4u02)}}<br />当前：×{{notation(player.anm4.pow(player.anm4u02.mul(16777216)).max(1))}}<br />花费：{{notation(v.anm4c02)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u3" onclick="buyanm4u(3)">增加风之徱粕效果指数<br />{{ascale(player.anm4u03,3)}}等级{{notatint(player.anm4u03)}}<br />当前：+{{notation(player.anm4u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm4u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm4c03)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u4" onclick="buyanm4u(4)">增加1~40式风灵的超指数<br />{{ascale(player.anm4u04,4)}}等级{{notatint(player.anm4u04)}}<br />当前：+{{notation(player.anm4u04.pow(0.5).div(2500))}}<br />花费：{{notation(v.anm4c04)}}风之徱粕</button></td>
                     </tr>
                 </table>
                 <div class="btnrow">
@@ -1528,7 +1528,7 @@
             </div>
         </div>
         <div id="p6_1" v-if="v.currentPage=='p6_1'">
-            <div align="center" class="ftsz2" style="color:#0000ff">扭敧重置时风灵被扭敧了！看起来就像是蒸发了一样，不知道代价又是什么？别担心，新机制就要来了！</div>
+            <div align="center" class="ftsz2" style="color:#0000ff">扭敧重置时能量坍缩了！看起来就像是蒸发了一样，不知道代价又是什么？别担心，新机制就要来了！</div>
             <div class="btnrow">
                 <div align="center" class="ftsz3" style="display:inline-block; margin:auto">你来到了量子之海! 选择深度：</div>
                 <div class="selector">
@@ -1556,7 +1556,7 @@
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[0]?'PL5upgyes':'PL5upgno'" onclick="buyquau(0)">11<br />基于量子提升1~48式风灵产量<br />当前：×{{notation(v.quae11)}}<br />花费：1量子<br /></button></td>
+                    <td><button :class="player.quau[0]?'PL5upgyes':'PL5upgno'" onclick="buyquau(0)">11<br />基于量子提升1~48式风灵产量<br />当前：×{{notation(v.quae11)}}<br />花费：100量子<br /></button></td>
                     <td><button :class="player.quau[1]?'PL5upgyes':'PL5upgno'" onclick="buyquau(1)">12<br />获得并保留1~32式风灵自动作成，并解锁自动作成33~40式风灵<br />花费：10000量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
@@ -1564,8 +1564,8 @@
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[2]?'PL5upgyes':'PL5upgno'" onclick="buyquau(2)">13<br />获得并保留风之微粒、徯粓、徰粔升级自动购买，并解锁自动购买风之徱粕升级<br />花费：1e8量子<br /></button></td>
-                    <td><button class="PL5upgno" onmousedown="fillqua(1)">F1<br />(连续)基于量子提升41~48式风灵的指数<br />当前：+{{notation(v.quaef1)}}<br />已填充：{{notation(player.quafil01)}}量子</button></td>
+                    <td><button :class="player.quau[2]?'PL5upgyes':'PL5upgno'" onclick="buyquau(2)">13<br />获得并保留风之xx升级自动购买和风之xx解锁状态，并解锁自动购买风之徱粕升级<br />花费：1e6量子<br /></button></td>
+                    <td><button class="PL5upgno" onmousedown="fillqua(1)">F1<br />(连续)基于填充数量提升41~48式风灵的指数<br />当前：+{{notation(v.quaef1)}}<br />已填充：{{notation(player.quafil01)}}量子</button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
@@ -1598,32 +1598,32 @@
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">21<br />获得并保留扬敦目标1~8(要求：购买升级11)<br />花费：1e8量子<br /></button></td>
-                    <td><button class="PL5upgno">22<br />获得并保留扬敦目标9~16(要求：购买升级12)<br />花费：1e12量子<br /></button></td>
+                    <td><button :class="player.quau[3]?'PL5upgyes':'PL5upgno'" onclick="buyquau(3)">21<br />扭敧重置时保留扬敦目标1~16和进阶挑战13~16(要求：购买升级11)<br />花费：1e8量子<br /></button></td>
+                    <td><button :class="player.quau[4]?'PL5upgyes':'PL5upgno'" onclick="buyquau(4)">22<br />保留并解锁自动获得扩散、扪敤、扫敥、扬敦次数(要求：购买升级12)<br />花费：1e10量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">23<br />解锁自动扬敦碎片升级和锻造柏拉图立体(要求：扭敧重置2次)<br />花费：1e24量子<br /></button></td>
+                    <td><button :class="player.quau[5]?'PL5upgyes':'PL5upgno'" onclick="buyquau(5)">23<br />扭敧重置时保留扬敦碎片升级、1e15最终立体波、最后一行协同升级(要求：扭敧重置2次)<br />花费：1e14量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">24<br />解锁自动协同升级和自动购买营养餐(要求：扭敧重置2次)<br />花费：1e32量子<br /></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                </tr>
-                <tr>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">25<br />获得并保留2000试炼场最大关卡和1024征标值(要求：购买升级13)<br />花费：1e18量子<br /></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">F2<br />(连续)基于填充数量提升41~48式风灵的超指数<br />已填充：{{player.quafil02}}量子<br /></button></td>
+                    <td><button :class="player.quau[6]?'PL5upgyes':'PL5upgno'" onclick="buyquau(6)">24<br />扭敧重置时保留2000试炼场最大关卡、1024征标值、593式营养餐(要求：扭敧重置2次)<br />花费：1e16量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[7]?'PL5upgyes':'PL5upgno'" onclick="buyquau(7)">25<br />解锁自动购买协同升级和营养餐(要求：购买升级13)<br />花费：1e12量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno">26<br />解锁光合作用(要求：扭敧重置10次)(coming s∞n)<br />花费：1e40量子<br /></button></td>
-                    <td><button class="PL5upgno">F3<br />(连续)基于填充数量和扭敧能量提升1~40式风灵的指数<br />已填充：{{player.quafil03}}量子<br /></button></td>
+                    <td><button class="PL5upgem"></button></td>
+                    <td><button class="PL5upgno" onmousedown="fillqua(2)">F2<br />(连续)基于填充数量提升41~48式风灵的超指数<br />已填充：{{player.quafil02}}量子<br /></button></td>
+                    <td><button class="PL5upgem"></button></td>
+                </tr>
+                <tr>
+                    <td><button class="PL5upgem"></button></td>
+                    <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[8]?'PL5upgyes':'PL5upgno'" onclick="buyquau(8)">26<br />解锁光合作用(要求：扭敧重置10次)<br />花费：1e20量子<br /></button></td>
+                    <td><button class="PL5upgno" onmousedown="fillqua(3)">F3<br />(连续)基于填充数量和扭敧能量提升1~40式风灵的指数<br />已填充：{{player.quafil03}}量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
@@ -1640,17 +1640,17 @@
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[9]?'PL5upgyes':'PL5upgno'" onclick="buyquau(9)">31<br />解锁自动获得风五倍系统和风六倍系统(要求：购买升级21)<br />花费：1e22量子<br /></button></td>
+                    <td><button :class="player.quau[10]?'PL5upgyes':'PL5upgno'" onclick="buyquau(10)">32<br />解锁自动购买风灵升级5和6(要求：购买升级22)<br />花费：1e24量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[11]?'PL5upgyes':'PL5upgno'" onclick="buyquau(11)">33<br />肆壹式风灵可以生产肆零式风灵(要求：拥有e5e27能量)<br />花费：1e26量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[12]?'PL5upgyes':'PL5upgno'" onclick="buyquau(12)">34<br />每秒自动获得100%判定中的扬敦点，直到扬敦点等于判定中的扬敦点为止(要求：拥有e1e28能量)<br />花费：1e28量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
@@ -1740,7 +1740,7 @@
         <div id="p6_2" v-if="v.currentPage=='p6_2'">
             <div class="btnrow">
                 <div align="center" class="ftsz2">扭敧机器可以进行时空扭敧，用来加快不同的速度，每个扭敧机器都有一个速度函数，可以对它们进行升级</div>
-                <div align="center" class="ftsz2">你有<span class="ftsz3" style="color:#0000ff">{{notation(player.PL5sec)}}</span>扭敧时间，<span class="ftsz3" style="color:#ff0000">{{notation(player.PL1sec)}}</span>扩散时间</div>
+                <div align="center" class="ftsz2">你有<span class="ftsz3" style="color:#ff0000">{{notation(player.PL1sec)}}</span>扩散时间，<span class="ftsz3" style="color:#0000ff">{{notation(player.PL5sec)}}</span>扭敧时间</div>
             </div>
             <table align="center">
                 <tr>
@@ -1756,7 +1756,7 @@
                         <div align="center" class="xbmch">
                             <br />
                             贰式时空扭敧机器<br />
-                            二阶游戏速度×{{notation(player.PL5secrl.pow(player.xbmu02.add(1).mul(0.25)))}}<br />
+                            二阶游戏速度×{{notation(player.PL5secrl.pow(player.xbmu03.add(1).mul(0.25)))}}<br />
                             速度函数：x^{{notation(player.xbmu02.div(4).add(1.25))}}
                         </div>
                     </td>
@@ -1765,71 +1765,96 @@
             <table align="center">
                 <tr>
                     <td><button class="xbupg" onclick="buyxbmu(1)">壹式时空扭敧机器的指数增加1<br />当前：+{{notation(player.xbmu01)}}<br />花费：{{notation(v.xbmc01)}}扭敧点</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(2)">贰式时空扭敧机器的指数增加0.25<br />当前：+{{notation(player.xbmu02.div(4))}}<br />花费：{{notation(v.xbmc02)}}扭敧点</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(3)">基于扭敧时间，<br />当前：<br />花费：{{notation(v.xbmc01)}}扭敧时间</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(4)">基于扭敧时间，<br />当前：<br />花费：{{notation(v.xbmc02)}}扭敧时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(2)">使一阶游戏速度翻倍<br />当前：×{{notation(player.xbmu02.pwb(2))}}<br />花费：{{notation(v.xbmc02)}}扩散时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(3)">贰式时空扭敧机器的指数增加0.25<br />当前：+{{notation(player.xbmu03.div(4))}}<br />花费：{{notation(v.xbmc03)}}扭敧点</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(4)">使二阶游戏速度翻倍<br />当前：×{{notation(player.xbmu04.pwb(2))}}<br />花费：{{notation(v.xbmc04)}}扭敧时间</button></td>
                 </tr>
                 <tr>
-                    <td><button class="xbupg" onclick="buyxbmu(5)">基于扭敧时间，<br />当前：<br />花费：{{notation(v.xbmc01)}}扭敧时间</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(6)">基于扭敧时间，<br />当前：<br />花费：{{notation(v.xbmc02)}}扭敧时间</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(7)">基于扩散时间，<br />当前：<br />花费：{{notation(v.xbmc01)}}扩散时间</button></td>
-                    <td><button class="xbupg" onclick="buyxbmu(8)">基于扩散时间，<br />当前：<br />花费：{{notation(v.xbmc02)}}扩散时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(5)">基于扩散时间，提升风灵升级1的效果指数<br />当前：×{{notation(v.xbme05)}}<br />花费：{{notation(v.xbmc05)}}扩散时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(6)">基于扩散时间，提升风灵升级2的效果指数<br />当前：×{{notation(v.xbme06)}}<br />花费：{{notation(v.xbmc06)}}扩散时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(7)">基于扭敧时间，提升甜甜花种子获取数量的指数<br />当前：×{{notation(v.xbme07)}}<br />花费：{{notation(v.xbmc07)}}扭敧时间</button></td>
+                    <td><button class="xbupg" onclick="buyxbmu(8)">基于扭敧时间，提升多面体波获取数量的指数<br />当前：×{{notation(v.xbme08)}}<br />花费：{{notation(v.xbmc08)}}扭敧时间</button></td>
                 </tr>
             </table>
-            <div align="center" class="ftsz2">点击切换正向/反向扭敧</div>
         </div>
         <div id="p6_3" v-if="v.currentPage=='p6_3'">
             <div class="btnrow">
-                <div align="center" class="PL5upgno" @click=" ">
-                    点击收集红橙光能量（基于扩散时间）
-                </div>
-                <div align="center" class="PL5upgno" @click=" ">
-                    点击收集蓝紫光能量（基于扭敧时间）
-                </div>
-                <div align="center" class="PL5upgno" @click=" ">
-                    获得1二氧化碳，获得1水
-                </div>
-                <div align="center" class="PL5upgno" @click=" ">
-                    触发光合作用（自动：开）
-                </div>
+                <table align="center">
+                    <tr>
+                        <td><div align="center" class="PL5upgno" onclick="colRlit()">点击收集红橙光能量（基于扩散时间）</div></td>
+                        <td></td>
+                        <td></td>
+                        <td><div align="center" class="PL5upgno" onclick="colBlit()">点击收集蓝紫光能量（基于扭敧时间）</div></td>
+                    </tr>
+                    <tr>
+                        <td><div align="center" class="PL5upgno" onclick=""></div></td>
+                        <td><div align="center" class="PL5upgno" onclick=""></div></td>
+                        <td><div align="center" class="PL5upgno" onclick=""></div></td>
+                        <td><div align="center" class="PL5upgno" onclick=""></div></td>
+                    </tr>
+                </table>
+                <div align="center" class="ftsz2" @click=" ">你有1二氧化碳，1水</div>
                 <div align="center" class="ftsz2">你有0葡萄糖，0果糖，0蔗糖，0淀粉</div>
                 <div align="center" class="PL5upgno">
-                    合成淀粉（需要10葡萄糖），你的淀粉使时间扭敧速度增加（自动：开）
+                    合成淀粉（需要6葡萄糖），你的淀粉使时间扭敧速度增加（自动：开）
                 </div>
                 <div align="center" class="PL5upgno">
                     合成蔗糖（需要1葡萄糖+1果糖），你的蔗糖使1~48式风灵产量增量（自动：开）
+                </div>
+                <div align="center" class="PL5upgno">
+                    解锁太阳风灵，需要：1淀粉和1蔗糖
                 </div>
             </div>
         </div>
         <div id="p6_4" v-if="v.currentPage=='p6_4'">
             <div class="btnrow">
-                <div align="center" class="ftsz2">你有<span class="ftsz3">0</span>电磁能量，它使最终能量指数乘以<span class="ftsz3">0</span></div>
+                <br /><div align="center" class="ftsz2">你有<span class="ftsz3">0</span>电磁能量，它使最终能量指数乘以<span class="ftsz3">0</span></div><br />
                 <div class="solarwsc" style="background-color:#ffffff80;">
                     <span>壹式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
-                    <button class="wscbt2" @click=" ">最大作成</button>
                     <button class="wscbt1" @click=" ">作成1次需要:<br>4电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
                 <div class="solarwsc" style="background-color:#ff000080;">
                     <span>贰式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
-                    <button class="wscbt2" @click=" ">最大作成</button>
-                    <button class="wscbt1" @click=" ">作成1次需要:<br>65536电磁能量</button><br />
+                    <button class="wscbt1" @click=" ">作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
                 <div class="solarwsc" style="background-color:#ffff0080;">
                     <span>叁式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
-                    <button class="wscbt2" @click=" ">最大作成</button>
-                    <button class="wscbt1" @click=" ">作成1次需要:<br>1.844e19电磁能量</button><br />
+                    <button class="wscbt1" @click=" ">作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
                 <div class="solarwsc" style="background-color:#00ff0080;">
                     <span>肆式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
-                    <button class="wscbt2" @click=" ">最大作成</button>
-                    <button class="wscbt1" @click=" "> 作成1次需要:<br>1.125e77电磁能量</button><br />
+                    <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
+                    <span class="wscdat">1919810</span>
+                </div>
+                <div class="solarwsc" style="background-color:#00ffff80;">
+                    <span>伍式太阳风灵作成·114514</span>
+                    <button class="wscbt2" @click=" ">自动：</button>
+                    <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
+                    <span class="wscdat">1919810</span>
+                </div>
+                <div class="solarwsc" style="background-color:#0000ff80;">
+                    <span>陆式太阳风灵作成·114514</span>
+                    <button class="wscbt2" @click=" ">自动：</button>
+                    <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
+                    <span class="wscdat">1919810</span>
+                </div>
+                <div class="solarwsc" style="background-color:#ff00ff80;">
+                    <span>柒式太阳风灵作成·114514</span>
+                    <button class="wscbt2" @click=" ">自动：</button>
+                    <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
+                    <span class="wscdat">1919810</span>
+                </div>
+                <div class="solarwsc" style="background-color:#00000080;">
+                    <span>捌式太阳风灵作成·114514</span>
+                    <button class="wscbt2" @click=" ">自动：</button>
+                    <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
                 <div align="center" class="ftsz2">触发1次电磁暴，通过后解锁伍式太阳风灵</div>
