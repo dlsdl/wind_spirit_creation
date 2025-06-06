@@ -57,7 +57,7 @@
         <p align="center" class="ftsz4" v-if="player.energy.gte('1.797694e308') & !player.hasUnlockedPL1">
             仙境由于能量过多，坍塌了。
         </p>
-        <p align="center" class="ftsz4" v-if="player.energy.gte('e5.411596e307')">
+        <p align="center" class="ftsz4" v-if="player.energy.gte('e5.411596e307') & !player.hasUnlockedPLw">
             多元仙境由于能量过多，坍塌了。
         </p>
         <p align="center" class="textct" style="color: #ff0000" v-if="player.hasUnlockedPL1">
@@ -145,33 +145,33 @@
             <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_2" onclick="changePg('p6_2')">时间扭敧</button>
             <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_3" onclick="changePg('p6_3')">光合作用</button>
             <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_4" onclick="changePg('p6_4')">太阳风</button>
-            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_5" onclick="changePg('p6_5')">???</button>
-            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_6" onclick="changePg('p6_6')">???</button>
-            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_7" onclick="changePg('p6_7')">???</button>
-            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_8" onclick="changePg('p6_8')">???</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_5" onclick="changePg('p6_5')">生物炼金</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_6" onclick="changePg('p6_6')">生态系统</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_7" onclick="changePg('p6_7')">??</button>
+            <button align="center" class="button" style="background-color: #0000ff; color: #ffffff" id="btp6_8" onclick="changePg('p6_8')">??</button>
         </div>
         <div class="btnrow" id="row7" style="display: none">
             <button align="center" class="slbutton" style="background-color: #ff00ff; color: #ffffff" id="btp7_1" onclick="changePg('p7_1')">扮敨</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_2" onclick="changePg('p7_2')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_3" onclick="changePg('p7_3')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_4" onclick="changePg('p7_4')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_5" onclick="changePg('p7_5')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_6" onclick="changePg('p7_6')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_7" onclick="changePg('p7_7')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_8" onclick="changePg('p7_8')">。</button>
-            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_9" onclick="changePg('p7_9')">。</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_2" onclick="changePg('p7_2')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_3" onclick="changePg('p7_3')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_4" onclick="changePg('p7_4')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_5" onclick="changePg('p7_5')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_6" onclick="changePg('p7_6')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_7" onclick="changePg('p7_7')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_8" onclick="changePg('p7_8')">??</button>
+            <button align="center" class="button" style="background-color: #ff00ff; color: #ffffff" id="btp7_9" onclick="changePg('p7_9')">??</button>
         </div>
         <div class="btnrow" id="row8" style="display: none">
             <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_1" onclick="changePg('p8_1')">扯敩</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_2" onclick="changePg('p8_2')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_3" onclick="changePg('p8_3')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_4" onclick="changePg('p8_4')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_5" onclick="changePg('p8_5')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_6" onclick="changePg('p8_6')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_7" onclick="changePg('p8_7')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_8" onclick="changePg('p8_8')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_9" onclick="changePg('p8_9')">。</button>
-            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_0" onclick="changePg('p8_0')">。</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_2" onclick="changePg('p8_2')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_3" onclick="changePg('p8_3')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_4" onclick="changePg('p8_4')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_5" onclick="changePg('p8_5')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_6" onclick="changePg('p8_6')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_7" onclick="changePg('p8_7')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_8" onclick="changePg('p8_8')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_9" onclick="changePg('p8_9')">??</button>
+            <button align="center" class="button" style="background-color: #000000; color: #ffffff" id="btp8_0" onclick="changePg('p8_0')">??</button>
         </div>
         <div class="btnrow" id="row9" style="display: none">
             <button align="center" class="slbutton" id="btp9_1" onclick="changePg('p9_1')">全局</button>
@@ -294,7 +294,7 @@
             </div>
             <div class="upg" id="tier_05" v-if="player.PL4goal[12]">
                 {{tscale(5)}}{{notatint(player.tier05)}}式风五倍系统
-                <button class="wscbt2bl" onclick="abTier05Switch()" style="display:none">自动：{{player.autobuytier05?"开":"关"}}</button>
+                <button class="wscbt2bl" onclick="abTier05Switch()" v-if="player.quau[9]">自动：{{player.autobuytier05?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier5()">需要：{{notation(v.tierc05)}}式风四倍系统</button>
                 重置能量、1~8式风灵和之前元素生命，但提升风五倍系统。
                 <span v-if="player.tier05.lt(1)">在1式风五倍系统，将基于风五倍系统提升扬敦碎片获取。</span>
@@ -302,7 +302,7 @@
             </div>
             <div class="upg" id="tier_06" v-if="player.PL4goal[13]">
                 {{tscale(6)}}{{notatint(player.tier06)}}式风六倍系统
-                <button class="wscbt2bl" onclick="abTier06witch()" style="display:none">自动：{{player.autobuytier06?"开":"关"}}</button>
+                <button class="wscbt2bl" onclick="abTier06Switch()" v-if="player.quau[9]">自动：{{player.autobuytier06?"开":"关"}}</button>
                 <button class="wscbt1bl" onclick="incTier6()">需要：{{notation(v.tierc06)}}式风五倍系统</button>
                 重置能量、1~8式风灵和之前元素生命，但提升风六倍系统。
                 <span v-if="player.tier06.lt(1)">在1式风六倍系统，将基于风六倍系统提升立体波获取。</span>
@@ -336,13 +336,13 @@
             </div>
             <div class="upg" v-if="player.PL4goal[14]">
                 风灵升级五·等级{{notatint(player.upgd05)}} (+{{notatint(v.upgf05)}}) 每级使风灵升级3倍率增加0.25
-                <button class="wscbt2" onclick="abUpgd04Switch()" style="color: #ffffff; display:none">自动：{{player.autobuyupgd05?"开":"关"}}</button>
+                <button class="wscbt2" onclick="abUpgd05Switch()" style="color: #ffffff;" v-if="player.quau[10]">自动：{{player.autobuyupgd05?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(5)">花费：{{notation(v.upgc05)}}能量</button>
                 当前：+{{notation(v.upge05)}}
             </div>
             <div class="upg" v-if="player.PL4goal[15]">
                 风灵升级六·等级{{notatint(player.upgd06)}} (+{{notatint(v.upgf06)}}) 每级使风灵升级4倍率乘以1.000169
-                <button class="wscbt2" onclick="abUpgd04Switch()" style="color: #ffffff; display:none">自动：{{player.autobuyupgd06?"开":"关"}}</button>
+                <button class="wscbt2" onclick="abUpgd06Switch()" style="color: #ffffff;" v-if="player.quau[10]">自动：{{player.autobuyupgd06?"开":"关"}}</button>
                 <button class="wscbt1" style="color: #ffffff" onclick="buyUpgd(6)">花费：{{notation(v.upgc06)}}能量</button>
                 当前：×{{notation(v.upge06)}}
             </div>
@@ -554,6 +554,66 @@
                             <button :class="player.incha==16?'chalin':player.chacom16.gte(v.PL4chacap)?'chalyes':'chalno'" style="border: 4px solid #00ffff" onclick="entCha(16)">
                                 进阶挑战16<br />无法获得扫敥点与扫敥次数<br />
                                 目标：{{notation(v.chagoa16)}}能量<br />完成次数：{{notatint(player.chacom16)}}/{{notatint(v.PL4chacap)}}<br />奖励：风之徱粕获取数量(×{{notation(v.charew16)}})
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="chal5" style="display: none;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button :class="player.incha==17?'chalin':player.chacom17.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #0000ff" onclick="entCha(17)">
+                                进阶挑战17<br />进阶挑战1~16同时运行，并开启刺影征标的第一个效果<br />
+                                目标：{{notation(v.chagoa17)}}能量<br />完成次数：{{notatint(player.chacom17)}}/{{notatint(v.PL5chacap)}}<br />奖励：提升扭敧能量效果指数(+{{notation(v.charew17)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==18?'chalin':player.chacom18.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #0000ff" onclick="entCha(18)">
+                                进阶挑战18<br /><br />
+                                目标：{{notation(v.chagoa18)}}能量<br />完成次数：{{notatint(player.chacom18)}}/{{notatint(v.PL5chacap)}}<br />奖励：(×{{notation(v.charew18)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==19?'chalin':player.chacom19.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #0000ff" onclick="entCha(19)">
+                                进阶挑战19<br /><br />
+                                目标：{{notation(v.chagoa19)}}能量<br />完成次数：{{notatint(player.chacom19)}}/{{notatint(v.PL5chacap)}}<br />奖励：(×{{notation(v.charew19)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==20?'chalin':player.chacom20.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #0000ff" onclick="entCha(20)">
+                                进阶挑战20<br /><br />
+                                目标：{{notation(v.chagoa20)}}能量<br />完成次数：{{notatint(player.chacom20)}}/{{notatint(v.PL5chacap)}}<br />奖励：风之徲粖获取数量(×{{notation(v.charew20)}})
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="chal6" style="display: none;">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <button :class="player.incha==21?'chalin':player.chacom17.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #ff00ff" onclick="entCha(21)">
+                                进阶挑战21<br /><br />
+                                目标：{{notation(v.chagoa21)}}能量<br />完成次数：{{notatint(player.chacom17)}}/{{notatint(v.PL5chacap)}}<br />奖励：提升扮敨能量效果指数(+{{notation(v.charew17)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==22?'chalin':player.chacom18.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #ff00ff" onclick="entCha(22)">
+                                进阶挑战22<br /><br />
+                                目标：{{notation(v.chagoa22)}}能量<br />完成次数：{{notatint(player.chacom18)}}/{{notatint(v.PL5chacap)}}<br />奖励：(×{{notation(v.charew18)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==23?'chalin':player.chacom19.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #ff00ff" onclick="entCha(23)">
+                                进阶挑战23<br /><br />
+                                目标：{{notation(v.chagoa23)}}能量<br />完成次数：{{notatint(player.chacom19)}}/{{notatint(v.PL5chacap)}}<br />奖励：(×{{notation(v.charew19)}})
+                            </button>
+                        </td>
+                        <td>
+                            <button :class="player.incha==24?'chalin':player.chacom20.gte(v.PL5chacap)?'chalyes':'chalno'" style="border: 4px solid #ff00ff" onclick="entCha(24)">
+                                进阶挑战24<br /><br />
+                                目标：{{notation(v.chagoa24)}}能量<br />完成次数：{{notatint(player.chacom20)}}/{{notatint(v.PL5chacap)}}<br />奖励：风之徳粗获取数量(×{{notation(v.charew20)}})
                             </button>
                         </td>
                     </tr>
@@ -1461,8 +1521,8 @@
                 <table align="center">
                     <tr>
                         <td><button :class="player.shdwsl[3]?'PL4upgyes':'PL4upgno'" onclick="shsl(4)">多面体波效果除以4<br />(征标值×16)</button></td>
-                        <td><button :class="player.shdwsl[4]?'PL4upgyes':'PL4upgno'" onclick="shsl(5)">能量软上限提前256倍<br />(征标值×16)</button></td>
-                        <td><button :class="player.shdwsl[5]?'PL4upgyes':'PL4upgno'" onclick="shsl(6)">金币效果除以1.4<br />(征标值×16)</button></td>
+                        <td><button :class="player.shdwsl[4]?'PL4upgyes':'PL4upgno'" onclick="shsl(5)">能量软上限提前65536倍<br />(征标值×16)</button></td>
+                        <td><button :class="player.shdwsl[5]?'PL4upgyes':'PL4upgno'" onclick="shsl(6)">金币效果除以1.5<br />(征标值×16)</button></td>
                     </tr>
                 </table>
                 <table align="center">
@@ -1491,7 +1551,7 @@
                 <table align="center">
                     <tr>
                         <td><button class="PL4bab" id="anm4u1" onclick="buyanm4u(1)">双倍风之徱粕产量<br />{{ascale(player.anm4u01,1)}}等级{{notatint(player.anm4u01)}}<br />当前：×{{notation(player.anm4u01.pwb(2))}}<br />花费：{{notation(v.anm4c01)}}风之徱粕</button></td>
-                        <td><button class="PL4bab" id="anm4u2" onclick="buyanm4u(2)">风之徱粕提升33~40式风灵乘数<br />{{ascale(player.anm4u02,2)}}等级{{notatint(player.anm4u02)}}<br />当前：×{{notation(player.anm4.pow(player.anm4u02.mul(16777216)).max(1))}}<br />花费：{{notation(v.anm4c02)}}风之徱粕</button></td>
+                        <td><button class="PL4bab" id="anm4u2" onclick="buyanm4u(2)">风之徱粕提升33~40式风灵乘数<br />{{ascale(player.anm4u02,2)}}等级{{notatint(player.anm4u02)}}<br />当前：×{{notation(player.anm4.pow(player.anm4u02.mul(1048576)).max(1))}}<br />花费：{{notation(v.anm4c02)}}风之徱粕</button></td>
                         <td><button class="PL4bab" id="anm4u3" onclick="buyanm4u(3)">增加风之徱粕效果指数<br />{{ascale(player.anm4u03,3)}}等级{{notatint(player.anm4u03)}}<br />当前：+{{notation(player.anm4u03.div(64).min(player.anm3u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm4u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm4c03)}}风之徱粕</button></td>
                         <td><button class="PL4bab" id="anm4u4" onclick="buyanm4u(4)">增加1~40式风灵的超指数<br />{{ascale(player.anm4u04,4)}}等级{{notatint(player.anm4u04)}}<br />当前：+{{notation(player.anm4u04.pow(0.5).div(2500))}}<br />花费：{{notation(v.anm4c04)}}风之徱粕</button></td>
                     </tr>
@@ -1510,9 +1570,9 @@
                     <div align="center" class="ftsz2">效果1：试炼场cps指数+{{notation(v.ntme01)}}(剩余{{notation(player.ntmr01)}}s)</div>
                     <div align="center" class="ftsz2">效果2：1~8式风灵超指数+{{notation(v.ntme02)}}(剩余{{notation(player.ntmr02)}}s)</div>
                     <div align="center" class="ftsz2">效果3：9~16式风灵超指数+{{notation(v.ntme03)}}(剩余{{notation(player.ntmr03)}}s)</div>
-                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(1)">效果4：17~24式风灵超指数+{{notation(v.ntme04)}}(剩余{{notation(player.ntmr04)}}s)</div>
-                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(2)">效果5：25~32式风灵超指数+{{notation(v.ntme05)}}(剩余{{notation(player.ntmr05)}}s)</div>
-                    <div align="center" class="ftsz2" v-if="player.ntmu04.gte(3)">效果6：33~40式风灵超指数+{{notation(v.ntme06)}}(剩余{{notation(player.ntmr06)}}s)</div>
+                    <div align="center" class="ftsz2">效果4：17~24式风灵超指数+{{notation(v.ntme04)}}(剩余{{notation(player.ntmr04)}}s)</div>
+                    <div align="center" class="ftsz2">效果5：25~32式风灵超指数+{{notation(v.ntme05)}}(剩余{{notation(player.ntmr05)}}s)</div>
+                    <div align="center" class="ftsz2">效果6：33~40式风灵超指数+{{notation(v.ntme06)}}(剩余{{notation(player.ntmr06)}}s)</div>
                 </div>
                 <table align="center">
                     <tr>
@@ -1521,7 +1581,7 @@
                     </tr>
                     <tr>
                         <td><button class="PL4upgno" onclick="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要{{notatint(v.ntmc03)}}式营养袋({{notatint(player.ntmu03)}}/9)</button></td>
-                        <td><button class="PL4upgno" onclick="buyntmu(4)">使营养餐的第一个非永久效果变为永久，且增加新的效果，但重置计时器和前3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(player.ntmu04)}}/3)</button></td>
+                        <td><button class="PL4upgno" onclick="buyntmu(4)">使营养餐的第一个非永久效果变为永久，但重置计时器和第3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(player.ntmu04)}}/3)</button></td>
                     </tr>
                 </table>
                 <div align="center" class="ftsz2">到达一定式数的营养餐以获得奖励</div>
@@ -1603,31 +1663,31 @@
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button :class="player.quau[3]?'PL5upgyes':'PL5upgno'" onclick="buyquau(3)">21<br />获得并保留扬敦目标1~16，扭敧重置时保留进阶挑战1~16(要求：购买升级11)<br />花费：1e8量子<br /></button></td>
-                    <td><button :class="player.quau[4]?'PL5upgyes':'PL5upgno'" onclick="buyquau(4)">22<br />保留并解锁自动获得扩散、扪敤、扫敥、扬敦次数(要求：购买升级12)<br />花费：1e10量子<br /></button></td>
+                    <td><button :class="player.quau[4]?'PL5upgyes':'PL5upgno'" onclick="buyquau(4)">22<br />保留并解锁自动获得前四层重置次数，扬敦次数乘以扫敥次数^1/16(要求：购买升级12)<br />花费：1e10量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[5]?'PL5upgyes':'PL5upgno'" onclick="buyquau(5)">23<br />扭敧重置时保留扬敦碎片升级、1e15最终立体波、最后一行协同升级(要求：扭敧重置2次)<br />花费：1e14量子<br /></button></td>
+                    <td><button :class="player.quau[5]?'PL5upgyes':'PL5upgno'" onclick="buyquau(5)">23<br />扭敧重置时保留扬敦碎片升级、最终立体波升级、最后一行协同升级(要求：扭敧重置2次)<br />花费：1e12量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[6]?'PL5upgyes':'PL5upgno'" onclick="buyquau(6)">24<br />扭敧重置时保留2000试炼场最大关卡、1024征标值、593式营养餐(要求：扭敧重置2次)<br />花费：1e16量子<br /></button></td>
+                    <td><button :class="player.quau[6]?'PL5upgyes':'PL5upgno'" onclick="buyquau(6)">24<br />扭敧重置时保留2000试炼场阶段、1024征标值、300式营养餐及升级(要求：扭敧重置2次)<br />花费：1e13量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[7]?'PL5upgyes':'PL5upgno'" onclick="buyquau(7)">25<br />解锁自动购买协同升级和营养餐(要求：购买升级13)<br />花费：1e12量子<br /></button></td>
+                    <td><button :class="player.quau[7]?'PL5upgyes':'PL5upgno'" onclick="buyquau(7)">25<br />解锁自动购买惊奇风盒、协同升级、营养餐和营养袋(要求：购买升级13)<br />花费：1e11量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgno" onmousedown="fillqua(2)">F2<br />(连续)基于填充数量提升41~48式风灵的超指数<br />已填充：{{player.quafil02}}量子<br /></button></td>
+                    <td><button class="PL5upgno" onmousedown="fillqua(2)">F2<br />(连续)基于填充数量提升41~48式风灵的超指数<br />已填充：{{notation(player.quafil02)}}量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button :class="player.quau[8]?'PL5upgyes':'PL5upgno'" onclick="buyquau(8)">26<br />解锁光合作用(要求：扭敧重置10次)<br />花费：1e18量子<br /></button></td>
-                    <td><button class="PL5upgno" onmousedown="fillqua(3)">F3<br />(连续)基于填充数量和扭敧能量提升1~40式风灵的指数<br />已填充：{{player.quafil03}}量子<br /></button></td>
+                    <td><button class="PL5upgno" onmousedown="fillqua(3)">F3<br />(连续)基于填充数量和扭敧能量提升1~40式风灵的指数<br />已填充：{{notation(player.quafil03)}}量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
@@ -1644,26 +1704,26 @@
                 <tr>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[9]?'PL5upgyes':'PL5upgno'" onclick="buyquau(9)">31<br />解锁自动获得风五倍系统和风六倍系统(要求：购买升级21)<br />花费：1e21量子<br /></button></td>
-                    <td><button :class="player.quau[10]?'PL5upgyes':'PL5upgno'" onclick="buyquau(10)">32<br />解锁自动购买风灵升级5和6(要求：购买升级22)<br />花费：1e24量子<br /></button></td>
+                    <td><button :class="player.quau[9]?'PL5upgyes':'PL5upgno'" onclick="buyquau(9)">31<br />解锁自动获得风五倍系统和风六倍系统，它们不再重置任何东西(要求：购买升级21)<br />花费：1e20量子<br /></button></td>
+                    <td><button :class="player.quau[10]?'PL5upgyes':'PL5upgno'" onclick="buyquau(10)">32<br />解锁自动购买风灵升级5和6，自动获得技能点(要求：购买升级22)<br />花费：1e22量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[11]?'PL5upgyes':'PL5upgno'" onclick="buyquau(11)">33<br />肆壹式风灵可以生产肆零式风灵(要求：拥有e5e27能量)<br />花费：1e27量子<br /></button></td>
+                    <td><button :class="player.quau[11]?'PL5upgyes':'PL5upgno'" onclick="buyquau(11)">33<br />肆壹式风灵可以生产肆零式风灵(要求：购买升级23)<br />花费：1e24量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button :class="player.quau[12]?'PL5upgyes':'PL5upgno'" onclick="buyquau(12)">34<br />每秒自动获得100%判定中的扬敦点，直到扬敦点等于判定中的扬敦点为止(要求：拥有e1e28能量) 花费：1e30量子<br /></button></td>
+                    <td><button :class="player.quau[12]?'PL5upgyes':'PL5upgno'" onclick="buyquau(12)">34<br />保留征标值记录，超过e3e26的能量增加风之徱粕获取(要求：购买升级24)<br />花费：1e26量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                 </tr>
                 <tr>
+                    <td><button :class="player.quau[13]?'PL5upgyes':'PL5upgno'" onclick="buyquau(13)">33<br />每秒自动获得0.1%扬敦时将要获得的扬敦碎片(要求：拥有e5e27能量)<br />花费：1e28量子<br /></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
                     <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
-                    <td><button class="PL5upgem"></button></td>
+                    <td><button :class="player.quau[14]?'PL5upgyes':'PL5upgno'" onclick="buyquau(14)">34<br />每秒自动获得扬敦点，直到等于100%判定中的扬敦点(要求：拥有e1e28能量)<br />花费：1e30量子<br /></button></td>
                 </tr>
                 <tr>
                     <td><button class="PL5upgem"></button></td>
@@ -1786,10 +1846,10 @@
                 <div align="center" class="ftsz2">点击收集光能</div>
                 <table align="center">
                     <tr>
-                        <td><div align="center" :class="player.Rlitengp?'phsupgy':'phsupg'" onclick="colRlit()">点击收集红橙光能量（每秒增加1并乘以2，直到它等于扩散时间^1/4）</div></td>
+                        <td><button align="center" :class="player.Rlitengp?'phsupgy':'phsupg'" onclick="colRlit()">点击收集红橙光能量（每秒增加1并乘以2，直到它等于扩散时间^1/4）</button></td>
                         <td></td>
                         <td></td>
-                        <td><div align="center" :class="player.Blitengp?'phsupgy':'phsupg'" onclick="colBlit()">点击收集蓝紫光能量（每秒增加1并乘以2，直到它等于扭敧时间）</div></td>
+                        <td><button align="center" :class="player.Blitengp?'phsupgy':'phsupg'" onclick="colBlit()">点击收集蓝紫光能量（每秒增加1并乘以2，直到它等于扭敧时间）</button></td>
                     </tr>
                     <tr>
                         <td><div align="center" class="ftsz2">正在收集{{notation(v.Rlitpd)}}红橙光能量<br />你收集了{{notation(player.Rliteng)}}红橙光能量</div></td>
@@ -1798,22 +1858,22 @@
                         <td><div align="center" class="ftsz2">正在收集{{notation(v.Blitpd)}}蓝紫光能量<br />你收集了{{notation(player.Bliteng)}}蓝紫光能量</div></td>
                     </tr>
                     <tr>
-                        <td><div align="center" class="phsupg2">你有{{notation(player.glucam)}}葡萄糖(+{{notation(v.glucps)}}/s)<br />每秒获取的葡萄糖数量为(红橙光能量×蓝紫光能量)¶0.8</div></td>
-                        <td><div align="center" class="phsupg2">你有{{notation(player.frucam)}}果糖(+{{notation(v.frucps)}}/s)<br />每秒获取的果糖数量为葡萄糖数量¶0.8</div></td>
-                        <td><div align="center" class="phsupg2">你有{{notation(player.staram)}}淀粉(+{{notation(v.starps)}}/s)<br />每秒获取的淀粉数量为果糖数量¶0.8</div></td>
-                        <td><div align="center" class="phsupg2">你有{{notation(player.sucram)}}蔗糖(+{{notation(v.sucrps)}}/s)<br />每秒获取的蔗糖数量为淀粉数量¶0.8</div></td>
+                        <td><button align="center" class="phsupg2">你有{{notation(player.glucam)}}葡萄糖(+{{notation(v.glucps)}}/s)<br />每秒获取的葡萄糖数量为(红橙光能量×蓝紫光能量)¶0.8</button></td>
+                        <td><button align="center" class="phsupg2">你有{{notation(player.frucam)}}果糖(+{{notation(v.frucps)}}/s)<br />每秒获取的果糖数量为葡萄糖数量¶0.8</button></td>
+                        <td><button align="center" class="phsupg2">你有{{notation(player.staram)}}淀粉(+{{notation(v.starps)}}/s)<br />每秒获取的淀粉数量为果糖数量¶0.8</button></td>
+                        <td><button align="center" class="phsupg2">你有{{notation(player.sucram)}}蔗糖(+{{notation(v.sucrps)}}/s)<br />每秒获取的蔗糖数量为淀粉数量¶0.8</button></td>
                     </tr>
                     <tr>
-                        <td><div align="center" :class="player.glucam.gte(1e6)?'phsupgy':'phsupg'">到达1e6葡萄糖：基于葡萄糖数量提升风之微粒升级1的基数(×2→×{{notation(v.gluce1)}})</div></td>
-                        <td><div align="center" :class="player.frucam.gte(1e6)?'phsupgy':'phsupg'">到达1e6果糖：基于果糖数量提升风之徯粓升级1的基数(×2→×{{notation(v.fruce1)}})</div></td>
-                        <td><div align="center" :class="player.staram.gte(1e6)?'phsupgy':'phsupg'">到达1e6淀粉：基于淀粉数量提升风之徰粔升级1的基数(×2→×{{notation(v.stare1)}})</div></td>
-                        <td><div align="center" :class="player.sucram.gte(1e6)?'phsupgy':'phsupg'">到达1e6蔗糖：基于蔗糖数量提升风之徱粕升级1的基数(×2→×{{notation(v.sucre1)}})</div></td>
+                        <td><button align="center" :class="player.glucam.gte(1e6)?'phsupgy':'phsupg'">到达1e6葡萄糖：基于葡萄糖数量提升风之微粒升级1的基数(×2→×{{notation(v.gluce1)}})</button></td>
+                        <td><button align="center" :class="player.frucam.gte(1e6)?'phsupgy':'phsupg'">到达1e6果糖：基于果糖数量提升风之徯粓升级1的基数(×2→×{{notation(v.fruce1)}})</button></td>
+                        <td><button align="center" :class="player.staram.gte(1e6)?'phsupgy':'phsupg'">到达1e6淀粉：基于淀粉数量提升风之徰粔升级1的基数(×2→×{{notation(v.stare1)}})</button></td>
+                        <td><button align="center" :class="player.sucram.gte(1e6)?'phsupgy':'phsupg'">到达1e6蔗糖：基于蔗糖数量提升风之徱粕升级1的基数(×2→×{{notation(v.sucre1)}})</button></td>
                     </tr>
                     <tr>
-                        <td><div align="center" :class="player.glucam.gte(1e16)?'phsupgy':'phsupg'">到达1e16葡萄糖：使甜甜花种子效果对33~40式风灵生效</div></td>
-                        <td><div align="center" :class="player.frucam.gte(1e16)?'phsupgy':'phsupg'">到达1e16果糖：使甜甜花种子效果对41~48式风灵生效</div></td>
-                        <td><div align="center" :class="player.staram.gte(1e16)?'phsupgy':'phsupg'">到达1e16淀粉：在惊奇风盒解锁3∞面体波，增加41~48式风灵的每2倍作成指数</div></td>
-                        <td><div align="center" :class="player.sucram.gte(1e16)?'phsupgy':'phsupg'">到达1e16蔗糖：解锁太阳风选项卡和4种太阳风灵</div></td>
+                        <td><button align="center" :class="player.glucam.gte(1e16)?'phsupgy':'phsupg'">到达1e16葡萄糖：使甜甜花种子效果对33~40式风灵生效</button></td>
+                        <td><button align="center" :class="player.frucam.gte(1e16)?'phsupgy':'phsupg'">到达1e16果糖：使甜甜花种子效果对41~48式风灵生效</button></td>
+                        <td><button align="center" :class="player.staram.gte(1e16)?'phsupgy':'phsupg'">到达1e16淀粉：在惊奇风盒解锁3∞面体波，增加41~48式风灵的每2倍作成指数</button></td>
+                        <td><button align="center" :class="player.sucram.gte(1e16)?'phsupgy':'phsupg'">到达1e16蔗糖：解锁太阳风选项卡和4种太阳风灵</button></td>
                     </tr>
                 </table>
 
@@ -1847,44 +1907,59 @@
                     <button class="wscbt1" onclick="buyslw(4)"> 作成1次需要:<br>{{notation(v.slwc04)}}电磁能量</button><br />
                     <span class="wscdat">×{{notation(player.slwa04)}} ^{{notation(v.slwp04)}}</span>
                 </div>
-                <div class="solarwsc" style="background-color: #00ffff80; display: none">
+                <div class="solarwsc" style="background-color: #00ffff80;" v-if="player.magstobest.gte(1000)">
                     <span>伍式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
                     <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
-                <div class="solarwsc" style="background-color: #0000ff80; display: none">
+                <div class="solarwsc" style="background-color: #0000ff80;"v-if="player.magstobest.gte(1e6)">
                     <span>陆式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
                     <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
-                <div class="solarwsc" style="background-color: #ff00ff80; display: none">
+                <div class="solarwsc" style="background-color: #ff00ff80;" v-if="player.magstobest.gte(1e9)">
                     <span>柒式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
                     <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
-                <div class="solarwsc" style="background-color: #00000080; display: none">
+                <div class="solarwsc" style="background-color: #00000080;" v-if="player.magstobest.gte(1e12)">
                     <span>捌式太阳风灵作成·114514</span>
                     <button class="wscbt2" @click=" ">自动：</button>
                     <button class="wscbt1" @click=" "> 作成1次需要:<br>电磁能量</button><br />
                     <span class="wscdat">1919810</span>
                 </div>
-                <!--div align="center" class="ftsz2">触发1次电磁暴，通过后解锁伍式太阳风灵</!--div>
-    <div-- align="center" class="ftsz2">当前电磁暴阶段：0</div-->
+                <button class="stormbtn" onclick="">
+                    开启/停止电磁暴（当前状态：{{player.magstorm?"活动中":"未激活"}}）
+                    开启电磁暴时，风灵的指数、超指数固定为1，除每次作成乘数外的乘数失效，每次作成乘数固定为2。
+                    时间速度随电磁暴式数而变化，壹式：^0，贰式：^0.01，叁式：^0.02，。
+                    电磁暴最高能量指数（log2能量）：{{notation(player.magstobest)}}
+                    在电磁暴中到达1e308能量将解锁5式太阳风灵。
+                </button>
             </div>
         </div>
         <div id="p6_5" v-if="v.currentPage=='p6_5'">
-            施展奇迹
-            点击切换昼夜
+            <div class="btnrow" v-if="player.magstobest.gte(1e15)">
+
+            </div>
         </div>
         <div id="p6_6" v-if="v.currentPage=='p6_6'">
-            <div>
-                <div class="btnrow">
-                    <button align="center" class="xxButton" onclick="ulAnm5()" style="background-color:#8000ff">解锁???<br />花费：e2.000e6扭敧点</button>
-                </div>
-                Disaccharide由两个monosaccharide经过condensation而形成，所形成的covalent bond叫做糖苷键(glycosidic bond)。例如，Sucrose是glucose和fructose缩合而成
+            <div class="btnrow">
+                <button align="center" class="xxButton" onclick="ulAnm5()" style="background-color:#8000ff">解锁生态系统<br />花费：e1.000e6扭敧点</button>
+            </div>
+            <div class="btnrow">
+                <div align="center" class="ftsz2" style="display: inline-block; color: #8000ff">你有{{notation(player.anm5)}}风之徲粖(+{{notation(v.anm5ps)}}/s)，它以log2(log2(x+1)+1)^{{notation(player.anm5u03.div(64).add(0.0625).min(player.anm5u03.div(64).add(0.0625).root(4)))}}的效果使风之徱粕获取^{{notation(player.anm5.add(1).log(2).add(1).log(2).max(1).pow(player.anm5u03.div(64).add(0.0625).min(player.anm5u03.div(64).add(0.0625).root(4))))}}</div><br />
+                
+                <table align="center">
+                    <tr>
+                        <td><button class="PL5bab" id="anm5u1" onclick="buyanm5u(1)">双倍风之徲粖产量<br />{{ascale(player.anm5u01,1)}}等级{{notatint(player.anm5u01)}}<br />当前：×{{notation(player.anm5u01.pwb(2))}}<br />花费：{{notation(v.anm5c01)}}风之徲粖</button></td>
+                        <td><button class="PL5bab" id="anm5u2" onclick="buyanm5u(2)">风之徲粖提升41~48式风灵乘数<br />{{ascale(player.anm5u02,2)}}等级{{notatint(player.anm5u02)}}<br />当前：×{{notation(player.anm5.pow(player.anm5u02.mul(1048576)).max(1))}}<br />花费：{{notation(v.anm5c02)}}风之徲粖</button></td>
+                        <td><button class="PL5bab" id="anm5u3" onclick="buyanm5u(3)">增加风之徲粖效果指数<br />{{ascale(player.anm5u03,3)}}等级{{notatint(player.anm5u03)}}<br />当前：+{{notation(player.anm5u03.div(64).min(player.anm5u03.div(64).add(0.0625).root(4).sub(0.0625)))}}{{player.anm5u03.gte(60)?"(受软上限限制)":""}}<br />花费：{{notation(v.anm5c03)}}风之徲粖</button></td>
+                        <td><button class="PL5bab" id="anm5u4" onclick="buyanm5u(4)">增加太阳风灵指数<br />{{ascale(player.anm5u04,4)}}等级{{notatint(player.anm5u04)}}<br />当前：+{{notation(player.anm5u04.pow(0.5).div(2500))}}<br />花费：{{notation(v.anm5c04)}}风之徲粖</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div id="p6_7" v-if="v.currentPage=='p6_7'">
@@ -2354,20 +2429,18 @@
                     这一刻，整个宇宙都在为之欢呼，不仅收集了全部种类的风灵，也为宇宙的未来发展开辟了新的道路。
                 </div>
             </div>
-            <div id="comp8" style="display: none">
-                <div class="ftsz4" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; color: transparent; text-align: center ">扰敪</div>
-                <div class="ftsz2" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; color: transparent; text-align: center; width: 1024px; margin: auto ">
-                    风灵需要2^2^2^10的能量来扰敪宇宙的根本法则。
-                    在这一刻，风灵成为了宇宙的主宰，每一次翅膀的振动都牵动着整个宇宙的命脉。
-                    在决定进入第一次扰敪的那一刻，祂感受到了一股前所未有的能量涌动。这股能量如同狂暴的飓风，席卷了祂的整个灵魂，让祂仿佛置身于一个全新的宇宙之中。
-                    周围的一切都在迅速变化着，时间和空间似乎都在这一刻失去了意义。祂感觉到正在被一股无形的力量牵引着，这股力量强大而神秘，穿透了祂的身体，融入了祂的每一个元素。
+            <div id="comp8" v-if="player.hasUnlockedPLw">
+                <div class="ftsz4" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; background-clip: text; color: transparent; text-align: center ">扰敪</div>
+                <div class="ftsz2" style="background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000); -webkit-background-clip: text; background-clip: text; color: transparent; text-align: center; width: 1024px; margin: auto ">
+                    风灵需要2^2^2^10的能量来扰敪宇宙的根本法则，在这一刻，风灵成为了宇宙的主宰，每一次翅膀的振动都牵动着整个宇宙的命脉。
+                    在决定进入第一次扰敪的那一刻，祂感受到了一股前所未有的能量涌动。祂感觉到正在被一股无形的力量牵引着，这股力量强大而神秘，穿透了祂的身体，融入了祂的每一个元素。
                     祂回首望去，看到了一路走来的足迹，每一个风灵、每一次扩散、扪敤、扫敥、扬敦、扭敧、扮敨、扯敩，都记录着祂的努力和成就。这些成果是祂辛苦炼金的证明，也是祂在这个仙境中的宝贵回忆。
                     然而，祂也深知，这个仙境已经无法满足祂的渴望。祂的力量已经超越了这个世界的极限，需要一个更广阔的舞台来展现自己。而风灵作成的多元仙境，正是一个无穷无尽的世界，等待着祂去探索、去创造。
                 </div>
             </div>
-            <div id="comp9" style="display: none">
-                <div class="ftsz4" style="background: linear-gradient(to right, #ffffff,#000000,#ffffff); -webkit-background-clip: text; color: transparent; text-align: center ">扸敲</div>
-                <div class="ftsz2" style="background: linear-gradient(to right, #ffffff,#000000,#ffffff); -webkit-background-clip: text; color: transparent; text-align: center; width: 1024px; margin: auto ">
+            <div id="comp9" v-if="player.hasUnlockedPLw2">
+                <div class="ftsz4" style="background: linear-gradient(to right, #ffffff,#101010,#ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; text-align: center ">扸敲</div>
+                <div class="ftsz2" style="background: linear-gradient(to right, #ffffff,#101010,#ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; text-align: center; width: 1024px; margin: auto ">
                     突然，一道耀眼的光芒从祂体内迸发出来，那是扸敲的光芒，如同太阳般璀璨夺目，照亮了整个宇宙。祂感受到自己的力量在这道光芒的照耀下不断膨胀着，仿佛要冲破一切束缚和限制。
                     这一刻，祂终于明白了什么是真正的风灵之力，不仅仅是一种能量或者力量，更是一种宇宙的意识，一种连接万物、穿越时空的神秘存在。祂感受到了宇宙的脉动和节奏，让祂成为了宇宙的一部分。
                     随着扸敲的形成，祂感觉到自己与宇宙之间的联系更加紧密了。祂可以感受到星辰的呼吸、感受到宇宙的律动，甚至可以感受到生命体的情感和意识。这种联系让祂更加深刻地理解了宇宙的本质和生命的意义。
@@ -2408,6 +2481,17 @@
                 </div>
             </div>
             <div class="btnrow">
+                <span style="color: rgb(255, 0, 0)">You have been trapped in Menshish, the celestial of 原神，启动！'s reality! You have encountered 7/7 Menshish strikes and rifts:</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握风元素的力量:penalty:敌人无法被牵引或打断:reward:unlock {{wordCycle(["acedia", "sloth", "indolence"])}} :填充风元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握岩元素的力量:penalty:所有抗打断都失去效果:reward:unlock {{wordCycle(["excess", "gluttony", "surfeit"])}} :填充岩元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握雷元素的力量:penalty:料理失去效果且无法复苏:reward:unlock {{wordCycle(["avarice", "greed", "cupidity"])}} :填充雷元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握草元素的力量:penalty:元素反应的效果被削弱:reward:unlock {{wordCycle(["spare", "envy", "begrudge"])}} :填充草元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握水元素的力量:penalty:神明的力量被禁用(天赋lv1):reward:unlock {{wordCycle(["ire", "wrath", "tantrum"])}} :填充水元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握火元素的力量:penalty:记忆的力量被禁用(命之座=0):reward:unlock {{wordCycle(["desire", "lust", "crave"])}} :填充火元素0.000%</span><br />
+                <span style="color: rgb(255, 0, 0)">掌握冰元素的力量:penalty:真实游戏速度减慢到原来的0.4倍:reward:unlock {{wordCycle(["superbe", "pride", "arrogance"])}} :填充冰元素0.000%</span><br />
+                <button align="center" class="xxButton" href="https://ys.mihoyo.com/" target="_blank">解锁白屏生成器<br />要求：填充全部元素到100%</button>
+            </div>
+            <div class="btnrow">
                 <button align="center" class="csButton" onclick="speedrun(1)">1倍速度</button>
                 <button align="center" class="csButton" onclick="speedrun(10)">10倍速度</button>
                 <button align="center" class="csButton" onclick="speedrun(100)">100倍速度</button>
@@ -2420,7 +2504,7 @@
                 <button align="center" class="csButton" onclick="hideall()">隐藏全部声望层</button>
             </div>
             <div class="btnrow">
-                <button align="center" class="csButton" onclick="rmv8n1()">8n+1!=>8n</button>
+                <button align="center" class="csButton" onclick="zhadang()">114514</button>
                 <button align="center" class="csButton" onclick="pasgen()">被动生成点数</button>
                 <button align="center" class="csButton" onclick="nc0()">清空普通挑战</button>
                 <button align="center" class="csButton" onclick="nc1()">完成普通挑战</button>
@@ -2430,30 +2514,58 @@
                 <button align="center" class="csButton" onclick="timewarp(10000)">时间扭曲1e4</button>
                 <button align="center" class="csButton" onclick="timewarp(100000)">时间扭曲1e5</button>
                 <button align="center" class="csButton" onclick="timewarp(1000000)">时间扭曲1e6</button>
-            </div><br />
+            </div>
             <div class="btnrow">
-                <span style="color: rgb(255, 0, 0)">You have been trapped in Menshish, the celestial of 原神，启动！'s reality! You have encountered 7/7 Menshish strikes and rifts:</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握风元素的力量:penalty:敌人无法被牵引或打断:reward:unlock {{wordCycle(["acedia", "sloth", "indolence"])}} :填充风元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握岩元素的力量:penalty:所有抗打断都失去效果:reward:unlock {{wordCycle(["excess", "gluttony", "surfeit"])}} :填充岩元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握雷元素的力量:penalty:料理失去效果且无法复苏:reward:unlock {{wordCycle(["avarice", "greed", "cupidity"])}} :填充雷元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握草元素的力量:penalty:元素反应的效果被削弱:reward:unlock {{wordCycle(["spare", "envy", "begrudge"])}} :填充草元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握水元素的力量:penalty:神明的力量被禁用(天赋lv1):reward:unlock {{wordCycle(["‌ire", "wrath", "tantrum"])}} :填充水元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握火元素的力量:penalty:记忆的力量被禁用(命之座=0):reward:unlock {{wordCycle(["desire", "lust", "crave"])}} :填充火元素0.000%</span><br />
-                <span style="color: rgb(255, 0, 0)">掌握冰元素的力量:penalty:真实游戏速度减慢到原来的0.4倍:reward:unlock {{wordCycle(["superbe", "pride", "arrogance"])}} :填充冰元素0.000%</span><br />
-                <button align="center" class="xxButton" href="https://ys.mihoyo.com/" target="_blank">解锁白屏生成器<br />要求：填充全部元素到100%</button>
-            </div><br />
+                <button align="center" class="csButton" onclick="test11()">扩散qol</button>
+                <button align="center" class="csButton" onclick="test12()">扩散解锁</button>
+                <button align="center" class="csButton" onclick="test21()">扪敤qol</button>
+                <button align="center" class="csButton" onclick="test22()">扪敤解锁</button>
+            </div>
             <div class="btnrow">
-                <div class="solarwsc" style="background-color:#ffffff80;">
-                    <span>壹式太阳风灵作成·114514</span>
-                    <button class="wscbt2" @click="abwSwitch(wsc.id)">自动：</button>
-                    <button class="wscbt2" @click=" ">最大作成</button>
-                    <button class="wscbt1" @click=" ">
-                        作成1次需要:<br>2电磁能量
-                    </button><br />
-                    <span class="wscdat">1919810</span>
-                </div>
-                <div>~!@#$%^&*()_+`馃槹</div>
-
+                <button align="center" class="csButton" onclick="test31()">扫敥qol</button>
+                <button align="center" class="csButton" onclick="test32()">扫敥解锁</button>
+                <button align="center" class="csButton" onclick="test41()">扬敦qol</button>
+                <button align="center" class="csButton" onclick="test42()">扬敦解锁</button>
+            </div>
+            <div class="btnrow">
+                <span class="ftsz4">您已解锁糖类合成器，在这里你可以合成自然界不存在的非法糖类</span><br />
+                <span>--合成阶层1--</span><br />
+                <span>你有 0 D-甘油醛</span><br />
+                <span>你有 0 L-甘油醛</span><br />
+                <span>--合成阶层2--</span><br />
+                <span>你有 0 D-赤藓糖</span><br />
+                <span>你有 0 L-赤藓糖</span><br />
+                <span>你有 0 D-苏糖</span><br />
+                <span>你有 0 L-苏糖</span><br />
+                <span>--合成阶层3--</span><br />
+                <span>你有 0 D-核糖</span><br />
+                <span>你有 0 L-核糖</span><br />
+                <span>你有 0 D-阿拉伯糖</span><br />
+                <span>你有 0 L-阿拉伯糖</span><br />
+                <span>你有 0 D-木糖</span><br />
+                <span>你有 0 L-木糖</span><br />
+                <span>你有 0 D-来苏糖</span><br />
+                <span>你有 0 L-来苏糖</span><br />
+                <span>--合成阶层4--</span><br />
+                <span>你有 0 D-阿洛糖</span><br />
+                <span>你有 0 L-阿洛糖</span><br />
+                <span>你有 0 D-阿卓糖</span><br />
+                <span>你有 0 L-阿卓糖</span><br />
+                <span>你有 0 D-葡萄糖</span><br />
+                <span>你有 0 L-葡萄糖</span><br />
+                <span>你有 0 D-甘露糖</span><br />
+                <span>你有 0 L-甘露糖</span><br />
+                <span>你有 0 D-古洛糖</span><br />
+                <span>你有 0 L-古洛糖</span><br />
+                <span>你有 0 D-艾杜糖</span><br />
+                <span>你有 0 L-艾杜糖</span><br />
+                <span>你有 0 D-半乳糖</span><br />
+                <span>你有 0 L-半乳糖</span><br />
+                <span>你有 0 D-塔洛糖</span><br />
+                <span>你有 0 L-塔洛糖</span><br />
+            </div>
+            <div class="btnrow">
+                <div>宇宙浩瀚无垠，智识包罗万象；天才有天才的活法，庸人也有庸人的自足。</div>
                 <div class="quanto">你有01234567890123456789012345678901234567890123456789量子元素能量</div>
                 <div class="imago">你有01234567890123456789012345678901234567890123456789虚数元素能量</div>
                 <div class="staro">你有01234567890123456789012345678901234567890123456789星尘元素能量</div>
@@ -2642,6 +2754,16 @@
             <div class="noti" id="notiach47">完成成就：谜影</div>
             <div class="noti" id="notiach48">完成成就：已经走过1/6了？</div>
             <div class="noti" id="notiach49">完成成就：某种奇怪的炼金产物</div>
+            <div class="noti" id="notiach4a">完成成就：</div>
+            <div class="noti" id="notiach4b">完成成就：</div>
+            <div class="noti" id="notiach4c">完成成就：</div>
+            <div class="noti" id="notiach4d">完成成就：</div>
+            <div class="noti" id="notiach4e">完成成就：</div>
+            <div class="noti" id="notiach4f">完成成就：</div>
+            <div class="noti" id="notiach50">完成成就：进进入入扭扭敧敧……</div>
+            <div class="noti" id="notiach51">完成成就：</div>
+            <div class="noti" id="notiach52">完成成就：</div>
+            <div class="noti" id="notiach53">完成成就：</div>
 
             <div class="noti" id="autosave">游戏已保存</div>
             <div class="noti" id="export">已导出存档</div>

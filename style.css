@@ -120,6 +120,7 @@ div {
 .rygcbm {
     background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
     text-align: center;
 }
@@ -434,48 +435,56 @@ div {
 .pyro {
     background: linear-gradient(45deg, #ff0000, #ff8000, #ff0000, #ff8000, #ff0000);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .hydro {
     background: linear-gradient(45deg, #0000ff, #0080ff, #0000ff, #0080ff, #0000ff);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .electro {
     background: linear-gradient(45deg, #ff00ff, #8000ff, #ff00ff, #8000ff, #ff00ff);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .cryo {
     background: linear-gradient(45deg, #80ffff, #ffffff, #80ffff, #ffffff, #80ffff);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .quanto {
     background: linear-gradient(45deg, #9966ff, #000099, #9966ff, #000099, #9966ff);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .imago {
     background: linear-gradient(45deg, #cc9966, #ffff33, #cc9966, #ffff33, #cc9966);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .staro {
     background: linear-gradient(45deg, #cc9999, #cc0066, #cc9999, #cc0066, #cc9999);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
 .etho {
     background: linear-gradient(45deg, #0000ff, #ff0000, #0000ff, #ff0000, #0000ff);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
 }
 
@@ -958,7 +967,7 @@ div {
 
 .phsupg {
     width: 240px;
-    height: 80px;
+    height: 100px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #0000ff;
@@ -970,7 +979,7 @@ div {
 
 .phsupgy {
     width: 240px;
-    height: 80px;
+    height: 100px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #0000ff;
@@ -982,7 +991,7 @@ div {
 
 .phsupg2 {
     width: 240px;
-    height: 160px;
+    height: 200px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #0000ff;
@@ -1013,6 +1022,29 @@ div {
     width: 1008px;
     padding: 8px 8px;
     margin: 0px auto;
+}
+
+.stormbtn{
+    width: 640px;
+    height: 160px;
+    background-color: #000000;
+    border: 4px solid #0000ff;
+    padding: 8px 8px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.PL5bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .PL6button {
