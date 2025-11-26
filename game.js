@@ -6230,10 +6230,10 @@ function getxbe() {
     v.xbmc07 = player.xbmu07.add(1).pwb(2).pwb(65536);
     v.xbmc08 = player.xbmu08.add(1).pwb(2).pwb(65536);
 
-    v.xbme05 = player.PL1tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu05).add(1);
-    v.xbme06 = player.PL1tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu06).add(1);
-    v.xbme07 = player.PL5tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu07).add(1);
-    v.xbme08 = player.PL5tms.max(2).log(2).log(2).sub(5).mul(0.1).mul(player.xbmu08).add(1);
+    v.xbme05 = player.PL1tms.max(2).log(2).log(2).sub(5).max(0).mul(0.05).mul(player.xbmu05).add(1);
+    v.xbme06 = player.PL1tms.max(2).log(2).log(2).sub(5).max(0).mul(0.05).mul(player.xbmu06).add(1);
+    v.xbme07 = player.PL5tms.max(2).log(2).log(2).sub(2).max(0).mul(0.05).mul(player.xbmu07).add(1);
+    v.xbme08 = player.PL5tms.max(2).log(2).log(2).sub(2).max(0).mul(0.05).mul(player.xbmu08).add(1);
 }
 
 function buyxbmu(tier) {
