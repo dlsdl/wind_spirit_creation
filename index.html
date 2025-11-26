@@ -1834,7 +1834,7 @@
                         <div align="center" class="xbmch">
                             <br />
                             贰式时空扭敧机器<br />
-                            将一阶游戏速度乘以现实扭敧时间^{{notation(player.xbmu03.add(1).div(4))}}
+                            将一阶游戏速度乘以现实扭敧时间^{{notation(player.xbmu03.add(1).div(4))}}<br />
                             二阶游戏速度×{{notation(player.PL5secrl.pow(player.xbmu03.add(1).mul(0.25)))}}<br />
                         </div>
                     </td>
@@ -2093,7 +2093,7 @@
                         </div>
 
                             <button class="phsupg" onclick="buyecou(2)">
-                                升级一级消费者 (×2 产量) - 花费: {{ notation(v.ecou02c) }} 扭敧点
+                                升级一级消费者 (×2 产量) - 花费: {{ notation(v.ecou02c) }} 一级消费者
                             </button>
 
                     </div>
@@ -2104,7 +2104,7 @@
                             <span style="color: #ff8000;">(+{{ notation(v.consumer2ps) }}/秒)</span>
                         </div>
                             <button class="phsupg" onclick="buyecou(3)">
-                                升级二级消费者 (×2 产量) - 花费: {{ notation(v.ecou03c) }} 扭敧点
+                                升级二级消费者 (×2 产量) - 花费: {{ notation(v.ecou03c) }} 二级消费者
                             </button>
                     </div>
                     
@@ -2114,7 +2114,7 @@
                             <span style="color: #ff0000;">(+{{ notation(v.consumer3ps) }}/秒)</span>
                         </div>
                             <button class="phsupg" onclick="buyecou(4)">
-                                升级三级消费者 (×2 产量) - 花费: {{ notation(v.ecou04c) }} 扭敧点
+                                升级三级消费者 (×2 产量) - 花费: {{ notation(v.ecou04c) }} 三级消费者
                             </button>
                     </div>
                 </div>
@@ -2139,7 +2139,7 @@
             </div>
         </div>
         <div id="p6_7" v-if="v.currentPage=='p6_7'">
-            <div class="btnrow" v-if="player.hasUnlockedPL5">
+            <div class="btnrow" v-if="false">
                 <div class="ftsz2" style="text-align: center">
                 一共有5种碱基，花费扭敧点增加碱基每秒获得数量，碱基数量提供强力加成。<br/>
                 </div><br/>
@@ -2253,10 +2253,10 @@
                 </div>
                 </div>
             </div>
-            <div v-else align="center" class="ftsz2">需要 </div>
+            <div v-else align="center" class="ftsz2"> </div>
         </div>
         <div id="p6_8" v-if="v.currentPage=='p6_8'">
-            <div class="btnrow" v-if="player.hasUnlockedPL5">
+            <div class="btnrow" v-if="false">
                 <!--CRISPR基因编辑系统-->
                 <h2 style="color: #00ff00; text-align: center;">CRISPR-Cas9基因编辑系统</h2>
                 
@@ -2369,7 +2369,7 @@
                     </ol>
                 </div>
             </div>
-            <div v-else align="center" class="ftsz2">需要 </div>
+            <div v-else align="center" class="ftsz2"> </div>
         </div>
 
         <div id="p7_1" style="display: none">
