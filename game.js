@@ -37,6 +37,7 @@ var v;
 function hardReset() {
     /*存档数值*/
     player = {
+        //风灵
         energy: new Decimal(2),
         energyttl: new Decimal(2),
 
@@ -174,6 +175,7 @@ function hardReset() {
         autobuyupgd07: false,
         autobuyupgd08: false,
 
+        //扩散
         hasUnlockedPL1: false,
         PL1energy: new Decimal(1),
         PL1pts: new Decimal(0),
@@ -243,6 +245,7 @@ function hardReset() {
         chacom23: new Decimal(0),
         chacom24: new Decimal(0),
 
+        //扪敤
         hasUnlockedPL2: false,
         PL2energy: new Decimal(1),
         PL2pts: new Decimal(0),
@@ -319,6 +322,7 @@ function hardReset() {
         anm2u03: new Decimal(0),
         anm2u04: new Decimal(0),
 
+        //扫敥
         hasUnlockedPL3: false,
         PL3energy: new Decimal(1),
         PL3pts: new Decimal(0),
@@ -429,6 +433,7 @@ function hardReset() {
         convn: new Decimal(0),
         convp: new Decimal(0),
 
+        //扬敦
         hasUnlockedPL4: false,
         PL4energy: new Decimal(1),
         PL4pts: new Decimal(0),
@@ -545,6 +550,7 @@ function hardReset() {
         ntmr05: new Decimal(0),
         ntmr06: new Decimal(0),
 
+        //扭敧
         hasUnlockedPL5: false,
         PL5energy: new Decimal(1),
         PL5pts: new Decimal(0),
@@ -601,27 +607,78 @@ function hardReset() {
         magstolv: 0,
         magstorm: false,
         magstobest: N(0),
-        bioess: new Decimal(0),
-        biomat01: new Decimal(1),
-        biomat02: new Decimal(1),
-        bioalclv: new Decimal(0),
-        bioupg01: new Decimal(0),
-        bioupg02: new Decimal(0),
+
+        parents: new Decimal(0),               // 纯合亲本数量
+        tools: new Decimal(0),                 // 育种工具数量
+        generation: new Decimal(0),            // 当前世代
+        phenotype: null,          // 当前表型 (dominant/recessive)
+        homozygosity: new Decimal(0),          // 纯合度 (0-1)
+        goodGenes: new Decimal(0),             // 优良基因数量
+        stability: new Decimal(0),             // 遗传稳定性
+        breedingProgress: new Decimal(0),       // 育种进度
+
         hasunlockedanm5: false,
-
+        producer: new Decimal(0),     // 生产者数量
+        consumer1: new Decimal(0),    // 一级消费者数量
+        consumer2: new Decimal(0),    // 二级消费者数量
+        consumer3: new Decimal(0),    // 三级消费者数量
+        ecou01: new Decimal(0),          // 生产者升级1等级
+        ecou02: new Decimal(0),         // 一级消费者升级1等级
+        ecou03: new Decimal(0),         // 二级消费者升级1等级
+        ecou04: new Decimal(0),          // 三级消费者升级1等级
         anm5: new Decimal(0),
-
         anm5u01: new Decimal(0),
         anm5u02: new Decimal(0),
         anm5u03: new Decimal(0),
         anm5u04: new Decimal(0),
 
-        hasUnlockedPL6: false,
+        baseA: new Decimal(0),
+        baseG: new Decimal(0),
+        baseC: new Decimal(0),
+        baseT: new Decimal(0),
+        baseU: new Decimal(0),
+        baseA_prod: new Decimal(0),
+        baseG_prod: new Decimal(0),
+        baseC_prod: new Decimal(0),
+        baseT_prod: new Decimal(0),
+        baseU_prod: new Decimal(0),
+        baseA_upg1: new Decimal(0),
+        baseG_upg1: new Decimal(0),
+        baseC_upg1: new Decimal(0),
+        baseT_upg1: new Decimal(0),
+        baseU_upg1: new Decimal(0),
+        baseA_upg2: new Decimal(0),
+        baseG_upg2: new Decimal(0),
+        baseC_upg2: new Decimal(0),
+        baseT_upg2: new Decimal(0),
+        baseU_upg2: new Decimal(0),
+        
+        
+        dna: new Decimal(0),              // DNA资源
+        geneSlots: [false, false, false, false, false, false, false, false, false, false,], // 基因槽位解锁状态
+        activeGenes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],        // 当前激活的基因
+        geneLevels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],         // 基因等级
+        dnaGeneration: new Decimal(0),    // DNA总产量
+        editingLevel: new Decimal(0),     // 编辑技术水平
+        efficiencyBonus: new Decimal(1),   // 编辑效率加成
 
+        //扮敨
+        hasUnlockedPL6: false,
+        PL6energy: new Decimal(1),
+        PL6pts: new Decimal(0),
+        PL6ptsttl: new Decimal(0),
+        PL6tms: new Decimal(0),
+        PL6sec: new Decimal(0),
+        PL6secrl: new Decimal(0),
+        PL6conf: true,
+
+        //扯敩
         hasUnlockedPL7: false,
 
+        //扰敪
         hasUnlockedPLw: false,
 
+        //扸敲
         hasUnlockedPLw2: false,
 
         autobuywsc: [null,
@@ -685,12 +742,12 @@ function hardReset() {
 
         scaltier01: new Decimal(16),
         scaltier02: new Decimal(1048576),
-        scaltier03: new Decimal(1.267650600228229e30),
-        scaltier04: new Decimal(3.273390607896141e150),
-        scaltier05: new Decimal("1e800"),
-        scaltier06: new Decimal("1e4000"),
-        scaltier07: new Decimal("1e20000"),
-        scaltier08: new Decimal("1e100000"),
+        scaltier03: new Decimal(1e46),
+        scaltier04: new Decimal("1e686"),
+        scaltier05: new Decimal("e1e5"),
+        scaltier06: new Decimal("e1e6"),
+        scaltier07: new Decimal("e1e7"),
+        scaltier08: new Decimal("e1e8"),
 
         scalupgd01: new Decimal(100),
         scalupgd02: new Decimal(1e8),
@@ -701,6 +758,7 @@ function hardReset() {
         scalupgd07: new Decimal("1e896"),
         scalupgd08: new Decimal("1e2048"),
 
+        //风灵
         wscc01: new Decimal(2),
         wscc02: new Decimal(4),
         wscc03: new Decimal(16),
@@ -1065,6 +1123,7 @@ function hardReset() {
         upgd07mult: new Decimal(0),
         upgd08mult: new Decimal(0),
 
+        //扩散
         PL1engmul: new Decimal(1),
         PL1engpow: new Decimal(1),
 
@@ -1145,6 +1204,7 @@ function hardReset() {
         PL5chacap: new Decimal(4),
         PL6chacap: new Decimal(4),
 
+        //扪敤
         PL2engmul: new Decimal(1),
         PL2engpow: new Decimal(1),
 
@@ -1185,6 +1245,7 @@ function hardReset() {
         anm2c03: new Decimal(1000),
         anm2c04: new Decimal(10000),
 
+        //扫敥
         PL3engmul: new Decimal(1),
         PL3engpow: new Decimal(1),
         PL3tef1: new Decimal(1),
@@ -1279,6 +1340,7 @@ function hardReset() {
         convp15: new Decimal(0),
         convp16: new Decimal(0),
 
+        //扬敦
         PL4engmul: new Decimal(1),
         PL4engpow: new Decimal(1),
 
@@ -1405,6 +1467,7 @@ function hardReset() {
         ntme05: new Decimal(0),
         ntme06: new Decimal(0),
 
+        //扭敧
         PL5engmul: new Decimal(1),
         PL5engpow: new Decimal(1),
 
@@ -1453,17 +1516,44 @@ function hardReset() {
         slwp07: new Decimal(0),
         slwp08: new Decimal(0),
 
+        parentPrice: new Decimal(1),
+        toolPrice: new Decimal(1),
+        bioalceff: new Decimal(1),
+        history: [],              // 育种历史记录
+
+        ecou01c: new Decimal(0),
+        ecou02c: new Decimal(0),
+        ecou03c: new Decimal(0),
+        ecou04c: new Decimal(0),
+        producerps:new Decimal(0),
+        consumer1ps:new Decimal(0),
+        consumer2ps:new Decimal(0),
+        consumer3ps:new Decimal(0),
         anm5ps: new Decimal(0),
         anm5c01: new Decimal(10),
         anm5c02: new Decimal(100),
         anm5c03: new Decimal(1000),
         anm5c04: new Decimal(10000),
 
+        //扮敨
+        PL6engmul: new Decimal(1),
+        PL6engpow: new Decimal(1),
+
+        //扯敩
+        PL7engmul: new Decimal(1),
+        PL7engpow: new Decimal(1),
+
+        //扰敪
+
+        //扸敲
+
+
         currentTab: "row1",
         currentPage: "p1_1",
         lastPage: [1,1,1,1,1,1,1,1,1,1,1,1],
     }
 }
+
 hardReset();
 
 var tempPlayer = player;
@@ -1492,7 +1582,6 @@ function get_offline_time() {
 }
 
 //#region 存档
-/*存档*/
 function save() {
     localStorage.windSpiritCreation = btoa(JSON.stringify(player));
     shownoti("#autosave");
@@ -1580,7 +1669,6 @@ async function trueHardReset() {
 //#endregion
 
 //#region 游戏
-/*游戏*/
 function buyWsc(tier) {
     getWscCost();
     var name = tiername[tier];
@@ -1742,6 +1830,14 @@ function abwSwitch(tier) {
     else player.autobuywsc[tier] = false;
 }
 
+function autobuyon(n) {
+    for(i=n*8-7;i<n*8+1;i++) player.autobuywsc[i]=true;
+}
+
+function autobuyoff(n){
+    for(i=n*8-7;i<n*8+1;i++) player.autobuywsc[i]=false;
+}
+
 function maxAll() {
     for (let i = 1; i <= 48; i++) {
         buyMaxWsc(i);
@@ -1851,7 +1947,7 @@ function getWscMult() {
     if (player.std[8] == true) mult01to08 = mult01to08.mul(player.PL2energy.max(2).log(2).pow(4096).max(1));
     if (player.std[9] == true) mult09to16 = mult09to16.mul(player.PL2energy.max(2).log(2).pow(256).max(1));
     if (player.std[10] == true) mult17to24 = mult17to24.mul(player.PL2energy.max(2).log(2).pow(16).max(1));
-    if (player.std[11] == true) mult01to08 = mult01to08.mul(player.PL1sec.pow(0.5).pwb("1.044e1233"));
+    if (player.std[11] == true) mult01to08 = mult01to08.mul(player.PL1sec.pow(0.5).pwb("1.044e1233").min("ee30"));
     if (player.std[12] == true) mult09to16 = mult09to16.mul(player.PL2sec.pow(0.25).pwb("1.797e308"));
     if (player.std[13] == true) mult17to24 = mult17to24.mul(player.PL1energy.max(2).log(2).pow(16));
     if (player.std[14] == true) mult01to08 = mult01to08.mul(player.PL1tms.pow(1024).max(1));
@@ -1885,6 +1981,8 @@ function getWscMult() {
         mult33to40 = mult33to40.mul(v.quae11);
         mult41to48 = mult41to48.mul(v.quae11);
     }
+
+    mult41to48 = mult41to48.mul(player.anm5.pow(player.anm5u02.mul(67108864)));
     
     mult01to08 = mult01to08.mul(v.PL1engmul).mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul).mul(v.PL5engmul);
     mult09to16 = mult09to16.mul(v.PL2engmul).mul(v.PL3engmul).mul(v.PL4engmul).mul(v.PL5engmul);
@@ -4894,11 +4992,11 @@ function getboggle() {
         v.hdrn12wps = v.hdrn12wps.pow(v.xbme08);
         v.hdrn20wps = v.hdrn20wps.pow(v.xbme08);
     }
-    v.hdrn4e = player.hdrn4w.div(1024).add(2).log(2).pow(0.4).div(1024).min(0.05);
-    v.hdrn6e = player.hdrn6w.div(256).add(2).log(2).pow(0.4).div(1024).min(0.05);
-    v.hdrn8e = player.hdrn8w.div(64).add(2).log(2).pow(0.4).div(1024).min(0.05);
-    v.hdrn12e = player.hdrn12w.div(16).add(2).log(2).pow(0.4).div(1024).min(0.05);
-    v.hdrn20e = player.hdrn20w.div(4).add(2).log(2).pow(0.4).div(1024).min(0.05);
+    v.hdrn4e = player.hdrn4w.div(1024).add(1).log(2).pow(0.4).div(1024).min(0.05);
+    v.hdrn6e = player.hdrn6w.div(256).add(1).log(2).pow(0.4).div(1024).min(0.05);
+    v.hdrn8e = player.hdrn8w.div(64).add(1).log(2).pow(0.4).div(1024).min(0.05);
+    v.hdrn12e = player.hdrn12w.div(16).add(1).log(2).pow(0.4).div(1024).min(0.05);
+    v.hdrn20e = player.hdrn20w.div(4).add(1).log(2).pow(0.4).div(1024).min(0.05);
     if (player.synu13.gte(1)) {
         v.wxzfe = player.bogglettl.div(2).add(1).root(2).min(16);
         v.hydfe = player.bogglettl.div(2).add(1).root(2).min(16);
@@ -5047,10 +5145,10 @@ function buyltwu(tier) {
 
 function getbatow() {
     v.mhp = hpstg(player.stage);
-    v.pcps = v.cps.mul(v.skef02).mul(v.skef04).mul(player.chacom15.pwb(4));
+    v.pcps = v.cps.mul(v.skef02.max(1)).mul(v.skef04.max(1)).mul(player.chacom15.pwb(4));
     if (player.ntmr01.gte(0.05)) v.pcps = v.pcps.pow(v.ntme01.add(1));
     v.bpmpb = player.coin.add(1).log(2).div(16777216).min(0.000244140625);
-    v.atke = player.atk.add(1).mul(v.btke).div(16).mul(v.skef01).mul(v.skef03).mul(player.chacom15.pwb(4));
+    v.atke = player.atk.add(1).mul(v.btke).div(16).mul(v.skef01.max(1)).mul(v.skef03.max(1)).mul(player.chacom15.pwb(4));
     v.btke = player.btk.add(2).pow(v.ctke);
     v.ctke = player.ctk.div(4).add(2).hyp(v.dtke);
     v.dtke = player.dtk.div(16).add(1)
@@ -5093,13 +5191,17 @@ function dfstr() {
 }
 
 function stageclear() {
-    if (player.stage.gte(player.stgcl.add(1))) player.stgcl = player.stage;
-    if (player.stgcl.gt(player.stgmx)) player.stgmx = player.stgcl
-    //v.atke大于hpstg(player.stage.add(10)).mul(10)，跳10关
-    //v.atke大于hpstg(player.stage.add(100)).mul(10)，跳100关
-    if(v.atke.gte(hpstg(player.stage.add(100)).mul(10))) player.stage = player.stage.add(100);
+    //造成的伤害每秒大于10、100、1000关后hp的10倍时，跳10、100、1000关
+    if(v.atke.gte(hpstg(player.stage.add(1000)).mul(10))) player.stage = player.stage.add(1000);
+    else if(v.atke.gte(hpstg(player.stage.add(100)).mul(10))) player.stage = player.stage.add(100);
     else if(v.atke.gte(hpstg(player.stage.add(10)).mul(10))) player.stage = player.stage.add(10);
     else player.stage = player.stage.add(1);
+    //当进入的关卡大于已完成关卡时，更新已完成关卡和最大关卡数量
+    if (player.stage.gt(player.stgcl)) {
+        player.stgcl = player.stage;
+        player.stgmx = player.stgmx.max(player.stgcl);
+    }
+    //更新当前血量为最大血量，更新金币每秒产量
     player.rhp = v.mhp;
     let df = player.stage.sub(1).div(1000).min(10).floor();
     v.cps = player.stgcl.add(df.add(1).mul(24)).div(16).pwb(2).div(16);
@@ -5457,7 +5559,7 @@ function autobuyanm4upg() {
 function getntm() {
     if (player.shdwrc.lt(1024)) return;
     if (player.ntmv.lt(300)) v.ntmc01 = player.ntmv.add(1).pwb("ee6");
-    else v.ntmc01 = player.ntmv.sub(299).pwb(1.1).mul(300).pwb("ee6");
+    else v.ntmc01 = player.ntmv.sub(299).pwb(1.15).mul(300).pwb("ee6");
     v.ntmc02 = player.nrev.add(1).mul(10);
     v.ntmc03 = player.ntmu03.add(1).add(player.ntmu04.mul(6));
     v.ntmc04 = new Decimal(9);
@@ -5523,7 +5625,7 @@ async function PL5FR() {
         player.PL5ptsttl = player.PL5ptsttl.add(player.PL4pts.root(1073741824).floor());
         player.PL5tms = player.PL5tms.add(1);
         player.PL5sec = new Decimal(0);
-        player.PL5secrl = new Decimal(0);
+        if(!player.hasUnlockedPL5) player.PL5secrl = new Decimal(0);
 
         player.hasUnlockedPL5 = true;
 
@@ -6034,8 +6136,8 @@ function chdepth(tier) {
 function getqua() {
     v.quantps = player.PL5energy.max(2).log(2).pow(player.PL5tms.pow(0.25).min(4));
     v.quae11 = player.quant.pow(4).div(256).add(1);
-    if (player.quafil01.lte(4.914e17)) v.quaef1 = player.quafil01.add(1).log(2).mul(0.01);
-    else v.quaef1 = player.quafil01.add(1).log(2).log(2).mul(0.1);
+    if (player.quafil01.lte(4e6)) v.quaef1 = player.quafil01.add(1).log(2).mul(0.01);
+    else v.quaef1 = player.quafil01.add(1).log(2).log(2).mul(0.05);
     v.quaef2 = player.quafil02.add(2).log(2).log(2).mul(0.05);
     v.quaef3 = player.quafil03.add(2).log(2).log(2).mul(0.0001);
 }
@@ -6104,6 +6206,12 @@ function buyquau(tier) {
     if (tier == 14 & player.quant.gte(1e30) & player.energy.gte("e1e28")) {
         player.quau[14] = true;
     }
+    if (tier == 15 & player.quant.gte(1e40) & player.sucram.gte(1e16)) {
+        player.quau[15] = true;
+    }
+    if (tier == 16 & player.quant.gte(1e50)) {
+        player.quau[16] = true;
+    }
 }
 
 function fillqua(tier) {
@@ -6113,10 +6221,10 @@ function fillqua(tier) {
 }
 
 function getxbe() {
-    v.xbmc01 = player.xbmu01.add(1).pwb(2).pwb(2);
-    v.xbmc02 = player.xbmu02.add(1).pow(2).pwb(2).mul(1e4);
-    v.xbmc03 = player.xbmu03.add(1).pwb(2).pwb(2);
-    v.xbmc04 = player.xbmu04.add(1).pow(2).pwb(2).mul(1e4);
+    v.xbmc01 = player.xbmu01.add(1).pow(1.5).pwb(2).pwb(2);
+    v.xbmc02 = player.xbmu02.add(1).pow(2).pwb(1e4).mul(1e8);
+    v.xbmc03 = player.xbmu03.add(1).pow(1.5).pwb(2).pwb(2);
+    v.xbmc04 = player.xbmu04.add(1).pow(2).pwb(10).mul(100);
     v.xbmc05 = player.xbmu05.add(1).pwb(2).pwb(65536);
     v.xbmc06 = player.xbmu06.add(1).pwb(2).pwb(65536);
     v.xbmc07 = player.xbmu07.add(1).pwb(2).pwb(65536);
@@ -6189,9 +6297,10 @@ function getslw() {
         let name = tiername[i];
         let p = N(i - 1).pwb(2);
         v["slwc" + name] = (N(2).mul(player["slwb" + name].pwb(4)).pow(p)).pwb(2);
-        v["slwp" + name] = player["slwb" + name]
+        v["slwp" + name] = (player["slwb" + name]<=2?player["slwb" + name]:player["slwb" + name].sub(2).pwb(1.5).mul(2)).mul(v.bioalceff);
     }
-    v.FEexp = player.EMenergy.max(2).log(2).log(2).div(16).add(1);
+    v.FEexp = player.EMenergy.max(4).log(2).log(2).log(2).div(16).add(1);
+    if(player.magstorm) player.magstobest = player.magstobest.max(player.energy.max(2).log(2));
 }
 
 function emeadd1() {
@@ -6203,12 +6312,13 @@ function buyslw(tier) {
     getslw();
     if (player.EMenergy.gte(v["slwc" + name])) {
         player["slwb" + name] = player["slwb" + name].add(1);
-        player["slwa" + name] = player["slwa" + name].add(0.0625);
+        player["slwa" + name] = player["slwa" + name].add(0.1);
         player.EMenergy = player.EMenergy.sub(v["slwc" + name]);
     }
 }
 
-function swmagsto(){
+function swMagStorm(){
+    PL5FR();
     for(let i=1;i<=48;i++){
         let name = tiername[i];
         player["wsca"+name]=Decimal.dZero;
@@ -6219,9 +6329,629 @@ function swmagsto(){
     else player.magstorm=true;
 }
 
+function getbioalc(){
+//纯合亲本价格更新
+    v.parentPrice = N("1e1000").pow(player.parents.pwb(2));
+    v.toolPrice = N("ee11").pow(player.tools.pwb(2));
+//效果更新
+    v.bioalceff= player.goodGenes.pow(0.25).add(1);
+}
+
+// 购买纯合亲本
+function buyAlchemyParent() {
+    // 检查是否有足够的扭敧点
+    if (player.PL5pts.gte(v.parentPrice)) {
+        player.PL5pts = player.PL5pts.sub(1e100);
+        player.parents=player.parents.add(1);
+    }
+}
+
+// 购买育种工具
+function buyAlchemyTool() {
+    // 检查是否有足够的扭敧能量
+    if (player.PL5energy.gte(v.toolPrice)) {
+        player.tools = player.tools.add(1);
+    }
+}
+
+// 开始杂交 (P代 × P代 → F1代)
+function startHybridization() {  
+    if (player.parents.gte(2)) {
+        player.parents= player.parents.sub(2);
+        player.generation = new Decimal(1);
+        player.phenotype = 'hybrid'; // 杂合子
+        player.homozygosity = new Decimal(0);     // 杂合子纯合度为0
+        // 添加历史记录
+        addAlchemyHistory(0, '杂交操作', '获得F1代杂合子');
+    }
+}
+
+// 自交繁殖 (F代 → F+1代)
+function selfPollinate() {
+    // 自交会增加纯合度，但不会超过1
+    player.homozygosity = player.homozygosity.add(player.generation.pwb(1/2))
+    player.generation = player.generation.add(1);
+    // 自交后仍为杂合子，但可以产生不同表型
+    player.phenotype = 'hybrid';       
+    // 添加历史记录
+    addAlchemyHistory(player.generation - 1, '自交繁殖', `获得F${player.generation}代，纯合度: ${(player.homozygosity.mul(100).toFixed(0))}%`);
+}
+
+// 选择显性性状
+function selectDominant() {
+    player.phenotype = 'dominant';
+    // 如果纯合度达到一定水平99%，继续自交获得稳定遗传类型
+    if (player.homozygosity.gte(0.99)) {
+        player.stability = player.homozygosity.sub(0.99).mul(100);
+        player.goodGenes = player.goodGenes.add(player.generation.sub(4).mul(player.tools));
+        addAlchemyHistory(player.generation, '选择显性性状', '获得稳定遗传的显性性状类型');
+        player.generation = new Decimal(1);
+        player.homozygosity = new Decimal(0);
+    } else {
+        addAlchemyHistory(player.generation, '选择显性性状', '需要继续自交获得稳定遗传类型');
+    }
+}
+
+// 选择隐性性状
+function selectRecessive() {
+    player.alchemy.phenotype = 'recessive';
+    // 隐性性状一旦选择就完成育种过程
+    player.stability = new Decimal(1.0);
+    player.goodGenes =player.goodGenes.add(player.tools);
+    addAlchemyHistory(player.generation, '选择隐性性状', '完成隐性性状育种过程');
+    player.generation = new Decimal(1);
+    player.homozygosity = new Decimal(0);
+}
+
+// 添加育种历史记录
+function addAlchemyHistory(generation, action, result) {
+    v.history.push({
+        generation: generation,
+        action: action,
+        result: result,
+        timestamp: Date.now()
+    });
+    
+    // 限制历史记录数量
+    if (v.history.length > 10) {
+        v.history.shift();
+    }
+}
+
+// 获取育种历史
+function getAlchemyHistory() {
+    return v.history || [];
+}
+
+// 更新生物炼金系统
+function updateAlchemy() {
+    
+    // 生物炼金系统对风灵产量的影响
+    if (player.alchemy.goodGenes > 0) {
+        // 每1个优良基因提供10%的风灵产量加成
+        // 这里需要根据实际的风灵系统来应用这个加成
+    }
+    
+    // 遗传稳定性影响整体效率
+    if (player.alchemy.stability > 0) {
+        // 稳定性越高，系统效率越好
+        player.alchemy.breedingProgress = player.alchemy.stability;
+    }
+}
+
+// 获取生物炼金系统的效率加成
+function getAlchemyEfficiency() {
+    if (!player.alchemy.unlocked) return 1;
+    
+    let baseEfficiency = 1;
+    
+    // 基于优良基因数量的加成
+    baseEfficiency += player.alchemy.goodGenes * 0.05;
+    
+    // 基于遗传稳定性的加成
+    baseEfficiency += player.alchemy.stability * 0.1;
+    
+    // 基于工具数量的加成
+    baseEfficiency += player.alchemy.tools * 0.02;
+    
+    return baseEfficiency;
+}
+
+// 重置育种过程
+function resetAlchemy() {
+    player.alchemy.generation = new Decimal(0);
+    player.alchemy.phenotype = null;
+    player.alchemy.homozygosity = new Decimal(0);
+    player.alchemy.history = [];
+    player.alchemy.breedingProgress = new Decimal(0);
+}
+
+// 高级育种技术 - 连续选择
+function advancedBreeding() {
+    if (player.stability.lt(0.8)) return false;
+    // 当稳定性达到80%时，可以进行高级育种
+    player.alchemy.goodGenes = player.alchemy.goodGenes.add(1);
+    player.alchemy.stability = Decimal.min(new Decimal(1.0), player.alchemy.stability.add(0.1));
+    
+    addAlchemyHistory(player.alchemy.generation, '高级育种', '获得更优良的遗传特性');
+}
+
+//生态系统玩法
+function ulAnm5() {
+    if (player.PL5pts.gte("1e200000") & player.hasunlockedanm5 == false) player.hasunlockedanm5 = true;
+}
+
+function getanm5() {
+    v.anm5c01 = scaleUpgd(player.anm5u01.add(1).mul(1)).pwb(10);
+    v.anm5c02 = scaleUpgd(player.anm5u02.add(1).mul(2)).pwb(10);
+    v.anm5c03 = scaleUpgd(player.anm5u03.add(1).mul(3)).pwb(10);
+    v.anm5c04 = scaleUpgd(player.anm5u04.add(1).mul(4)).pwb(10);
+    v.ecou01c = player.ecou01.add(1).pwb(3);
+    v.ecou02c = player.ecou02.add(1).pwb(3);
+    v.ecou03c = player.ecou03.add(1).pwb(3);
+    v.ecou04c = player.ecou04.add(1).pwb(3);
+    v.producerps=N(1e-6).mul(player.ecou01.pwb(2));
+    v.consumer1ps=player.producer.pow(0.5).sub(1000).max(0).mul(player.ecou02.pwb(2)).div(1e12);
+    v.consumer2ps=player.consumer1.pow(0.5).sub(1000).max(0).mul(player.ecou03.pwb(2)).div(1e16);
+    v.consumer3ps=player.consumer2.pow(0.5).sub(1000).max(0).mul(player.ecou04.pwb(2)).div(1e20);
+}
+
+function buyanm5u(tier) {
+    let name = tiername[tier];
+    if (player.anm5.gte(v["anm5c" + name])) {
+        player["anm5u" + name] = player["anm5u" + name].add(1);
+        player.anm5 = player.anm5.sub(v["anm5c" + name]);
+    }
+}
+
+function buyecou(tier){
+    if(tier==1) {
+        if(player.producer.gte(v.ecou01c)){
+            player.ecou01 = player.ecou01.add(1);
+            player.producer = player.producer.sub(v.ecou01c);
+        }
+    }
+    else if(tier==2) {
+        if(player.consumer1.gte(v.ecou02c)){
+            player.ecou02 = player.ecou02.add(1);
+            player.consumer1 = player.consumer1.sub(v.ecou02c);
+        }
+    }
+    else if(tier==3) {
+        if(player.consumer2.gte(v.ecou03c)){
+            player.ecou03 = player.ecou03.add(1);
+            player.consumer2 = player.consumer2.sub(v.ecou03c);
+        }
+    }
+    else if(tier==4) {
+        if(player.consumer3.gte(v.ecou04c)){
+            player.ecou04 = player.ecou04.add(1);
+            player.consumer3 = player.consumer3.sub(v.ecou04c);
+        }
+    }
+    else return;
+}
+
+// 获取一级消费者产量（每秒）
+function getEcosystemConsumer1Rate() {
+    // 基础产量：基于生产者数量
+    let baseRate = getEcosystemProducer().div(1000);
+    // 升级加成：每级升级1乘以2
+    let upgradeBonus = new Decimal(2).pow(player.consumer1Upgrade1);
+    return baseRate.mul(upgradeBonus);
+}
+
+// 获取二级消费者产量（每秒）
+function getEcosystemConsumer2Rate() {
+    // 基础产量：基于一级消费者数量
+    let baseRate = getEcosystemConsumer1().div(100);
+    // 升级加成：每级升级1乘以2
+    let upgradeBonus = new Decimal(2).pow(player.consumer2Upgrade1);
+    return baseRate.mul(upgradeBonus);
+}
+
+// 获取三级消费者产量（每秒）
+function getEcosystemConsumer3Rate() {
+    // 基础产量：基于二级消费者数量
+    let baseRate = getEcosystemConsumer2().div(10);
+    // 升级加成：每级升级1乘以2
+    let upgradeBonus = new Decimal(2).pow(player.consumer3Upgrade1);
+    return baseRate.mul(upgradeBonus);
+}
+
+// 获取生产者升级1的花费
+function getEcosystemProducerUpgradeCost() {
+    return new Decimal(10).pow(player.producerUpgrade1);
+}
+
+// 获取一级消费者升级1的花费
+function getEcosystemConsumer1UpgradeCost() {
+    return new Decimal(10).pow(player.consumer1Upgrade1);
+}
+
+// 获取二级消费者升级1的花费
+function getEcosystemConsumer2UpgradeCost() {
+    return new Decimal(10).pow(player.consumer2Upgrade1);
+}
+
+// 获取三级消费者升级1的花费
+function getEcosystemConsumer3UpgradeCost() {
+    return new Decimal(10).pow(player.consumer3Upgrade1);
+}
+
+// 升级生产者
+function upgradeEcosystemProducer() {
+    let cost = getEcosystemProducerUpgradeCost();
+    if (player.producer.gte(cost)) {
+        player.producer = player.producer.sub(cost);
+        player.producerUpgrade1=player.producerUpgrade1.add(1);
+    }
+}
+
+// 升级一级消费者
+function upgradeEcosystemConsumer1() {
+    let cost = getEcosystemConsumer1UpgradeCost();
+    if (getEcosystemConsumer1().gte(cost)) {
+        // 从一级消费者中扣除费用（减少一级消费者数量）
+        player.consumer1 = getEcosystemConsumer1().sub(cost);
+        player.consumer1Upgrade1=player.consumer1Upgrade1.add(1);
+    }
+}
+
+// 升级二级消费者
+function upgradeEcosystemConsumer2() {
+    let cost = getEcosystemConsumer2UpgradeCost();
+    if (getEcosystemConsumer2().gte(cost)) {
+        // 从二级消费者中扣除费用（减少二级消费者数量）
+        player.consumer2 = getEcosystemConsumer2().sub(cost);
+        player.consumer2Upgrade1=player.consumer2Upgrade1.add(1);
+    }
+}
+
+// 升级三级消费者
+function upgradeEcosystemConsumer3() {
+    let cost = getEcosystemConsumer3UpgradeCost();
+    if (getEcosystemConsumer3().gte(cost)) {
+        // 从三级消费者中扣除费用（减少三级消费者数量）
+        player.consumer3 = getEcosystemConsumer3().sub(cost);
+        player.consumer3Upgrade1=player.consumer3Upgrade1.add(1);
+    }
+}
+
+// 获取生态系统对风之徲粖的加成
+function getEcosystemBonus() {
+    let bonus = new Decimal(1);
+    // 基于生产者数量的加成
+    bonus = bonus.mul(getEcosystemProducer().add(1).log(10).div(10).add(1));
+    // 基于消费者层级的加成
+    if (getEcosystemConsumer1().gt(0)) {
+        bonus = bonus.mul(getEcosystemConsumer1().add(1).log(10).div(20).add(1));
+    }
+    if (getEcosystemConsumer2().gt(0)) {
+        bonus = bonus.mul(getEcosystemConsumer2().add(1).log(10).div(30).add(1));
+    }
+    if (getEcosystemConsumer3().gt(0)) {
+        bonus = bonus.mul(getEcosystemConsumer3().add(1).log(10).div(40).add(1));
+    }
+    return bonus;
+}
+
+// 更新生态系统逻辑（每秒执行）
+function updateEcosystem() {
+    // 生产者增加：每秒+1生产者 + 升级加成
+    let producerIncrease = getEcosystemProducerRate();
+    player.producer = getEcosystemProducer().add(producerIncrease);
+    
+    // 一级消费者增加：基于生产者数量，但生产者会减少
+    if (getEcosystemProducer().gte(1000000)) {
+        let consumer1Increase = getEcosystemConsumer1Rate();
+        let producerDecrease = getEcosystemConsumer1().div(100); // 生产者基于一级消费者数量减少
+        
+        player.ecosystem.consumer1 = getEcosystemConsumer1().add(consumer1Increase);
+        player.ecosystem.producer = getEcosystemProducer().sub(producerDecrease);
+        
+        // 确保数量不为负数
+        if (player.ecosystem.producer.lt(0)) player.ecosystem.producer = new Decimal(0);
+    }
+    
+    // 二级消费者增加：基于一级消费者数量，但一级消费者会减少
+    if (getEcosystemConsumer1().gte(10000)) {
+        let consumer2Increase = getEcosystemConsumer2Rate();
+        let consumer1Decrease = getEcosystemConsumer2().div(10); // 一级消费者基于二级消费者数量减少
+        
+        player.ecosystem.consumer2 = getEcosystemConsumer2().add(consumer2Increase);
+        player.ecosystem.consumer1 = getEcosystemConsumer1().sub(consumer1Decrease);
+        
+        // 确保数量不为负数
+        if (player.ecosystem.consumer1.lt(0)) player.ecosystem.consumer1 = new Decimal(0);
+    }
+    
+    // 三级消费者增加：基于二级消费者数量，但二级消费者会减少
+    if (getEcosystemConsumer2().gte(1000)) {
+        let consumer3Increase = getEcosystemConsumer3Rate();
+        let consumer2Decrease = getEcosystemConsumer3().div(1); // 二级消费者基于三级消费者数量减少
+        
+        player.ecosystem.consumer3 = getEcosystemConsumer3().add(consumer3Increase);
+        player.ecosystem.consumer2 = getEcosystemConsumer2().sub(consumer2Decrease);
+        
+        // 确保数量不为负数
+        if (player.ecosystem.consumer2.lt(0)) player.ecosystem.consumer2 = new Decimal(0);
+    }
+}
+
+
+//碱基玩法
+// 碱基产量计算函数
+function calculateBaseProduction(baseName, upgrade1Name, upgrade2Name) {
+    let baseAmount = player[baseName];
+    let baseProd = new Decimal(0);
+    
+    // 基础产量（根据当前拥有的碱基数量）
+    if (baseAmount.gte(1)) baseProd = baseProd.add(baseAmount.div(10));
+    if (baseAmount.gte(10)) baseProd = baseProd.add(baseAmount.div(100));
+    if (baseAmount.gte(1e10)) baseProd = baseProd.add(baseAmount.div(1e15));
+    if (baseAmount.gte(1e100)) baseProd = baseProd.add(baseAmount.div(1e105));
+    if (baseAmount.gte(1e1000)) baseProd = baseProd.add(baseAmount.div(1e1005));
+    if (baseAmount.gte(1e10000)) baseProd = baseProd.add(baseAmount.div(1e10005));
+    
+    // 第一种升级：双倍产量
+    baseProd = baseProd.mul(new Decimal(2).pow(player[upgrade1Name]));
+    
+    // 第二种升级：指数加成（额外的乘数）
+    baseProd = baseProd.mul(new Decimal(1.1).pow(player[upgrade2Name]));
+    
+    return baseProd;
+}
+
+//碱基解锁检查函数
+function checkBaseUnlocks(baseName, unlockedArrayName) {
+    let baseAmount = player[baseName];
+    let thresholds = [new Decimal(10), new Decimal(1e10), new Decimal(1e100), new Decimal(1e1000), new Decimal(1e10000)];
+    
+    for (let i = 0; i < thresholds.length; i++) {
+        if (baseAmount.gte(thresholds[i])) {
+            player[unlockedArrayName][i] = true;
+        }
+    }
+}
+
+//碱基产量更新函数
+function updateBaseProduction() {
+    if (!player.hasUnlockedBases) return;
+    
+    // 更新每种碱基的产量
+    player.baseA_prod = calculateBaseProduction('baseA', 'baseA_upg1', 'baseA_upg2');
+    player.baseG_prod = calculateBaseProduction('baseG', 'baseG_upg1', 'baseG_upg2');
+    player.baseC_prod = calculateBaseProduction('baseC', 'baseC_upg1', 'baseC_upg2');
+    player.baseT_prod = calculateBaseProduction('baseT', 'baseT_upg1', 'baseT_upg2');
+    player.baseU_prod = calculateBaseProduction('baseU', 'baseU_upg1', 'baseU_upg2');
+    
+    // 检查解锁条件
+    checkBaseUnlocks('baseA', 'baseA_unlocked');
+    checkBaseUnlocks('baseG', 'baseG_unlocked');
+    checkBaseUnlocks('baseC', 'baseC_unlocked');
+    checkBaseUnlocks('baseT', 'baseT_unlocked');
+    checkBaseUnlocks('baseU', 'baseU_unlocked');
+}
+
+//碱基增加函数（用于购买碱基）
+function addBase(baseName, amount) {
+    player[baseName] = player[baseName].add(amount);
+    updateBaseProduction();
+}
+
+//碱基第一种升级购买函数（双倍产量）
+function buyBaseUpgrade1(baseName, upgradeName) {
+    let cost = new Decimal(1).mul(new Decimal(10).pow(player[upgradeName])); // 指数增长成本
+    
+    // 根据升级类型检查资源
+    let canAfford = false;
+    switch(baseName) {
+        case 'baseA':
+            canAfford = player.energy.gte(cost);
+            if (canAfford) player.energy = player.energy.sub(cost);
+            break;
+        case 'baseG':
+            canAfford = player.PL1pts.gte(cost);
+            if (canAfford) player.PL1pts = player.PL1pts.sub(cost);
+            break;
+        case 'baseC':
+            canAfford = player.PL2pts.gte(cost);
+            if (canAfford) player.PL2pts = player.PL2pts.sub(cost);
+            break;
+        case 'baseT':
+            canAfford = player.PL3pts.gte(cost);
+            if (canAfford) player.PL3pts = player.PL3pts.sub(cost);
+            break;
+        case 'baseU':
+            canAfford = player.PL4pts.gte(cost);
+            if (canAfford) player.PL4pts = player.PL4pts.sub(cost);
+            break;
+    }
+    
+    if (canAfford) {
+        player[upgradeName] = player[upgradeName].add(1);
+        updateBaseProduction();
+    }
+}
+
+//碱基第二种升级购买函数（指数加成）
+function buyBaseUpgrade2(baseName, upgradeName) {
+    let upgradeLevel = player[upgradeName];
+    let cost = new Decimal(1).mul(new Decimal(100).pow(upgradeLevel)); // 扭敧点成本
+    
+    if (player.PL5pts.gte(cost)) {
+        player.PL5pts = player.PL5pts.sub(cost);
+        player[upgradeName] = upgradeLevel.add(1);
+        updateBaseProduction();
+    }
+}
+
+//碱基系统辅助函数
+function getBaseCost(baseName) {
+    let baseCount = player[baseName];
+    return new Decimal(10).mul(new Decimal(5).pow(baseCount));
+}
+
+function getBaseUpgrade1TotalEffect() {
+    let totalLevel = player.baseA_upg1.add(player.baseG_upg1).add(player.baseC_upg1).add(player.baseT_upg1).add(player.baseU_upg1);
+    return new Decimal(1.1).pow(totalLevel);
+}
+
+function getBaseUpgrade2TotalEffect() {
+    let totalLevel = player.baseA_upg2.add(player.baseG_upg2).add(player.baseC_upg2).add(player.baseT_upg2).add(player.baseU_upg2);
+    return new Decimal(1.5).pow(totalLevel);
+}
+
+// CRISPR系统玩法
+// CRISPR系统辅助函数
+function getCRISPRDnaGeneration() {
+    let baseGen = new Decimal(1);
+    // 基于碱基总产量提供DNA生成
+    if (player.baseprd) {
+        baseGen = baseGen.add(player.baseprd.div(100));
+    }
+    // 基于能量提供额外DNA生成
+    if (player.energy) {
+        baseGen = baseGen.add(player.energy.max(1).log(10).div(10));
+    }
+    // 基于编辑技术水平加成
+    baseGen = baseGen.mul(player.crispr.editingLevel.add(1).pow(0.5));
+    return baseGen;
+}
+
+function getCRISPREditingCost(geneIndex, level) {
+    let baseCost = new Decimal(10).pow(level);
+    // 不同基因有不同的基础成本
+    let multipliers = [1, 5, 20, 50]; // 基因1-4的基础成本倍率
+    return baseCost.mul(multipliers[geneIndex]);
+}
+
+function getCRISPRGeneEffect(geneIndex, level) {
+    let baseEffects = [
+        1.1,  // 基因1：增加风灵产量
+        1.05, // 基因2：增加多面体获取
+        1.02, // 基因3：增加量子获取效率  
+        1.15  // 基因4：增加太阳风灵产量
+    ];
+    return new Decimal(baseEffects[geneIndex]).pow(level);
+}
+
+function getTotalCRISPREffect() {
+    let totalEffect = new Decimal(1);
+    for (let i = 0; i < 4; i++) {
+        if (player.crispr.activeGenes[i] > 0) {
+            totalEffect = totalEffect.mul(getCRISPRGeneEffect(i, player.crispr.geneLevels[i]));
+        }
+    }
+    return totalEffect;
+}
+
+function unlockCRISPRGeneSlot(slotIndex) {
+    if (!player.crispr.geneSlots[slotIndex]) {
+        // 解锁成本递增
+        let unlockCost = new Decimal(100).pow(slotIndex + 1);
+        if (player.crispr.dna.gte(unlockCost)) {
+            player.crispr.dna = player.crispr.dna.sub(unlockCost);
+            player.crispr.geneSlots[slotIndex] = true;
+            return true;
+        }
+    }
+    return false;
+}
+
+function editCRISPRGene(geneIndex, newGeneId) {
+    if (player.crispr.geneSlots[geneIndex]) {
+        player.crispr.activeGenes[geneIndex] = newGeneId;
+        player.crispr.geneLevels[geneIndex] = 1; // 重置为1级
+        return true;
+    }
+    return false;
+}
+
+function upgradeCRISPRGene(geneIndex) {
+    if (player.crispr.activeGenes[geneIndex] > 0) {
+        let currentLevel = player.crispr.geneLevels[geneIndex];
+        let cost = getCRISPREditingCost(geneIndex, currentLevel);
+        
+        if (player.crispr.dna.gte(cost)) {
+            player.crispr.dna = player.crispr.dna.sub(cost);
+            player.crispr.geneLevels[geneIndex]++;
+            return true;
+        }
+    }
+    return false;
+}
+
+function upgradeCRISPREditingTech() {
+    let currentLevel = player.crispr.editingLevel;
+    let upgradeCost = new Decimal(50).pow(currentLevel.add(1));
+    
+    if (player.crispr.dna.gte(upgradeCost)) {
+        player.crispr.dna = player.crispr.dna.sub(upgradeCost);
+        player.crispr.editingLevel = player.crispr.editingLevel.add(1);
+        // 每次升级增加5%效率
+        player.crispr.efficiencyBonus = player.crispr.efficiencyBonus.mul(1.05);
+        return true;
+    }
+    return false;
+}
+
+function updateCRISPRProduction(speed) {
+    // 生成DNA
+    let dnaGen = getCRISPRDnaGeneration().mul(speed).mul(player.crispr.efficiencyBonus);
+    player.crispr.dna = player.crispr.dna.add(dnaGen);
+    player.crispr.dnaGeneration = player.crispr.dnaGeneration.add(dnaGen);
+}
+
+// CRISPR系统与游戏主循环集成
+function updateCRISPR() {
+    // 在mainLoop中调用此函数
+    let speed = new Decimal(v.gamespd1).mul(v.glbspd).div(20);
+    updateCRISPRProduction(speed);
+}
+
+// 检查CRISPR解锁条件
+function checkCRISPRUnlock() {
+    // 当玩家拥有足够碱基时解锁CRISPR系统
+    let totalBases = 0;
+    let baseTypes = ['baseA', 'baseG', 'baseC', 'baseT', 'baseU'];
+    for (let base of baseTypes) {
+        if (player[base]) {
+            totalBases += player[base].toNumber();
+        }
+    }
+    
+    return totalBases >= 100; // 解锁条件：拥有100个碱基
+}
+
+//扮敨层级
+function PL6reset() {
+    alert("请等待游戏更新")
+    /*
+    if (player.PL5pts.lt("4.198e323228496")) return;
+    var confirmation = true;
+    if (player.PL6conf == true) confirmation = confirm("您确定要扮敨吗？这将重置之前的一切进度，但是可以获得扮敨点！第一次扮敨解锁49~56式风灵和其他内容");
+    if (confirmation | !player.PL6conf) PL6FR();
+    */
+}
+
+async function PL6FR() {
+    
+        player.PL6pts = player.PL6pts.add(player.PL5pts.root(1073741824).floor());
+        player.PL6ptsttl = player.PL6ptsttl.add(player.PL5pts.root(1073741824).floor());
+        player.PL6tms = player.PL6tms.add(1);
+        player.PL6sec = new Decimal(0);
+        player.PL6secrl = new Decimal(0);
+
+        player.hasUnlockedPL6 = true;
+}
+
 
 
 //endregion
+
+//游戏速度计算
 var spd0 = 1;
 function getspd() {
     v.gamespd1 = player.chacom10.pwb(2).mul(player.ptnu04.div(3).pwb(2)).mul(player.anm3u04.pwb(1.189207115002721)).mul(v.fraue05).max(1);
@@ -6237,7 +6967,9 @@ function getspd() {
     v.gamespd2 = Decimal.dOne;
     if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.PL5secrl.pow(player.xbmu03.add(1).mul(0.25)));
     if (player.hasUnlockedPL5) v.gamespd2 = v.gamespd2.mul(player.xbmu04.pwb(2));
-    if(player.magstorm==true)v.gamespd2 =Decimal.dOne;
+    if (player.hasunlockedanm5) v.gamespd2 = v.gamespd2.mul(player.anm5u04.div(7).add(1));
+    if(player.magstorm==true) v.gamespd2 =Decimal.dOne;
+    
 
     if (player.gmrn != true) v.glbspd = 0;
     else if (player.fyjj != true | player.oflntm <= 0) v.glbspd = 1;
@@ -6246,6 +6978,7 @@ function getspd() {
     v.softcap = player.energy.max(2).log(2).div(getsoftcap().max(2).log(2)).max(1);
 }
 
+//能量软上限计算
 function getsoftcap() {
     if (player.incha == 13) return new Decimal(2);
     let sc = new Decimal("e3.470639555327098e17")
@@ -6266,6 +6999,7 @@ function getsoftcap4() {
     return new Decimal(4096).pwb(2).pwb(2)
 }
 
+//每秒生产的资源计算
 function produce(spd = 1) {
     let speed = new Decimal(spd).mul(v.gamespd1).mul(v.glbspd).div(20);
     let speed2 = new Decimal(spd).mul(v.gamespd2).mul(v.glbspd).div(20);
@@ -6288,6 +7022,7 @@ function produce(spd = 1) {
     else v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
     if (v.energyps.log(2).gte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
     v.preps = player.energy;
+    
     player.energy = player.energy.add(v.energyps);
     player.energyttl = player.energyttl.add(v.energyps);
 
@@ -6298,8 +7033,8 @@ function produce(spd = 1) {
     }
     if (player.PL1upg[12] == true & player.sta8n1 == true) { player.wsca08 = player.wsca08.add(hyp(player.wsca09.mul(v.wscm09).pow(v.wscp09), v.wsch09).pow(v.PL1engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd)); }
     if (player.std[18] == true & player.incha != 8 & player.incha != 9 & player.PL1pts.lte(player.energy.root(1024).floor())) {
-        player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor().mul(speed));
-        player.PL1ptsttl = player.PL1ptsttl.add(player.energy.root(1024).floor().mul(speed));
+        player.PL1pts = player.PL1pts.add(player.energy.root(1024).floor().mul(speed)).min(player.energy.root(1024).floor());
+        player.PL1ptsttl = player.PL1ptsttl.add(player.energy.root(1024).floor().mul(speed)).min(player.energy.root(1024).floor());
     }
     if (player.alcu[1] == true) player.PL1tms = player.PL1tms.add(getPL1tms().mul(speed));
 
@@ -6311,8 +7046,8 @@ function produce(spd = 1) {
     }
     if (player.std[7] == true & player.sta8n1 == true) player.wsca16 = player.wsca16.add(hyp(player.wsca17.mul(v.wscm17).pow(v.wscp17), v.wsch17).pow(v.PL2engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.tthpu[1] == true & player.PL2pts.lte(player.PL1pts.root(1024).floor())) {
-        player.PL2pts = player.PL2pts.add(player.PL1pts.root(1024).floor().mul(speed));
-        player.PL2ptsttl = player.PL2ptsttl.add(player.PL1pts.root(1024).floor().mul(speed));
+        player.PL2pts = player.PL2pts.add(player.PL1pts.root(1024).floor().mul(speed)).min(player.PL1pts.root(1024).floor());
+        player.PL2ptsttl = player.PL2ptsttl.add(player.PL1pts.root(1024).floor().mul(speed)).min(player.PL1pts.root(1024).floor());
     }
     if (player.xyzbo.gte(2)) player.PL2tms = player.PL2tms.add(getPL2tms().mul(speed));
 
@@ -6324,8 +7059,8 @@ function produce(spd = 1) {
     }
     if (player.tthpu[0] == true & player.sta8n1 == true) player.wsca24 = player.wsca24.add(hyp(player.wsca25.mul(v.wscm25).pow(v.wscp25), v.wsch25).pow(v.PL3engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.PL4goal[11] == true & player.PL3pts.lte(player.PL2pts.root(1048576).floor())) {
-        player.PL3pts = player.PL3pts.add(player.PL2pts.root(1048576).floor().mul(speed));
-        player.PL3ptsttl = player.PL3ptsttl.add(player.PL2pts.root(1048576).floor().mul(speed));
+        player.PL3pts = player.PL3pts.add(player.PL2pts.root(1048576).floor().mul(speed)).min(player.PL2pts.root(1048576).floor());
+        player.PL3ptsttl = player.PL3ptsttl.add(player.PL2pts.root(1048576).floor().mul(speed)).min(player.PL2pts.root(1048576).floor());
     }
     if (player.zzltu[0] == true) player.PL3tms = player.PL3tms.add(getPL3tms().mul(speed));
 
@@ -6337,8 +7072,8 @@ function produce(spd = 1) {
     }
     if (player.PL4goal[10] == true & player.sta8n1 == true) player.wsca32 = player.wsca32.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).hyp(v.wsch33).pow(v.PL4engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.quau[14] == true & player.PL4pts.lte(player.PL3pts.root(1048576).floor())) {
-        player.PL4pts = player.PL4pts.add(player.PL3pts.root(1048576).floor().mul(speed));
-        player.PL4ptsttl = player.PL4ptsttl.add(player.PL3pts.root(1048576).floor().mul(speed));
+        player.PL4pts = player.PL4pts.add(player.PL3pts.root(1048576).floor().mul(speed)).min(player.PL3pts.root(1048576).floor());
+        player.PL4ptsttl = player.PL4ptsttl.add(player.PL3pts.root(1048576).floor().mul(speed)).min(player.PL3pts.root(1048576).floor());
     }
     if (player.quau[4] == true) player.PL4tms = player.PL4tms.add(getPL4tms().mul(speed2));
 
@@ -6400,7 +7135,14 @@ function produce(spd = 1) {
         v.anm4ps = v.anm4ps.mul(player.anm4u01.pwb(anm4b)).mul(player.chacom16.pwb(16));
         if (v.ntma.gte(593)) v.anm4ps = v.anm4ps.mul(v.ntma.max(1));
         if (player.quau[12] == true) v.anm4ps = v.anm4ps.mul(player.energy.max(2).log(2).div(1e27).max(1));
+        if (player.hasunlockedanm5 == true) v.anm4ps = v.anm4ps.pow(player.anm5.add(1).log(2).add(1).log(2).max(1).pow(player.anm5u03.div(64).add(0.0625).min(player.anm5u03.div(64).add(0.0625).root(4))));
         player.anm4 = player.anm4.add(v.anm4ps.mul(speed2));
+    }
+    if(player.hasunlockedanm5 == true) {
+        let anm5b = N(2);
+        v.anm5ps=player.producer.max(2).log(2).mul(player.consumer1.max(2).log(2)).mul(player.consumer2.max(2).log(2)).mul(player.consumer3.max(2).log(2)).div(1e8);
+        v.anm5ps = v.anm5ps.mul(player.anm5u01.pwb(anm5b));
+        player.anm5 = player.anm5.add(v.anm5ps.mul(speed2));
     }
 
     if (player.PL1upg[11] == true) {
@@ -6513,7 +7255,7 @@ function produce(spd = 1) {
     }
 
     if (player.PL4goal[4] == true) {
-        player.cata = player.cata.add(v.gamespd1.mul(player.PL3tms.max(1).pow(0.5)));
+        player.cata = player.cata.add(v.gamespd1.mul(player.PL3tms.max(1).pow(0.5)).mul(speed));
         player.reacm2 = player.cata.pow(2);
     }
     if (player.quau[13] == true) player.PL4fra = player.PL4fra.add(getfra().div(1000).mul(speed2));
@@ -6528,13 +7270,13 @@ function produce(spd = 1) {
     else player.hdrn12w = player.hdrn12w.div(1.035265);
     if (player.hdrn20.gte(1) | player.synu13.gte(1)) player.hdrn20w = player.hdrn20w.add(v.hdrn20wps.mul(speed2));
     else player.hdrn20w = player.hdrn20w.div(1.035265);
-    if (player.staram.gte(1e16)) player.hdrn30w = player.hdrn30w.add(v.hdrn30wps.mul(speed2));
+    if (player.staram.gte(1e16) ) player.hdrn30w = player.hdrn30w.add(v.hdrn30wps.mul(speed2));
     if (player.zzlt.gte(1) | player.synu13.gte(1)) player.zzltw = player.zzltw.add(v.zzltwps.mul(speed2));
     else player.zzltw = player.zzltw.div(1.035265);
 
     if (player.zzltu[4] == true) {
         player.coin = player.coin.add(v.pcps.mul(speed2));
-        if (player.rhp.lte(v.atke.div(20))) stageclear();
+        if (player.rhp.lte(v.atke.mul(speed2))) stageclear();
         else player.rhp = player.rhp.sub(v.atke.mul(speed2));
     }
 
@@ -6562,6 +7304,13 @@ function produce(spd = 1) {
             let prev = tiername[i-1];
             player["slwa" + prev] = player["slwa" + prev].mul(player["slwa" + name].pow(v["slwp" + name]).root(20));
         }
+    }
+
+    if(player.hasunlockedanm5 == true) {
+        player.producer =player.producer.add(v.producerps.mul(speed2));
+        player.consumer1=player.consumer1.add(v.consumer1ps.mul(speed2));
+        player.consumer2=player.consumer2.add(v.consumer2ps.mul(speed2));
+        player.consumer3=player.consumer3.add(v.consumer3ps.mul(speed2));
     }
 
     if (player.incha == 5 | player.incha == 9) {
@@ -6603,12 +7352,10 @@ function fszqw() {
 //#region 数值计算
 /*数值计算*/
 function scale(x) {
-    if(player.magstorm == true) return x;
     return x.max(x.pow(2).div(v.scal01)).max(x.pow(4).div(v.scal02)).max(x.pow(8).div(v.scal03)).max(x.pow(16).div(v.scal04)).max(x.pow(32).div(v.scal05)).max(x.pow(64).div(v.scal06)).max(x.pow(128).div(v.scal07)).max(x.pow(256).div(v.scal08));
 }
 
 function invscale(x) {
-    if(player.magstorm == true) return x;
     return x.min(x.mul(v.scal01).root(2)).min(x.mul(v.scal02).root(4)).min(x.mul(v.scal03).root(8)).min(x.mul(v.scal04).root(16)).min(x.mul(v.scal05).root(32)).min(x.mul(v.scal06).root(64)).min(x.mul(v.scal07).root(128)).min(x.mul(v.scal08).root(256));
 }
 
@@ -6835,8 +7582,8 @@ function wscale(tier) {
 
 function tscale(tier) {
     let name = tiername[tier];
-    if (player["tier" + name].gte(1125899906842624)) return "四阶折算|";
-    else if (player["tier" + name].gte(1048576)) return "三阶折算|";
+    if (player["tier" + name].gte(1e80)) return "四阶折算|";
+    else if (player["tier" + name].gte(1e10)) return "三阶折算|";
     else if (player["tier" + name].gte(256)) return "二阶折算|";
     else if (player["tier" + name].gte(16)) return "一阶折算|";
     else return "";
@@ -6908,6 +7655,20 @@ function useoflntm() {
         if (player.oflntm <= 0) player.oflntm=0
     }
 }
+
+// 计算数组中true的数量的函数
+function countTrueValues(arr) {
+    if (!Array.isArray(arr)) {
+        return 0;
+    }
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === true) {
+            count++;
+        }
+    }
+    return count;
+}
 //#endregion
 
 //#region 成就
@@ -6940,7 +7701,7 @@ function comAch() {
     if (player.PL1tms.gt(0)) getAch(16);
     if (player.PL1energy.gte(1e6)) getAch(17);
     if (player.energy.root(1024).floor().gte(100)) getAch(18);
-    if (player.normchacom[0] & player.normchacom[1] & player.normchacom[2] & player.normchacom[3] & player.normchacom[4] &player.normchacom[5] & player.normchacom[6] & player.normchacom[7] & player.normchacom[8] & player.normchacom[9] &player.normchacom[10] & player.normchacom[11]) getAch(19);
+    if (countTrueValues(player.normchacom) == 12) getAch(19);
     if (player.wscb16.gt(0)) getAch(20);
     if (player.PL1upg[15] == true) getAch(21);
     if (player.PL1bab01.eq(5) & player.PL1bab02.eq(5) & player.PL1bab03.eq(5) & player.PL1bab04.eq(5) & player.PL1bab05.eq(5) & player.PL1bab06.eq(5) & player.PL1bab07.eq(5) & player.PL1bab08.eq(5) & player.PL1bab09.eq(5)) getAch(22);
@@ -6998,9 +7759,17 @@ function comAch() {
     if (player.hasunlockedanm4 == true) getAch(71);
     if (player.shdwrc.gte(1024)) getAch(72);
     if (player.nrev.gte(1)) getAch(73);
+    if(player.enengy.gte("ee16") & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(74);
+    if(player.enengy.gte("e12000") & player.infytx & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(75);
+    if(v.shdwpd.gte(1e18) & player.incyzb) getAch(76);
+    if(player.wxzf.eq(10) & player.hydf.eq(20) & player.xkwz.eq(30) & player.zzlt.eq(40)) getAch(77);
+    if(player.sklv01.eq(2) & player.sklv02.eq(2) & player.sklv03.eq(2) & player.sklv04.eq(2)) getAch(78);
+    if(player.bogglebox == player.bogglettl & player.energy.gte("ee24")) getAch(79);
 
     if (player.PL5tms.gt(0)) getAch(80);
-
+    if (player.quau[0] & player.quau[1] & player.quau[2] & player.quafil01.gt(0)) getAch(81);
+    if (v.gamespd2.gte(100)) getAch(82);
+    if (player.quau[8]) getAch(83);
 }
 //#endregion
 
@@ -7246,6 +8015,8 @@ function mainLoop() {
     getxbe();
     getphs();
     getslw();
+    getbioalc();
+    getanm5();
 
     getspd();
     autoBuy();
@@ -7504,8 +8275,9 @@ function test41() {
 
 function test42(){
     for(let i=0;i<5;i++) player.zzltu[i] = true;
-
 }
+
+
 
 /*滚动新闻*/
 var texts =
@@ -7710,6 +8482,7 @@ var texts =
         "你是一个一个一个的数字，你也是一个一个的一个数字",
         "来自星星的计算机，能够处理任何大小的数字，无论它们有多大",
         "生物炼金学家认为，通过将生物的基因和化学物质进行精确的控制和组合，可以创造出具有特定功能和性能的新物种，这种新物种可以被用于医学、农业、工业等领域，为人类带来更多的福利和便利，生物炼金学的研究和应用，将为人类带来更多的科学和技术进步",/*200*/
+
     ]
 var p = 50 + document.body.clientWidth
 var l = -50 - (newsText.innerText.length * 16)
@@ -7799,6 +8572,94 @@ function loadVue() {
         data: {
             player: player,
             v: v,
+        },
+        methods: {
+            // CRISPR相关方法
+            checkCRISPRUnlock: checkCRISPRUnlock,
+            getCRISPRDnaGeneration: getCRISPRDnaGeneration,
+            getCRISPREditingCost: function(geneIndex, level) {
+                return getCRISPREditingCost(geneIndex, level);
+            },
+            getCRISPRGeneEffect: function(geneIndex, level) {
+                return getCRISPRGeneEffect(geneIndex, level);
+            },
+            unlockCRISPRGeneSlot: function(slotIndex) {
+                return unlockCRISPRGeneSlot(slotIndex);
+            },
+            editCRISPRGene: function(geneIndex, newGeneId) {
+                return editCRISPRGene(geneIndex, newGeneId);
+            },
+            upgradeCRISPRGene: function(geneIndex) {
+                return upgradeCRISPRGene(geneIndex);
+            },
+            upgradeCRISPREditingTech: function() {
+                return upgradeCRISPREditingTech();
+            },
+            getGeneName: function(geneId) {
+                const geneNames = ['无', '基因1：风灵增强', '基因2：多面体增强', '基因3：量子增强', '基因4：太阳风灵增强'];
+                return geneNames[geneId] || '未知基因';
+            },
+
+            // 生物炼金系统Vue方法
+            checkAlchemyUnlock: function() {
+                return checkAlchemyUnlock();
+            },
+
+            buyAlchemyParent: function() {
+                if (buyAlchemyParent()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            buyAlchemyTool: function() {
+                if (buyAlchemyTool()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            startHybridization: function() {
+                if (startHybridization()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            selfPollinate: function() {
+                if (selfPollinate()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            selectDominant: function() {
+                if (selectDominant()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            selectRecessive: function() {
+                if (selectRecessive()) {
+                    this.$forceUpdate();
+                }
+            },
+
+            canHybridize: function() {
+                return canHybridize();
+            },
+
+            canSelfPollinate: function() {
+                return canSelfPollinate();
+            },
+
+            canSelectDominant: function() {
+                return canSelectDominant();
+            },
+
+            canSelectRecessive: function() {
+                return canSelectRecessive();
+            },
+
+            getAlchemyHistory: function() {
+                return getAlchemyHistory();
+            },
         }
     })
 }

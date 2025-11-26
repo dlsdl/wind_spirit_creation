@@ -1300,3 +1300,176 @@ div {
     height: 20px;
     position: absolute;
 }
+
+/* 碱基系统样式 */
+.bases-container {
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #0000ff;
+    background-color: rgba(0, 0, 255, 0.1);
+    border-radius: 8px;
+}
+
+.base-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border-left: 4px solid #0000ff;
+}
+
+.base-info {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.base-name {
+    font-weight: bold;
+    color: #0000ff;
+    min-width: 80px;
+}
+
+.base-amount {
+    color: #00ff00;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+.base-production {
+    color: #ffff00;
+    min-width: 120px;
+}
+
+.base-threshold {
+    color: #ff8800;
+    font-size: 12px;
+    min-width: 200px;
+}
+
+.base-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.base-buy-btn {
+    background-color: #0000ff;
+    color: #ffffff;
+    border: 2px solid #0080ff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.base-buy-btn:hover {
+    background-color: #0080ff;
+    transform: scale(1.05);
+}
+
+.base-buy-btn:disabled {
+    background-color: #666666;
+    color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.base-cost {
+    color: #ff8800;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.base-locked {
+    color: #ff0000;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.upgrades-section {
+    margin: 15px 0;
+    padding: 15px;
+    border: 2px solid #ff00ff;
+    background-color: rgba(255, 0, 255, 0.1);
+    border-radius: 8px;
+}
+
+.upgrade-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    border-left: 4px solid #ff00ff;
+}
+
+.upgrade-info {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+}
+
+.upgrade-name {
+    font-weight: bold;
+    color: #ff00ff;
+    min-width: 150px;
+}
+
+.upgrade-level {
+    color: #00ffff;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+.upgrade-effect {
+    color: #ffff00;
+    min-width: 200px;
+}
+
+.upgrade-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.upgrade-buy-btn {
+    background-color: #ff00ff;
+    color: #ffffff;
+    border: 2px solid #ff80ff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upgrade-buy-btn:hover {
+    background-color: #ff80ff;
+    transform: scale(1.05);
+}
+
+.upgrade-buy-btn:disabled {
+    background-color: #666666;
+    color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.upgrade-cost {
+    color: #ff8800;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 180px;
+}
