@@ -3132,22 +3132,22 @@ function entCha(tier) {
     if (tier <= 4) {
         PL1FR();
         player.incha = tier;
-        player.enengy = new Decimal(2);
+        player.energy = new Decimal(2);
     }
     else if (tier <= 8) {
         PL2FR();
         player.incha = tier;
-        player.enengy = new Decimal(2);
+        player.energy = new Decimal(2);
     }
     else if (tier <= 12) {
         PL3FR();
         player.incha = tier;
-        player.enengy = new Decimal(2);
+        player.energy = new Decimal(2);
     }
     else if (tier <= 16) {
         PL4FR();
         player.incha = tier;
-        player.enengy = new Decimal(2);
+        player.energy = new Decimal(2);
     }
     else return
 }
@@ -3700,7 +3700,7 @@ function entfytx() {
     player.wsca24 = player.wscb24;
     player.tier03 = new Decimal(0);
     player.tier04 = new Decimal(0);
-    player.enengy = new Decimal(2);
+    player.energy = new Decimal(2);
 }
 
 function autobuyanm2upg() {
@@ -5437,7 +5437,7 @@ function encyzb() {
     player.wsca38 = player.wscb38;
     player.wsca39 = player.wscb39;
     player.wsca40 = player.wscb40;
-    player.enengy = new Decimal(2);
+    player.energy = new Decimal(2);
 }
 
 function shsl(tier) {
@@ -7759,8 +7759,8 @@ function comAch() {
     if (player.hasunlockedanm4 == true) getAch(71);
     if (player.shdwrc.gte(1024)) getAch(72);
     if (player.nrev.gte(1)) getAch(73);
-    if(player.enengy.gte("ee16") & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(74);
-    if(player.enengy.gte("e12000") & player.infytx & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(75);
+    if(player.energy.gte("ee16") & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(74);
+    if(player.energy.gte("e12000") & player.infytx & player.PL1pts.lte(0) & player.PL2pts.lte(0) & player.PL3pts.lte(0)) getAch(75);
     if(v.shdwpd.gte(1e18) & player.incyzb) getAch(76);
     if(player.wxzf.eq(10) & player.hydf.eq(20) & player.xkwz.eq(30) & player.zzlt.eq(40)) getAch(77);
     if(player.sklv01.eq(2) & player.sklv02.eq(2) & player.sklv03.eq(2) & player.sklv04.eq(2)) getAch(78);
