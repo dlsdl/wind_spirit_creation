@@ -14,6 +14,10 @@ div {
     font-family: MonospaceTypewriter, monospace;
 }
 
+table {
+    border-spacing: 0;
+}
+
 [dxfl] {
     background-image: url("dxfl.png");
 }
@@ -96,14 +100,26 @@ div {
     -webkit-text-fill-color: transparent;
     -ms-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
-    text-fill-color: transparent;
     -webkit-animation-name: masked-animation;
+    animation-name: masked-animation;
     -webkit-animation-duration: 60s;
+    animation-duration: 60s;
     -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
 }
 
 @-webkit-keyframes masked-animation {
+    0% {
+        background-position: 0 0;
+    }
+    00% {
+        background-position: -8000px -3000px;
+    }
+}
+
+@keyframes masked-animation {
     0% {
         background-position: 0 0;
     }
@@ -327,8 +343,8 @@ div {
 }
 
 .PL1upgno {
-    width: 184px;
-    height: 136px;
+    width: 190px;
+    height: 142px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -338,8 +354,8 @@ div {
 }
 
 .PL1upgyes {
-    width: 184px;
-    height: 136px;
+    width: 190px;
+    height: 142px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
@@ -349,8 +365,8 @@ div {
 }
 
 .PL1bab {
-    width: 184px;
-    height: 184px;
+    width: 190px;
+    height: 190px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -1099,8 +1115,8 @@ div {
 
 
 .normchalno {
-    width: 248px;
-    height: 104px;
+    width: 254px;
+    height: 126px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ffffff;
@@ -1110,8 +1126,8 @@ div {
 }
 
 .normchalin {
-    width: 248px;
-    height: 104px;
+    width: 254px;
+    height: 126px;
     background-color: #008080;
     color: #ffffff;
     border: 4px solid #ffffff;
@@ -1121,8 +1137,8 @@ div {
 }
 
 .normchalyes {
-    width: 248px;
-    height: 104px;
+    width: 254px;
+    height: 126px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ffffff;
@@ -1132,8 +1148,8 @@ div {
 }
 
 .chalno {
-    width: 248px;
-    height: 184px;
+    width: 254px;
+    height: 190px;
     background-color: #000000;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -1143,8 +1159,8 @@ div {
 }
 
 .chalin {
-    width: 248px;
-    height: 184px;
+    width: 254px;
+    height: 190px;
     background-color: #008080;
     color: #ffffff;
     border: 4px solid #ff0000;
@@ -1154,8 +1170,8 @@ div {
 }
 
 .chalyes {
-    width: 248px;
-    height: 184px;
+    width: 254px;
+    height: 190px;
     background-color: #00ff80;
     color: #000000;
     border: 4px solid #ff0000;
@@ -1169,7 +1185,7 @@ div {
     height: 60px;
     background-image: radial-gradient(#ff0080,#000000);
     color: #ffffff;
-    border: 2px solid #00ff80;
+    border: 1px solid #00ff80;
     font-size: 12px;
     line-height: 15px;
     text-align: center;
@@ -1182,7 +1198,7 @@ div {
     height: 60px;
     background-image: radial-gradient(#00ff80,#000000);
     color: #ffffff;
-    border: 2px solid #00ff80;
+    border: 1px solid #00ff80;
     font-size: 12px;
     line-height: 15px;
     text-align: center;
