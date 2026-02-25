@@ -1714,14 +1714,13 @@ function save() {
     shownoti("#autosave");
 }
 
-async function load() {
+ function load() {
     if (localStorage.windSpiritCreation) {
         player = JSON.parse(atob(localStorage.windSpiritCreation));
         transformToDecimal(player);
     }
     get_offline_time();
     mainLoop();
-    await delay(100);
 }
 
 function exportSave() {
@@ -1778,11 +1777,10 @@ function importSaveFile() {
     }
 }
 
-async function trueHardReset() {
+ function trueHardReset() {
     let promption = prompt("您确定要硬重置吗？输入This is the future确定");
     if (promption == "This is the future") {
         hardReset();
-        await delay(100);
         player.energy = new Decimal(2);
         save();
         shownoti("#hardreset");
@@ -3348,7 +3346,7 @@ function PL2reset(){
     }
 }
 
-async function PL2FR() {
+ function PL2FR() {
     player.hasUnlockedPL2 = true;
     clearInterval(ml);
     ml = null;
@@ -3776,7 +3774,7 @@ function PL3reset() {
     }
 }
 
-async function PL3FR() {
+ function PL3FR() {
     player.hasUnlockedPL3 = true;
     clearInterval(ml);
     ml = null;
@@ -4502,7 +4500,7 @@ function PL4reset() {
     }
 }
 
-async function PL4FR() {
+ function PL4FR() {
     player.hasUnlockedPL4 = true;
     clearInterval(ml);
     ml = null;
@@ -5545,7 +5543,7 @@ function PL5reset() {
     }
 }
 
-async function PL5FR() {
+ function PL5FR() {
     player.hasUnlockedPL5 = true;
     clearInterval(ml);
     ml = null;
@@ -6777,7 +6775,7 @@ function PL6reset() {
     */
 }
 
-async function PL6FR() {
+ function PL6FR() {
     
         player.PL6pts = player.PL6pts.add(player.PL5pts.root(1073741824).floor());
         player.PL6ptsttl = player.PL6ptsttl.add(player.PL5pts.root(1073741824).floor());
