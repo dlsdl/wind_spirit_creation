@@ -23,6 +23,10 @@ table {
     border-spacing: 0;
 }
 
+[dxfl] {
+    background-image: url('../assets/dxfl.png');
+}
+
 @keyframes a-game-header__antimatter--glow {
     0% { color: #21f396; }
     25% { color: #3ab767; }
@@ -87,7 +91,7 @@ table {
 .button {
     width: 77px;
     padding: 1.5px 0px;
-    margin: 4.5px 0px;
+    margin: 4.5px 4.5px;
     border: 2px solid #333333;
     font-size: 16px;
     text-decoration: none;
@@ -98,7 +102,7 @@ table {
 .slbutton {
     width: 77px;
     padding: 1.5px 0px;
-    margin: 4.5px 0px;
+    margin: 4.5px 4.5px;
     border: 2px solid #00ff80;
     font-size: 16px;
     text-decoration: none;
@@ -1121,22 +1125,6 @@ table {
 .achno:hover .tooltip-text {
     display: block;
 }
-
-.noti {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    padding: 4px;
-    background-color: #80ffc0;
-    border: 1px solid #008040;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.2);
-    z-index: 9999;
-    display: none;
-    color: #000000;
-}
-
-.noti.show { display: block; }
 
 #offline {
     display: none;

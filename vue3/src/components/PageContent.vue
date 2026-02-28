@@ -192,6 +192,12 @@
     <div v-if="currentPage === 'p0_5'">
       <PageP0_5 :player="player" :v="v" />
     </div>
+    <div v-if="currentPage === 'p9_59330'">
+      <PageP9_59330 :player="player" :v="v" />
+    </div>
+    <div v-if="currentPage === 'p0_630875'">
+      <PageP0_630875 :player="player" :v="v" />
+    </div>
   </div>
 </template>
 
@@ -261,6 +267,8 @@ import PageP0_2 from './pages/PageP0_2.vue'
 import PageP0_3 from './pages/PageP0_3.vue'
 import PageP0_4 from './pages/PageP0_4.vue'
 import PageP0_5 from './pages/PageP0_5.vue'
+import PageP9_59330 from './pages/PageP9_59330.vue'
+import PageP0_630875 from './pages/PageP0_630875.vue'
 
 defineProps({
   currentPage: String,

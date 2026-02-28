@@ -16,7 +16,7 @@
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(1)">1式风模块：风灵每次作成乘数增加0.05，并解锁第一个升级。当前：+{{notation(player.tier02.max(1).pow(0.25).mul(player.tier01.max(1).pow(0.25)).mul(0.05))}}<br /></div>
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(2)">2式风模块：基于风模块式数^0.25乘以1式风模块的第一个效果，并解锁第二个升级。当前：×{{notation(player.tier02.pow(0.25))}}<br /></div>
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(5)">5式风模块：1式风模块的第一个效果×5，并将它乘以风单元式数^0.25。当前：×{{notation(player.tier01.pow(0.25))}}<br /></div>
-    <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(12)">12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×{{notation(new Decimal(1.010889286051700).pow(v.AGpower).pow(player.tier02))}}<br /></div>
+    <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(12)">12式风模块：每个风模块将风灵每次作成乘数×1.011，并解锁第三个升级。当前：×{{notation(v.AGpower.pwb(1.010889286051700).pow(player.tier02))}}<br /></div>
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(30)">30式风模块：使超过1e8的扩散次数增加风之微粒获取，并解锁第四个升级。当前：×{{notation(player.PL1tms.div(1e8).max(1).min(1e8))}}{{player.PL1tms.gte(1e16)?"(已达上限)":""}}<br /></div>
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(75)">75式风模块：使1式风模块的第一个效果×4，1~8、9~16式风灵每次作成乘数分别^1.1和^1.05。<br /></div>
     <div class="ftsz1" style="text-align: center" v-if="player.tier02.gte(237)">237式风模块：使风灵升级2的效果指数增加0.25<br /></div>

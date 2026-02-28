@@ -1727,7 +1727,6 @@ export function useGameState() {
         Object.assign(v, createV())
         lastUpdate = Date.now()
     }
- 
     
     function wscUnlocked() {
         if (player.hasUnlockedPL7) return 48
@@ -2837,22 +2836,10 @@ function getTierCost(tier) {
 
 function tier01Reset() {
         player.energy = new Decimal(2);
-        player.wscb01 = new Decimal(0);
-        player.wscb02 = new Decimal(0);
-        player.wscb03 = new Decimal(0);
-        player.wscb04 = new Decimal(0);
-        player.wscb05 = new Decimal(0);
-        player.wscb06 = new Decimal(0);
-        player.wscb07 = new Decimal(0);
-        player.wscb08 = new Decimal(0);
-        player.wsca01 = new Decimal(0);
-        player.wsca02 = new Decimal(0);
-        player.wsca03 = new Decimal(0);
-        player.wsca04 = new Decimal(0);
-        player.wsca05 = new Decimal(0);
-        player.wsca06 = new Decimal(0);
-        player.wsca07 = new Decimal(0);
-        player.wsca08 = new Decimal(0);
+        for (let i = 1; i <= 8; i++) {
+            player["wscb0" + i] = new Decimal(0);
+            player["wsca0" + i] = new Decimal(0);
+        }
 }
 
 function tier02Reset() {   
@@ -4484,7 +4471,7 @@ function buyxyzh() {
 }
 
 function ulAnm3() {
-    if (player.PL3pts.gte("1e10000") & player.hasunlockedanm3 == false) player.hasunlockedanm3 = true;
+    if (player.PL3pts.gte("1e5000") & player.hasunlockedanm3 == false) player.hasunlockedanm3 = true;
 }
 
 function reastart() {
@@ -7026,7 +7013,7 @@ function produce(spd = 1) {
         let anm2b = N(2);
         if (player.frucam.gte(1e6)) anm2b = v.fruce1;
         if (player.anm2sc.lt(1.797e308)) v.anm2ps = N(0);
-        else if (player.anm2sc.lt(3.525e3082)) v.anm2ps = player.anm2sc.max(2).log(2).div(1024).sub(2).pwb(100).mul(player.chacom08.pwb(4)).mul(player.anm2u01.pwb(anm2b));
+        else if (player.anm2sc.lt("3.525e3082")) v.anm2ps = player.anm2sc.max(2).log(2).div(1024).sub(2).pwb(100).mul(player.chacom08.pwb(4)).mul(player.anm2u01.pwb(anm2b));
         else v.anm2ps = player.anm2sc.max(2).log(2).div(1024).pow(16).mul(player.chacom08.pwb(4)).mul(player.anm2u01.pwb(anm2b));
         if (player.ptn[6] == true) v.anm2ps = v.anm2ps.mul(v.ptnm07);
         if (player.hasunlockedanm3 == true) v.anm2ps = v.anm2ps.pow(player.anm3.add(1).log(2).add(1).log(2).max(1).pow(player.anm3u03.div(64).add(0.0625).min(player.anm3u03.div(64).add(0.0625).root(4))));
@@ -7333,7 +7320,7 @@ function softcap(x) {
 
 //#region 游戏机制之外……
 function transformToDecimal(object) {
-    for (i in object) {
+    for (let i in object) {
         if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
         if (typeof (object[i]) == "object" && !isNaN(new Decimal(object[i]).mag)) transformToDecimal(object[i]);
         if (new Decimal(object[i]).gte("F1e308")) object[i] = new Decimal(1);
@@ -7730,14 +7717,22 @@ function changeBt(name) {
     v.currentTab = name;
     changePg("p" + name.substr(-1) + "_" + v.lastPage[new Decimal(name.substr(-1)).toNumber()]);
 }
+
 function changePg(name) {
     v.currentPage = name;
 }
 /*弹出提示*/
 function shownoti(notiname) {
-    var noti = document.querySelector(notiname);
-    noti.classList.add("show");
-    setTimeout(function () { noti.classList.remove("show"); }, 4000);
+    const notificationMessages = {
+        '#autosave': '游戏已保存',
+        '#export': '已导出存档',
+        '#import': '已导入存档',
+        '#exportfile': '已导出到文件',
+        '#importfile': '已从文件导入',
+        '#hardreset': '已全部重置',
+    }
+    const message = notificationMessages[notiname] || notiname
+    window.dispatchEvent(new CustomEvent('showNotification', { detail: notiname }))
 }
 /*快捷键*/
 document.addEventListener("keydown", hotkeys);
@@ -7989,17 +7984,25 @@ function autoBuy() {
 }
 
 var ml = null
+var autoSaveInterval = null
 
 function startGameLoop() {
+    load()
     if (ml) clearInterval(ml)
+    if (autoSaveInterval) clearInterval(autoSaveInterval)
     ml = setInterval(mainLoop, 33)
-    setInterval(save, 60000)
+    autoSaveInterval = setInterval(save, 60000)
+    
+    // 暴露到 window 对象以便在控制台中访问
+    window.player = player
+    window.v = v
+    window.changePg = changePg
 }
 
 //#region 测试
 var inputVal = "";
 function goldenEnergy() {
-    hardReset();
+    //hardReset();
     player.energy = new Decimal(inputVal).pwb(2).pwb(2);
     let p1 = player.energy.root(new Decimal(2).pow(10));
     if (p1.gte(2)) {
@@ -8026,10 +8029,10 @@ function goldenEnergy() {
         player.PL5pts = p5;
         player.hasUnlockedPL5 = true;
     }
-    let p6 = player.energy.root(new Decimal(2).pow(120));
-    let p7 = player.energy.root(new Decimal(2).pow(160));
-    save();
-    updateGUI();
+    //let p6 = player.energy.root(new Decimal(2).pow(120));
+
+    //let p7 = player.energy.root(new Decimal(2).pow(160));
+
 }
 
 function speedrun(speed) {
@@ -8043,6 +8046,8 @@ function resete() {
     player.PL3energy = new Decimal(1);
     player.PL4energy = new Decimal(1);
     player.PL5energy = new Decimal(1);
+    //player.PL6energy = new Decimal(1);
+    //player.PL7energy = new Decimal(1);
 }
 
 function reseta() {
@@ -8146,8 +8151,7 @@ function test42(){
 
 
 //#region 滚动新闻
-var texts =
-    [
+var texts = [
         "6308式风单元，75式超级风模块",
         "增量游戏就应该有滚动新闻",
         "可能是1.8e308序数增量吧吧友弄的吗？",
@@ -8350,7 +8354,6 @@ var texts =
         "生物炼金学家认为，通过将生物的基因和化学物质进行精确的控制和组合，可以创造出具有特定功能和性能的新物种，这种新物种可以被用于医学、农业、工业等领域，为人类带来更多的福利和便利，生物炼金学的研究和应用，将为人类带来更多的科学和技术进步",/*200*/
 
     ]
-
 function startNewsTicker() {
     const newsElement = document.getElementById('newsText')
     if (!newsElement) return null
@@ -8445,41 +8448,29 @@ function blendWords(first, second, param) {
 
     
     return {
-        N,
-        hyp,
-        pwb,
-        player,
-        v,
-        tiername,
-        hexdigit,
-        zerotosixtyfour,
+        N, hyp, pwb, player, v, tiername, hexdigit, zerotosixtyfour,
         hardReset,
-        notation,
-        notatint,
-        notatcom,
-        epsdisp,
-        getsoftcap,
-        wscUnlocked,
-        wscAutobuyable,
-        getWsColor,
-        wscale,
-        toChineseOrdinal,
-        getWSCresourcename,
-        displayWSdata,
-        tscale,
-        uscale,
-        uscap,
-        ascale,
-        scale,
+        //数值显示和计算
+        notation, notatint, notatcom, epsdisp, getsoftcap, tscale, uscale, uscap, ascale, scale,
+        //风灵
+        wscUnlocked, wscAutobuyable, getWsColor, wscale, toChineseOrdinal, getWSCresourcename, displayWSdata, buyWsc, buyMaxWsc, abwSwitch, maxAll,
+        //扩散
+        buyPL1upg, buyPL1bab, resetBab, entNormCha, entCha, quitCha, ulAnmOrb, buyparupg, buyorbupg, resetOrb,
+        //扪敤
+        buyPL2upg, resetElmt, dtavelmt, distelmt, dtmxelmt, buythr01, buythr02, buythr03, buymaxthr, buystd, rstd, rstd2, rstd3, buyalc, alchsw, buyalcu, buyanm2u, entfytx, ulAnm2,
+        //扫敥
+        research, ptnchs, buyptnupg, rptn, plt, har, imp, toseed, togene, tosucr, tthpre, buytthupg, buytthpu, buytthpu2,
+        buyxyzu, xyzsw, xyzswdp, buyxyze, buyxyzf, buyxyzg, buyxyzh, xyzbo, xyzbodp, reastart, reareset, buyanm3u, buyanm3u2,
+        ulAnm3, rconv, buyconv, subtthtier, addtthtier, atpltsw, atharsw, atimpsw, atbtusw, ulatplt, ulathar, ulatimp, ulatupg1, ulatupg2,
+        //扬敦
+
+
         dfstr,
         getprow1,
         getprow2,
         getprow3,
         energyshow,
-        buyWsc,
-        buyMaxWsc,
-        abwSwitch,
-        maxAll,
+        
         changeBt,
         changePg,
         PL1reset,
@@ -8488,7 +8479,7 @@ function blendWords(first, second, param) {
         PL4reset,
         PL5reset,
         PL6reset,
-        buyPL1upg,
+        
         incTier1,
         incTier2,
         incTier3,
@@ -8514,6 +8505,12 @@ function blendWords(first, second, param) {
         load,
         exportSave,
         importSave,
+        exportSaveFile,
+        importSaveFile,
         trueHardReset,
+
+        //secret
+        goldenEnergy, speedrun, resete, reseta, showall, hideall, zhadang, pasgen, nc0, nc1, timewarp,
+        test11, test12, test21, test22, test31, test32, test41, test42, animationBigCrunch, wordCycle, randomCrossWords, blendWords,
     }
 }

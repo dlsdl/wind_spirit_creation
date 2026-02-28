@@ -65,7 +65,7 @@
     </p>
     
     <p align="center" class="ftsz3">
-      你有<span class="ftsz4"> {{ notation(player.energy) }} </span>能量
+      你有 <span class="ftsz4">{{ notation(player.energy) }}</span> 能量
     </p>
     
     <p align="center" class="ftsz2">
@@ -117,18 +117,18 @@
     </p>
     
     <div class="btnrow" id="btnrowm">
-      <button v-if="player.hasUnlockedPLw2" class="button" style="background-image: url('./assets/PLw2bg.bmp'); background-size: 34%; color: #000000" @click="handleChangeBt('rowb')">扸敲</button>
-      <button v-if="player.hasUnlockedPLw" class="button" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="handleChangeBt('rowa')">扰敪</button>
-      <button class="slbutton" style="background-color: #ffffff; color: #000000" @click="handleChangeBt('row1')">风灵</button>
-      <button v-if="player.hasUnlockedPL1" class="button" style="background-color: #ff0000; color: #ffffff" @click="handleChangeBt('row2')">扩散</button>
-      <button v-if="player.hasUnlockedPL2" class="button" style="background-color: #ffff00; color: #000000" @click="handleChangeBt('row3')">扪敤</button>
-      <button v-if="player.hasUnlockedPL3" class="button" style="background-color: #00ff00; color: #000000" @click="handleChangeBt('row4')">扫敥</button>
-      <button v-if="player.hasUnlockedPL4" class="button" style="background-color: #00ffff; color: #000000" @click="handleChangeBt('row5')">扬敦</button>
-      <button v-if="player.hasUnlockedPL5" class="button" style="background-color: #0000ff; color: #ffffff" @click="handleChangeBt('row6')">扭敧</button>
-      <button v-if="player.hasUnlockedPL6" class="button" style="background-color: #ff00ff; color: #ffffff" @click="handleChangeBt('row7')">扮敨</button>
-      <button v-if="player.hasUnlockedPL7" class="button" style="background-color: #000000; color: #ffffff" @click="handleChangeBt('row8')">扯敩</button>
-      <button class="button" style="background-image: linear-gradient(to right,#808080,#ffffff,#808080); color: #000000" @click="handleChangeBt('row9')">统计</button>
-      <button class="button" style="background-image: linear-gradient(to right,#7f7f7f,#000000,#7f7f7f); color: #ffffff" @click="handleChangeBt('row0')">杂项</button>
+      <button v-if="player.hasUnlockedPLw2" :class="{ slbutton: isCurrentRow('rowb'), button: !isCurrentRow('rowb') }" style="background-image: url('./assets/PLw2bg.bmp'); background-size: 34%; color: #000000" @click="handleChangeBt('rowb')">扸敲</button>
+      <button v-if="player.hasUnlockedPLw" :class="{ slbutton: isCurrentRow('rowa'), button: !isCurrentRow('rowa') }" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="handleChangeBt('rowa')">扰敪</button>  
+      <button :class="{ slbutton: isCurrentRow('row1'), button: !isCurrentRow('row1') }" style="background-color: #ffffff; color: #000000" @click="handleChangeBt('row1')">风灵</button>
+      <button v-if="player.hasUnlockedPL1" :class="{ slbutton: isCurrentRow('row2'), button: !isCurrentRow('row2') }" style="background-color: #ff0000; color: #ffffff" @click="handleChangeBt('row2')">扩散</button>
+      <button v-if="player.hasUnlockedPL2" :class="{ slbutton: isCurrentRow('row3'), button: !isCurrentRow('row3') }" style="background-color: #ffff00; color: #000000" @click="handleChangeBt('row3')">扪敤</button>
+      <button v-if="player.hasUnlockedPL3" :class="{ slbutton: isCurrentRow('row4'), button: !isCurrentRow('row4') }" style="background-color: #00ff00; color: #000000" @click="handleChangeBt('row4')">扫敥</button>
+      <button v-if="player.hasUnlockedPL4" :class="{ slbutton: isCurrentRow('row5'), button: !isCurrentRow('row5') }" style="background-color: #00ffff; color: #000000" @click="handleChangeBt('row5')">扬敦</button>
+      <button v-if="player.hasUnlockedPL5" :class="{ slbutton: isCurrentRow('row6'), button: !isCurrentRow('row6') }" style="background-color: #0000ff; color: #ffffff" @click="handleChangeBt('row6')">扭敧</button>
+      <button v-if="player.hasUnlockedPL6" :class="{ slbutton: isCurrentRow('row7'), button: !isCurrentRow('row7') }" style="background-color: #ff00ff; color: #ffffff" @click="handleChangeBt('row7')">扮敨</button>
+      <button v-if="player.hasUnlockedPL7" :class="{ slbutton: isCurrentRow('row8'), button: !isCurrentRow('row8') }" style="background-color: #000000; color: #ffffff" @click="handleChangeBt('row8')">扯敩</button>
+      <button :class="{ slbutton: isCurrentRow('row9'), button: !isCurrentRow('row9') }" style="background-image: linear-gradient(to right,#808080,#ffffff,#808080); color: #000000" @click="handleChangeBt('row9')">统计</button>
+      <button :class="{ slbutton: isCurrentRow('row0'), button: !isCurrentRow('row0') }" style="background-image: linear-gradient(to right,#7f7f7f,#000000,#7f7f7f); color: #ffffff" @click="handleChangeBt('row0')">杂项</button>  
     </div>
     
     <div class="btnrow" id="rowb" v-show="currentRow === 'rowb'">
@@ -140,7 +140,7 @@
       <button class="button" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="changePg('pa_2')">特权/惩罚/进化</button>
     </div>
     
-    <div class="btnrow" id="row1">
+    <div class="btnrow" id="row1" v-show="currentRow === 'row1'">
       <button :class="{ slbutton: isCurrentPage('p1_1'), button: !isCurrentPage('p1_1') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_1')">风灵</button>
       <button :class="{ slbutton: isCurrentPage('p1_2'), button: !isCurrentPage('p1_2') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_2')">元素生命</button>
       <button :class="{ slbutton: isCurrentPage('p1_3'), button: !isCurrentPage('p1_3') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_3')">升级</button>
@@ -232,6 +232,7 @@
     </div>
     
     <PageContent :currentPage="v.currentPage" :player="player" :v="v" />
+    <NotificationToast />
   </div>
 </template>
 
@@ -239,6 +240,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useGameState } from './composables/useGameState'
 import PageContent from './components/PageContent.vue'
+import NotificationToast from './components/NotificationToast.vue'
 
 const {
   player,
@@ -280,6 +282,10 @@ const rowToFirstPage = {
 function handleChangeBt(row) {
   currentRow.value = row
   v.currentPage = rowToFirstPage[row] || 'p1_1'
+}
+
+function isCurrentRow(row) {
+  return currentRow.value === row
 }
 
 function isCurrentPage(pageName) {
