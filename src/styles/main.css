@@ -1,0 +1,1186 @@
+@font-face {
+    font-family: MonospaceTypewriter;
+    src: url('../assets/MonospaceTypewriter.ttf') format("truetype");
+}
+
+body {
+    background-color: #000000;
+    min-width: 1024px;
+    font-family: MonospaceTypewriter, monospace;
+}
+
+button {
+    text-align: center;
+    font-family: MonospaceTypewriter, monospace;
+}
+
+div {
+    background-color: rgba(0,0,0,0.25);
+    font-family: MonospaceTypewriter, monospace;
+}
+
+table {
+    border-spacing: 0;
+}
+
+[dxfl] {
+    background-image: url('../assets/dxfl.png');
+}
+
+@keyframes a-game-header__antimatter--glow {
+    0% { color: #21f396; }
+    25% { color: #3ab767; }
+    50% { color: #00d4bc; }
+    75% { color: #39c5bb; }
+    100% { color: #21f396; }
+}
+
+@keyframes bigcrunch {
+    0%, 100% { transform: scale(1); filter: blur(0); }
+    50% { transform: scale(0); filter: blur(5px); }
+}
+
+.nihility {
+    animation: nihility_text 2s cubic-bezier(0.37, 0.3, 0.63, 0.6) infinite
+}
+
+@keyframes nihility_text {
+    0%, 100% { text-shadow: 0px -4px 4px #ff0000, 0px 4px 4px #00ffff; color: white; }
+    17% { text-shadow: 4px -2px 4px #ffff00, -4px 2px 4px #00ffff; color: #cccccc; }
+    33% { text-shadow: 4px 2px 4px #00ff00, -4px -2px 4px #ff00ff; color: #999999; }
+    50% { text-shadow: 0px 4px 4px #00ffff, 0px -4px 4px #ff0000; color: #666666; }
+    67% { text-shadow: -4px 2px 4px #0000ff, 4px -2px 4px #ffff00; color: #333333; }
+    83% { text-shadow: -4px -2px 4px #ff00ff, 4px 2px 4px #00ff00; color: black; }
+}
+
+.erudition {
+    text-align: center;
+    color: #000;
+    max-width: 700px;
+    background: -webkit-linear-gradient(top, #003300 0%, #006600 30%, #009900 60%, #00cc00 100% ) repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: masked-animation 60s infinite linear;
+}
+
+@keyframes masked-animation {
+    0% { background-position: 0 0; }
+    100% { background-position: -8000px -3000px; }
+}
+
+.redacted { background: black; color: black; }
+
+.rygcbm {
+    background: linear-gradient(to right, #ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+
+.ftsz1 { margin: 4px 2px; font-size: 12px; color: #ffffff; }
+.ftsz2 { margin: 4px 2px; font-size: 16px; color: #ffffff; }
+.ftsz3 { margin: 4px 2px; font-size: 24px; color: #ffffff; }
+.ftsz4 { margin: 4px 2px; font-size: 32px; color: #ffffff; }
+.ftsz5 { margin: 4px 2px; font-size: 48px; color: #ffffff; }
+.ftsz6 { margin: 4px 2px; font-size: 64px; color: #ffffff; }
+
+.textct { margin: auto; font-size: 16px; color: #ffffff; width: 64% }
+
+.button {
+    width: 77px;
+    padding: 1.5px 0px;
+    margin: 4.5px 4.5px;
+    border: 2px solid #333333;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.slbutton {
+    width: 77px;
+    padding: 1.5px 0px;
+    margin: 4.5px 4.5px;
+    border: 2px solid #00ff80;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    display: inline-block;
+}
+
+.ltbutton {
+    background-color: #cccccc;
+    color: #000000;
+    width: 96px;
+    height: 24px;
+    padding: 0px;
+    margin: auto;
+    border: hidden;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.xxButton {
+    background-color: #cccccc;
+    color: #000000;
+    width: 160px;
+    height: 80px;
+    padding: 4px;
+    margin: 8px 0px;
+    border: hidden;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.csButton {
+    background-color: #00ff80;
+    color: #000000;
+    width: 120px;
+    height: 40px;
+    padding: 4px;
+    margin: 4px;
+    border: hidden;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btnrow { height: auto; width: 100%; text-align: center; }
+
+.wsc {
+    border: none;
+    color: #000000;
+    height: 48px;
+    width: 1008px;
+    padding: 8px 8px;
+    margin: 0px auto;
+}
+
+.wscdat { position: relative; left: 0px; top: 4px; }
+
+.wscbt1 {
+    background-color: #00000000;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-size: 16px;
+    height: 48px;
+    width: 192px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt1bl {
+    background-color: #00ff80;
+    color: #000000;
+    border: 2px solid #000000;
+    font-size: 16px;
+    height: 48px;
+    width: 192px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt2 {
+    background-color: #00000000;
+    color: #000000;
+    border: 2px solid #00ff80;
+    font-size: 16px;
+    height: 48px;
+    width: 96px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.wscbt2bl {
+    background-color: #00ff80;
+    color: #000000;
+    border: 2px solid #000000;
+    font-size: 16px;
+    height: 48px;
+    width: 96px;
+    text-decoration: none;
+    cursor: pointer;
+    float: right;
+}
+
+.upg {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+}
+
+.PL1button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 64px;
+    left: 16px;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height:20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL1upgno {
+    width: 190px;
+    height: 142px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL1upgyes {
+    width: 190px;
+    height: 142px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+}
+
+.PL1bab {
+    width: 190px;
+    height: 190px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL2button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    background-color: #ffff00;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL2mlstno {
+    border: 2px solid #ffff00;
+    background-color: #000000;
+    color: #ffffff;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.PL2mlstyes {
+    border: 2px solid #ffff00;
+    background-color: #00ff80;
+    color: #000000;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.PL2upgno {
+    width: 254px;
+    height: 160px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL2upgyes {
+    width: 254px;
+    height: 160px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    margin: 0px auto;
+}
+
+.PL2elmt {
+    width: 1008px;
+    height: 100px;
+    background-color: #000000;
+    border: 4px solid #ffff00;
+    padding: 8px 8px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 150%;
+}
+
+.pyro {
+    background: linear-gradient(45deg, #ff0000, #ff8000, #ff0000, #ff8000, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hydro {
+    background: linear-gradient(45deg, #0000ff, #0080ff, #0000ff, #0080ff, #0000ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.electro {
+    background: linear-gradient(45deg, #ff00ff, #8000ff, #ff00ff, #8000ff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.cryo {
+    background: linear-gradient(45deg, #80ffff, #ffffff, #80ffff, #ffffff, #80ffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.quanto {
+    background: linear-gradient(45deg, #9966ff, #000099, #9966ff, #000099, #9966ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.imago {
+    background: linear-gradient(45deg, #cc9966, #ffff33, #cc9966, #ffff33, #cc9966);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.staro {
+    background: linear-gradient(45deg, #cc9999, #cc0066, #cc9999, #cc0066, #cc9999);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.etho {
+    background: linear-gradient(45deg, #0000ff, #ff0000, #0000ff, #ff0000, #0000ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.stdno {
+    width: 180px;
+    height: 135px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.stdyes {
+    width: 180px;
+    height: 135px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alcno {
+    width: 152px;
+    height: 152px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alcyes {
+    width: 152px;
+    height: 152px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fytx {
+    width: 1008px;
+    height: 144px;
+    background-color: #000000;
+    border: 4px solid #ffff00;
+    padding: 8px 8px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.PL2bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ffff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL3button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 160px;
+    left: 16px;
+    background-color: #00ff00;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resno {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resyes {
+    width: 184px;
+    height: 184px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resin {
+    width: 184px;
+    height: 184px;
+    background-color: #008080;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.probarcon {
+    width: 1020px;
+    height: 20px;
+    margin:auto;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    color: #00ff80;
+    z-index: 0;
+    background-color: #000000;
+}
+
+.probar {
+    width: 1%;
+    height: 20px;
+    text-align:center;
+    z-index: 1;
+    background-color: #008040;
+}
+
+.PL3upgno {
+    width: 184px;
+    height: 152px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL3upgyes {
+    width: 184px;
+    height: 152px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    margin: 0px auto;
+}
+
+.tthupg {
+    width: 312px;
+    height: 88px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tthupg2 {
+    width: 240px;
+    height: 100px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tthupg2y {
+    width: 240px;
+    height: 100px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL3bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff00;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL4button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 160px;
+    right: 16px;
+    background-color: #00ffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL4goalno {
+    border: 2px solid #00ffff;
+    background-color: #000000;
+    color: #ffffff;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.PL4goalyes {
+    border: 2px solid #00ffff;
+    background-color: #00ff80;
+    color: #000000;
+    height: 48px;
+    width: 1008px;
+    padding: 6px 6px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.fraupg {
+    border: 4px solid #00ffff;
+    background-color: #000000;
+    color: #ffffff;
+    height: 128px;
+    width: 500px;
+    padding: 8px 8px;
+    margin: 0px auto;
+    font-size: 16px;
+    text-align: center;
+}
+
+.boggle {
+    width: 190px;
+    height: 140px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.boggleyes {
+    width: 190px;
+    height: 140px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.batowc {
+    width: 500px;
+    height: 200px;
+    line-height: 200%;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+}
+
+.batu {
+    width: 124px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.batu2 {
+    width: 252px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.batu3 {
+    width: 508px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.synu {
+    border: 4px solid #00ffff;
+    background-color: #000000;
+    color: #ffffff;
+    height: 160px;
+    width: 160px;
+    padding: 8px 8px;
+    margin: 0px auto;
+    font-size: 16px;
+    text-align: center;
+}
+
+.synuyes {
+    border: 4px solid #00ffff;
+    background-color: #00ff80;
+    color: #000000;
+    height: 160px;
+    width: 160px;
+    padding: 8px 8px;
+    margin: 0px auto;
+    font-size: 16px;
+    text-align: center;
+}
+
+.PL4upgno {
+    width: 248px;
+    height: 124px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL4upgyes {
+    width: 248px;
+    height: 124px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    margin: 0px auto;
+}
+
+.PL4bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL5button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 256px;
+    left: 16px;
+    background-color: #0000ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.selector {
+    width: 180px;
+    height: 40px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #0000ff;
+    margin: auto;
+    display: inline-block;
+}
+
+.slctyes {
+    width: 40px;
+    height: 40px;
+    background-color: #00ff80;
+    margin: 0;
+    color: #000000;
+    cursor: pointer;
+}
+
+.slctno {
+    width: 40px;
+    height: 40px;
+    background-color: #000080;
+    margin: 0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.PL5upgem {
+    width: 166px;
+    height: 166px;
+    background-image: radial-gradient(#000080,#000000);
+    color: #ffffff;
+    border: 4px solid #000000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL5upgno {
+    width: 166px;
+    height: 166px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0px auto;
+}
+
+.PL5upgyes {
+    width: 166px;
+    height: 166px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: default;
+    margin: 0px auto;
+}
+
+.xbmch {
+    width: 396px;
+    height: 200px;
+    font-size: 24px;
+    line-height: 40px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.xbupg {
+    width: 200px;
+    height: 150px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.phsupg {
+    width: 240px;
+    height: 100px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.phsupgy {
+    width: 240px;
+    height: 100px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.phsupg2 {
+    width: 240px;
+    height: 200px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+@keyframes solarwind {
+    0% { box-shadow: 1.25rem 1.25rem 1rem #ff800080, 1.25rem -1.25rem 1rem #ffff8080, -1.25rem -1.25rem 1rem #ff800080, -1.25rem 1.25rem 1rem #ffff8080; }
+    50% { box-shadow: 1.25rem 1.25rem 1rem #ffff8080, 1.25rem -1.25rem 1rem #ff800080, -1.25rem -1.25rem 1rem #ffff8080, -1.25rem 1.25rem 1rem #ff800080; }
+    100% { box-shadow: 1.25rem 1.25rem 1rem #ff800080, 1.25rem -1.25rem 1rem #ffff8080, -1.25rem -1.25rem 1rem #ff800080, -1.25rem 1.25rem 1rem #ffff8080; }
+}
+
+.solarwsc {
+    border: none;
+    animation: solarwind 4s infinite;
+    backdrop-filter: blur(5px);
+    color: #ffffff;
+    height: 48px;
+    width: 1008px;
+    padding: 8px 8px;
+    margin: 0px auto;
+}
+
+.stormbtn{
+    width: 640px;
+    height: 160px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    border: 4px solid #0000ff;
+    padding: 8px 8px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 150%;
+    cursor: pointer;
+}
+
+.PL5bab {
+    width: 184px;
+    height: 184px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #0000ff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL6button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 256px;
+    right: 16px;
+    background-color: #ff00ff;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL7button {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 352px;
+    left: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PLwbutton {
+    width: 16%;
+    min-width: 160px;
+    height: 80px;
+    position: absolute;
+    top: 352px;
+    right: 16px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.normchalno {
+    width: 254px;
+    height: 126px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.normchalin {
+    width: 254px;
+    height: 126px;
+    background-color: #008080;
+    color: #ffffff;
+    border: 4px solid #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.normchalyes {
+    width: 254px;
+    height: 126px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chalno {
+    width: 254px;
+    height: 190px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chalin {
+    width: 254px;
+    height: 190px;
+    background-color: #008080;
+    color: #ffffff;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.chalyes {
+    width: 254px;
+    height: 190px;
+    background-color: #00ff80;
+    color: #000000;
+    border: 4px solid #ff0000;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.achno {
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(#ff0080,#000000);
+    color: #ffffff;
+    border: 1px solid #00ff80;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.achyes {
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(#00ff80,#000000);
+    color: #ffffff;
+    border: 1px solid #00ff80;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.singul {
+    width: 136px;
+    height: 136px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 4px solid #00ff80;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.tooltip-text {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200%;
+    padding: 4px;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: #000000;
+    border: 1px solid #00ff80;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    z-index: 1;
+}
+
+.achyes:hover .tooltip-text,
+.achno:hover .tooltip-text {
+    display: block;
+}
+
+#offline {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+#offlcont {
+    background-color: #000000;
+    color: #ffffff;
+    margin: 20% auto;
+    padding: 20px;
+    border: 2px solid #00ff80;
+    width: 30%;
+    height: 20%;
+}
+
+#offlbtn {
+    background-color: #00ff80;
+    color: #000000;
+    width: 96px;
+    height: 24px;
+    padding: 2px;
+    margin: 5% auto;
+    border: hidden;
+    font-family: MonospaceTypewriter, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.news {
+    color: #000000;
+    width: 90%;
+    left: 5%;
+    top: 4px;
+    bottom: 4px;
+    height: 20px;
+    position: relative;
+    border: 2px solid #cccccc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.newsContent {
+    height: 20px;
+    position: absolute;
+}
