@@ -11,7 +11,6 @@
       <br />
       支持所有序数增量吧吧友，你可以点击链接来游玩吧友们自制的增量游戏：<br />
       <a href="https://seanxlx2011.github.io/" target="_blank" style="color: #00ff80">数据增量重制版</a>、
-      <!--a href="https://0i00000000a7.github.io/points-incremental-rewritten/" target="_blank" style="color: #00ff80">点数增量重制版(已变成棍母)</a-->
       <a href="https://aster131072.github.io/incremental_evolution/" target="_blank" style="color: #00ff80">增量进化</a>、
       <a href="https://veryrrdefine.github.io/MdVI-rewritten/" target="_blank" style="color: #00ff80">多维体积增量</a>、
       <a href="https://veryrrdefine.github.io/mdvi4/" target="_blank" style="color: #00ff80">多维体积增量v4.0</a>、

@@ -1,6 +1,8 @@
 <template>
   <div id="savebank" style="color: #ffffff; padding: 20px;">
     <h1>风灵作成存档银行</h1>
+    <button class="btn" @click="goBack">返回</button>
+    <br />
     <br />
     <div id="saves">
       <template v-for="(category, catIndex) in categories" :key="catIndex">
@@ -26,8 +28,6 @@
         </div>
       </template>
     </div>
-    <br />
-    <button class="btn" @click="goBack">返回</button>
   </div>
 </template>
 
@@ -200,7 +200,7 @@ const categories = [
   },
   {
     name: '扸敲阶段',
-    styles: 'background-color: #888888; color: #000000; font-size: 24px',
+    styles: 'background-image: url(/PLw2bg.bmp); background-size: cover; color: #000000; font-size: 24px',
     saves: [
       {
         name: '',

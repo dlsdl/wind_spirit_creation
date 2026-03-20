@@ -64,7 +64,7 @@
             </td>
             <td>
               <button :class="player.std[5] ? 'stdyes' : 'stdno'" @click="buystd(5)">
-                25式风单元以降低的效果乘以16~24式风灵<br />当前：x{{ notation(player.tier01.mul(v.DBpower).pwb(2).root(256).max(1)) }}<br />需要：9烧瓶
+                25式风单元以降低的效果乘以17~24式风灵<br />当前：x{{ notation(player.tier01.mul(v.DBpower).pwb(2).root(256).max(1)) }}<br />需要：9烧瓶
               </button>
             </td>
           </tr>
@@ -110,12 +110,12 @@
           <tr>
             <td>
               <button :class="player.std[11] ? 'stdyes' : 'stdno'" @click="buystd(11)">
-                基于扩散时间提高1~8式风灵乘数 当前：x{{ notation(player.PL1sec.pow(0.25).pwb("1e2560").min("e2.56e13")) }}<br />需要：20烧瓶
+                基于扩散时间提高1~8式风灵乘数 当前：x{{ notation(player.PL1sec.pow(0.25).pwb("1.189e4932").min("e1.6e13")) }}<br />需要：20烧瓶
               </button>
             </td>
             <td>
               <button :class="player.std[12] ? 'stdyes' : 'stdno'" @click="buystd(12)">
-                基于扪敤时间提高9~16式风灵乘数 当前：x{{ notation(player.PL2sec.pow(0.25).pwb("1e160").min("e1.6e12")) }}<br />需要：25烧瓶
+                基于扪敤时间提高9~16式风灵乘数 当前：x{{ notation(player.PL2sec.pow(0.25).pwb("1.797e308").min("e1e12")) }}<br />需要：25烧瓶
               </button>
             </td>
             <td>
@@ -171,125 +171,125 @@
       <table align="center">
         <tbody>
           <tr>
-          <td>
-            <button :class="player.std[20] ? 'stdyes' : 'stdno'" @click="buystd(20)">
-              基于炼金生命1增加1~8式风灵的指数<br />当前：+{{ notation(player.alch01.div(1e6).min(0.01)) }}<br />需要：3600烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[21] ? 'stdyes' : 'stdno'" @click="buystd(21)">
-              基于炼金生命1增加25式风单元效果<br />当前：x{{ notation(player.alch01.div(16000).add(1).min(1.587401)) }}<br />需要：4800烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[22] ? 'stdyes' : 'stdno'" @click="buystd(22)">
-              基于炼金生命2增加1~8式风灵的指数<br />当前：+{{ notation(player.alch02.div(1e6).min(0.01)) }}<br />需要：6000烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[23] ? 'stdyes' : 'stdno'" @click="buystd(23)">
-              基于炼金生命2增加12式风模块效果<br />当前：x{{ notation(player.alch02.div(36000).add(1).min(1.259921)) }}<br />需要：7200烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[24] ? 'stdyes' : 'stdno'" @click="buystd(24)">
-              基于炼金生命3增加9~16式风灵的指数<br />当前：+{{ notation(player.alch03.div(1e6).min(0.01)) }}<br />需要：4800烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[25] ? 'stdyes' : 'stdno'" @click="buystd(25)">
-              基于炼金生命3增加25式风单元效果<br />当前：x{{ notation(player.alch03.div(16000).add(1).min(1.587401)) }}<br />需要：6400烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[26] ? 'stdyes' : 'stdno'" @click="buystd(26)">
-              基于炼金生命4增加9~16式风灵的指数<br />当前：+{{ notation(player.alch04.div(1e6).min(0.01)) }}<br />需要：8000烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[27] ? 'stdyes' : 'stdno'" @click="buystd(27)">
-              基于炼金生命4增加12式风模块效果<br />当前：x{{ notation(player.alch04.div(36000).add(1).min(1.259921)) }}<br />需要：9600烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[28] ? 'stdyes' : 'stdno'" @click="buystd(28)">
-              基于炼金生命5增加17~24式风灵的指数<br />当前：+{{ notation(player.alch05.div(1e6).min(0.01)) }}<br />需要：6000烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[29] ? 'stdyes' : 'stdno'" @click="buystd(29)">
-              基于炼金生命5增加25式风单元效果<br />当前：x{{ notation(player.alch05.div(16000).add(1).min(1.587401)) }}<br />需要：8000烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[30] ? 'stdyes' : 'stdno'" @click="buystd(30)">
-              基于炼金生命6增加17~24式风灵的指数<br />当前：+{{ notation(player.alch06.div(1e6).min(0.01)) }}<br />需要：10000烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[31] ? 'stdyes' : 'stdno'" @click="buystd(31)">
-              基于炼金生命6增加12式风模块效果<br />当前：x{{ notation(player.alch06.div(36000).add(1).min(1.259921)) }}<br />需要：12000烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[32] ? 'stdyes' : 'stdno'" @click="buystd(32)">
-              火元素能量提升1~8式风灵的乘数<br />当前：x{{ notation(player.elmten01.pow(256)) }}<br />需要：7200烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[33] ? 'stdyes' : 'stdno'" @click="buystd(33)">
-              水元素能量提升9~16式风灵的乘数<br />当前：x{{ notation(player.elmten02.pow(16)) }}<br />需要：10800烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[34] ? 'stdyes' : 'stdno'" @click="buystd(34)">
-              雷元素能量提升17~24式风灵的乘数<br />当前：x{{ notation(player.elmten03.pow(1)) }}<br />需要：12600烧瓶
-            </button>
-          </td>
-          <td>
-            <button :class="player.std[35] ? 'stdyes' : 'stdno'" @click="buystd(35)">
-              冰元素能量提升风之微粒获取的乘数<br />当前：x{{ notation(player.elmten04.log(2).pow(2)) }}<br />需要：14400烧瓶
-            </button>
-          </td>
-        </tr>
+            <td>
+              <button :class="player.std[20] ? 'stdyes' : 'stdno'" @click="buystd(20)">
+                基于炼金生命1增加1~8式风灵的指数<br />当前：+{{ notation(player.alch01.div(1e6).min(0.01)) }}<br />需要：3600烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[21] ? 'stdyes' : 'stdno'" @click="buystd(21)">
+                基于炼金生命1增加25式风单元效果<br />当前：+{{ notation(player.alch01.div(100).min(100)) }}%<br />需要：4800烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[22] ? 'stdyes' : 'stdno'" @click="buystd(22)">
+                基于炼金生命2增加1~8式风灵的指数<br />当前：+{{ notation(player.alch02.div(1e6).min(0.01)) }}<br />需要：6000烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[23] ? 'stdyes' : 'stdno'" @click="buystd(23)">
+                基于炼金生命2增加12式风模块效果<br />当前：+{{ notation(player.alch02.div(200).min(50)) }}%<br />需要：7200烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[24] ? 'stdyes' : 'stdno'" @click="buystd(24)">
+                基于炼金生命3增加9~16式风灵的指数<br />当前：+{{ notation(player.alch03.div(1e6).min(0.01)) }}<br />需要：4800烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[25] ? 'stdyes' : 'stdno'" @click="buystd(25)">
+                基于炼金生命3增加25式风单元效果<br />当前：+{{ notation(player.alch03.div(100).min(100)) }}%<br />需要：6400烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[26] ? 'stdyes' : 'stdno'" @click="buystd(26)">
+                基于炼金生命4增加9~16式风灵的指数<br />当前：+{{ notation(player.alch04.div(1e6).min(0.01)) }}<br />需要：8000烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[27] ? 'stdyes' : 'stdno'" @click="buystd(27)">
+                基于炼金生命4增加12式风模块效果<br />当前：+{{ notation(player.alch04.div(200).min(50)) }}%<br />需要：9600烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[28] ? 'stdyes' : 'stdno'" @click="buystd(28)">
+                基于炼金生命5增加17~24式风灵的指数<br />当前：+{{ notation(player.alch05.div(1e6).min(0.01)) }}<br />需要：6000烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[29] ? 'stdyes' : 'stdno'" @click="buystd(29)">
+                基于炼金生命5增加25式风单元效果<br />当前：+{{ notation(player.alch05.div(100).min(100)) }}%<br />需要：8000烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[30] ? 'stdyes' : 'stdno'" @click="buystd(30)">
+                基于炼金生命6增加17~24式风灵的指数<br />当前：+{{ notation(player.alch06.div(1e6).min(0.01)) }}<br />需要：10000烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[31] ? 'stdyes' : 'stdno'" @click="buystd(31)">
+                基于炼金生命6增加12式风模块效果<br />当前：+{{ notation(player.alch06.div(200).min(50)) }}%<br />需要：12000烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[32] ? 'stdyes' : 'stdno'" @click="buystd(32)">
+                火元素能量提升1~8式风灵的乘数<br />当前：x{{ notation(player.elmten01.pow(4096)) }}<br />需要：7200烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[33] ? 'stdyes' : 'stdno'" @click="buystd(33)">
+                水元素能量提升9~16式风灵的乘数<br />当前：x{{ notation(player.elmten02.pow(256)) }}<br />需要：10800烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[34] ? 'stdyes' : 'stdno'" @click="buystd(34)">
+                雷元素能量提升17~24式风灵的乘数<br />当前：x{{ notation(player.elmten03.pow(16)) }}<br />需要：12600烧瓶
+              </button>
+            </td>
+            <td>
+              <button :class="player.std[35] ? 'stdyes' : 'stdno'" @click="buystd(35)">
+                冰元素能量提升风之微粒获取的乘数<br />当前：x{{ notation(player.elmten04.max(2).log(2).pow(4)) }}<br />需要：14400烧瓶
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
       <table align="center">
         <tbody>
-        <tr>
-          <td>
-            <button :class="player.std[36] ? 'stdyes' : 'stdno'" id="std37" @click="buystd(36)">
-              在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响）<br />需要：250000烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[37] ? 'stdyes' : 'stdno'" id="std38" @click="buystd(37)">
-              在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^2<br />需要：500000烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[38] ? 'stdyes' : 'stdno'" id="std39" @click="buystd(38)">
-              在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^3<br />需要：750000烧瓶
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button :class="player.std[39] ? 'stdyes' : 'stdno'" id="std40" @click="buystd(39)">
-              在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^4<br />需要：1e6烧瓶
-            </button>
-          </td>
-        </tr>
+          <tr>
+            <td>
+              <button :class="player.std[36] ? 'stdyes' : 'stdno'" id="std37" @click="buystd(36)">
+                在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响）<br />需要：250000烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[37] ? 'stdyes' : 'stdno'" id="std38" @click="buystd(37)">
+                在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^2<br />需要：500000烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[38] ? 'stdyes' : 'stdno'" id="std39" @click="buystd(38)">
+                在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^3<br />需要：750000烧瓶
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button :class="player.std[39] ? 'stdyes' : 'stdno'" id="std40" @click="buystd(39)">
+                在风压坍陷中，1-16式风灵乘数乘以总计烧瓶数量（不受log2乘数影响），总计乘以^4<br />需要：1e6烧瓶
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

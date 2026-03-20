@@ -184,7 +184,7 @@
       <PageP0_2 :player="player" :v="v" />
     </div>
     <div v-if="currentPage === 'p0_3'">
-      <PageP0_3 :player="player" :v="v" />
+      <PageP0_3 :player="player" :v="v" @switchPage="$emit('switchPage', $event)" />
     </div>
     <div v-if="currentPage === 'p0_4'">
       <PageP0_4 :player="player" :v="v" />

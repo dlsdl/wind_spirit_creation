@@ -4,14 +4,14 @@
       <div align="center" class="ftsz2">你有{{notatint(player.bogglebox)}}惊奇!风盒，开启它们可以随机获得柏拉图!立体，可以将柏拉图!立体锻造为物品<br />当拥有的柏拉图!立体数量大于0时，将会产生立体波，否则立体波会衰减<br />每2倍作成指数的效果为使风灵指数乘以1+max(0,log2(作成次数)-0.5)×每2倍作成指数</div>
       <table align="center">
         <tbody>
-        <tr>
-          <td><button class="boggle" @click="getbox1">从扬敦点中获取惊奇!风盒<br />花费：{{notation(v.boxc1)}}扬敦点<br />总计获取{{notatint(player.boxa1)}}</button></td>
-          <td><button class="boggle" @click="getbox2">从扬敦碎片中获取惊奇!风盒<br />花费：{{notation(v.boxc2)}}扬敦碎片<br />总计获取{{notatint(player.boxa2)}}</button></td>
-          <td><button class="boggle" @click="openbox1">开启1个惊奇!风盒</button></td>
-          <td><button class="boggle" @click="openbox2">开启80%惊奇!风盒</button></td>
-          <td><button class="boggle" @click="resbox">返还惊奇!风盒，但进行扬敦重置</button></td>
-        </tr>
-      </tbody>
+          <tr>
+            <td><button class="boggle" @click="getbox1">从扬敦点中获取惊奇!风盒<br />花费：{{notation(v.boxc1)}}扬敦点<br />总计获取{{notatint(player.boxa1)}}</button></td>
+            <td><button class="boggle" @click="getbox2">从扬敦碎片中获取惊奇!风盒<br />花费：{{notation(v.boxc2)}}扬敦碎片<br />总计获取{{notatint(player.boxa2)}}</button></td>
+            <td><button class="boggle" @click="openbox1">开启1个惊奇!风盒</button></td>
+            <td><button class="boggle" @click="openbox2">开启80%惊奇!风盒</button></td>
+            <td><button class="boggle" @click="resbox">返还惊奇!风盒，但进行扬敦重置</button></td>
+          </tr>
+        </tbody>
       </table>
       <div align="center" class="ftsz2">
         你有<span class="ftsz3">{{notatint(player.hdrn4)}}</span>柏拉图!四面体, 每秒产生{{notation(v.hdrn4wps)}}四面体波,

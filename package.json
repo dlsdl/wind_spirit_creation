@@ -1,6 +1,6 @@
 {
   "name": "wind-spirit-creation-vue3",
-  "version": "1.0.0",
+  "version": "6.1.0",
   "description": "风灵作成 - Vue 3版本",
   "type": "module",
   "scripts": {
@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.0",
-    "break_eternity.js": "^2.0.0"
+    "break_eternity.js": "^2.0.0",
+    "vue": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.0.0"
+    "typescript": "^5.9.3",
+    "vite": "^5.0.0",
+    "vue-tsc": "^3.2.5"
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div id="changelog" style="color: #ffffff; padding: 20px;">
     <h1>更新日志</h1>
+    <button class="btn" @click="goBack">返回</button>
     <br />
     <p>
       v6.0.0 2026-3-1 使用Vue 3重写整个游戏，添加了扮敨重置<br />
@@ -51,8 +52,6 @@
       v0.2.0 2023-7-23 添加风单元以及风模块、2个风灵升级<br />
       v0.1.0 2023-7-18 添加1~8式风灵、风灵基础值、存档管理、滚动新闻<br />
     </p>
-    <br />
-    <button class="btn" @click="goBack">返回</button>
   </div>
 </template>
 

@@ -44,137 +44,24 @@ function createPlayer() {
         //风灵
         energy: new Decimal(2),
         energyttl: new Decimal(2),
-
-        wscb01: new Decimal(0),
-        wscb02: new Decimal(0),
-        wscb03: new Decimal(0),
-        wscb04: new Decimal(0),
-        wscb05: new Decimal(0),
-        wscb06: new Decimal(0),
-        wscb07: new Decimal(0),
-        wscb08: new Decimal(0),
-        wscb09: new Decimal(0),
-        wscb10: new Decimal(0),
-        wscb11: new Decimal(0),
-        wscb12: new Decimal(0),
-        wscb13: new Decimal(0),
-        wscb14: new Decimal(0),
-        wscb15: new Decimal(0),
-        wscb16: new Decimal(0),
-        wscb17: new Decimal(0),
-        wscb18: new Decimal(0),
-        wscb19: new Decimal(0),
-        wscb20: new Decimal(0),
-        wscb21: new Decimal(0),
-        wscb22: new Decimal(0),
-        wscb23: new Decimal(0),
-        wscb24: new Decimal(0),
-        wscb25: new Decimal(0),
-        wscb26: new Decimal(0),
-        wscb27: new Decimal(0),
-        wscb28: new Decimal(0),
-        wscb29: new Decimal(0),
-        wscb30: new Decimal(0),
-        wscb31: new Decimal(0),
-        wscb32: new Decimal(0),
-        wscb33: new Decimal(0),
-        wscb34: new Decimal(0),
-        wscb35: new Decimal(0),
-        wscb36: new Decimal(0),
-        wscb37: new Decimal(0),
-        wscb38: new Decimal(0),
-        wscb39: new Decimal(0),
-        wscb40: new Decimal(0),
-        wscb41: new Decimal(0),
-        wscb42: new Decimal(0),
-        wscb43: new Decimal(0),
-        wscb44: new Decimal(0),
-        wscb45: new Decimal(0),
-        wscb46: new Decimal(0),
-        wscb47: new Decimal(0),
-        wscb48: new Decimal(0),
-        wscb49: new Decimal(0),
-        wscb50: new Decimal(0),
-        wscb51: new Decimal(0),
-        wscb52: new Decimal(0),
-        wscb53: new Decimal(0),
-        wscb54: new Decimal(0),
-        wscb55: new Decimal(0),
-        wscb56: new Decimal(0),
-        wscb57: new Decimal(0),
-        wscb58: new Decimal(0),
-        wscb59: new Decimal(0),
-        wscb60: new Decimal(0),
-        wscb61: new Decimal(0),
-        wscb62: new Decimal(0),
-        wscb63: new Decimal(0),
-        wscb64: new Decimal(0),
-
-        wsca01: new Decimal(0),
-        wsca02: new Decimal(0),
-        wsca03: new Decimal(0),
-        wsca04: new Decimal(0),
-        wsca05: new Decimal(0),
-        wsca06: new Decimal(0),
-        wsca07: new Decimal(0),
-        wsca08: new Decimal(0),
-        wsca09: new Decimal(0),
-        wsca10: new Decimal(0),
-        wsca11: new Decimal(0),
-        wsca12: new Decimal(0),
-        wsca13: new Decimal(0),
-        wsca14: new Decimal(0),
-        wsca15: new Decimal(0),
-        wsca16: new Decimal(0),
-        wsca17: new Decimal(0),
-        wsca18: new Decimal(0),
-        wsca19: new Decimal(0),
-        wsca20: new Decimal(0),
-        wsca21: new Decimal(0),
-        wsca22: new Decimal(0),
-        wsca23: new Decimal(0),
-        wsca24: new Decimal(0),
-        wsca25: new Decimal(0),
-        wsca26: new Decimal(0),
-        wsca27: new Decimal(0),
-        wsca28: new Decimal(0),
-        wsca29: new Decimal(0),
-        wsca30: new Decimal(0),
-        wsca31: new Decimal(0),
-        wsca32: new Decimal(0),
-        wsca33: new Decimal(0),
-        wsca34: new Decimal(0),
-        wsca35: new Decimal(0),
-        wsca36: new Decimal(0),
-        wsca37: new Decimal(0),
-        wsca38: new Decimal(0),
-        wsca39: new Decimal(0),
-        wsca40: new Decimal(0),
-        wsca41: new Decimal(0),
-        wsca42: new Decimal(0),
-        wsca43: new Decimal(0),
-        wsca44: new Decimal(0),
-        wsca45: new Decimal(0),
-        wsca46: new Decimal(0),
-        wsca47: new Decimal(0),
-        wsca48: new Decimal(0),
-        wsca49: new Decimal(0),
-        wsca50: new Decimal(0),
-        wsca51: new Decimal(0),
-        wsca52: new Decimal(0),
-        wsca53: new Decimal(0),
-        wsca54: new Decimal(0),
-        wsca55: new Decimal(0),
-        wsca56: new Decimal(0),
-        wsca57: new Decimal(0),
-        wsca58: new Decimal(0),
-        wsca59: new Decimal(0),
-        wsca60: new Decimal(0),
-        wsca61: new Decimal(0),
-        wsca62: new Decimal(0),
-        wsca63: new Decimal(0),
-        wsca64: new Decimal(0),
-
+        // 使用 for 循环批量生成 wscb01-wscb64
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wscb`+tiername[i];
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
+        // 使用 for 循环批量生成 wsca01-wsca64
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wsca`+tiername[i];
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
         tier01: new Decimal(0),
         tier02: new Decimal(0),
         tier03: new Decimal(0),
@@ -183,8 +70,8 @@ function createPlayer() {
         tier06: new Decimal(0),
         tier07: new Decimal(0),
         tier08: new Decimal(0),
-        tier01conf: false,
-        tier02conf: false,
+        tier01conf: false,  //继承自FE
+        tier02conf: false,  //可以不要
         autobuytier01: false,
         autobuytier02: false,
         autobuytier03: false,
@@ -193,7 +80,6 @@ function createPlayer() {
         autobuytier06: false,
         autobuytier07: false,
         autobuytier08: false,
-
         upgd01: new Decimal(0),
         upgd02: new Decimal(0),
         upgd03: new Decimal(0),
@@ -220,7 +106,6 @@ function createPlayer() {
         PL1sec: new Decimal(0),
         PL1secrl: new Decimal(0),
         PL1conf: true,
-
         PL1upg: [false, false, false, false,
                  false, false, false, false,
                  false, false, false, false,
@@ -256,30 +141,15 @@ function createPlayer() {
         normchapow: new Decimal(1),
         normchacom: [false, false, false, false, false, false, false, false, false, false, false, false,],
         incha: 0,
-        chacom01: new Decimal(0),
-        chacom02: new Decimal(0),
-        chacom03: new Decimal(0),
-        chacom04: new Decimal(0),
-        chacom05: new Decimal(0),
-        chacom06: new Decimal(0),
-        chacom07: new Decimal(0),
-        chacom08: new Decimal(0),
-        chacom09: new Decimal(0),
-        chacom10: new Decimal(0),
-        chacom11: new Decimal(0),
-        chacom12: new Decimal(0),
-        chacom13: new Decimal(0),
-        chacom14: new Decimal(0),
-        chacom15: new Decimal(0),
-        chacom16: new Decimal(0),
-        chacom17: new Decimal(0),
-        chacom18: new Decimal(0),
-        chacom19: new Decimal(0),
-        chacom20: new Decimal(0),
-        chacom21: new Decimal(0),
-        chacom22: new Decimal(0),
-        chacom23: new Decimal(0),
-        chacom24: new Decimal(0),
+        // 使用 for 循环批量生成chacom
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 24; i++) {
+                const key = `chacom`+tiername[i];
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
 
         //扪敤
         hasUnlockedPL2: false,
@@ -290,7 +160,6 @@ function createPlayer() {
         PL2sec: new Decimal(0),
         PL2secrl: new Decimal(0),
         PL2conf: true,
-
         PL2tmsc: new Decimal(0),
         PL2upg01: new Decimal(0),
         PL2upg02: new Decimal(0),
@@ -367,44 +236,28 @@ function createPlayer() {
         PL3sec: new Decimal(0),
         PL3secrl: new Decimal(0),
         PL3conf: true,
-
         res: [false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
         ],
         inres: 0,
-        resa01: new Decimal(0),
-        resa02: new Decimal(0),
-        resa03: new Decimal(0),
-        resa04: new Decimal(0),
-        resa05: new Decimal(0),
-        resa06: new Decimal(0),
-        resa07: new Decimal(0),
-        resa08: new Decimal(0),
-        resa09: new Decimal(0),
-        resa10: new Decimal(0),
-        resa11: new Decimal(0),
-        resa12: new Decimal(0),
-        resa13: new Decimal(0),
-        resa14: new Decimal(0),
-        resa15: new Decimal(0),
-        resa16: new Decimal(0),
-        resp01: new Decimal(0),
-        resp02: new Decimal(0),
-        resp03: new Decimal(0),
-        resp04: new Decimal(0),
-        resp05: new Decimal(0),
-        resp06: new Decimal(0),
-        resp07: new Decimal(0),
-        resp08: new Decimal(0),
-        resp09: new Decimal(0),
-        resp10: new Decimal(0),
-        resp11: new Decimal(0),
-        resp12: new Decimal(0),
-        resp13: new Decimal(0),
-        resp14: new Decimal(0),
-        resp15: new Decimal(0),
-        resp16: new Decimal(0),
+        // 使用 for 循环批量生成resa和resp
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 16; i++) {
+                const key = `resa`+tiername[i];
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 16; i++) {
+                const key = `resp`+tiername[i];
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
         ptn: [false, false, false, false, false, false, false, false,],
         ptnu01: new Decimal(0),
         ptnu02: new Decimal(0),
@@ -478,7 +331,6 @@ function createPlayer() {
         PL4sec: new Decimal(0),
         PL4secrl: new Decimal(0),
         PL4conf: true,
-
         PL4goal: [false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
             false, false, false, false, false, false, false, false,
@@ -540,21 +392,15 @@ function createPlayer() {
         syna04: new Decimal(0),
         syna05: new Decimal(0),
         synfcs: 0,
-        synu01: new Decimal(0),
-        synu02: new Decimal(0),
-        synu03: new Decimal(0),
-        synu04: new Decimal(0),
-        synu05: new Decimal(0),
-        synu06: new Decimal(0),
-        synu07: new Decimal(0),
-        synu08: new Decimal(0),
-        synu09: new Decimal(0),
-        synu10: new Decimal(0),
-        synu11: new Decimal(0),
-        synu12: new Decimal(0),
-        synu13: new Decimal(0),
-        synu14: new Decimal(0),
-        synu15: new Decimal(0),
+        // 使用 for 循环批量生成synu
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 15; i++) {
+                const key = `synu0${i}`;
+                obj[key] = new Decimal(0);
+            }
+            return obj;
+        })(),
         hasunlockedanm4: false,
         incyzb: false,
         shdwsl: [false,
@@ -595,7 +441,6 @@ function createPlayer() {
         PL5sec: new Decimal(0),
         PL5secrl: new Decimal(0),
         PL5conf: true,
-
         depth: 1,
         quant: new Decimal(1),
         quau: [false, false, false, false, false, false,
@@ -643,7 +488,6 @@ function createPlayer() {
         magstolv: 0,
         magstorm: false,
         magstobest: new Decimal(0),
-
         parents: new Decimal(0),               // 纯合亲本数量
         tools: new Decimal(0),                 // 育种工具数量
         generation: new Decimal(0),            // 当前世代
@@ -652,7 +496,6 @@ function createPlayer() {
         goodGenes: new Decimal(0),             // 优良基因数量
         stability: new Decimal(0),             // 遗传稳定性
         breedingProgress: new Decimal(0),       // 育种进度
-
         hasunlockedanm5: false,
         producer: new Decimal(0),     // 生产者数量
         consumer1: new Decimal(0),    // 一级消费者数量
@@ -667,7 +510,6 @@ function createPlayer() {
         anm5u02: new Decimal(0),
         anm5u03: new Decimal(0),
         anm5u04: new Decimal(0),
-
         baseA: new Decimal(0),
         baseG: new Decimal(0),
         baseC: new Decimal(0),
@@ -694,8 +536,6 @@ function createPlayer() {
         baseC_unlocked: [false, false, false, false, false],
         baseT_unlocked: [false, false, false, false, false],
         baseU_unlocked: [false, false, false, false, false],
-        
-        
         dna: new Decimal(0),              // DNA资源
         geneSlots: [false, false, false, false, false, false, false, false, false, false,], // 基因槽位解锁状态
         activeGenes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],        // 当前激活的基因
@@ -759,11 +599,11 @@ function createPlayer() {
 //#region 非存档数值
 function createV() {
     return {
+        //通用数值
         glbspd: 1,
         preps: new Decimal(0),
         energyps: new Decimal(0),
         baseprd: new Decimal(0.25),
-
         gamespd1: new Decimal(1),
         gamespd2: new Decimal(1),
         gamespd3: new Decimal(1),
@@ -774,7 +614,6 @@ function createV() {
         softcap4: new Decimal(1),
         wscmpb: new Decimal(1.6),
         wscppb: new Decimal(1.001),
-
         scal01: new Decimal(1024),
         scal02: new Decimal(1099511627776),
         scal03: new Decimal(1.329227995784915e36),
@@ -783,7 +622,6 @@ function createV() {
         scal06: new Decimal("9.497114518078914e577"),
         scal07: new Decimal("4.115101717688653e1348"),
         scal08: new Decimal("3.524971412108382e3082"),
-
         scaltier01: new Decimal(16),
         scaltier02: new Decimal(1048576),
         scaltier03: new Decimal(1e46),
@@ -792,7 +630,6 @@ function createV() {
         scaltier06: new Decimal("e1e6"),
         scaltier07: new Decimal("e1e7"),
         scaltier08: new Decimal("e1e8"),
-
         scalupgd01: new Decimal(100),
         scalupgd02: new Decimal(1e8),
         scalupgd03: new Decimal(1e24),
@@ -803,396 +640,56 @@ function createV() {
         scalupgd08: new Decimal("1e2048"),
 
         //风灵
-        wscc01: new Decimal(2),
-        wscc02: new Decimal(4),
-        wscc03: new Decimal(16),
-        wscc04: new Decimal(256),
-        wscc05: new Decimal(65536),
-        wscc06: new Decimal(4294967296),
-        wscc07: new Decimal(1.844674407370955e19),
-        wscc08: new Decimal(3.402823669209384e38),
-        wscc09: new Decimal(2),
-        wscc10: new Decimal(4),
-        wscc11: new Decimal(16),
-        wscc12: new Decimal(256),
-        wscc13: new Decimal(65536),
-        wscc14: new Decimal(4294967296),
-        wscc15: new Decimal(1.844674407370955e19),
-        wscc16: new Decimal(3.402823669209384e38),
-        wscc17: new Decimal(2),
-        wscc18: new Decimal(4),
-        wscc19: new Decimal(16),
-        wscc20: new Decimal(256),
-        wscc21: new Decimal(65536),
-        wscc22: new Decimal(4294967296),
-        wscc23: new Decimal(1.844674407370955e19),
-        wscc24: new Decimal(3.402823669209384e38),
-        wscc25: new Decimal(2),
-        wscc26: new Decimal(4),
-        wscc27: new Decimal(16),
-        wscc28: new Decimal(256),
-        wscc29: new Decimal(65536),
-        wscc30: new Decimal(4294967296),
-        wscc31: new Decimal(1.844674407370955e19),
-        wscc32: new Decimal(3.402823669209384e38),
-        wscc33: new Decimal(2),
-        wscc34: new Decimal(4),
-        wscc35: new Decimal(16),
-        wscc36: new Decimal(256),
-        wscc37: new Decimal(65536),
-        wscc38: new Decimal(4294967296),
-        wscc39: new Decimal(1.844674407370955e19),
-        wscc40: new Decimal(3.402823669209384e38),
-        wscc41: new Decimal(2),
-        wscc42: new Decimal(4),
-        wscc43: new Decimal(16),
-        wscc44: new Decimal(256),
-        wscc45: new Decimal(65536),
-        wscc46: new Decimal(4294967296),
-        wscc47: new Decimal(1.844674407370955e19),
-        wscc48: new Decimal(3.402823669209384e38),
-        wscc49: new Decimal(2),
-        wscc50: new Decimal(4),
-        wscc51: new Decimal(16),
-        wscc52: new Decimal(256),
-        wscc53: new Decimal(65536),
-        wscc54: new Decimal(4294967296),
-        wscc55: new Decimal(1.844674407370955e19),
-        wscc56: new Decimal(3.402823669209384e38),
-        wscc57: new Decimal(2),
-        wscc58: new Decimal(4),
-        wscc59: new Decimal(16),
-        wscc60: new Decimal(256),
-        wscc61: new Decimal(65536),
-        wscc62: new Decimal(4294967296),
-        wscc63: new Decimal(1.844674407370955e19),
-        wscc64: new Decimal(3.402823669209384e38),
-
-        wsccor01: new Decimal(1),
-        wsccor02: new Decimal(2),
-        wsccor03: new Decimal(4),
-        wsccor04: new Decimal(8),
-        wsccor05: new Decimal(16),
-        wsccor06: new Decimal(32),
-        wsccor07: new Decimal(64),
-        wsccor08: new Decimal(128),
-        wsccor09: new Decimal(1),
-        wsccor10: new Decimal(2),
-        wsccor11: new Decimal(4),
-        wsccor12: new Decimal(8),
-        wsccor13: new Decimal(16),
-        wsccor14: new Decimal(32),
-        wsccor15: new Decimal(64),
-        wsccor16: new Decimal(128),
-        wsccor17: new Decimal(1),
-        wsccor18: new Decimal(2),
-        wsccor19: new Decimal(4),
-        wsccor20: new Decimal(8),
-        wsccor21: new Decimal(16),
-        wsccor22: new Decimal(32),
-        wsccor23: new Decimal(64),
-        wsccor24: new Decimal(128),
-        wsccor25: new Decimal(1),
-        wsccor26: new Decimal(2),
-        wsccor27: new Decimal(4),
-        wsccor28: new Decimal(8),
-        wsccor29: new Decimal(16),
-        wsccor30: new Decimal(32),
-        wsccor31: new Decimal(64),
-        wsccor32: new Decimal(128),
-        wsccor33: new Decimal(1),
-        wsccor34: new Decimal(2),
-        wsccor35: new Decimal(4),
-        wsccor36: new Decimal(8),
-        wsccor37: new Decimal(16),
-        wsccor38: new Decimal(32),
-        wsccor39: new Decimal(64),
-        wsccor40: new Decimal(128),
-        wsccor41: new Decimal(1),
-        wsccor42: new Decimal(2),
-        wsccor43: new Decimal(4),
-        wsccor44: new Decimal(8),
-        wsccor45: new Decimal(16),
-        wsccor46: new Decimal(32),
-        wsccor47: new Decimal(64),
-        wsccor48: new Decimal(128),
-        wsccor49: new Decimal(1),
-        wsccor50: new Decimal(2),
-        wsccor51: new Decimal(4),
-        wsccor52: new Decimal(8),
-        wsccor53: new Decimal(16),
-        wsccor54: new Decimal(32),
-        wsccor55: new Decimal(64),
-        wsccor56: new Decimal(128),
-        wsccor57: new Decimal(1),
-        wsccor58: new Decimal(2),
-        wsccor59: new Decimal(4),
-        wsccor60: new Decimal(8),
-        wsccor61: new Decimal(16),
-        wsccor62: new Decimal(32),
-        wsccor63: new Decimal(64),
-        wsccor64: new Decimal(128),
-
-        wsccsl01: new Decimal(2),
-        wsccsl02: new Decimal(4),
-        wsccsl03: new Decimal(8),
-        wsccsl04: new Decimal(16),
-        wsccsl05: new Decimal(32),
-        wsccsl06: new Decimal(64),
-        wsccsl07: new Decimal(128),
-        wsccsl08: new Decimal(256),
-        wsccsl09: new Decimal(2),
-        wsccsl10: new Decimal(4),
-        wsccsl11: new Decimal(8),
-        wsccsl12: new Decimal(16),
-        wsccsl13: new Decimal(32),
-        wsccsl14: new Decimal(64),
-        wsccsl15: new Decimal(128),
-        wsccsl16: new Decimal(256),
-        wsccsl17: new Decimal(2),
-        wsccsl18: new Decimal(4),
-        wsccsl19: new Decimal(8),
-        wsccsl20: new Decimal(16),
-        wsccsl21: new Decimal(32),
-        wsccsl22: new Decimal(64),
-        wsccsl23: new Decimal(128),
-        wsccsl24: new Decimal(256),
-        wsccsl25: new Decimal(2),
-        wsccsl26: new Decimal(4),
-        wsccsl27: new Decimal(8),
-        wsccsl28: new Decimal(16),
-        wsccsl29: new Decimal(32),
-        wsccsl30: new Decimal(64),
-        wsccsl31: new Decimal(128),
-        wsccsl32: new Decimal(256),
-        wsccsl33: new Decimal(2),
-        wsccsl34: new Decimal(4),
-        wsccsl35: new Decimal(8),
-        wsccsl36: new Decimal(16),
-        wsccsl37: new Decimal(32),
-        wsccsl38: new Decimal(64),
-        wsccsl39: new Decimal(128),
-        wsccsl40: new Decimal(256),
-        wsccsl41: new Decimal(2),
-        wsccsl42: new Decimal(4),
-        wsccsl43: new Decimal(8),
-        wsccsl44: new Decimal(16),
-        wsccsl45: new Decimal(32),
-        wsccsl46: new Decimal(64),
-        wsccsl47: new Decimal(128),
-        wsccsl48: new Decimal(256),
-        wsccsl49: new Decimal(2),
-        wsccsl50: new Decimal(4),
-        wsccsl51: new Decimal(8),
-        wsccsl52: new Decimal(16),
-        wsccsl53: new Decimal(32),
-        wsccsl54: new Decimal(64),
-        wsccsl55: new Decimal(128),
-        wsccsl56: new Decimal(256),
-        wsccsl57: new Decimal(2),
-        wsccsl58: new Decimal(4),
-        wsccsl59: new Decimal(8),
-        wsccsl60: new Decimal(16),
-        wsccsl61: new Decimal(32),
-        wsccsl62: new Decimal(64),
-        wsccsl63: new Decimal(128),
-        wsccsl64: new Decimal(256),
-
-        wscm01: new Decimal(1),
-        wscm02: new Decimal(1),
-        wscm03: new Decimal(1),
-        wscm04: new Decimal(1),
-        wscm05: new Decimal(1),
-        wscm06: new Decimal(1),
-        wscm07: new Decimal(1),
-        wscm08: new Decimal(1),
-        wscm09: new Decimal(1),
-        wscm10: new Decimal(1),
-        wscm11: new Decimal(1),
-        wscm12: new Decimal(1),
-        wscm13: new Decimal(1),
-        wscm14: new Decimal(1),
-        wscm15: new Decimal(1),
-        wscm16: new Decimal(1),
-        wscm17: new Decimal(1),
-        wscm18: new Decimal(1),
-        wscm19: new Decimal(1),
-        wscm20: new Decimal(1),
-        wscm21: new Decimal(1),
-        wscm22: new Decimal(1),
-        wscm23: new Decimal(1),
-        wscm24: new Decimal(1),
-        wscm25: new Decimal(1),
-        wscm26: new Decimal(1),
-        wscm27: new Decimal(1),
-        wscm28: new Decimal(1),
-        wscm29: new Decimal(1),
-        wscm30: new Decimal(1),
-        wscm31: new Decimal(1),
-        wscm32: new Decimal(1),
-        wscm33: new Decimal(1),
-        wscm34: new Decimal(1),
-        wscm35: new Decimal(1),
-        wscm36: new Decimal(1),
-        wscm37: new Decimal(1),
-        wscm38: new Decimal(1),
-        wscm39: new Decimal(1),
-        wscm40: new Decimal(1),
-        wscm41: new Decimal(1),
-        wscm42: new Decimal(1),
-        wscm43: new Decimal(1),
-        wscm44: new Decimal(1),
-        wscm45: new Decimal(1),
-        wscm46: new Decimal(1),
-        wscm47: new Decimal(1),
-        wscm48: new Decimal(1),
-        wscm49: new Decimal(1),
-        wscm50: new Decimal(1),
-        wscm51: new Decimal(1),
-        wscm52: new Decimal(1),
-        wscm53: new Decimal(1),
-        wscm54: new Decimal(1),
-        wscm55: new Decimal(1),
-        wscm56: new Decimal(1),
-        wscm57: new Decimal(1),
-        wscm58: new Decimal(1),
-        wscm59: new Decimal(1),
-        wscm60: new Decimal(1),
-        wscm61: new Decimal(1),
-        wscm62: new Decimal(1),
-        wscm63: new Decimal(1),
-        wscm64: new Decimal(1),
-
-        wscp01: new Decimal(1),
-        wscp02: new Decimal(1),
-        wscp03: new Decimal(1),
-        wscp04: new Decimal(1),
-        wscp05: new Decimal(1),
-        wscp06: new Decimal(1),
-        wscp07: new Decimal(1),
-        wscp08: new Decimal(1),
-        wscp09: new Decimal(1),
-        wscp10: new Decimal(1),
-        wscp11: new Decimal(1),
-        wscp12: new Decimal(1),
-        wscp13: new Decimal(1),
-        wscp14: new Decimal(1),
-        wscp15: new Decimal(1),
-        wscp16: new Decimal(1),
-        wscp17: new Decimal(1),
-        wscp18: new Decimal(1),
-        wscp19: new Decimal(1),
-        wscp20: new Decimal(1),
-        wscp21: new Decimal(1),
-        wscp22: new Decimal(1),
-        wscp23: new Decimal(1),
-        wscp24: new Decimal(1),
-        wscp25: new Decimal(1),
-        wscp26: new Decimal(1),
-        wscp27: new Decimal(1),
-        wscp28: new Decimal(1),
-        wscp29: new Decimal(1),
-        wscp30: new Decimal(1),
-        wscp31: new Decimal(1),
-        wscp32: new Decimal(1),
-        wscp33: new Decimal(1),
-        wscp34: new Decimal(1),
-        wscp35: new Decimal(1),
-        wscp36: new Decimal(1),
-        wscp37: new Decimal(1),
-        wscp38: new Decimal(1),
-        wscp39: new Decimal(1),
-        wscp40: new Decimal(1),
-        wscp41: new Decimal(1),
-        wscp42: new Decimal(1),
-        wscp43: new Decimal(1),
-        wscp44: new Decimal(1),
-        wscp45: new Decimal(1),
-        wscp46: new Decimal(1),
-        wscp47: new Decimal(1),
-        wscp48: new Decimal(1),
-        wscp49: new Decimal(1),
-        wscp50: new Decimal(1),
-        wscp51: new Decimal(1),
-        wscp52: new Decimal(1),
-        wscp53: new Decimal(1),
-        wscp54: new Decimal(1),
-        wscp55: new Decimal(1),
-        wscp56: new Decimal(1),
-        wscp57: new Decimal(1),
-        wscp58: new Decimal(1),
-        wscp59: new Decimal(1),
-        wscp60: new Decimal(1),
-        wscp61: new Decimal(1),
-        wscp62: new Decimal(1),
-        wscp63: new Decimal(1),
-        wscp64: new Decimal(1),
-
-        wsch01: new Decimal(1),
-        wsch02: new Decimal(1),
-        wsch03: new Decimal(1),
-        wsch04: new Decimal(1),
-        wsch05: new Decimal(1),
-        wsch06: new Decimal(1),
-        wsch07: new Decimal(1),
-        wsch08: new Decimal(1),
-        wsch09: new Decimal(1),
-        wsch10: new Decimal(1),
-        wsch11: new Decimal(1),
-        wsch12: new Decimal(1),
-        wsch13: new Decimal(1),
-        wsch14: new Decimal(1),
-        wsch15: new Decimal(1),
-        wsch16: new Decimal(1),
-        wsch17: new Decimal(1),
-        wsch18: new Decimal(1),
-        wsch19: new Decimal(1),
-        wsch20: new Decimal(1),
-        wsch21: new Decimal(1),
-        wsch22: new Decimal(1),
-        wsch23: new Decimal(1),
-        wsch24: new Decimal(1),
-        wsch25: new Decimal(1),
-        wsch26: new Decimal(1),
-        wsch27: new Decimal(1),
-        wsch28: new Decimal(1),
-        wsch29: new Decimal(1),
-        wsch30: new Decimal(1),
-        wsch31: new Decimal(1),
-        wsch32: new Decimal(1),
-        wsch33: new Decimal(1),
-        wsch34: new Decimal(1),
-        wsch35: new Decimal(1),
-        wsch36: new Decimal(1),
-        wsch37: new Decimal(1),
-        wsch38: new Decimal(1),
-        wsch39: new Decimal(1),
-        wsch40: new Decimal(1),
-        wsch41: new Decimal(1),
-        wsch42: new Decimal(1),
-        wsch43: new Decimal(1),
-        wsch44: new Decimal(1),
-        wsch45: new Decimal(1),
-        wsch46: new Decimal(1),
-        wsch47: new Decimal(1),
-        wsch48: new Decimal(1),
-        wsch49: new Decimal(1),
-        wsch50: new Decimal(1),
-        wsch51: new Decimal(1),
-        wsch52: new Decimal(1),
-        wsch53: new Decimal(1),
-        wsch54: new Decimal(1),
-        wsch55: new Decimal(1),
-        wsch56: new Decimal(1),
-        wsch57: new Decimal(1),
-        wsch58: new Decimal(1),
-        wsch59: new Decimal(1),
-        wsch60: new Decimal(1),
-        wsch61: new Decimal(1),
-        wsch62: new Decimal(1),
-        wsch63: new Decimal(1),
-        wsch64: new Decimal(1),
-
+        // 使用 for 循环批量生成wscc, wsccor, wscscl
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wscc`+tiername[i];
+                obj[key] = new Decimal(2**(2**((i-1)%8)));
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wsccor`+tiername[i];
+                obj[key] = new Decimal(2**((i-1)%8));
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wsccsl`+tiername[i];
+                obj[key] = new Decimal(2**((i-1)%8+1));
+            }
+            return obj;
+        })(),
+        // 使用 for 循环批量生成wscm, wscp, wsch
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wscm`+tiername[i];
+                obj[key] = new Decimal(1);
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wscp`+tiername[i];
+                obj[key] = new Decimal(1);
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 64; i++) {
+                const key = `wsch`+tiername[i];
+                obj[key] = new Decimal(1);
+            }
+            return obj;
+        })(),
         wscbaseValue: new Decimal(0),
         wscbaseValue1: new Decimal(1),
         wscbaseValue2: new Decimal(1),
@@ -1202,6 +699,7 @@ function createV() {
         wscbaseValue6: new Decimal(1),
         wscbaseValue7: new Decimal(1),
         wscbaseValue8: new Decimal(1),
+        wscbaseValueMul: new Decimal(1),
         wscbaseValueExp: new Decimal(1),
         tierc01: new Decimal(4),
         tierc02: new Decimal(4),
@@ -1213,15 +711,14 @@ function createV() {
         tierc08: new Decimal(4),
         DBpower: new Decimal(1),
         AGpower: new Decimal(1),
-
         upgc01: new Decimal(256),
         upgc02: new Decimal(512),
         upgc03: new Decimal(1024),
         upgc04: new Decimal(2048),
-        upgc05: new Decimal(1),
-        upgc06: new Decimal(2),
-        upgc07: new Decimal(4),
-        upgc08: new Decimal(8),
+        upgc05: new Decimal(4096),
+        upgc06: new Decimal(8192),
+        upgc07: new Decimal(16384),
+        upgc08: new Decimal(32768),
         upgcor01: new Decimal(256),
         upgcor02: new Decimal(512),
         upgcor03: new Decimal(1024),
@@ -1266,12 +763,10 @@ function createV() {
         //扩散
         PL1engmul: new Decimal(1),
         PL1engpow: new Decimal(1),
-
         PL1ue5: new Decimal(1),
         PL1ue6: new Decimal(1),
         PL1ue7: new Decimal(1),
         PL1ue8: new Decimal(1),
-
         PL1babc1: new Decimal(1024),
         PL1babc2: new Decimal(1024),
         PL1babc3: new Decimal(1024),
@@ -1281,62 +776,29 @@ function createV() {
         alefps: new Decimal(0),
         bethps: new Decimal(0),
         gimlps: new Decimal(0),
-
         anmparps: new Decimal(0),
         anmparsc: new Decimal(80),
         parupgc01: new Decimal(10),
         parupgc02: new Decimal(100),
         parupgc03: new Decimal(1000),
         parupgc04: new Decimal(80),
-
-        chagoa01: new Decimal("1e1000"),
-        chagoa02: new Decimal("1e1000"),
-        chagoa03: new Decimal("1e1000"),
-        chagoa04: new Decimal("1e1000"),
-        chagoa05: new Decimal("1e1000000"),
-        chagoa06: new Decimal("1e1000000"),
-        chagoa07: new Decimal("1e1000000"),
-        chagoa08: new Decimal("1e1000000"),
-        chagoa09: new Decimal("e1e12"),
-        chagoa10: new Decimal("e1e12"),
-        chagoa11: new Decimal("e1e12"),
-        chagoa12: new Decimal("e1e12"),
-        chagoa13: new Decimal("e1e18"),
-        chagoa14: new Decimal("e1e18"),
-        chagoa15: new Decimal("e1e18"),
-        chagoa16: new Decimal("e1e18"),
-        chagoa17: new Decimal("e1e27"),
-        chagoa18: new Decimal("e1e27"),
-        chagoa19: new Decimal("e1e27"),
-        chagoa20: new Decimal("e1e27"),
-        chagoa21: new Decimal("e1e36"),
-        chagoa22: new Decimal("e1e36"),
-        chagoa23: new Decimal("e1e36"),
-        chagoa24: new Decimal("e1e36"),
-        charew01: new Decimal(1),
-        charew02: new Decimal(1),
-        charew03: new Decimal(1),
-        charew04: new Decimal(1),
-        charew05: new Decimal(1),
-        charew06: new Decimal(1),
-        charew07: new Decimal(1),
-        charew08: new Decimal(1),
-        charew09: new Decimal(1),
-        charew10: new Decimal(1),
-        charew11: new Decimal(1),
-        charew12: new Decimal(1),
-        charew13: new Decimal(1),
-        charew14: new Decimal(1),
-        charew15: new Decimal(1),
-        charew16: new Decimal(1),
-        charew17: new Decimal(1),
-        charew18: new Decimal(1),
-        charew19: new Decimal(1),
-        charew20: new Decimal(1),
-        charew21: new Decimal(1),
-        charew22: new Decimal(1),
-        charew23: new Decimal(1),
-        charew24: new Decimal(1),
+        // 使用 for 循环批量生成chagoa和charew
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 24; i++) {
+                const key = `chagoa`+tiername[i];
+                obj[key] = new Decimal("1e1000");
+            }
+            return obj;
+        })(),
+        ...(() => {
+            const obj = {};
+            for (let i = 1; i <= 24; i++) {
+                const key = `charew`+tiername[i];
+                obj[key] = new Decimal(1);
+            }
+            return obj;
+        })(),
         PL1chacap: new Decimal(4),
         PL2chacap: new Decimal(4),
         PL3chacap: new Decimal(4),
@@ -2156,12 +1618,12 @@ function getWscMult() {
     let wmpb41to48 = Decimal.dOne;
 
     v.DBpower = Decimal.dOne;
-    if (player.tier03.gte(42)) v.DBpower = v.DBpower.mul(4);
-    if (player.std[21] == true) v.DBpower = v.DBpower.mul(player.alch01.div(16000).add(1).min(1.587401));
-    if (player.std[25] == true) v.DBpower = v.DBpower.mul(player.alch03.div(16000).add(1).min(1.587401));
-    if (player.std[29] == true) v.DBpower = v.DBpower.mul(player.alch05.div(16000).add(1).min(1.587401));
-    v.DBpower = v.DBpower.mul(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03).add(1));
-
+    if (player.std[21] == true) v.DBpower = v.DBpower.add(player.alch01.div(10000).min(1));
+    if (player.std[25] == true) v.DBpower = v.DBpower.add(player.alch03.div(10000).min(1)); //max:4x
+    if (player.std[29] == true) v.DBpower = v.DBpower.add(player.alch05.div(10000).min(1));
+    v.DBpower = v.DBpower.mul(player.PL1bab01.add(player.PL1bab02).add(player.PL1bab03).add(1)); //max:16x
+    if (player.tier03.gte(42)) v.DBpower = v.DBpower.mul(4); //max:4x
+    
     if (player.tier01.gte(1)) mult01to08 = mult01to08.mul(player.tier01.add(1).pow(2));
     if (player.tier01.gte(2)) mult01to08 = mult01to08.mul(v.wscbaseValue.div(4).max(1));
     if (player.tier01.gte(5)) mult01to08 = mult01to08.mul(player.tier02.add(1).pow(3));
@@ -2200,15 +1662,15 @@ function getWscMult() {
     if (player.std[8] == true) mult01to08 = mult01to08.mul(player.PL2energy.max(2).log(2).pow(4096).max(1));
     if (player.std[9] == true) mult09to16 = mult09to16.mul(player.PL2energy.max(2).log(2).pow(256).max(1));
     if (player.std[10] == true) mult17to24 = mult17to24.mul(player.PL2energy.max(2).log(2).pow(16).max(1));
-    if (player.std[11] == true) mult01to08 = mult01to08.mul(player.PL1sec.pow(0.25).pwb("1e2560").min("e2.56e13"));
-    if (player.std[12] == true) mult09to16 = mult09to16.mul(player.PL2sec.pow(0.25).pwb("1e160").min("e1.6e12"));
+    if (player.std[11] == true) mult01to08 = mult01to08.mul(player.PL1sec.pow(0.25).pwb("1.189e4932").min("e1.6e13"));
+    if (player.std[12] == true) mult09to16 = mult09to16.mul(player.PL2sec.pow(0.25).pwb("1.797e308").min("e1e12"));
     if (player.std[13] == true) mult17to24 = mult17to24.mul(player.PL1energy.max(2).log(2).pow(16));
     if (player.std[14] == true) mult01to08 = mult01to08.mul(player.PL1tms.pow(1024).max(1));
     if (player.std[15] == true) mult09to16 = mult09to16.mul(player.PL2tms.pow(256).max(1));
     if (player.std[16] == true) mult17to24 = mult17to24.mul(player.energy.max(2).log(2).pow(16));
-    if (player.std[32] == true) mult01to08 = mult01to08.mul(player.elmten01.pow(256).max(1));
-    if (player.std[33] == true) mult09to16 = mult09to16.mul(player.elmten02.pow(16).max(1));
-    if (player.std[34] == true) mult17to24 = mult17to24.mul(player.elmten03.pow(1).max(1));
+    if (player.std[32] == true) mult01to08 = mult01to08.mul(player.elmten01.pow(4096).max(1));
+    if (player.std[33] == true) mult09to16 = mult09to16.mul(player.elmten02.pow(256).max(1));
+    if (player.std[34] == true) mult17to24 = mult17to24.mul(player.elmten03.pow(16).max(1));
 
     if (player.resa01.gte(1)) mult25to32 = mult25to32.mul(v.rese01);
     mult25to32 = mult25to32.mul(player.anm3.pow(player.anm3u02.mul(1024)).max(1));
@@ -2618,11 +2080,11 @@ function getWscMultPerBuy() {
     v.wscmpb = v.wscmpb.add(v.upge01).mul(v.upge02);
 
     v.AGpower = Decimal.dOne;
-    v.AGpower = v.AGpower.add(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2));
-    if (player.std[23] == true) v.AGpower = v.AGpower.mul(player.alch02.div(36000).add(1).min(1.259921));
-    if (player.std[27] == true) v.AGpower = v.AGpower.mul(player.alch04.div(36000).add(1).min(1.259921));
-    if (player.std[31] == true) v.AGpower = v.AGpower.mul(player.alch06.div(36000).add(1).min(1.259921));
-    if (player.tier03.gte(41)) v.AGpower = v.AGpower.mul(2);
+    if (player.std[23] == true) v.AGpower = v.AGpower.add(player.alch01.div(20000).min(1/2));
+    if (player.std[27] == true) v.AGpower = v.AGpower.add(player.alch01.div(20000).min(1/2)); //max:2.5x
+    if (player.std[31] == true) v.AGpower = v.AGpower.add(player.alch01.div(20000).min(1/2));
+    v.AGpower = v.AGpower.mul(player.PL1bab04.add(player.PL1bab05).add(player.PL1bab06).mul(0.2).add(1)); //max:4x
+    if (player.tier03.gte(41)) v.AGpower = v.AGpower.mul(1.6); //max:1.6x
     if (player.tier02.gte(12)) v.wscmpb = v.wscmpb.mul(new Decimal(1.010889286051700).pow(v.AGpower).pow(player.tier02));
 
     if (player.PL1upg[15] == true) v.wscmpb = v.wscmpb.mul(1.1);
@@ -5612,7 +5074,7 @@ function getntm() {
     v.ntma = player.ntmv.mul(v.ntmm);
     v.ntmecd = new Decimal(30).mul(player.ntmu03.pwb(0.6));
     v.ntmels = new Decimal(30).mul(player.ntmu03.pwb(0.8));
-    for (i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 6; i++) {
         let name = tiername[i];
         if (player["ntmr" + name].gt(0.05)) player["ntmr" + name] = player["ntmr" + name].sub(0.05);
         else player["ntmr" + name] = new Decimal(0);
@@ -7079,6 +6541,7 @@ function produce(spd = 1) {
         if (player.tier02.gte(30)) v.anmparps = v.anmparps.mul(player.PL1tms.div(1e8).max(1).min(1e8));
         if (player.tier01.gte(630)) v.anmparps = v.anmparps.mul(player.wscb16.pwb(1.258925412).max(1));
         if (player.tier01.gte(1995)) v.anmparps = v.anmparps.mul(player.wscb24.pwb(1.258925412).max(1));
+        if (player.std[35]) v.anmparps = v.anmparps.mul(player.elmten04.max(2).log(2).pow(4));
         if (player.hasunlockedanm2 == true) v.anmparps = v.anmparps.pow(player.anm2.add(1).log(2).add(1).log(2).max(1).pow(player.anm2u03.div(64).add(0.0625).min(player.anm2u03.div(64).add(0.0625).root(4))));
         if (player.ptn[5] == true) v.anmparps = v.anmparps.mul(v.ptnm06);
         if (v.anmparps.gte(v.anmparsc)) {

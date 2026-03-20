@@ -27,51 +27,51 @@
       </table>
       <table align="center">
         <tbody>
-        <tr>
-          <td><button class="tthupg" @click="plt()">种植甜甜花</button></td>
-          <td><button class="tthupg" @click="har()">收获甜甜花</button></td>
-          <td><button class="tthupg" @click="imp()">改良甜甜花使它的倍数上限增加1，需要{{notatint(v.tthimpc)}}个{{notatint(player.tthimpr)}}倍大甜甜花</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><div align="center" class="ftsz2">将甜甜花转化为种子、基因、糖分</div></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><button class="tthupg" @click="toseed()">将甜甜花转化为种子(+{{notation(v.tthseedpd)}})</button></td>
-          <td><button class="tthupg" @click="togene()">研究甜甜花获得基因(+{{notation(v.tthgenepd)}})</button></td>
-          <td><button class="tthupg" @click="tosucr()">提炼甜甜花的糖分(+{{notation(v.tthsucrpd)}})</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><div align="center" class="ftsz2">你有{{notatint(player.tthseed)}}种子</div></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><button class="tthupg" @click="ulatplt()">解锁自动种植<br />花费：1000种子</button></td>
-          <td><button class="tthupg" @click="ulathar()">解锁自动收获<br />花费：1e6种子</button></td>
-          <td><button class="tthupg" @click="ulatimp()">解锁自动改良<br />花费：1e9种子</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><div align="center" class="ftsz2">你有{{notatint(player.tthgene)}}基因</div></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><button class="tthupg" @click="ulatupg1()">解锁自动第二行升级<br />花费：1e12基因</button></td>
-          <td><button class="tthupg" @click="buytthupg(1)">生长的速度乘以2<br />花费：{{notation(v.tthuc01)}}基因<br />当前：×{{notation(v.tthue01)}}</button></td>
-          <td><button class="tthupg" @click="buytthupg(2)">获得的种子乘以2<br />花费：{{notation(v.tthuc02)}}基因<br />当前：×{{notation(v.tthue02)}}</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><div align="center" class="ftsz2">你有{{notatint(player.tthsucr)}}糖分</div></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><button class="tthupg" @click="ulatupg2()">解锁自动第三行升级<br />花费：1e15糖分</button></td>
-          <td><button class="tthupg" @click="buytthupg(3)">每一倍大甜甜花的生长需求乘数÷1.01<br />花费：{{notation(v.tthuc03)}}糖分<br />当前：÷{{notation(v.tthue03)}}</button></td>
-          <td><button class="tthupg" @click="buytthupg(4)">每一倍大甜甜花的种子转化乘数×1.01<br />花费：{{notation(v.tthuc04)}}糖分<br />当前：×{{notation(v.tthue04)}}</button></td>
-        </tr>
+          <tr>
+            <td><button class="tthupg" @click="plt()">种植甜甜花</button></td>
+            <td><button class="tthupg" @click="har()">收获甜甜花</button></td>
+            <td><button class="tthupg" @click="imp()">改良甜甜花使它的倍数上限增加1，需要{{notatint(v.tthimpc)}}个{{notatint(player.tthimpr)}}倍大甜甜花</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><div align="center" class="ftsz2">将甜甜花转化为种子、基因、糖分</div></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button class="tthupg" @click="toseed()">将甜甜花转化为种子(+{{notation(v.tthseedpd)}})</button></td>
+            <td><button class="tthupg" @click="togene()">研究甜甜花获得基因(+{{notation(v.tthgenepd)}})</button></td>
+            <td><button class="tthupg" @click="tosucr()">提炼甜甜花的糖分(+{{notation(v.tthsucrpd)}})</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><div align="center" class="ftsz2">你有{{notatint(player.tthseed)}}种子</div></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button class="tthupg" @click="ulatplt()">解锁自动种植<br />花费：1000种子</button></td>
+            <td><button class="tthupg" @click="ulathar()">解锁自动收获<br />花费：1e6种子</button></td>
+            <td><button class="tthupg" @click="ulatimp()">解锁自动改良<br />花费：1e9种子</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><div align="center" class="ftsz2">你有{{notatint(player.tthgene)}}基因</div></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button class="tthupg" @click="ulatupg1()">解锁自动第二行升级<br />花费：1e12基因</button></td>
+            <td><button class="tthupg" @click="buytthupg(1)">生长的速度乘以2<br />花费：{{notation(v.tthuc01)}}基因<br />当前：×{{notation(v.tthue01)}}</button></td>
+            <td><button class="tthupg" @click="buytthupg(2)">获得的种子乘以2<br />花费：{{notation(v.tthuc02)}}基因<br />当前：×{{notation(v.tthue02)}}</button></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><div align="center" class="ftsz2">你有{{notatint(player.tthsucr)}}糖分</div></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><button class="tthupg" @click="ulatupg2()">解锁自动第三行升级<br />花费：1e15糖分</button></td>
+            <td><button class="tthupg" @click="buytthupg(3)">每一倍大甜甜花的生长需求乘数÷1.01<br />花费：{{notation(v.tthuc03)}}糖分<br />当前：÷{{notation(v.tthue03)}}</button></td>
+            <td><button class="tthupg" @click="buytthupg(4)">每一倍大甜甜花的种子转化乘数×1.01<br />花费：{{notation(v.tthuc04)}}糖分<br />当前：×{{notation(v.tthue04)}}</button></td>
+          </tr>
         </tbody>
       </table>
       <div align="center" class="ftsz2">到达8倍大甜甜花，可以进行声望，重置甜甜花及其升级，获得甜甜花香味特化版</div>
