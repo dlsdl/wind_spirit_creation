@@ -1,0 +1,1 @@
+import{_ as e,o as c,c as a}from"./index-CwLSfzP2.js";const o={},s={class:"page-p8-5"};function t(_,n){return c(),a("div",s)}const d=e(o,[["render",t],["__scopeId","data-v-9a11f64a"]]);export{d as default};

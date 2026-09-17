@@ -30,52 +30,62 @@
         </tbody>
       </table>
       <table align="center">
-        <tr>
-          <td><button class="batu" @click="chgstg(1)">难度-1</button></td>
-          <td><button class="batu" @click="chgstg(2)">阶段-100</button></td>
-          <td><button class="batu" @click="chgstg(3)">阶段-10</button></td>
-          <td><button class="batu" @click="chgstg(4)">阶段-1</button></td>
-          <td><button class="batu" @click="chgstg(5)">阶段+1</button></td>
-          <td><button class="batu" @click="chgstg(6)">阶段+10</button></td>
-          <td><button class="batu" @click="chgstg(7)">阶段+100</button></td>
-          <td><button class="batu" @click="chgstg(8)">难度+1</button></td>
-        </tr>
+        <tbody>
+          <tr>
+            <td><button class="batu" @click="chgstg(1)">难度-1</button></td>
+            <td><button class="batu" @click="chgstg(2)">阶段-100</button></td>
+            <td><button class="batu" @click="chgstg(3)">阶段-10</button></td>
+            <td><button class="batu" @click="chgstg(4)">阶段-1</button></td>
+            <td><button class="batu" @click="chgstg(5)">阶段+1</button></td>
+            <td><button class="batu" @click="chgstg(6)">阶段+10</button></td>
+            <td><button class="batu" @click="chgstg(7)">阶段+100</button></td>
+            <td><button class="batu" @click="chgstg(8)">难度+1</button></td>
+          </tr>
+        </tbody>
       </table>
       <table align="center">
-        <tr>
-          <td><button class="batu2" @click="buybatu(1)">攻击等级+1<br />花费：{{notation(v.atkc)}}金币</button></td>
-          <td><button class="batu2" @click="buybatu(2)">攼凼等级+1<br />花费：{{notation(v.btkc)}}金币</button></td>
-          <td><button class="batu2" @click="buybatu(3)">攽函等级+1<br />花费：{{notation(v.ctkc)}}金币</button></td>
-          <td><button class="batu2" @click="buybatu(4)">放凾等级+1<br />花费：{{notation(v.dtkc)}}金币</button></td>
-        </tr>
+        <tbody>
+          <tr>
+            <td><button class="batu2" @click="buybatu(1)">攻击等级+1<br />花费：{{notation(v.atkc)}}金币</button></td>
+            <td><button class="batu2" @click="buybatu(2)">攼凼等级+1<br />花费：{{notation(v.btkc)}}金币</button></td>
+            <td><button class="batu2" @click="buybatu(3)">攽函等级+1<br />花费：{{notation(v.ctkc)}}金币</button></td>
+            <td><button class="batu2" @click="buybatu(4)">放凾等级+1<br />花费：{{notation(v.dtkc)}}金币</button></td>
+          </tr>
+        </tbody>
       </table>
       <div v-if="player.stgmx.gte(1000)">
         <div align="center" class="ftsz2">进行转生（需要通过阶段1000）以获得技能点，你拥有{{notation(player.skpthv)}}/{{notation(player.skptcp)}}技能点</div>
         <table align="center">
-          <tr>
-            <td><button class="batu3" @click="batpre">转生使技能点上限变为{{notation(v.skptpd)}}(下一个在阶段{{notation(v.skptst)}})</button></td>
-            <td><button class="batu3" @click="reskl">返还技能点</button></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><button class="batu3" @click="batpre">转生使技能点上限变为{{notation(v.skptpd)}}(下一个在阶段{{notation(v.skptst)}})</button></td>
+              <td><button class="batu3" @click="reskl">返还技能点</button></td>
+            </tr>
+          </tbody>
         </table>
         <table align="center">
-          <tr>
-            <td><button class="batu" @click="sklv(1)">-1</button></td>
-            <td><button class="batu" @click="sklv(2)">+1</button></td>
-            <td><button class="batu" @click="sklv(3)">-1</button></td>
-            <td><button class="batu" @click="sklv(4)">+1</button></td>
-            <td><button class="batu" @click="sklv(5)">-1</button></td>
-            <td><button class="batu" @click="sklv(6)">+1</button></td>
-            <td><button class="batu" @click="sklv(7)">-1</button></td>
-            <td><button class="batu" @click="sklv(8)">+1</button></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><button class="batu" @click="sklv(1)">-1</button></td>
+              <td><button class="batu" @click="sklv(2)">+1</button></td>
+              <td><button class="batu" @click="sklv(3)">-1</button></td>
+              <td><button class="batu" @click="sklv(4)">+1</button></td>
+              <td><button class="batu" @click="sklv(5)">-1</button></td>
+              <td><button class="batu" @click="sklv(6)">+1</button></td>
+              <td><button class="batu" @click="sklv(7)">-1</button></td>
+              <td><button class="batu" @click="sklv(8)">+1</button></td>
+            </tr>
+          </tbody>
         </table>
         <table align="center">
-          <tr>
-            <td><button class="batu2">技能1·等级{{notation(player.sklv01)}}<br />基于扬敦能量乘以atk:×{{notation(v.skef01)}}</button></td>
-            <td><button class="batu2">技能2·等级{{notation(player.sklv02)}}<br />基于扬敦能量乘以cps:×{{notation(v.skef02)}}</button></td>
-            <td><button class="batu2">技能3·等级{{notation(player.sklv03)}}<br />基于多面体波乘以atk:×{{notation(v.skef03)}}</button></td>
-            <td><button class="batu2">技能4·等级{{notation(player.sklv04)}}<br />基于多面体波乘以cps:×{{notation(v.skef04)}}</button></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><button class="batu2">技能1·等级{{notation(player.sklv01)}}<br />基于扬敦能量乘以atk:×{{notation(v.skef01)}}</button></td>
+              <td><button class="batu2">技能2·等级{{notation(player.sklv02)}}<br />基于扬敦能量乘以cps:×{{notation(v.skef02)}}</button></td>
+              <td><button class="batu2">技能3·等级{{notation(player.sklv03)}}<br />基于多面体波乘以atk:×{{notation(v.skef03)}}</button></td>
+              <td><button class="batu2">技能4·等级{{notation(player.sklv04)}}<br />基于多面体波乘以cps:×{{notation(v.skef04)}}</button></td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div align="center" class="ftsz2">通过一定阶段数后解锁更多内容</div>

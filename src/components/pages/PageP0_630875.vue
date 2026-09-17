@@ -3,7 +3,7 @@
     <div class="ftsz1" style="color:#ffffff; text-align: center">changePg('p0_630875')</div>
     <div class="btnrow">
       <div class="ftsz2">金色能量：</div>
-      <input type="text" placeholder="能量=2^2^金色能量" v-model="inputVal" @keyup.enter="goldenEnergy" value="" />
+      <input type="text" placeholder="能量=2^2^金色能量" v-model="inputVal" @keyup.enter="goldenEnergy" />
       <div class="ftsz2">
         1.798e308
         6.742e315652
@@ -58,6 +58,32 @@
       <button align="center" class="csButton" @click="test41">扬敦qol</button>
       <button align="center" class="csButton" @click="test42">扬敦解锁</button>
     </div>
+    <!-- ===== 页面内容强制解锁：逐页勾选以显示被 v-if 挡住的内容 ===== -->
+    <div class="btnrow">
+      <span class="ftsz4">页面内容强制解锁（勾选后进入该页面，原本被 v-if 解锁条件挡住的内容会全部显示）</span><br />
+      <span class="ftsz2">例：勾选 p5_7 后进入「营养餐」，即可看到 &lt;div v-if="player.shdwrc.gte(1000)"&gt; 下的内容</span><br />
+      <input class="pvfilter" type="text" v-model="pageFilter" placeholder="按 id / 名称筛选，例如 p5 或 营养餐" />
+      <button align="center" class="csButton" @click="setAllPageContentUnlocked(true)">全部解锁</button>
+      <button align="center" class="csButton" @click="setAllPageContentUnlocked(false)">全部还原</button>
+      <button align="center" class="csButton" @click="resetPageContentUnlock">恢复默认</button>
+      <span class="ftsz2">共 {{ allNavPages.length }} 个页面，已解锁 {{ unlockedCount }} 个</span>
+    </div>
+    <div class="pagevis">
+      <div v-for="group in pageGroups" :key="group.id" class="pagevis-row">
+        <span class="pagevis-rowname">{{ group.rowLabel }}<span class="pagevis-rowid">[{{ group.id }}]</span></span>
+        <label
+          v-for="p in group.items"
+          :key="p.id"
+          class="pagevis-item"
+          :class="{ unlocked: isPageContentUnlocked(p.id), devonly: p.dev }">
+          <input type="checkbox" :checked="isPageContentUnlocked(p.id)" @change="setPageContentUnlocked(p.id, $event.target.checked)" />
+          <code>{{ p.id }}</code>
+          <span>{{ p.label }}</span>
+        </label>
+      </div>
+      <div v-if="pageGroups.length === 0" class="pagevis-row">没有匹配的页面</div>
+    </div>
+
     <div class="btnrow">
       <span class="ftsz4">您已解锁糖类合成器，在这里你可以合成自然界不存在的非法糖类</span><br />
       <span>--合成阶层1--</span><br />
@@ -213,7 +239,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useGameState } from '../../composables/useGameState'
 
 defineProps({
@@ -246,6 +272,105 @@ const {
   animationBigCrunch,
   wordCycle,
   randomCrossWords,
-  blendWords
+  blendWords,
+  // 页面内容强制解锁
+  navRows,
+  allNavPages,
+  extraNavPages,
+  isPageContentUnlocked,
+  setPageContentUnlocked,
+  setAllPageContentUnlocked,
+  resetPageContentUnlock,
 } = useGameState()
+
+// dev 专有页面在当前构建下是否存在（生产构建会被 tree-shake）
+const isDev = import.meta.env.DEV
+
+const pageFilter = ref('')
+
+function match(p, kw) {
+  return !kw || p.id.toLowerCase().includes(kw) || p.label.toLowerCase().includes(kw)
+}
+
+// 按导航栏分组展示全部可路由页面，便于批量勾选
+const pageGroups = computed(() => {
+  const kw = pageFilter.value.trim().toLowerCase()
+  const groups = []
+  for (const row of navRows) {
+    const items = row.pages.filter((p) => (!p.dev || isDev) && match(p, kw))
+    if (items.length) groups.push({ id: row.id, rowLabel: row.label, items })
+  }
+  const extra = extraNavPages.filter((p) => match(p, kw))
+  if (extra.length) groups.push({ id: 'extra', rowLabel: '其他', items: extra })
+  return groups
+})
+
+const unlockedCount = computed(() => allNavPages.filter((p) => isPageContentUnlocked(p.id)).length)
 </script>
+
+<style scoped>
+.pvfilter {
+  color: #ffffff;
+  background-color: #202020;
+  border: 1px solid #808080;
+  padding: 2px 6px;
+  margin-right: 6px;
+}
+
+.pagevis {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid #606060;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.pagevis-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.pagevis-rowname {
+  color: #ffffff;
+  font-weight: bold;
+  min-width: 84px;
+}
+
+.pagevis-rowid {
+  color: #909090;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.pagevis-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border: 1px solid #505050;
+  border-radius: 3px;
+  color: #e0e0e0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pagevis-item:hover {
+  border-color: #a0a0a0;
+}
+
+.pagevis-item.unlocked {
+  border-color: #40c040;
+  color: #c0ffc0;
+}
+
+.pagevis-item.devonly {
+  border-color: #ff8000;
+}
+
+.pagevis-item code {
+  color: #80c0ff;
+}
+</style>

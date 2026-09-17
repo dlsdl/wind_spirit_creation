@@ -5,7 +5,7 @@
       {{ uscale(1) }}风灵升级一·等级{{ notatint(player.upgd01) }} (+{{ notatint(v.upgf01) }}) 每级使风灵每次作成乘数增加{{ notation(v.upgd01mult) }}
       <button class="wscbt2" @click="abUpgd01Switch" style="color: #ffffff" v-if="player.PL1upg[2]">自动：{{ player.autobuyupgd01 ? "开" : "关" }}</button>
       <button class="wscbt1" style="color: #ffffff" @click="buyUpgd(1)">花费：{{ notation(v.upgc01) }}能量</button>
-      当前：+{{ notation(v.upge01) }}
+      当前：{{ notation(v.upge01) }}
     </div>
     <div class="upg" v-if="player.tier02.gte(2)">
       {{ uscale(2) }}风灵升级二·等级{{ notatint(player.upgd02) }} (+{{ notatint(v.upgf02) }}) 每级使风灵每次作成乘数乘以{{ notation(v.upgd02mult) }}
@@ -14,25 +14,25 @@
       当前：×{{ notation(v.upge02) }} {{ uscap(v.upge02) }}
     </div>
     <div class="upg" v-if="player.tier02.gte(12)">
-      {{ uscale(3) }}风灵升级三·等级{{ notatint(player.upgd03) }} (+{{ notatint(v.upgf03) }}) 每级使风灵升级1倍率增加{{ notation(v.upge05.mul(0.25)) }}倍
+      {{ uscale(3) }}风灵升级三·等级{{ notatint(player.upgd03) }} (+{{ notatint(v.upgf03) }}) 每级使风灵升级倍率增加{{ notation(v.upge05.mul(0.25)) }}
       <button class="wscbt2" @click="abUpgd03Switch" style="color: #ffffff" v-if="player.PL2tms.gte(7)">自动：{{ player.autobuyupgd03 ? "开" : "关" }}</button>
       <button class="wscbt1" style="color: #ffffff" @click="buyUpgd(3)">花费：{{ notation(v.upgc03) }}能量</button>
-      当前：+{{ notation(v.upge03) }}
+      当前：{{ notation(v.upge03) }}
     </div>
     <div class="upg" v-if="player.tier02.gte(30)">
-      {{ uscale(4) }}风灵升级四·等级{{ notatint(player.upgd04) }} (+{{ notatint(v.upgf04) }}) 每级使风灵升级2倍率乘以{{ v.upge06.mul(1.002711275050202).toFixed(6) }}
+      {{ uscale(4) }}风灵升级四·等级{{ notatint(player.upgd04) }} (+{{ notatint(v.upgf04) }}) 每级使风灵升级倍率乘以{{ v.upge06.mul(1.002711275050202).toFixed(6) }}
       <button class="wscbt2" @click="abUpgd04Switch" style="color: #ffffff" v-if="player.PL2tms.gte(8)">自动：{{ player.autobuyupgd04 ? "开" : "关" }}</button>
       <button class="wscbt1" style="color: #ffffff" @click="buyUpgd(4)">花费：{{ notation(v.upgc04) }}能量</button>
       当前：×{{ notation(v.upge04) }}
     </div>
     <div class="upg" v-if="player.PL4goal[14]">
-      风灵升级五·等级{{ notatint(player.upgd05) }} (+{{ notatint(v.upgf05) }}) 每级使风灵升级3倍率增加0.25
+      风灵升级五·等级{{ notatint(player.upgd05) }} (+{{ notatint(v.upgf05) }}) 每级使风灵升级倍率增加0.25
       <button class="wscbt2" @click="abUpgd05Switch" style="color: #ffffff;" v-if="player.quau[10]">自动：{{ player.autobuyupgd05 ? "开" : "关" }}</button>
       <button class="wscbt1" style="color: #ffffff" @click="buyUpgd(5)">花费：{{ notation(v.upgc05) }}能量</button>
-      当前：+{{ notation(v.upge05) }}
+      当前：{{ notation(v.upge05) }}
     </div>
     <div class="upg" v-if="player.PL4goal[15]">
-      风灵升级六·等级{{ notatint(player.upgd06) }} (+{{ notatint(v.upgf06) }}) 每级使风灵升级4倍率乘以1.000169
+      风灵升级六·等级{{ notatint(player.upgd06) }} (+{{ notatint(v.upgf06) }}) 每级使风灵升级倍率乘以1.000169
       <button class="wscbt2" @click="abUpgd06Switch" style="color: #ffffff;" v-if="player.quau[10]">自动：{{ player.autobuyupgd06 ? "开" : "关" }}</button>
       <button class="wscbt1" style="color: #ffffff" @click="buyUpgd(6)">花费：{{ notation(v.upgc06) }}能量</button>
       当前：×{{ notation(v.upge06) }}
@@ -41,7 +41,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import { useGameState } from '../../composables/useGameState'
 
 defineProps({

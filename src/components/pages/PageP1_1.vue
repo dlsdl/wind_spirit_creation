@@ -28,7 +28,7 @@
           class="wscbt1" 
           @click="buyWsc(wsc.id)" 
           :style="{color: wsc.id > 56 ? '#fff' : '#000'}">
-          作成1次花费:<br>{{ notation(v["wscc" + tiername[wsc.id]]) }}{{ getWSCresourcename(Math.floor(wsc.id / 8 - 0.125)) }}
+          作成1次花费<br>{{ notation(v["wscc" + tiername[wsc.id]]) }}{{ getWSCresourcename(Math.floor(wsc.id / 8 - 0.125)) }}
         </button><br />
         <span class="wscdat">{{ displayWSdata(wsc.id) }}</span>
       </div>
@@ -37,7 +37,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import { useGameState } from '../../composables/useGameState'
 
 const props = defineProps({

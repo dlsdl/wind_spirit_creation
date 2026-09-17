@@ -1,12 +1,11 @@
 import { reactive, ref, computed } from 'vue'
-import Decimal from 'break_eternity.js'
-
-function hyp(a, b) {
-    if (a.lte(2)) return a;
-    else return a.max(1).log(2).max(1).log(2).mul(b).pow_base(2).pow_base(2);
-}
-
-Decimal.prototype.hyp = function (value) { return hyp(this, value) }
+// P3：把无状态的部分拆成独立模块（Decimal 封装 / 格式化 / 主循环 / 存档 / 滚动新闻），
+// 本文件保留为状态与游戏逻辑的聚合出口，对外 API 不变，68 个页面无需改动。
+import Decimal, { hyp } from '../core/decimal.js'
+import { notation, notatint, notatcom, timeshow } from '../core/format.js'
+import * as gameLoop from '../core/loop.js'
+import * as persist from '../state/persist.js'
+import { startNewsTicker as startNewsTickerImpl } from '../ui/newsticker.js'
 
 const tiername = [null,
     "01", "02", "03", "04", "05", "06", "07", "08",
@@ -19,7 +18,8 @@ const tiername = [null,
     "57", "58", "59", "60", "61", "62", "63", "64",
 ]
 
-const hexdigit = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f",
+const hexdigit = [
+    "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f",
     "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "1a", "1b", "1c", "1d", "1e", "1f",
     "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "2a", "2b", "2c", "2d", "2e", "2f",
     "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "3a", "3b", "3c", "3d", "3e", "3f",
@@ -36,6 +36,262 @@ const hexdigit = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0
     "e0", "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8", "e9", "ea", "eb", "ec", "ed", "ee", "ef",
     "f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "fa", "fb", "fc", "fd", "fe", "ff",
 ]
+
+// ============================ P1-1：预计算字符串键 ============================
+// 热路径（尤其 produce() 的 6 条风灵链）里充满了 `player["wsca" + tiername[tier]]`，
+// 每帧要做近千次 "字符串拼接 + tiername 查表 + 字符串哈希"，且每次都产生一个临时字符串。
+// 改成查表后只剩一次数组索引。
+// 注意：存储仍使用原字段名（wsca01…wsca64），所以**存档格式完全不变**。
+// 真正的"数组下标化"会把 player.wsca## 改成 player.wsca[i]，那是破坏性改动且要同步 68 个页面，
+// 已列为 P3 架构重构项。
+const mkKeys = (prefix) => {
+    const arr = new Array(65)
+    for (let i = 1; i <= 64; i++) arr[i] = prefix + tiername[i]
+    return arr
+}
+const K_WSCA = mkKeys("wsca")
+const K_WSCB = mkKeys("wscb")
+const K_WSCM = mkKeys("wscm")
+const K_WSCP = mkKeys("wscp")
+const K_WSCH = mkKeys("wsch")
+
+// ============================ 页面导航配置表 ============================
+// 导航栏原本是 App.vue 里 ~100 行手写的 <button>，语义完全相同但无法批量控制。
+// 改为数据驱动后：
+//   · 「dev 测试页」里的逐页显隐勾选框（见 PageP0_630875.vue）才能统一生效
+//   · 消除大量重复样板，新增页面只需改这一张表
+// 字段说明：
+//   unlockKey  —— 该行随哪一层的解锁标志出现（null = 一直出现）
+//   tabStyle   —— 顶部「行标签按钮」的样式
+//   pageStyle  —— 行内「页面按钮」的样式
+//   fixedClass —— 'slbutton' / 'button' 表示固定样式(null = 依据是否当前页在两者间切换)
+//   dev        —— 仅在 npm run dev 下显示（Vite 的 import.meta.env.DEV）
+
+const RAINBOW_STYLE = "background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000"
+const PLW2_STYLE = "background-image: url('./assets/PLw2bg.bmp'); background-size: 34%; color: #000000"
+const GREY_W_STYLE = "background-image: linear-gradient(to right,#808080,#ffffff,#808080); color: #000000"
+const GREY_B_STYLE = "background-image: linear-gradient(to right,#7f7f7f,#000000,#7f7f7f); color: #ffffff"
+const solid = (bg, fg) => `background-color: ${bg}; color: ${fg}`
+
+const navRows = [
+    {
+        id: 'rowb', label: '扸敲', unlockKey: 'hasUnlockedPLw2',
+        tabStyle: PLW2_STYLE, pageStyle: PLW2_STYLE,
+        pages: [{ id: 'pb_1', label: '扸敲', fixedClass: 'slbutton' }],
+    },
+    {
+        id: 'rowa', label: '扰敪', unlockKey: 'hasUnlockedPLw',
+        tabStyle: RAINBOW_STYLE, pageStyle: RAINBOW_STYLE,
+        pages: [
+            { id: 'pa_1', label: '扰敪升级/商店', fixedClass: 'slbutton' },
+            { id: 'pa_2', label: '特权/惩罚/进化', fixedClass: 'button' },
+        ],
+    },
+    {
+        id: 'row1', label: '风灵', unlockKey: null,
+        tabStyle: solid('#ffffff', '#000000'), pageStyle: solid('#ffffff', '#000000'),
+        pages: [
+            { id: 'p1_1', label: '风灵' },
+            { id: 'p1_2', label: '元素生命' },
+            { id: 'p1_3', label: '升级' },
+        ],
+    },
+    {
+        id: 'row2', label: '扩散', unlockKey: 'hasUnlockedPL1',
+        tabStyle: solid('#ff0000', '#ffffff'), pageStyle: solid('#ff0000', '#ffffff'),
+        pages: [
+            { id: 'p2_1', label: '扩散升级' },
+            { id: 'p2_2', label: '购买项' },
+            { id: 'p2_3', label: '挑战' },
+            { id: 'p2_4', label: '风之晶球' },
+        ],
+    },
+    {
+        id: 'row3', label: '扪敤', unlockKey: 'hasUnlockedPL2',
+        tabStyle: solid('#ffff00', '#000000'), pageStyle: solid('#ffff00', '#000000'),
+        pages: [
+            { id: 'p3_1', label: '里程碑' },
+            { id: 'p3_2', label: '元素' },
+            { id: 'p3_3', label: '研究' },
+            { id: 'p3_4', label: '炼金' },
+            { id: 'p3_5', label: '风压坍陷' },
+        ],
+    },
+    {
+        id: 'row4', label: '扫敥', unlockKey: 'hasUnlockedPL3',
+        tabStyle: solid('#00ff00', '#000000'), pageStyle: solid('#00ff00', '#000000'),
+        pages: [
+            { id: 'p4_1', label: '进度研究' },
+            { id: 'p4_2', label: '药剂' },
+            { id: 'p4_3', label: '种甜甜花' },
+            { id: 'p4_4', label: '吸引子' },
+            { id: 'p4_5', label: '催化剂' },
+            { id: 'p4_6', label: '转化' },
+        ],
+    },
+    {
+        id: 'row5', label: '扬敦', unlockKey: 'hasUnlockedPL4',
+        tabStyle: solid('#00ffff', '#000000'), pageStyle: solid('#00ffff', '#000000'),
+        pages: [
+            { id: 'p5_1', label: '目标' },
+            { id: 'p5_2', label: '碎片升级' },
+            { id: 'p5_3', label: '惊奇风盒' },
+            { id: 'p5_4', label: '试炼场' },
+            { id: 'p5_5', label: '协同' },
+            { id: 'p5_6', label: '刺影征标' },
+            { id: 'p5_7', label: '营养餐' },
+        ],
+    },
+    {
+        id: 'row6', label: '扭敧', unlockKey: 'hasUnlockedPL5',
+        tabStyle: solid('#0000ff', '#ffffff'), pageStyle: solid('#0000ff', '#ffffff'),
+        pages: [
+            { id: 'p6_1', label: '升级海' },
+            { id: 'p6_2', label: '时间扭敧' },
+            { id: 'p6_3', label: '光合作用' },
+            { id: 'p6_4', label: '太阳风' },
+            { id: 'p6_5', label: '生物炼金' },
+            { id: 'p6_6', label: '生态系统' },
+            { id: 'p6_7', label: '碱基' },
+            { id: 'p6_8', label: 'CRISPR' },
+        ],
+    },
+    {
+        id: 'row7', label: '扮敨', unlockKey: 'hasUnlockedPL6',
+        tabStyle: solid('#ff00ff', '#ffffff'), pageStyle: solid('#ff00ff', '#ffffff'),
+        pages: [
+            { id: 'p7_1', label: '???' }, { id: 'p7_2', label: '???' }, { id: 'p7_3', label: '???' },
+            { id: 'p7_4', label: '???' }, { id: 'p7_5', label: '???' }, { id: 'p7_6', label: '???' },
+            { id: 'p7_7', label: '???' }, { id: 'p7_8', label: '???' }, { id: 'p7_9', label: '???' },
+        ],
+    },
+    {
+        id: 'row8', label: '扯敩', unlockKey: 'hasUnlockedPL7',
+        tabStyle: solid('#000000', '#ffffff'), pageStyle: solid('#000000', '#ffffff'),
+        pages: [
+            { id: 'p8_1', label: '扯敩拜谢' }, { id: 'p8_2', label: '扯敩升级' }, { id: 'p8_3', label: '扯敩挑战' },
+            { id: 'p8_4', label: '扯敩星星' }, { id: 'p8_5', label: '扯敩动物' }, { id: 'p8_6', label: '扯敩膨胀' },
+            { id: 'p8_7', label: '扯敩试炼' }, { id: 'p8_8', label: '扯敩遗物' }, { id: 'p8_9', label: '扯敩矿物' },
+            { id: 'p8_0', label: '扯敩元素' },
+        ],
+    },
+    {
+        id: 'row9', label: '统计', unlockKey: null,
+        tabStyle: GREY_W_STYLE, pageStyle: '',
+        pages: [
+            { id: 'p9_1', label: '全局' },
+            { id: 'p9_2', label: '元素生命' },
+            { id: 'p9_3', label: '软上限' },
+            { id: 'p9_4', label: '折算' },
+            { id: 'p9_59330', label: '测试页 p9_59330', dev: true },
+        ],
+    },
+    {
+        id: 'row0', label: '杂项', unlockKey: null,
+        tabStyle: GREY_B_STYLE, pageStyle: '',
+        pages: [
+            { id: 'p0_1', label: '存档' },
+            { id: 'p0_2', label: '选项' },
+            { id: 'p0_3', label: '关于' },
+            { id: 'p0_4', label: '成就' },
+            { id: 'p0_5', label: '概要' },
+            { id: 'p0_630875', label: '测试页 p0_630875', dev: true },
+        ],
+    },
+]
+
+// 不挂在导航栏上、但 PageContent 仍可路由到的页面（同样纳入显隐清单）
+const extraNavPages = [
+    { id: 'changelog', label: '更新日志' },
+    { id: 'savebank', label: '存档银行' },
+]
+
+const allNavPages = navRows.reduce((acc, row) => acc.concat(row.pages), []).concat(extraNavPages)
+
+// ============================ dev：页面内容强制解锁 ============================
+// 语义：勾选某个 PageP... 后，该页面内所有"解锁条件"类的判断一律视为成立，
+// 从而显示出原本被 v-if 挡住的内容（例如 p5_7 的 <div v-if="player.shdwrc.gte(1000)">）。
+//
+// 实现要点：不做任何页面级改动，而是在 PageContent.vue 里把传给页面的 player / v
+// 换成一个"只读替身"代理：
+//   · Decimal 字段   → 包一层代理，gte/lte/gt/lt/eq/neq 恒返回 true（其余方法照旧，显示不受影响）
+//   · boolean 字段   → true（如 player.hasUnlockedPL1 / player.quau[1]）
+//   · 数组           → 其中的 boolean 元素变为 true（如 player.PL1upg / player.ach）
+//   · 其它（字符串/数字）保持原样，避免误伤 player.incha 这类状态判断
+//   · 写入全部透传 → 游戏逻辑用到的模块级 player/v 始终是真实对象，数值绝不被污染
+// 依赖收集不受影响：读取仍走 Reflect.get(真实reactive对象)，触发的是同一个 track。
+// 仅在勾选时才启用，默认关闭。
+
+const pageContentUnlock = ref({})
+
+function isPageContentUnlocked(id) {
+    return pageContentUnlock.value[id] === true
+}
+
+function setPageContentUnlocked(id, val) {
+    pageContentUnlock.value[id] = !!val
+}
+
+function setAllPageContentUnlocked(val) {
+    const next = {}
+    for (const p of allNavPages) next[p.id] = val
+    pageContentUnlock.value = next
+}
+
+function resetPageContentUnlock() {
+    pageContentUnlock.value = {}
+}
+
+const DEV_TRUE = () => true
+const devDecimalCache = new WeakMap()
+
+// 让 gte/lte/gt/lt/eq/neq 恒为 true 的 Decimal 替身（其它行为完全沿用真值）
+function devTruthyDecimal(d) {
+    let p = devDecimalCache.get(d)
+    if (p) return p
+    p = new Proxy(d, {
+        get(t, key) {
+            if (key === "gte" || key === "lte" || key === "gt" || key === "lt" || key === "eq" || key === "neq") return DEV_TRUE
+            const v = Reflect.get(t, key)
+            return typeof v === "function" ? v.bind(t) : v
+        },
+    })
+    devDecimalCache.set(d, p)
+    return p
+}
+
+function devUnlockArray(arr) {
+    let out = null
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === "boolean" && arr[i] !== true) {
+            if (out === null) out = arr.slice()
+            out[i] = true
+        }
+    }
+    return out === null ? arr : out
+}
+
+const devObjectCache = new WeakMap()
+
+function devUnlockProxy(target) {
+    if (!target) return target
+    let p = devObjectCache.get(target)
+    if (p) return p
+    p = new Proxy(target, {
+        get(t, key) {
+            const val = Reflect.get(t, key) // 读取真实 reactive 对象 → 依赖照常收集
+            if (val instanceof Decimal) return devTruthyDecimal(val)
+            if (typeof val === "boolean") return true
+            if (Array.isArray(val)) return devUnlockArray(val)
+            return val
+        },
+        set(t, key, value) {
+            return Reflect.set(t, key, value) // 写入透传，不污染逻辑
+        },
+    })
+    devObjectCache.set(target, p)
+    return p
+}
 
 //#region 存档数值
 function createPlayer() {
@@ -393,10 +649,14 @@ function createPlayer() {
         syna05: new Decimal(0),
         synfcs: 0,
         // 使用 for 循环批量生成synu
+        // BugFix: 原写法 `synu0${i}` 只会生成 synu01~synu09、synu010~synu015，
+        // 而 getboggle()/produce()/getChaGoal() 等处使用的是 synu10~synu15 —— 二者不匹配，
+        // 导致新存档下 player.synu11 恒为 undefined，主循环第一帧就在
+        // `player.synu11.gte(1)` 抛 TypeError（产线日志里的既有崩溃）。
         ...(() => {
             const obj = {};
             for (let i = 1; i <= 15; i++) {
-                const key = `synu0${i}`;
+                const key = `synu` + (i < 10 ? "0" + i : i);
                 obj[key] = new Decimal(0);
             }
             return obj;
@@ -553,6 +813,13 @@ function createPlayer() {
         PL6sec: new Decimal(0),
         PL6secrl: new Decimal(0),
         PL6conf: true,
+        PL6chaIn: new Decimal(0),
+        PL6chacom: [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+        PL6chall: [false, false, false, false, false, false, false, false, false, false, false, false],
+        PL6auto: false,
+        PL6brickpts: new Decimal(0),
+        PL6brickptsttl: new Decimal(0),
+        PL6brick: [false, false, false, false, false, false, false, false, false, false],
 
         //扯敩
         hasUnlockedPL7: false,
@@ -1140,6 +1407,40 @@ function createV() {
         //扮敨
         PL6engmul: new Decimal(1),
         PL6engpow: new Decimal(1),
+        PL6chago01: new Decimal(0),
+        PL6chago02: new Decimal(0),
+        PL6chago03: new Decimal(0),
+        PL6chago04: new Decimal(0),
+        PL6chago05: new Decimal(0),
+        PL6chago06: new Decimal(0),
+        PL6chago07: new Decimal(0),
+        PL6chago08: new Decimal(0),
+        PL6chago09: new Decimal(0),
+        PL6chago10: new Decimal(0),
+        PL6chago11: new Decimal(0),
+        PL6chago12: new Decimal(0),
+        PL6charew01: new Decimal(0),
+        PL6charew02: new Decimal(0),
+        PL6charew03: new Decimal(0),
+        PL6charew04: new Decimal(0),
+        PL6charew05: new Decimal(0),
+        PL6charew06: new Decimal(0),
+        PL6charew07: new Decimal(0),
+        PL6charew08: new Decimal(0),
+        PL6charew09: new Decimal(0),
+        PL6charew10: new Decimal(0),
+        PL6charew11: new Decimal(0),
+        PL6charew12: new Decimal(0),
+        PL6brickc01: new Decimal(1),
+        PL6brickc02: new Decimal(10),
+        PL6brickc03: new Decimal(100),
+        PL6brickc04: new Decimal(1000),
+        PL6brickc05: new Decimal(10000),
+        PL6brickc06: new Decimal(100000),
+        PL6brickc07: new Decimal(1000000),
+        PL6brickc08: new Decimal(1e10),
+        PL6brickc09: new Decimal(1e100),
+        PL6brickc10: new Decimal(1e1000),
 
         //扯敩
         PL7engmul: new Decimal(1),
@@ -1163,7 +1464,7 @@ let playerInstance = null
 let vInstance = null
 let player = null
 let v = null
-let ml = null
+// 注：主循环句柄 ml 已移交 core/loop.js 管理
 let diff = 0
 
 function getOrCreateState() {
@@ -1302,45 +1603,29 @@ export function useGameState() {
 }
 
 //#region 存档
+// P2：序列化 / base64 / 版本迁移已抽到 state/persist.js，这里只保留与游戏状态耦合的部分。
 function save() {
-    localStorage.windSpiritCreation = btoa(JSON.stringify(playerInstance))
-    shownoti("#autosave")
+    if (persist.saveTo(playerInstance)) shownoti("#autosave")
 }
 
 function load() {
-    if (localStorage.windSpiritCreation) {
-        try {
-            const savedData = JSON.parse(atob(localStorage.windSpiritCreation))
-            transformToDecimal(savedData)
-            Object.assign(playerInstance, savedData)
-        } catch (e) {
-            console.error('Failed to load save:', e)
-        }
-    }
+    persist.loadFrom(playerInstance)
 }
 
 function exportSave() {
     save()
     shownoti("#export")
-    return btoa(JSON.stringify(playerInstance))
+    return persist.encodeSave(playerInstance)
 }
 
 function exportSaveFile() {
-    let str = btoa(JSON.stringify(playerInstance))
-    let file = new Blob([str], { type: "text/plain" })
-    window.URL = window.URL || window.webkitURL
-    let a = document.createElement("a")
-    a.href = window.URL.createObjectURL(file)
-    a.download = "WindSpiritCreationSave-" + Date().replaceAll(" ", "_").slice(0, 24) + ".txt"
-    a.click()
+    persist.exportSaveFile(playerInstance)
     shownoti("#exportfile")
 }
 
 function importSave(saveString) {
     try {
-        const savedData = JSON.parse(atob(saveString))
-        transformToDecimal(savedData)
-        Object.assign(playerInstance, savedData)
+        Object.assign(playerInstance, persist.decodeSave(saveString))
         save()
         shownoti("#import")
     } catch (e) {
@@ -1349,25 +1634,14 @@ function importSave(saveString) {
 }
 
 function importSaveFile() {
-    let a = document.createElement("input")
-    a.setAttribute("type", "file")
-    a.click()
-    a.onchange = () => {
-        let fr = new FileReader()
-        fr.onload = () => {
-            let save2 = fr.result
-            try {
-                const savedData = JSON.parse(atob(save2))
-                transformToDecimal(savedData)
-                Object.assign(playerInstance, savedData)
-                save()
-                shownoti("#importfile")
-            } catch (e) {
-                console.error('Failed to import save file:', e)
-            }
-        }
-        fr.readAsText(a.files[0])
-    }
+    persist.importSaveFile(playerInstance, (ok) => {
+        if (ok) { save(); shownoti("#importfile") }
+    })
+}
+
+// 硬重置时连存档一起清掉（原实现只重置内存，localStorage 里仍是旧数据）
+function clearSave() {
+    persist.clearSave()
 }
 
  function trueHardReset() {
@@ -1375,6 +1649,7 @@ function importSaveFile() {
     if (promption == "This is the future") {
         hardReset();
         player.energy = new Decimal(2);
+        clearSave();   // P2：硬重置要连 localStorage 里的存档一起清掉
         save();
         shownoti("#hardreset");
     }
@@ -2612,8 +2887,7 @@ function PL1reset() {
 
 function PL1FR() {
         player.hasUnlockedPL1 = true;
-        clearInterval(ml);
-        ml = null;
+        gameLoop.restart()
 
         player.energy = new Decimal(2);
         for(let i=1;i<=8;i++){
@@ -2630,7 +2904,7 @@ function PL1FR() {
         player.PL1secrl = new Decimal(0);
         player.PL1energy = new Decimal(1);
 
-        ml=setInterval(mainLoop, 33);
+        gameLoop.restart()
         player.energy = new Decimal(2);
 }
 
@@ -2947,8 +3221,7 @@ function PL2reset(){
 
  function PL2FR() {
     player.hasUnlockedPL2 = true;
-    clearInterval(ml);
-    ml = null;
+    gameLoop.restart()
 
     player.energy = new Decimal(2);
     for(let i=1;i<=16;i++){
@@ -2995,7 +3268,7 @@ function PL2reset(){
     player.PL2secrl = new Decimal(0);
     player.PL2energy = new Decimal(1);
 
-    ml=setInterval(mainLoop, 33);
+    gameLoop.restart()
     player.energy = new Decimal(2);
 }
 
@@ -3367,8 +3640,7 @@ function PL3reset() {
 
  function PL3FR() {
     player.hasUnlockedPL3 = true;
-    clearInterval(ml);
-    ml = null;
+    gameLoop.restart()
 
     player.PL2tms = new Decimal(2).pow(player.PL3tms).min(player.PL3tms.mul(4));
 
@@ -3512,7 +3784,7 @@ function PL3reset() {
     player.anm2u04 = new Decimal(0);
     player.PL3energy = new Decimal(1);
 
-    ml=setInterval(mainLoop, 33);
+    gameLoop.restart()
     player.energy = new Decimal(2);
 }
 
@@ -4093,8 +4365,7 @@ function PL4reset() {
 
  function PL4FR() {
     player.hasUnlockedPL4 = true;
-    clearInterval(ml);
-    ml = null;
+    gameLoop.restart()
 
     player.PL1tms = new Decimal(0);
     player.PL2tms = new Decimal(0);
@@ -4373,7 +4644,7 @@ if (player.PL4goal[2] != true) {
     }
     player.PL4energy = new Decimal(1);
 
-    ml=setInterval(mainLoop, 33);
+    gameLoop.restart()
     player.energy = new Decimal(2);
 }
 
@@ -5136,8 +5407,7 @@ function PL5reset() {
 
  function PL5FR() {
     player.hasUnlockedPL5 = true;
-    clearInterval(ml);
-    ml = null;
+    gameLoop.restart()
 
     player.PL1tms = new Decimal(0);
     player.PL2tms = new Decimal(0);
@@ -5547,7 +5817,7 @@ function PL5reset() {
     player.ntmr05= new Decimal(0);
     player.ntmr06= new Decimal(0);
 
-    ml=setInterval(mainLoop, 33);
+    gameLoop.restart()
     player.energy = new Decimal(2);
 }
 
@@ -6408,6 +6678,53 @@ function checkCRISPRUnlock() {
     return totalBases >= 100; // 解锁条件：拥有100个碱基
 }
 
+//region 扮敨试炼函数
+function getPL6ChaGoal() {
+    for (let i = 1; i <= 12; i++) {
+        v["PL6chago" + String(i).padStart(2, '0')] = Decimal.pow(2, 10 * i);
+    }
+    for (let i = 1; i <= 12; i++) {
+        v["PL6charew" + String(i).padStart(2, '0')] = player.PL6chacom[i - 1].add(1).mul(0.5);
+    }
+}
+
+function entPL6Cha(tier) {
+    if (player.PL6chaIn != 0) quitPL6Cha();
+    if (player.hasUnlockedPL6) {
+        player.PL6chaIn = tier;
+        player.energy = new Decimal(2);
+        player.PL6chall = [false, false, false, false, false, false, false, false, false, false, false, false];
+        player.PL6chall[tier - 1] = true;
+    }
+}
+
+function quitPL6Cha() {
+    player.PL6chaIn = 0;
+    player.PL6chall = [false, false, false, false, false, false, false, false, false, false, false, false];
+}
+
+function comPL6Cha() {
+    if (player.PL6chaIn > 0) {
+        let tier = player.PL6chaIn;
+        if (player.energy.gte(v["PL6chago" + String(tier).padStart(2, '0')])) {
+            player.PL6chacom[tier - 1] = player.PL6chacom[tier - 1].add(1);
+        }
+    }
+}
+
+function buyPL6Brick(id) {
+    if (player.PL6brickpts.gte(v["PL6brickc" + String(id).padStart(2, '0')])) {
+        player.PL6brickpts = player.PL6brickpts.sub(v["PL6brickc" + String(id).padStart(2, '0')]);
+        player.PL6brick[id - 1] = true;
+    }
+}
+
+function updatePL6Brick() {
+    player.PL6brickpts = player.PL6brickpts.add(player.PL6ptsttl.root(1073741824).floor());
+    player.PL6brickptsttl = player.PL6brickptsttl.add(player.PL6ptsttl.root(1073741824).floor());
+}
+//endregion
+
 //region 扮敨层级
 function PL6reset() {
     if (player.PL5pts.lt("4.198e323228496")) return;
@@ -6417,7 +6734,7 @@ function PL6reset() {
 }
 
  function PL6FR() {
-    
+
         player.PL6pts = player.PL6pts.add(player.PL5pts.root(1073741824).floor());
         player.PL6ptsttl = player.PL6ptsttl.add(player.PL5pts.root(1073741824).floor());
         player.PL6tms = player.PL6tms.add(1);
@@ -6459,18 +6776,18 @@ function produce(spd = 1) {
     player.PL4sec = player.PL4sec.plus(speed2);
     player.PL5sec = player.PL5sec.plus(speed2);
 
-    if (player.energy.log(2).lte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).pow(v.FEexp).mul(speed).mul(v.baseprd);
-    else v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
-    if (v.energyps.log(2).gte(getsoftcap().log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(getsoftcap().log(2)).hyp(0.5).pow(getsoftcap().log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
+    // P0-2③：softcap 每帧只算一次（原先这里重复调用了 3 次）
+    const sc = softcapNow();
+    if (player.energy.log(2).lte(sc.log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).pow(v.FEexp).mul(speed).mul(v.baseprd);
+    else v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(sc.log(2)).hyp(0.5).pow(sc.log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
+    if (v.energyps.log(2).gte(sc.log(2))) v.energyps = player.wsca01.mul(v.wscm01).pow(v.wscp01).hyp(v.wsch01).root(sc.log(2)).hyp(0.5).pow(sc.log(2)).pow(v.FEexp).mul(speed).mul(v.baseprd);
     v.preps = player.energy;
     
     player.energy = player.energy.add(v.energyps);
     player.energyttl = player.energyttl.add(v.energyps);
 
     if(player.incha != 12) for (let tier = 2; tier <= 8; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed).mul(v.baseprd));
     }
     if (player.PL1upg[12] == true & player.sta8n1 == true) { player.wsca08 = player.wsca08.add(hyp(player.wsca09.mul(v.wscm09).pow(v.wscp09), v.wsch09).pow(v.PL1engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd)); }
     if (player.std[18] == true & player.incha != 8 & player.incha != 9 & player.PL1pts.lte(player.energy.root(1024).floor())) {
@@ -6481,9 +6798,7 @@ function produce(spd = 1) {
 
     player.PL1energy = player.PL1energy.add(player.wsca09.mul(v.wscm09).pow(v.wscp09).hyp(v.wsch09).mul(speed).mul(v.baseprd));
     if (player.incha != 12) for (let tier = 10; tier <= 16; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed).mul(v.baseprd));
     }
     if (player.std[7] == true & player.sta8n1 == true) player.wsca16 = player.wsca16.add(hyp(player.wsca17.mul(v.wscm17).pow(v.wscp17), v.wsch17).pow(v.PL2engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.tthpu[1] == true & player.PL2pts.lte(player.PL1pts.root(1024).floor())) {
@@ -6494,9 +6809,7 @@ function produce(spd = 1) {
 
     player.PL2energy = player.PL2energy.add(player.wsca17.mul(v.wscm17).pow(v.wscp17).hyp(v.wsch17).mul(speed).mul(v.baseprd));
     if (player.incha != 12) for (let tier = 18; tier <= 24; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed).mul(v.baseprd));
     }
     if (player.tthpu[0] == true & player.sta8n1 == true) player.wsca24 = player.wsca24.add(hyp(player.wsca25.mul(v.wscm25).pow(v.wscp25), v.wsch25).pow(v.PL3engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.PL4goal[11] == true & player.PL3pts.lte(player.PL2pts.root(1048576).floor())) {
@@ -6507,9 +6820,7 @@ function produce(spd = 1) {
 
     player.PL3energy = player.PL3energy.add(player.wsca25.mul(v.wscm25).pow(v.wscp25).hyp(v.wsch25).mul(speed).mul(v.baseprd));
     if (player.incha != 12) for (let tier = 26; tier <= 32; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed).mul(v.baseprd));
     }
     if (player.PL4goal[10] == true & player.sta8n1 == true) player.wsca32 = player.wsca32.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).hyp(v.wsch33).pow(v.PL4engpow.pow(v.cpper).max(1)).mul(speed).mul(v.baseprd));
     if (player.quau[14] == true & player.PL4pts.lte(player.PL3pts.root(1048576).floor())) {
@@ -6520,17 +6831,13 @@ function produce(spd = 1) {
 
     player.PL4energy = player.PL4energy.add(player.wsca33.mul(v.wscm33).pow(v.wscp33).hyp(v.wsch33).mul(speed2).mul(v.baseprd));
     for (let tier = 34; tier <= 40; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed2).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed2).mul(v.baseprd));
     }
     if (player.quau[11] == true & player.sta8n1 == true) player.wsca40 = player.wsca40.add(player.wsca41.mul(v.wscm41).pow(v.wscp41).hyp(v.wsch41).pow(v.PL5engpow.pow(v.cpper).max(1)).mul(speed2).mul(v.baseprd));
 
     player.PL5energy = player.PL5energy.add(player.wsca41.mul(v.wscm41).pow(v.wscp41).hyp(v.wsch41).mul(speed2).mul(v.baseprd));
     for (let tier = 42; tier <= 48; tier++) {
-        let name = tiername[tier];
-        let prev = tiername[tier - 1];
-        player["wsca" + prev] = player["wsca" + prev].add(player["wsca" + name].mul(v["wscm" + name]).pow(v["wscp" + name]).hyp(v["wsch" + name]).mul(speed2).mul(v.baseprd));
+        player[K_WSCA[tier - 1]] = player[K_WSCA[tier - 1]].add(player[K_WSCA[tier]].mul(v[K_WSCM[tier]]).pow(v[K_WSCP[tier]]).hyp(v[K_WSCH[tier]]).mul(speed2).mul(v.baseprd));
     }
 
     if (player.hasunlockedanmorb == true) {
@@ -6799,9 +7106,13 @@ function getspd() {
 }
 
 //能量软上限计算
+// P1-3：原先每帧 new Decimal("e3.470639555327098e17") 若干次（produce + getspd + 模板），
+// 字符串解析开销远高于复用常量。
+const SOFTCAP_BASE = new Decimal("e3.470639555327098e17")
+
 function getsoftcap() {
     if (player.incha == 13) return new Decimal(2);
-    let sc = new Decimal("e3.470639555327098e17")
+    let sc = SOFTCAP_BASE
     sc = sc.pow(v.fraue03);
     if (player.incyzb == true & player.shdwsl[4] == true) sc = sc.root(65536);
     return sc
@@ -6820,27 +7131,64 @@ function getsoftcap4() {
 }
 
 //其他软上限和折算计算
+// ============================ P0-3 ============================
+// 折算函数的两条优化（数学上与原式等价）：
+//  ① O(1) 快路径：第 k 项 x^(2^k)/s_k ≤ x  ⟺  s_k ≥ x^(2^k - 1)。
+//     阈值构造时满足 s_k ≥ s_1^(2^k - 1)（可逐项验证），
+//     因此只要 x ≤ s_1，所有折算项都不可能超过 x —— 直接返回 x，一次比较、零次 pow。
+//     (-1 阶) invscale 的每项 (x·s_k)^(1/2^k) ≥ x 的条件完全相同，故快路径同样成立。
+//  ② 链式幂：原写法 x.pow(2)、x.pow(4)…x.pow(256) 各自独立求幂，
+//     合计 O(1+2+…+8) 次平方+归一化；改为 acc = acc.pow(2) 复用上一次结果，降到 8 次。
+// 收益：getWscCost 每帧 48 次调用，早期几乎全部命中快路径；后期通用路径也省约 4 倍幂运算。
+
 function scale(x) {
-    return x.max(x.pow(2).div(v.scal01)).max(x.pow(4).div(v.scal02)).max(x.pow(8).div(v.scal03)).max(x.pow(16).div(v.scal04)).max(x.pow(32).div(v.scal05)).max(x.pow(64).div(v.scal06)).max(x.pow(128).div(v.scal07)).max(x.pow(256).div(v.scal08));
+    if (x.lte(v.scal01)) return x; // 快路径
+    let best = x;
+    let acc = x;
+    for (let k = 1; k <= 8; k++) {
+        acc = acc.pow(2); // x^(2^k)
+        const cand = acc.div(v["scal0" + k]);
+        if (cand.gt(best)) best = cand;
+    }
+    return best;
 }
 
 function invscale(x) {
+    if (x.lte(v.scal01)) return x; // 快路径
     return x.min(x.mul(v.scal01).root(2)).min(x.mul(v.scal02).root(4)).min(x.mul(v.scal03).root(8)).min(x.mul(v.scal04).root(16)).min(x.mul(v.scal05).root(32)).min(x.mul(v.scal06).root(64)).min(x.mul(v.scal07).root(128)).min(x.mul(v.scal08).root(256));
 }
 
 function scaleTier(x) {
-    return x.max(x.pow(2).div(v.scaltier01)).max(x.pow(4).div(v.scaltier02)).max(x.pow(8).div(v.scaltier03)).max(x.pow(16).div(v.scaltier04));
+    if (x.lte(v.scaltier01)) return x; // 快路径
+    let best = x;
+    let acc = x;
+    for (let k = 1; k <= 4; k++) {
+        acc = acc.pow(2); // x^(2^k)
+        const cand = acc.div(v["scaltier0" + k]);
+        if (cand.gt(best)) best = cand;
+    }
+    return best;
 }
 
 function invscaleTier(x) {
+    if (x.lte(v.scaltier01)) return x; // 快路径
     return x.min(x.mul(v.scaltier01).root(2)).min(x.mul(v.scaltier02).root(4)).min(x.mul(v.scaltier03).root(8)).min(x.mul(v.scaltier04).root(16));
 }
 
 function scaleUpgd(x) {
-    return x.max(x.pow(2).div(v.scalupgd01)).max(x.pow(4).div(v.scalupgd02)).max(x.pow(8).div(v.scalupgd03)).max(x.pow(16).div(v.scalupgd04));
+    if (x.lte(v.scalupgd01)) return x; // 快路径
+    let best = x;
+    let acc = x;
+    for (let k = 1; k <= 4; k++) {
+        acc = acc.pow(2); // x^(2^k)
+        const cand = acc.div(v["scalupgd0" + k]);
+        if (cand.gt(best)) best = cand;
+    }
+    return best;
 }
 
 function invscaleUpgd(x) {
+    if (x.lte(v.scalupgd01)) return x; // 快路径
     return x.min(x.mul(v.scalupgd01).root(2)).min(x.mul(v.scalupgd02).root(4)).min(x.mul(v.scalupgd03).root(8)).min(x.mul(v.scalupgd04).root(16));
 }
 
@@ -6862,13 +7210,8 @@ function softcap(x) {
 //#endregion
 
 //#region 游戏机制之外……
-function transformToDecimal(object) {
-    for (let i in object) {
-        if (typeof (object[i]) == "string" && !isNaN(new Decimal(object[i]).mag)) object[i] = new Decimal(object[i]);
-        if (typeof (object[i]) == "object" && !isNaN(new Decimal(object[i]).mag)) transformToDecimal(object[i]);
-        if (new Decimal(object[i]).gte("F1e308")) object[i] = new Decimal(1);
-    }
-}
+// 注：transformToDecimal 已由 state/persist.js 的 decodeValue 取代
+// （typeof 分派，每个键只构造 1 次 Decimal，且不递归进 Decimal 自身）。
 
 function time(diff) {
     if (!playerInstance) return
@@ -6895,118 +7238,6 @@ function time(diff) {
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function notation(amount) {
-    let string = "";
-    if (amount.sign == -1) {
-        string = string + "-";
-        amount.sign = 1;
-    }
-    if (amount.lt("ee6")) {
-        let power = Decimal.floor(Decimal.log10(amount));
-        let mantissa = amount.div(Decimal.pow(10, power));
-        if (amount == 0) string = "0.000";
-        else if (power < -3) string = string + mantissa.toFixed(3) + "e" + power;
-        else if (power < -2) string = string + amount.toFixed(6);
-        else if (power < -1) string = string + amount.toFixed(5);
-        else if (power < 0) string = string + amount.toFixed(4);
-        else if (power < 1) string = string + amount.toFixed(3);
-        else if (power < 2) string = string + amount.toFixed(2);
-        else if (power < 3) string = string + amount.toFixed(1);
-        else if (power < 6) string = string + amount.toFixed(0);
-        else string = string + mantissa.toFixed(3) + "e" + power;
-    }
-    else if (amount.lt("eee6")) {
-        let power2 = Decimal.floor(Decimal.log10(Decimal.log10(amount)));
-        let mantissa2 = Decimal.floor(Decimal.log10(amount)).div(Decimal.pow(10, power2));
-        string = string + "e" + mantissa2.toFixed(3) + "e" + power2;
-    }
-    else if (amount.lt("eeee6")) {
-        let power3 = Decimal.floor(Decimal.log10(Decimal.log10(Decimal.log10(amount))));
-        let mantissa3 = Decimal.floor(Decimal.log10(Decimal.log10(amount))).div(Decimal.pow(10, power3));
-        string = string + "ee" + mantissa3.toFixed(3) + "e" + power3;
-    }
-    else if (amount.layer < 1.79e308) {
-        let aF = 1;
-        let Fb = amount.layer;
-        if (amount.mag <  1e10) {
-            aF = Decimal.log10(amount.mag);
-            Fb = Fb + 1;
-        }
-        else {
-            aF = Decimal.log10(Decimal.log10(amount.mag));
-            Fb = Fb + 2;
-        }
-        string = string + aF.toFixed(3) + "f" + Fb;
-    }
-    else string = "114514";
-    return string;
-}
-
-function notatint(amount) {
-    let string = "";
-    if (amount.sign == -1) {
-        string = string + "-";
-        amount.sign = 1;
-    }
-    if (amount.lt("ee6")) {
-        let power = Decimal.floor(Decimal.log10(amount));
-        let mantissa = amount.div(Decimal.pow(10, power));
-        if (amount == 0) string = "0";
-        else if (power < 6) string = string + amount.floor();
-        else string = string + mantissa.toFixed(3) + "e" + power;
-    }
-    else if (amount.lt("eee6")) {
-        let power2 = Decimal.floor(Decimal.log10(Decimal.log10(amount)));
-        let mantissa2 = Decimal.floor(Decimal.log10(amount)).div(Decimal.pow(10, power2));
-        string = string + "e" + mantissa2.toFixed(3) + "e" + power2;
-    }
-    else if (amount.lt("eeee6")) {
-        let power3 = Decimal.floor(Decimal.log10(Decimal.log10(Decimal.log10(amount))));
-        let mantissa3 = Decimal.floor(Decimal.log10(Decimal.log10(amount))).div(Decimal.pow(10, power3));
-        string = string + "ee" + mantissa3.toFixed(3) + "e" + power3;
-    }
-    else if (amount.layer < 1.79e308) {
-        let aF = 1;
-        let Fb = amount.layer;
-        if (amount.mag < 1e10) {
-            aF = Decimal.log10(amount.mag);
-            Fb = Fb + 1;
-        }
-        else{
-            aF = Decimal.log10(Decimal.log10(amount.mag));
-            Fb = Fb + 2;
-        }
-        string = string + aF.toFixed(3) + "f" + Fb;
-    }
-    else string = "1919810";
-    return string;
-}
-
-function notatcom(num) {
-    if (num === null || num === undefined) return "NaN"
-    if(num.gte(1e15)) return(notation(num))
-    let init = num.toString()
-    let portions = init.split(".")
-    portions[0] = portions[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    return portions[0]
-}
-
-function timeshow(time) {
-    if (time.gte(8e36)) return notation(time.div(8e36)) + '超级宇宙年龄';
-    if (time.gte(4.352e17)) return notation(time.div(4.352e17)) + '宇宙年龄';
-    if (time.gte(31536000)) return notation(time.div(31536000)) + '年';
-    let t = time.toNumber();
-    let s = '';
-    if (t >= 86400) s = s + Math.floor(t / 86400) + '天';
-    t -= Math.floor(t / 86400) * 86400;
-    if (t >= 3600) s = s + Math.floor(t / 3600) + '小时';
-    t -= Math.floor(t / 3600) * 3600;
-    if (t >= 60) s = s + Math.floor(t / 60) + '分钟';
-    t -= Math.floor(t / 60) * 60;
-    s = s + Math.floor(t) + '秒';
-    return s;
 }
 
 function energyshow() {
@@ -7052,18 +7283,30 @@ function fszqw() {
     }
 }
 
+// P1-3：wscale 在 PageP1_1 的 64 行里每行调用一次、且 30Hz 重渲染，
+// 原写法每行每帧 new Decimal(...) 9 次 + 9 次 div → 64×9×30 ≈ 1.7 万次/秒的纯常量计算。
+// 提前构造常量后，运行时只剩 1 次 div + 若干次比较。
+const WSCALE_THRESHOLDS = [
+    new Decimal(1125899906842624),
+    new Decimal(35184372088832),
+    new Decimal(1099511627776),
+    new Decimal(34359738368),
+    new Decimal(1073741824),
+    new Decimal(33554432),
+    new Decimal(1048576),
+    new Decimal(32768),
+    new Decimal(1024),
+]
+const WSCALE_LABELS = ["九阶折算|", "八阶折算|", "七阶折算|", "六阶折算|", "五阶折算|", "四阶折算|", "三阶折算|", "二阶折算|", "一阶折算|"]
+
 function wscale(tier) {
     let name = tiername[tier];
-    if (player["wscb" + name].gte(new Decimal(1125899906842624).div(v["wsccsl" + name]))) return "九阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(35184372088832).div(v["wsccsl" + name]))) return "八阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(1099511627776).div(v["wsccsl" + name]))) return "七阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(34359738368).div(v["wsccsl" + name]))) return "六阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(1073741824).div(v["wsccsl" + name]))) return "五阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(33554432).div(v["wsccsl" + name]))) return "四阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(1048576).div(v["wsccsl" + name]))) return "三阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(32768).div(v["wsccsl" + name]))) return "二阶折算|";
-    else if (player["wscb" + name].gte(new Decimal(1024).div(v["wsccsl" + name]))) return "一阶折算|";
-    else return "";
+    const b = player["wscb" + name];
+    const sl = v["wsccsl" + name];
+    for (let i = 0; i < 9; i++) {
+        if (b.gte(WSCALE_THRESHOLDS[i].div(sl))) return WSCALE_LABELS[i];
+    }
+    return "";
 }
 
 function tscale(tier) {
@@ -7075,13 +7318,22 @@ function tscale(tier) {
     else return "";
 }
 
+const USCALE_THRESHOLDS = [
+    new Decimal(33554432),
+    new Decimal(1048576),
+    new Decimal(32768),
+    new Decimal(1024),
+]
+const USCALE_LABELS = ["四阶折算|", "三阶折算|", "二阶折算|", "一阶折算|"]
+
 function uscale(tier) {
     let name = tiername[tier];
-    if (player["upgd" + name].gte(new Decimal(33554432).div(v["upgcsl" + name]))) return "四阶折算|";
-    else if (player["upgd" + name].gte(new Decimal(1048576).div(v["upgcsl" + name]))) return "三阶折算|";
-    else if (player["upgd" + name].gte(new Decimal(32768).div(v["upgcsl" + name]))) return "二阶折算|";
-    else if (player["upgd" + name].gte(new Decimal(1024).div(v["upgcsl" + name]))) return "一阶折算|";
-    else return "";
+    const u = player["upgd" + name];
+    const sl = v["upgcsl" + name];
+    for (let i = 0; i < 4; i++) {
+        if (u.gte(USCALE_THRESHOLDS[i].div(sl))) return USCALE_LABELS[i];
+    }
+    return "";
 }
 
 function ascale(x, tier) {
@@ -7115,15 +7367,14 @@ function swfyjj() {
 }
 
 function swgmrn() {
+    // 暂停/恢复只改全局速度倍率；主循环始终由 core/loop.js 统一管理，
+    // 不再用"丢弃 interval 句柄"的方式去停（旧写法 ml = null 只是丢了句柄，interval 仍在跑）。
     if (player.gmrn != true) {
         player.gmrn = true;
-        //ml = setInterval(mainLoop, 50);
         v.glbspd = 1;
     }
     else {
         player.gmrn = false;
-        //clearInterval(ml);
-        ml = null;
         v.glbspd = 0;
     }
 }
@@ -7269,7 +7520,14 @@ function shownoti(notiname) {
     window.dispatchEvent(new CustomEvent('showNotification', { detail: notiname }))
 }
 /*快捷键*/
-document.addEventListener("keydown", hotkeys);
+// BugFix: 这行原本写在 useGameState() 工厂体内，而每个页面组件的 setup 都会调用一次
+// useGameState() —— 于是每切换一次页面就往 document 上多挂一个 keydown 监听且从不移除，
+// 结果是按一次空格会触发 N 次 maxAll()。改成模块级一次性注册（并保留 SSR/Node 下的守卫）。
+let hotkeysRegistered = false
+if (typeof document !== "undefined" && !hotkeysRegistered) {
+    document.addEventListener("keydown", hotkeys);
+    hotkeysRegistered = true
+}
 function hotkeys(event) {
     if (player.hotk != true) return;
     switch (event.keyCode) {
@@ -7353,68 +7611,145 @@ function hotkeys(event) {
 }
 
 /*循环*/
-function mainLoop() {
-    diff = (Date.now() - lastUpdate) / 1000;
-    lastUpdate = Date.now();
+// ============================ P0-2 ============================
+// 旧实现每 33ms 无条件执行全部 get*()，其中大量结果与当前进度毫无关系。这里做三件事：
+//
+// ① 层级门控：只有**已解锁**的层才会每帧进入生产链；未解锁层退化为 computeIdleLayers()
+//    以 ≈1Hz 兜底刷新。这样既砍掉了绝大部分无用计算，又不会出现"值被冻结成错误旧值"的问题，
+//    语义与逐帧全算等价（层未解锁时其输入也处于初始状态，1Hz 与 30Hz 结果一致）。
+//
+// ② 频率分级：
+//      30Hz —— 核心生产链：各层乘区 + PL0 乘区 + 游戏速度 + autoBuy + produce
+//      10Hz —— 价格类派生值 getWscCost / getTierCost / getUpgdCost（只影响"能否购买/显示多少")
+//       1Hz —— comAch() 成就检查（纯幂等的解锁标记，无速率敏感行为）
+//    * 购买入口 buyWsc / buyMaxWsc / incTierN / buyUpgd 内部都会先自行调用对应的 getXxxCost()，
+//      所以价格降频不会影响购买正确性。
+//    * comNormCha() / comCha() 与次速率挂钩（每次满足目标即 +1 完成数），保持 30Hz 不动以维持原有balance。
+//
+// ③ getsoftcap() 每帧只算一次并缓存：旧代码 produce() 内调用了 3 次、模板再调 1 次，
+//    每次都要做 new Decimal("e3.47e17").pow(v.fraue03)。
+
+var mainLoopTick = 0
+var softcapThisTick = null
+
+// produce() 可能被 timewarp() 在 tick 之外调用，因此保留惰性回退
+function softcapNow() {
+    return softcapThisTick !== null ? softcapThisTick : getsoftcap()
+}
+
+// —— 30Hz：已解锁层 + PL0 核心（保持原有 PL5→PL0 的求值顺序）——
+function computeUnlockedLayers() {
     //PL5
-    getPL5engMul();
-    getPL5engPow();
-    getqua();
-    getxbe();
-    getphs();
-    getslw();
-    getbioalc();
-    getanm5();
+    if (player.hasUnlockedPL5) {
+        getPL5engMul();
+        getPL5engPow();
+        getqua();
+        getxbe();
+        getphs();
+        getslw();
+        getbioalc();
+        getanm5();
+    }
     //PL4
-    getPL4engMul();
-    getPL4engPow();
-    getPL4goal2();
-    getfrau();
-    getboggle();
-    getbatow();
-    getsyn();
-    getanm4();
-    getntm();
+    if (player.hasUnlockedPL4) {
+        getPL4engMul();
+        getPL4engPow();
+        getPL4goal2();
+        getfrau();
+        getboggle();
+        getbatow();
+        getsyn();
+        getanm4();
+        getntm();
+    }
     //PL3
-    getPL3engMul();
-    getPL3engPow();
-    getres();
-    getptn();
-    gettth();
-    getxyz();
-    getanm3();
-    getconv();
+    if (player.hasUnlockedPL3) {
+        getPL3engMul();
+        getPL3engPow();
+        getres();
+        getptn();
+        gettth();
+        getxyz();
+        getanm3();
+        getconv();
+    }
     //PL2
-    getPL2engMul();
-    getPL2engPow();
-    getPL2upgCost();
-    getelmt();
-    getthrcost();
-    getalc();
-    getanm2();
+    if (player.hasUnlockedPL2) {
+        getPL2engMul();
+        getPL2engPow();
+        getPL2upgCost();
+        getelmt();
+        getthrcost();
+        getalc();
+        getanm2();
+    }
     //PL1
-    getPL1engMul()
-    getPL1engPow();
-    getPL1u();
-    getBab();
-    getParupgCost();
-    getChaGoal();
-    //PL0
+    if (player.hasUnlockedPL1) {
+        getPL1engMul();
+        getPL1engPow();
+        getPL1u();
+        getBab();
+        getParupgCost();
+        getChaGoal();
+    }
+    //PL0 核心乘区：无论进度如何都必须每帧计算
     getWscMult();
     getWscPow();
     getWscHyp();
     getWscMultPerBuy();
-    for (let i = 1; i <= 48; i++) getWscCost(i);
     getWscBaseValue();
-    for (let i = 1; i <= 6; i++) getTierCost(i);
     getUpgdMult();
-    for (let i = 1; i <= 6; i++) getUpgdCost(i);
-
     getspd();
+}
+
+// —— ≈1Hz：未解锁层的兜底刷新 ——
+function computeIdleLayers() {
+    if (!player.hasUnlockedPL5) {
+        getPL5engMul(); getPL5engPow(); getqua(); getxbe(); getphs(); getslw(); getbioalc(); getanm5();
+    }
+    if (!player.hasUnlockedPL4) {
+        getPL4engMul(); getPL4engPow(); getPL4goal2(); getfrau(); getboggle(); getbatow(); getsyn(); getanm4(); getntm();
+    }
+    if (!player.hasUnlockedPL3) {
+        getPL3engMul(); getPL3engPow(); getres(); getptn(); gettth(); getxyz(); getanm3(); getconv();
+    }
+    if (!player.hasUnlockedPL2) {
+        getPL2engMul(); getPL2engPow(); getPL2upgCost(); getelmt(); getthrcost(); getalc(); getanm2();
+    }
+    if (!player.hasUnlockedPL1) {
+        getPL1engMul(); getPL1engPow(); getPL1u(); getBab(); getParupgCost(); getChaGoal();
+    }
+}
+
+// —— ≈10Hz：只用于显示/可购买性判断的价格 ——
+function computeCosts() {
+    for (let i = 1; i <= 48; i++) getWscCost(i);
+    for (let i = 1; i <= 6; i++) getTierCost(i);
+    for (let i = 1; i <= 6; i++) getUpgdCost(i);
+}
+
+// P3：dt 由 core/loop.js 的固定步长累加器传入（稳态下恒为 1/30）。
+// 保留默认值以便 timewarp() 等 tick 之外的调用点继续工作。
+function mainLoop(dt = gameLoop.FIXED_DT) {
+    diff = dt;
+    lastUpdate = Date.now();
+    mainLoopTick++;
+    softcapThisTick = null;
+
+    const costTick = mainLoopTick % 3 === 0;   // 每 3 帧 ≈ 10Hz
+    const idleTick = mainLoopTick % 30 === 0;  // 每 30 帧 ≈ 1Hz
+
+    computeUnlockedLayers();
+    if (idleTick) computeIdleLayers();
+
+    softcapThisTick = getsoftcap();
+
+    if (costTick) computeCosts();
+
     autoBuy();
     produce();
     if(player.gmrn) time(diff);
-    comAch();
+    if (idleTick) comAch();
     comNormCha();
     comCha();
     useoflntm();
@@ -7517,20 +7852,43 @@ function autoBuy() {
     autobuyanm4upg();
 }
 
-var ml = null
 var autoSaveInterval = null
+var stopNewsTickerFn = null
 
 function startGameLoop() {
     load()
-    if (ml) clearInterval(ml)
+
+    // P0-2：先跑一次完整的派生值计算，保证首帧到来前 v 内所有字段都已就绪
+    // （否则第一帧会因为 costTick / idleTick 未命中而缺少部分派生值）
+    mainLoopTick = 0
+    computeUnlockedLayers()
+    computeIdleLayers()
+    softcapThisTick = getsoftcap()
+    computeCosts()
+
+    // P3：改用 core/loop.js 的固定步长累加器（rAF 驱动 + dt 钳制）
+    gameLoop.start(mainLoop)
+
     if (autoSaveInterval) clearInterval(autoSaveInterval)
-    ml = setInterval(mainLoop, 33)
     autoSaveInterval = setInterval(save, 60000)
-    
+
     // 暴露到 window 对象以便在控制台中访问
     window.player = player
     window.v = v
     window.changePg = changePg
+}
+
+/** 组件卸载时调用：停掉主循环、自动存档与滚动新闻（原来这些定时器从不清理） */
+function stopGameLoop() {
+    gameLoop.stop()
+    if (autoSaveInterval) {
+        clearInterval(autoSaveInterval)
+        autoSaveInterval = null
+    }
+    if (stopNewsTickerFn) {
+        stopNewsTickerFn()
+        stopNewsTickerFn = null
+    }
 }
 
 //#region 测试
@@ -7888,28 +8246,12 @@ var texts = [
         "生物炼金学家认为，通过将生物的基因和化学物质进行精确的控制和组合，可以创造出具有特定功能和性能的新物种，这种新物种可以被用于医学、农业、工业等领域，为人类带来更多的福利和便利，生物炼金学的研究和应用，将为人类带来更多的科学和技术进步",/*200*/
 
     ]
+// P2：滚动新闻改用 rAF + transform（见 ui/newsticker.js），
+// 并保存 stop 句柄，由 stopGameLoop() 统一清理（原实现返回的 timer 无人保存）。
 function startNewsTicker() {
-    const newsElement = document.getElementById('newsText')
-    if (!newsElement) return null
-    
-    let p = 50 + document.body.clientWidth
-    let l = -50 - (newsElement.innerText.length * 16)
-    
-    newsElement.innerHTML = texts[Math.floor(Math.random() * texts.length)]
-    
-    const timer = setInterval(function () {
-        if (!playerInstance || !playerInstance.news) return
-        p -= 1
-        if (p <= l) {
-            newsElement.innerHTML = texts[Math.floor(Math.random() * texts.length)]
-            newsElement.style.width = (newsElement.innerText.length * 16).toString() + "px"
-            l = -50 - (newsElement.innerText.length * 16)
-            p = 50 + document.body.clientWidth
-        }
-        newsElement.style.left = p.toFixed(1) + "px"
-    }, 10)
-    
-    return timer
+    if (stopNewsTickerFn) stopNewsTickerFn()
+    stopNewsTickerFn = startNewsTickerImpl(texts, () => !!playerInstance && playerInstance.news)
+    return stopNewsTickerFn
 }
 
 var caidan = false;
@@ -7984,6 +8326,9 @@ function blendWords(first, second, param) {
     return {
         N, hyp, pwb, player, v, tiername, hexdigit, zerotosixtyfour,
         hardReset,
+        //页面导航 + dev 页面内容强制解锁
+        navRows, allNavPages, extraNavPages,
+        isPageContentUnlocked, setPageContentUnlocked, setAllPageContentUnlocked, resetPageContentUnlock, devUnlockProxy,
         //数值显示和计算
         notation, notatint, notatcom, epsdisp, getsoftcap, tscale, uscale, uscap, ascale, scale,
         //风灵
@@ -8032,12 +8377,17 @@ function blendWords(first, second, param) {
         getCRISPRGeneEffect,
         upgradeCRISPREditingTech,
         //扮敨
+        getPL6ChaGoal,
+        entPL6Cha,
+        quitPL6Cha,
+        comPL6Cha,
+        buyPL6Brick,
+        updatePL6Brick,
+
+
 
 
         //扯敩
-
-
-
         dfstr,
         getprow1,
         getprow2,
@@ -8073,10 +8423,11 @@ function blendWords(first, second, param) {
         abUpgd05Switch,
         abUpgd06Switch,
         startGameLoop,
+        stopGameLoop,
         startNewsTicker,
 
         //杂项
-        save, load, exportSave, importSave, exportSaveFile, importSaveFile, trueHardReset,
+        save, load, exportSave, importSave, exportSaveFile, importSaveFile, trueHardReset, clearSave,
         autobuyon, autobuyoff, swfyjj, swgmrn, fszqw,
 
         //secret

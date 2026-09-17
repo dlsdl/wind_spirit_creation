@@ -2,13 +2,15 @@
   <div id="p0_4">
     <br />
     <table align="center">
-      <tr v-for="row in 6" :key="row">
-        <td v-for="col in 16" :key="col" :class="player.ach[(row-1)*16 + col - 1] ? 'achyes' : 'achno'">
-          {{ achIds[(row-1)*16 + col - 1] }}<br />
-          {{ achName[(row-1)*16 + col - 1] }}
-          <span class="tooltip-text">{{ tooltip[(row-1)*16 + col - 1] }}</span>
-        </td>
-      </tr>
+      <tbody>
+        <tr v-for="row in 6" :key="row">
+          <td v-for="col in 16" :key="col" :class="player.ach[(row-1)*16 + col - 1] ? 'achyes' : 'achno'">
+            {{ achIds[(row-1)*16 + col - 1] }}<br />
+            {{ achName[(row-1)*16 + col - 1] }}
+            <span class="tooltip-text">{{ tooltip[(row-1)*16 + col - 1] }}</span>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>

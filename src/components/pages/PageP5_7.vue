@@ -13,14 +13,16 @@
         <div align="center" class="ftsz2">效果6：33~40式风灵超指数+{{notation(v.ntme06)}}(剩余{{notation(player.ntmr06)}}s)</div>
       </div>
       <table align="center">
-        <tr>
-          <td><button class="PL4upgno" @click="buyntmu(1)">{{player.ntmv.gte(300)?"一阶折算|":""}}将营养餐式数增加1，需要{{notatint(v.ntmc01)}}扬敦点</button></td>
-          <td><button class="PL4upgno" @click="buyntmu(2)">将营养袋式数增加1，需要{{notatint(v.ntmc02)}}式营养餐</button></td>
-        </tr>
-        <tr>
-          <td><button class="PL4upgno" @click="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要{{notatint(v.ntmc03)}}式营养袋({{notatint(player.ntmu03)}}/9)</button></td>
-          <td><button class="PL4upgno" @click="buyntmu(4)">使营养餐的第一个非永久效果变为永久，但重置计时器和第3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(player.ntmu04)}}/3)</button></td>
-        </tr>
+        <tbody>
+          <tr>
+            <td><button class="PL4upgno" @click="buyntmu(1)">{{player.ntmv.gte(300)?"一阶折算|":""}}将营养餐式数增加1，需要{{notatint(v.ntmc01)}}扬敦点</button></td>
+            <td><button class="PL4upgno" @click="buyntmu(2)">将营养袋式数增加1，需要{{notatint(v.ntmc02)}}式营养餐</button></td>
+          </tr>
+          <tr>
+            <td><button class="PL4upgno" @click="buyntmu(3)">冷却时间减少40%，但持续时间减少20%，需要{{notatint(v.ntmc03)}}式营养袋({{notatint(player.ntmu03)}}/9)</button></td>
+            <td><button class="PL4upgno" @click="buyntmu(4)">使营养餐的第一个非永久效果变为永久，但重置计时器和第3个升级的数量，需要{{notatint(v.ntmc04)}}级冷却时间升级({{notatint(player.ntmu04)}}/3)</button></td>
+          </tr>
+        </tbody>
       </table>
       <div align="center" class="ftsz2">到达一定式数的营养餐以获得奖励</div>
       <div :class="v.ntma.gte(10)?'PL4goalyes':'PL4goalno'">到达10式营养餐<br />基于营养餐提高扩散、扪敤、扫敥、扬敦能量的指数（+0.002×营养餐，最高为1）</div>

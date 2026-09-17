@@ -116,119 +116,30 @@
       你有{{ notatint(player.PL6pts) }}扮敨点,{{ notation(player.PL6energy) }}扮敨能量,它以{{ notation(v.PL6engpow) }}的指数将1~48式风灵的效果乘以{{ notation(v.PL6engmul) }}倍。
     </p>
     
+    <!-- ===== 顶部「行标签」按钮：数据驱动，自动跳过未解锁的行 ===== -->
     <div class="btnrow" id="btnrowm">
-      <button v-if="player.hasUnlockedPLw2" :class="{ slbutton: isCurrentRow('rowb'), button: !isCurrentRow('rowb') }" style="background-image: url('./assets/PLw2bg.bmp'); background-size: 34%; color: #000000" @click="handleChangeBt('rowb')">扸敲</button>
-      <button v-if="player.hasUnlockedPLw" :class="{ slbutton: isCurrentRow('rowa'), button: !isCurrentRow('rowa') }" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="handleChangeBt('rowa')">扰敪</button>  
-      <button :class="{ slbutton: isCurrentRow('row1'), button: !isCurrentRow('row1') }" style="background-color: #ffffff; color: #000000" @click="handleChangeBt('row1')">风灵</button>
-      <button v-if="player.hasUnlockedPL1" :class="{ slbutton: isCurrentRow('row2'), button: !isCurrentRow('row2') }" style="background-color: #ff0000; color: #ffffff" @click="handleChangeBt('row2')">扩散</button>
-      <button v-if="player.hasUnlockedPL2" :class="{ slbutton: isCurrentRow('row3'), button: !isCurrentRow('row3') }" style="background-color: #ffff00; color: #000000" @click="handleChangeBt('row3')">扪敤</button>
-      <button v-if="player.hasUnlockedPL3" :class="{ slbutton: isCurrentRow('row4'), button: !isCurrentRow('row4') }" style="background-color: #00ff00; color: #000000" @click="handleChangeBt('row4')">扫敥</button>
-      <button v-if="player.hasUnlockedPL4" :class="{ slbutton: isCurrentRow('row5'), button: !isCurrentRow('row5') }" style="background-color: #00ffff; color: #000000" @click="handleChangeBt('row5')">扬敦</button>
-      <button v-if="player.hasUnlockedPL5" :class="{ slbutton: isCurrentRow('row6'), button: !isCurrentRow('row6') }" style="background-color: #0000ff; color: #ffffff" @click="handleChangeBt('row6')">扭敧</button>
-      <button v-if="player.hasUnlockedPL6" :class="{ slbutton: isCurrentRow('row7'), button: !isCurrentRow('row7') }" style="background-color: #ff00ff; color: #ffffff" @click="handleChangeBt('row7')">扮敨</button>
-      <button v-if="player.hasUnlockedPL7" :class="{ slbutton: isCurrentRow('row8'), button: !isCurrentRow('row8') }" style="background-color: #000000; color: #ffffff" @click="handleChangeBt('row8')">扯敩</button>
-      <button :class="{ slbutton: isCurrentRow('row9'), button: !isCurrentRow('row9') }" style="background-image: linear-gradient(to right,#808080,#ffffff,#808080); color: #000000" @click="handleChangeBt('row9')">统计</button>
-      <button :class="{ slbutton: isCurrentRow('row0'), button: !isCurrentRow('row0') }" style="background-image: linear-gradient(to right,#7f7f7f,#000000,#7f7f7f); color: #ffffff" @click="handleChangeBt('row0')">杂项</button>  
+      <template v-for="row in shownRows" :key="row.id">
+        <button
+          :class="{ slbutton: isCurrentRow(row.id), button: !isCurrentRow(row.id) }"
+          :style="row.tabStyle"
+          @click="handleChangeBt(row.id)">{{ row.label }}</button>
+      </template>
     </div>
-    
-    <div class="btnrow" id="rowb" v-show="currentRow === 'rowb'">
-      <button class="slbutton" style="background-image: url('./assets/PLw2bg.bmp'); background-size: 34%; color: #000000" @click="changePg('pb_1')">扸敲</button>
-    </div>
-    
-    <div class="btnrow" id="rowa" v-show="currentRow === 'rowa'">
-      <button class="slbutton" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="changePg('pa_1')">扰敪升级/商店</button>
-      <button class="button" style="background-image: linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); color: #000000" @click="changePg('pa_2')">特权/惩罚/进化</button>
-    </div>
-    
-    <div class="btnrow" id="row1" v-show="currentRow === 'row1'">
-      <button :class="{ slbutton: isCurrentPage('p1_1'), button: !isCurrentPage('p1_1') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_1')">风灵</button>
-      <button :class="{ slbutton: isCurrentPage('p1_2'), button: !isCurrentPage('p1_2') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_2')">元素生命</button>
-      <button :class="{ slbutton: isCurrentPage('p1_3'), button: !isCurrentPage('p1_3') }" style="background-color: #ffffff; color: #000000" @click="changePg('p1_3')">升级</button>
-    </div>
-    
-    <div class="btnrow" id="row2" v-show="currentRow === 'row2'">
-      <button :class="{ slbutton: isCurrentPage('p2_1'), button: !isCurrentPage('p2_1') }" style="background-color: #ff0000; color: #ffffff" @click="changePg('p2_1')">扩散升级</button>
-      <button :class="{ slbutton: isCurrentPage('p2_2'), button: !isCurrentPage('p2_2') }" style="background-color: #ff0000; color: #ffffff" @click="changePg('p2_2')">购买项</button>
-      <button :class="{ slbutton: isCurrentPage('p2_3'), button: !isCurrentPage('p2_3') }" style="background-color: #ff0000; color: #ffffff" @click="changePg('p2_3')">挑战</button>
-      <button :class="{ slbutton: isCurrentPage('p2_4'), button: !isCurrentPage('p2_4') }" style="background-color: #ff0000; color: #ffffff" @click="changePg('p2_4')">风之晶球</button>
-    </div>
-    
-    <div class="btnrow" id="row3" v-show="currentRow === 'row3'">
-      <button :class="{ slbutton: isCurrentPage('p3_1'), button: !isCurrentPage('p3_1') }" style="background-color: #ffff00; color: #000000" @click="changePg('p3_1')">里程碑</button>
-      <button :class="{ slbutton: isCurrentPage('p3_2'), button: !isCurrentPage('p3_2') }" style="background-color: #ffff00; color: #000000" @click="changePg('p3_2')">元素</button>
-      <button :class="{ slbutton: isCurrentPage('p3_3'), button: !isCurrentPage('p3_3') }" style="background-color: #ffff00; color: #000000" @click="changePg('p3_3')">研究</button>
-      <button :class="{ slbutton: isCurrentPage('p3_4'), button: !isCurrentPage('p3_4') }" style="background-color: #ffff00; color: #000000" @click="changePg('p3_4')">炼金</button>
-      <button :class="{ slbutton: isCurrentPage('p3_5'), button: !isCurrentPage('p3_5') }" style="background-color: #ffff00; color: #000000" @click="changePg('p3_5')">风压坍陷</button>
-    </div>
-    
-    <div class="btnrow" id="row4" v-show="currentRow === 'row4'">
-      <button :class="{ slbutton: isCurrentPage('p4_1'), button: !isCurrentPage('p4_1') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_1')">进度研究</button>
-      <button :class="{ slbutton: isCurrentPage('p4_2'), button: !isCurrentPage('p4_2') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_2')">药剂</button>
-      <button :class="{ slbutton: isCurrentPage('p4_3'), button: !isCurrentPage('p4_3') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_3')">种甜甜花</button>
-      <button :class="{ slbutton: isCurrentPage('p4_4'), button: !isCurrentPage('p4_4') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_4')">吸引子</button>
-      <button :class="{ slbutton: isCurrentPage('p4_5'), button: !isCurrentPage('p4_5') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_5')">催化剂</button>
-      <button :class="{ slbutton: isCurrentPage('p4_6'), button: !isCurrentPage('p4_6') }" style="background-color: #00ff00; color: #000000" @click="changePg('p4_6')">转化</button>
-    </div>
-    
-    <div class="btnrow" id="row5" v-show="currentRow === 'row5'">
-      <button :class="{ slbutton: isCurrentPage('p5_1'), button: !isCurrentPage('p5_1') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_1')">目标</button>
-      <button :class="{ slbutton: isCurrentPage('p5_2'), button: !isCurrentPage('p5_2') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_2')">碎片升级</button>
-      <button :class="{ slbutton: isCurrentPage('p5_3'), button: !isCurrentPage('p5_3') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_3')">惊奇风盒</button>
-      <button :class="{ slbutton: isCurrentPage('p5_4'), button: !isCurrentPage('p5_4') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_4')">试炼场</button>
-      <button :class="{ slbutton: isCurrentPage('p5_5'), button: !isCurrentPage('p5_5') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_5')">协同</button>
-      <button :class="{ slbutton: isCurrentPage('p5_6'), button: !isCurrentPage('p5_6') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_6')">刺影征标</button>
-      <button :class="{ slbutton: isCurrentPage('p5_7'), button: !isCurrentPage('p5_7') }" style="background-color: #00ffff; color: #000000" @click="changePg('p5_7')">营养餐</button>
-    </div>
-    
-    <div class="btnrow" id="row6" v-show="currentRow === 'row6'">
-      <button :class="{ slbutton: isCurrentPage('p6_1'), button: !isCurrentPage('p6_1') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_1')">升级海</button>
-      <button :class="{ slbutton: isCurrentPage('p6_2'), button: !isCurrentPage('p6_2') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_2')">时间扭敧</button>
-      <button :class="{ slbutton: isCurrentPage('p6_3'), button: !isCurrentPage('p6_3') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_3')">光合作用</button>
-      <button :class="{ slbutton: isCurrentPage('p6_4'), button: !isCurrentPage('p6_4') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_4')">太阳风</button>
-      <button :class="{ slbutton: isCurrentPage('p6_5'), button: !isCurrentPage('p6_5') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_5')">生物炼金</button>
-      <button :class="{ slbutton: isCurrentPage('p6_6'), button: !isCurrentPage('p6_6') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_6')">生态系统</button>
-      <button :class="{ slbutton: isCurrentPage('p6_7'), button: !isCurrentPage('p6_7') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_7')">碱基</button>
-      <button :class="{ slbutton: isCurrentPage('p6_8'), button: !isCurrentPage('p6_8') }" style="background-color: #0000ff; color: #ffffff" @click="changePg('p6_8')">CRISPR</button>
-    </div>
-    
-    <div class="btnrow" id="row7" v-show="currentRow === 'row7'">
-      <button :class="{ slbutton: isCurrentPage('p7_1'), button: !isCurrentPage('p7_1') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_1')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_2'), button: !isCurrentPage('p7_2') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_2')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_3'), button: !isCurrentPage('p7_3') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_3')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_4'), button: !isCurrentPage('p7_4') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_4')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_5'), button: !isCurrentPage('p7_5') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_5')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_6'), button: !isCurrentPage('p7_6') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_6')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_7'), button: !isCurrentPage('p7_7') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_7')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_8'), button: !isCurrentPage('p7_8') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_8')">???</button>
-      <button :class="{ slbutton: isCurrentPage('p7_9'), button: !isCurrentPage('p7_9') }" style="background-color: #ff00ff; color: #ffffff" @click="changePg('p7_9')">???</button>
-    </div>
-    
-    <div class="btnrow" id="row8" v-show="currentRow === 'row8'">
-      <button :class="{ slbutton: isCurrentPage('p8_1'), button: !isCurrentPage('p8_1') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_1')">扯敩拜谢</button>
-      <button :class="{ slbutton: isCurrentPage('p8_2'), button: !isCurrentPage('p8_2') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_2')">扯敩升级</button>
-      <button :class="{ slbutton: isCurrentPage('p8_3'), button: !isCurrentPage('p8_3') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_3')">扯敩挑战</button>
-      <button :class="{ slbutton: isCurrentPage('p8_4'), button: !isCurrentPage('p8_4') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_4')">扯敩星星</button>
-      <button :class="{ slbutton: isCurrentPage('p8_5'), button: !isCurrentPage('p8_5') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_5')">扯敩动物</button>
-      <button :class="{ slbutton: isCurrentPage('p8_6'), button: !isCurrentPage('p8_6') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_6')">扯敩膨胀</button>
-      <button :class="{ slbutton: isCurrentPage('p8_7'), button: !isCurrentPage('p8_7') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_7')">扯敩试炼</button>
-      <button :class="{ slbutton: isCurrentPage('p8_8'), button: !isCurrentPage('p8_8') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_8')">扯敩遗物</button>
-      <button :class="{ slbutton: isCurrentPage('p8_9'), button: !isCurrentPage('p8_9') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_9')">扯敩矿物</button>
-      <button :class="{ slbutton: isCurrentPage('p8_0'), button: !isCurrentPage('p8_0') }" style="background-color: #000000; color: #ffffff" @click="changePg('p8_0')">扯敩元素</button>
-    </div>
-    
-    <div class="btnrow" id="row9" v-show="currentRow === 'row9'">
-      <button :class="{ slbutton: isCurrentPage('p9_1'), button: !isCurrentPage('p9_1') }" @click="changePg('p9_1')">全局</button>
-      <button :class="{ slbutton: isCurrentPage('p9_2'), button: !isCurrentPage('p9_2') }" @click="changePg('p9_2')">元素生命</button>
-      <button :class="{ slbutton: isCurrentPage('p9_3'), button: !isCurrentPage('p9_3') }" @click="changePg('p9_3')">软上限</button>
-      <button :class="{ slbutton: isCurrentPage('p9_4'), button: !isCurrentPage('p9_4') }" @click="changePg('p9_4')">折算</button>
-    </div>
-    
-    <div class="btnrow" id="row0" v-show="currentRow === 'row0'">
-      <button :class="{ slbutton: isCurrentPage('p0_1'), button: !isCurrentPage('p0_1') }" @click="changePg('p0_1')">存档</button>
-      <button :class="{ slbutton: isCurrentPage('p0_2'), button: !isCurrentPage('p0_2') }" @click="changePg('p0_2')">选项</button>
-      <button :class="{ slbutton: isCurrentPage('p0_3'), button: !isCurrentPage('p0_3') }" @click="changePg('p0_3')">关于</button>
-      <button :class="{ slbutton: isCurrentPage('p0_4'), button: !isCurrentPage('p0_4') }" @click="changePg('p0_4')">成就</button>
-      <button :class="{ slbutton: isCurrentPage('p0_5'), button: !isCurrentPage('p0_5') }" @click="changePg('p0_5')">概要</button>
+
+    <!-- ===== 行内「页面按钮」：dev 页面仅在 npm run dev 下渲染 ===== -->
+    <div
+      v-for="row in shownRows"
+      :key="row.id"
+      class="btnrow"
+      :id="row.id"
+      v-show="currentRow === row.id">
+      <template v-for="p in navPagesOf(row)" :key="p.id">
+        <button
+          :class="p.fixedClass || (isCurrentPage(p.id) ? 'slbutton' : 'button')"
+          :style="row.pageStyle"
+          :title="p.dev ? '仅开发环境可见' : ''"
+          @click="changePg(p.id)">{{ p.label }}</button>
+      </template>
     </div>
     
     <PageContent :currentPage="v.currentPage" :player="player" :v="v" @switchPage="handleSwitchPage" />
@@ -237,10 +148,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useGameState } from './composables/useGameState'
 import PageContent from './components/PageContent.vue'
 import NotificationToast from './components/NotificationToast.vue'
+
+// dev 专有入口（p9_59330 / p0_630875）只在 `npm run dev` 下出现。
+// Vite 会把 import.meta.env.DEV 静态替换为常量，生产构建下相关分支会被 tree-shake 掉。
+const isDev = import.meta.env.DEV
 
 const {
   player,
@@ -259,33 +174,37 @@ const {
   //PL7reset,
   //PLwreset,
   startGameLoop,
+  stopGameLoop,
   startNewsTicker,
+  // 页面导航配置表
+  navRows,
 } = useGameState()
 
 const currentRow = ref('row1')
 
-const rowToFirstPage = {
-  'row1': 'p1_1',
-  'row2': 'p2_1',
-  'row3': 'p3_1',
-  'row4': 'p4_1',
-  'row5': 'p5_1',
-  'row6': 'p6_1',
-  'row7': 'p7_1',
-  'row8': 'p8_1',
-  'row9': 'p9_1',
-  'row0': 'p0_1',
-  'rowa': 'pa_1',
-  'rowb': 'pb_1',
+// 单行内实际渲染的页面：非开发环境过滤掉 dev 页
+function navPagesOf(row) {
+  if (!row || !row.pages) return []
+  return row.pages.filter((p) => !p.dev || isDev)
 }
 
-function handleChangeBt(row) {
-  currentRow.value = row
-  v.currentPage = rowToFirstPage[row] || 'p1_1'
+// 未解锁的行不出现在导航栏
+const shownRows = computed(() =>
+  navRows.filter((row) => !row.unlockKey || player[row.unlockKey])
+)
+
+function getNavRow(rowId) {
+  return navRows.find((r) => r.id === rowId)
 }
 
-function isCurrentRow(row) {
-  return currentRow.value === row
+function handleChangeBt(rowId) {
+  currentRow.value = rowId
+  const first = navPagesOf(getNavRow(rowId))[0]
+  v.currentPage = first ? first.id : 'p1_1'
+}
+
+function isCurrentRow(rowId) {
+  return currentRow.value === rowId
 }
 
 function isCurrentPage(pageName) {
@@ -294,9 +213,9 @@ function isCurrentPage(pageName) {
 
 function handleSwitchPage(pageName) {
   v.currentPage = pageName
-  if (pageName === 'changelog' || pageName === 'savebank') {
-    currentRow.value = 'row0'
-  } else if (pageName.startsWith('p0_')) {
+  const row = navRows.find((r) => r.pages.some((p) => p.id === pageName))
+  if (row) currentRow.value = row.id
+  else if (pageName === 'changelog' || pageName === 'savebank' || pageName.startsWith('p0_')) {
     currentRow.value = 'row0'
   }
 }
@@ -304,6 +223,11 @@ function handleSwitchPage(pageName) {
 onMounted(() => {
   startGameLoop()
   startNewsTicker()
+})
+
+// P2/P3：卸载时停掉主循环、自动存档与滚动新闻（旧代码这三个定时器都没有清理）
+onUnmounted(() => {
+  stopGameLoop()
 })
 </script>
 
